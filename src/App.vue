@@ -1,4 +1,5 @@
 <template>
+  哈哈哈哈哈哈哈哈哈
   <HelloWorld msg="Hello Vue 3.0 + Vite" />
 </template>
 
