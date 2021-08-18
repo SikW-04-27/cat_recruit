@@ -1,6 +1,7 @@
 <template>
  <UserNav/>
  <Register/>
+
 </template>
 
 <script>
@@ -15,5 +16,5 @@ export default {
   Register,
   UserNav
   }
-};
+}
 </script>
