@@ -1,6 +1,5 @@
 <template>
- <UserNav/>
- <Register/>
+
 
 </template>
 
