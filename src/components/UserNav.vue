@@ -30,11 +30,16 @@
 </template>
 
 <script>
+import {ref} from 'vue'
   export default {
-    data() {
+   setup() {
+
+     let activeIndex = ref('1');
+      let activeIndex2 = ref('1');
+    
       return {
-        activeIndex: '1',
-        activeIndex2: '1'
+        activeIndex,
+        activeIndex2
       };
     },
     methods: {
