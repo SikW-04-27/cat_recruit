@@ -1,7 +1,6 @@
 <template>
-  哈哈哈哈哈哈哈哈哈11111122222333334444555555
+  哈哈哈哈哈哈哈哈哈11111122222
   <HelloWorld msg="Hello Vue 3.0 + Vite" />
-  1316516515631
 </template>
 
 <script>
