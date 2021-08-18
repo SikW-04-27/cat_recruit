@@ -3,7 +3,7 @@ import { createApp } from 'vue'
 
 // 引入全部组件库
 import ElementPlus from 'element-plus';
-import '../node_modules/element-plus/lib/theme-chalk/index.css';
+import '../mode element-plus/lib/theme-chalk/index.css';
 
 
 import App from './App.vue'
