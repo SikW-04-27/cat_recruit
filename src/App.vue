@@ -1,5 +1,6 @@
 <template>
   <Manage></Manage>
+  1
 </template>
 
 <script>
