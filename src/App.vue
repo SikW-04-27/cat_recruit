@@ -1,7 +1,6 @@
 <template>
   <UserNav/>
   <div class="middle">
-    
     <Manage></Manage>
   </div>
 
