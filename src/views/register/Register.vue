@@ -3,8 +3,6 @@
     <input type="text" v-model="userName">
     <input type="text" v-model="userPassword">
     <button @click="register">注册</button>
-    <h1>1111111111111111111</h1>
-    <h3>222222222222222222222222</h3>
   </div>
 </template>
 
