@@ -6,10 +6,10 @@
   class="el-menu-demo"
   mode="horizontal"
   @select="handleSelect"
-  background-color="#545c64"
+  background-color="#1b213a"
   text-color="#fff"
-  active-text-color="#ffd04b">
-  <el-menu-item index="1">处理中心</el-menu-item>
+  active-text-color="red">
+  <el-menu-item index="1"><router-link to="/introduction">工作室介绍</router-link></el-menu-item>
   <el-submenu index="2">
     <template #title>我的工作台</template>
     <el-menu-item index="2-1">选项1</el-menu-item>
@@ -23,16 +23,23 @@
     </el-submenu>
   </el-submenu>
   <el-menu-item index="3" disabled>消息中心</el-menu-item>
-  <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>
+  <el-menu-item index="4"><router-link to="/register">注册</router-link></el-menu-item>
 </el-menu>
+
+<router-view></router-view>
 </template>
 
 <script>
+import {ref} from 'vue'
   export default {
-    data() {
+   setup() {
+
+     let activeIndex = ref('1');
+      let activeIndex2 = ref('1');
+    
       return {
-        activeIndex: '1',
-        activeIndex2: '1'
+        activeIndex,
+        activeIndex2
       };
     },
     methods: {
@@ -44,5 +51,7 @@
 </script>
 
 <style>
+
+@import '../assets/scss/normalize.css'
 
 </style>
