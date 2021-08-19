@@ -1,6 +1,7 @@
 <template>
 <UserNav/>
 
+
 </template>
 
 <script>
@@ -18,3 +19,7 @@ export default {
   }
 }
 </script>
+<style>
+
+@import "./assets/scss/base.scss";
+</style>
