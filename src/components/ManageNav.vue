@@ -41,7 +41,7 @@
 
 
 
-<style lang="scss">
+<style lang="scss" scoped>
     .nav_logo{
       margin-top: 10px;
       margin-left: 20px;

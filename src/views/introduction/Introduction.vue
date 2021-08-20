@@ -48,7 +48,11 @@
       </ul>
     </div>
     <div class="studio-happy">
-        <p>工作室日常</p>
+      <p>工作室日常</p>
+      <img src="../../assets/img/happy1.jpg" alt="">
+      <img src="../../assets/img/happy2.jpg" alt="">
+      <img src="../../assets/img/happy3.jpg" alt="">
+      <img src="../../assets/img/happy4.jpg" alt="">
     </div>
   </div>
 </template>
@@ -61,7 +65,7 @@ export default {};
 #content {
   margin: 0 auto;
   width: 70%;
-  height: 1000px;
+  height: 1200px;
   color: #c2c2c2;
   font-size: 14px;
   background-color: #1e4353;
@@ -114,13 +118,12 @@ export default {};
     line-height: 25px;
     border: 1px solid #fff;
     span {
-        width: 100%;
-  text-align: center;
-  font-weight: 700;
+      width: 100%;
+      text-align: center;
+      font-weight: 700;
     }
   }
 }
-
 
 .studio-recruit ul {
   display: flex;
@@ -131,10 +134,13 @@ export default {};
     line-height: 25px;
   }
   span {
-  font-weight: 700;
-
+    font-weight: 700;
   }
 }
 
-
+.studio-happy {
+    img {
+        height: 200px;
+    }
+}
 </style>

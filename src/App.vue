@@ -1,7 +1,7 @@
 <template>
   <div class="middle">
     <UserNav></UserNav>
-    <Manage></Manage>
+    <!-- <Manage></Manage> -->
   </div>
 </template>
 
@@ -14,6 +14,7 @@ export default {
   name: "App",
   components: {
     Manage,
+    UserNav
   },
 };
 </script>
