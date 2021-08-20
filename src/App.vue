@@ -21,9 +21,10 @@ export default {
 
 <style lang="scss">
 @import "./assets/scss/base.scss";
-body {
-  background-color: rgb(41, 45, 63);
-}
+@import "./assets/scss/base.css";
+// body {
+//   background-color: rgb(41, 45, 63);
+// }
 .middle {
   width: 1200px;
   margin: 0 auto;
