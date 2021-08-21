@@ -115,7 +115,7 @@ const router = createRouter({
 
         {
             name: '',
-            path: 'manageRegister',
+            path: '/manageRegister',
             component: ManageRegister
         },
 
