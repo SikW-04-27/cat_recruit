@@ -1,7 +1,6 @@
 <template>
   <div class="middle">
     <!-- <UserNav></UserNav> -->
-    
     <Manage></Manage>
   </div>
 </template>
