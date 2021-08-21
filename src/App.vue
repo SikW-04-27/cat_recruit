@@ -1,5 +1,4 @@
 <template>
-  <UserNav/>
   <div class="middle">
     <Manage></Manage>
   </div>
@@ -14,6 +13,7 @@ import Manage from './views/manage/manage.vue'
 export default {
   name: "App",
   components: {
+    UserNav,
     Manage
   }
 }

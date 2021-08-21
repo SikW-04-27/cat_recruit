@@ -1,6 +1,6 @@
 <template>
   <ManageNav></ManageNav>
-  <CheckPersonal></CheckPersonal>
+  <router-view></router-view>
 </template>
 
 <script>

@@ -35,30 +35,21 @@
       fixed="right"
       label="操作"
       width="120">
-      <template #default="scope">
-        <el-button
-          @click.prevent="deleteRow(scope.$index, tableData)"
-          type="text"
-          size="small">
-          详情
-        </el-button>
-      </template>
+      <router-link to='/checkpersonal'>详情</router-link>
     </el-table-column>
   </el-table>
 </template>
 
 <script>
   export default {
-    methods: {
-      deleteRow(index, rows) {
-        rows.splice(index, 1);
+    setup(props) {
+      let personaldetial = function(index, rows) {
+        console.log(111);
       }
-    },
-    data() {
-      return {
+      return{
         tableData: [{
           date: '2016-05-03',
-          name: '王小虎去企鹅企鹅',
+          name: '王小虎去企鹅企鹅111',
           province: '上海',
           city: '普陀区',
           address: '上海市普陀区金沙江路 1518 弄',
@@ -105,20 +96,20 @@
           city: '普陀区',
           address: '上海市普陀区金沙江路 1518 弄',
           zip: 200333
-        }]
+        }],
+        personaldetial
       }
-    }
+    },
+    
   }
 </script>
 
-<style lang="scss">
-    // @import ".../assets/scss/table.scss";
-    .el-table,
-    .el-table tr,
-    .el-table th{
-        background-color: rgb(41, 45, 63);
-        tr{
-          background-color: rgb(41, 45, 63);
-        }
+<style lang="scss" scoped>
+
+    .el-table {
+      cursor: pointer;
+      --el-table-row-hover-background-color: gray;
     }
+    
+
 </style>
