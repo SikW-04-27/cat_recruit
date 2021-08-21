@@ -22,8 +22,9 @@
       <el-menu-item index="2-4-3">选项3</el-menu-item>
     </el-submenu>
   </el-submenu>
-  <el-menu-item index="3" disabled>消息中心</el-menu-item>
-  <el-menu-item index="4"><router-link to="/register">注册</router-link></el-menu-item>
+  <!-- <el-menu-item index="3" disabled>消息中心</el-menu-item> -->
+  <el-menu-item index="3"><router-link to="/news">消息中心</router-link></el-menu-item>
+  <el-menu-item index="4"><router-link to="/login">登录</router-link></el-menu-item>
 </el-menu>
 
 <router-view></router-view>
@@ -52,6 +53,5 @@ import {ref} from 'vue'
 
 <style>
 
-@import '../assets/scss/normalize.css'
 
 </style>

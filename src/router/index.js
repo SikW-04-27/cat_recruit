@@ -11,6 +11,10 @@ import ModifyRating from '../views/manage/operation/ModifyRating.vue'
 import ModifyRatingList from '../views/manage/operation/ModifyRatingList.vue'
 import CheckDetialPoint from '../views/manage/check/CheckDetialPoint.vue'
 import ModifyProcess from '../views/manage/operation/ModifyProcess.vue'
+import Login from '../views/login/Login.vue'
+import StudentRegister from '../views/register/children/StudentRegister.vue'
+import ManageRegister from '../views/register/children/ManageRegister.vue'
+import News from '../views/news/News.vue'
 
 const router = createRouter({  
     history: createWebHistory(),  
@@ -28,10 +32,29 @@ const router = createRouter({
         },
 
         {
+            path: '/login',
+            name: '',
+            component: Login,
+
+        },
+
+        {
             path: '/register',
             name: '',
             component: Register,
+            children: [
+                {
+                    name: '',
+                    path: '',
+                    component: StudentRegister,
+                },
 
+                {
+                    name: '',
+                    path: 'studentRegister',
+                    component: StudentRegister,
+                },
+            ]
         },
 
         //查看已报名学生
@@ -88,7 +111,20 @@ const router = createRouter({
             path:'/modifyprocess',
             name:'modifyprocess',
             component: ModifyProcess, 
+        },
+
+        {
+            name: '',
+            path: 'manageRegister',
+            component: ManageRegister
+        },
+
+        {
+            name: '',
+            path: '/news',
+            component: News
         }
+
     ]
 })
 
