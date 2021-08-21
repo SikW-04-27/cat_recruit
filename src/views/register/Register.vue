@@ -26,7 +26,7 @@ export default {
 #register {
   margin: 100px auto;
   width: 450px;
-  height: 360px;
+  // height: 360px;
   border: 1px solid #ccc;
 
   .register-option {
