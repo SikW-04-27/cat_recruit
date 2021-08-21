@@ -1,5 +1,9 @@
 // 表格样式
+.el-table,
 .el-table tr,
 .el-table th{
     background-color: rgb(41, 45, 63);
+    tr{
+      background-color: rgb(41, 45, 63);
+    }
 }

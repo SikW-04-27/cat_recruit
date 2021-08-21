@@ -1,19 +1,28 @@
 <template>
   
-  <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect" background-color="RGB(41,45,63)" text-color="#fff" active-text-color="#fff">
+  <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal"  background-color="RGB(41,45,63)" text-color="#fff" active-text-color="#fff">
     <img class="nav_logo" src="../assets/img/catlogo.png" alt="">
-    <el-menu-item index="3">个人中心</el-menu-item>
-  <el-menu-item index="1">已报名</el-menu-item>
+    
+      <el-menu-item index="3">
+        <router-link to="/checkcenter">个人中心</router-link>
+      </el-menu-item>
+
+      <el-menu-item index="1">
+        <router-link to="/checkregistered">已报名</router-link>
+      </el-menu-item>
+    
+
   <el-submenu index="2">
-    <template #title>评分</template>
-    <el-menu-item index="2-1">笔试</el-menu-item>
-    <el-menu-item index="2-2">一轮面试</el-menu-item>
-    <el-menu-item index="2-3">二轮面试</el-menu-item>
-    <el-menu-item index="2-4">一轮考核</el-menu-item>
-    <el-menu-item index="2-5">二轮考核</el-menu-item>
+    <template #title>管理进程</template>
+    <el-menu-item index="2-1">
+      <router-link to="/modifyprocess">管理预约</router-link>
+    </el-menu-item>
+    <el-menu-item index="2-2">管理阶段</el-menu-item>
   </el-submenu>
-  
-  <el-menu-item index="4">操作管理</el-menu-item>
+
+    <el-menu-item index="4">
+      <router-link to="/modifyratinglist">操作管理</router-link>
+    </el-menu-item>  
 </el-menu>
 <div class="line"></div>
 
@@ -41,7 +50,8 @@
 
 
 
-<style lang="scss" scoped>
+<style lang="scss">
+    @import "../assets/scss/table.scss";
     .nav_logo{
       margin-top: 10px;
       margin-left: 20px;
@@ -49,8 +59,28 @@
     }
     .el-menu{
         .el-menu-item,.el-submenu{
+          padding: 0;
           float: right;
+          a{
+            padding: 0 20px;
+            display: inline-block;
+            height: 60px;
+            line-height: 60px;
+            color: #fff;
+          }
         }
+        
+    }
+    .el-popper{
+        .el-menu--horizontal{
+          a{
+            height: 36px;
+            line-height: 36px;
+            padding-left: 0;
+          }
+        }
+        
+            
     }
 
 </style>

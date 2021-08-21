@@ -1,7 +1,7 @@
 <template>
   <div class="middle">
-    <UserNav></UserNav>
-    <!-- <Manage></Manage> -->
+    <!-- <UserNav></UserNav> -->
+    <Manage></Manage>
   </div>
 </template>
 
@@ -13,18 +13,18 @@ import Manage from "./views/manage/manage.vue";
 export default {
   name: "App",
   components: {
-    Manage,
-    UserNav
-  },
-};
+    UserNav,
+    Manage
+  }
+}
 </script>
 
 <style lang="scss">
 @import "./assets/scss/base.scss";
 @import "./assets/scss/base.css";
-// body {
-//   background-color: rgb(41, 45, 63);
-// }
+body {
+  background-color: rgb(41, 45, 63);
+}
 .middle {
   width: 1200px;
   margin: 0 auto;
