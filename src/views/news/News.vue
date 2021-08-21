@@ -1,14 +1,14 @@
 
 <template>
-<div class="block">
+<div class="block" id="content">
   <el-timeline>
-      <el-timeline-item timestamp="2021/4/12" placement="top">
+      <el-timeline-item timestamp="2021/4/12" placement="top" color="#0bbd87">
       <el-card class="active">
         <h4>面试结果</h4>
         <p>你无了。。。</p>
       </el-card>
     </el-timeline-item>
-    <el-timeline-item timestamp="2018/4/12" placement="top">
+    <el-timeline-item timestamp="2018/4/12" placement="top" color="#0bbd87">
       <el-card>
         <h4>面试结果</h4>
         <p>你无了。。。</p>
@@ -26,6 +26,12 @@
         <p>报名成功</p>
       </el-card>
     </el-timeline-item>
+      <el-timeline-item timestamp="2018/4/2" placement="top">
+      <el-card>
+        <h4>报名</h4>
+        <p>报名成功</p>
+      </el-card>
+    </el-timeline-item>
   </el-timeline>
 </div>
 </template>
@@ -35,6 +41,11 @@
 </script>
 
 <style lang="scss" scoped>
+
+#content {
+    margin: 50px auto 0;
+    width: 70%;
+}
 
 .active {
     border: 1px solid red;

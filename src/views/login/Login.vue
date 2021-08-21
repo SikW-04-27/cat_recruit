@@ -1,10 +1,9 @@
 <template>
   <div id="login" class="">
-    <input type="text" v-model="userName">
-    <input type="text" v-model="userPassword">
+    <input type="text" v-model="userName" placeholder="账户">
+    <input type="text" v-model="userPassword" placeholder="密码">
     <div class="tips">
-        <input type="checkbox" value="记住密码">
-        <router-link to='/register'>注册</router-link>
+        <router-link to='/register'>账号注册</router-link>
     </div>
     <button @click="register">登录</button> 
   </div>
@@ -42,7 +41,7 @@ export default {
 #login {
   margin: 65px auto;
   width: 400px;
-  height: 200px;
+  height: 220px;
   text-align: center;
   border: 1px solid #ccc;
   /* background-color: blue; */
@@ -51,6 +50,7 @@ export default {
     margin-top: 28px;
     width: 280px;
     height: 30px;
+    padding-left: 8px;
     border: 1px solid red
   }
 
@@ -58,6 +58,11 @@ export default {
     margin-top: 30px;
     width: 120px;
     height: 36px;
+  }
+
+  .tips {
+
+    font-size: 14px;
   }
 
 }

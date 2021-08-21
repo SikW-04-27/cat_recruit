@@ -1,11 +1,11 @@
 <template>
  <div id="manage-register" class="">
     <div>邮箱</div>
-    <input type="text" v-model="userName">
+    <input type="text">
     <div>密码</div>
-    <input type="text" v-model="userPassword">
+    <input type="text">
     <div>管理员密钥</div>
-     <input type="text" v-model="userPassword">
+     <input type="text">
     <div class="tips">邮箱格式错误！</div>
   </div>
 </template>
