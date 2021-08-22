@@ -1,4 +1,5 @@
 <template>
+<IntroductionTitle>工作室日常</IntroductionTitle>
      <div class="studio-happy">
       <p>工作室日常</p>
       <img src="../../../assets/img/happy1.jpg" alt="" />
@@ -8,9 +9,15 @@
     </div>
 </template>
 
-<script>
-export default {
 
+<script>
+
+import IntroductionTitle from '../../../components/IntroductionTitle.vue'
+export default {
+    name: 'Life',
+    components: {
+        IntroductionTitle
+    }
 }
 </script>
 

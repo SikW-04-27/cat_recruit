@@ -27,7 +27,9 @@ export default {
 
 
 body {
-  background-color: rgb(41, 45, 63);
+  // background-color: #292d3f;
+  // background: url('./assets/img/bg.jpg') no-repeat 100% 100%;
+  background-image: url('./assets/img/bg1.jpg');
 }
 .middle {
   width: 1200px;
