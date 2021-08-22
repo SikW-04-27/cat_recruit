@@ -17,7 +17,7 @@ export const deleteAppointmentInfo = p => post('http://112.74.33.254:2358/appoin
 // export const deleteAllAppointmentInfo = p => post('http://112.74.33.254:2358/deleteAllAppointmentInfo',p);
 
 //获取当前总体招新状态
-// export const getCurrentStatus = p => post('http://112.74.33.254:2358/status/getCurrentStatus',p)
+export const getCurrentStatus = p => post('http://112.74.33.254:2358/status/getCurrentStatus',p)
 
 //通过ID获得某个用户的进度信息
 export const getUserStatus = p => post('http://112.74.33.254:2358/status/getUserStatus',p)

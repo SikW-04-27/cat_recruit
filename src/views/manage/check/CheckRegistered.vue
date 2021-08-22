@@ -1,6 +1,6 @@
 <template>
   <el-table
-    :data="tableData"
+    :data="tableData.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()) || data.city.toLowerCase().includes(search.toLowerCase()))"
     style="width: 100%;"
     max-height="2500"
     >
@@ -28,21 +28,29 @@
     <el-table-column
       prop="address"
       label="学院专业"
-      width="500">
+      width="400">
     </el-table-column>
     
     <el-table-column
       fixed="right"
       label="操作"
-      width="120">
+      width="240">
+      <template #header>
+        <el-input
+          v-model="search"
+          size="small"
+          placeholder="输入关键字搜索"/>
+      </template>
       <router-link to='/checkpersonal'>详情</router-link>
     </el-table-column>
   </el-table>
 </template>
 
 <script>
+  import {ref} from 'vue'
   export default {
     setup(props) {
+      let search = ref('')
       let personaldetial = function(index, rows) {
         console.log(111);
       }
@@ -97,6 +105,7 @@
           address: '上海市普陀区金沙江路 1518 弄',
           zip: 200333
         }],
+        search,
         personaldetial
       }
     },
@@ -110,6 +119,9 @@
       cursor: pointer;
       --el-table-row-hover-background-color: gray;
     }
+
+    
+    
     
 
 </style>
