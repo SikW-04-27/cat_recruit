@@ -41,5 +41,8 @@ export default {
         text-align: center;
         font-size: 20px;
         color: #fff;
+        p{
+            margin-bottom: 10px;
+        }
     }
 </style>
