@@ -3,6 +3,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 import Introduction from '../views/introduction/Introduction.vue'
 import Register from '../views/register/Register.vue'
+
+//管理端组件
 import CheckRegistered from '../views/manage/check/CheckRegistered.vue'
 import CheckPersonal from '../views/manage/check/CheckPersonal.vue'
 import CheckCenter from '../views/manage/check/CheckCenter.vue'
@@ -11,6 +13,9 @@ import ModifyRating from '../views/manage/operation/ModifyRating.vue'
 import ModifyRatingList from '../views/manage/operation/ModifyRatingList.vue'
 import CheckDetialPoint from '../views/manage/check/CheckDetialPoint.vue'
 import ModifyProcess from '../views/manage/operation/ModifyProcess.vue'
+import ModifyStatus from '../views/manage/operation/ModifyStatus.vue'
+
+
 import Login from '../views/login/Login.vue'
 import StudentRegister from '../views/register/children/StudentRegister.vue'
 import ManageRegister from '../views/register/children/ManageRegister.vue'
@@ -106,11 +111,18 @@ const router = createRouter({
             component: CheckDetialPoint, 
         },
 
-        //修改进程
+        //管理预约时间
         {
             path:'/modifyprocess',
             name:'modifyprocess',
             component: ModifyProcess, 
+        },
+
+        //修改进程
+        {
+            path:'/modifystatus',
+            name:'modifystatus',
+            component: ModifyStatus, 
         },
 
         {

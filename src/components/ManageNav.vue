@@ -17,7 +17,9 @@
     <el-menu-item index="2-1">
       <router-link to="/modifyprocess">管理预约</router-link>
     </el-menu-item>
-    <el-menu-item index="2-2">管理阶段</el-menu-item>
+    <el-menu-item index="2-2">
+      <router-link to="/modifystatus">管理阶段</router-link>
+    </el-menu-item>
   </el-submenu>
 
     <el-menu-item index="4">

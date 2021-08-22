@@ -71,6 +71,9 @@ export default {
         margin: 20px;
         color: #fff;
         font-size: 20px;
+        p{
+          margin-bottom: 10px;
+        }
     }
     .avatar {
         width: 150px;
