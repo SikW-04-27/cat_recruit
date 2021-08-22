@@ -20,10 +20,13 @@ import Login from '../views/login/Login.vue'
 import StudentRegister from '../views/register/children/StudentRegister.vue'
 import ManageRegister from '../views/register/children/ManageRegister.vue'
 import News from '../views/news/News.vue'
+import Appointment from '../views/appointment/Appointment.vue'
+import Progress from '../views/progress/progress.vue'
+import Form from '../views/signup/Form.vue'
 
-const router = createRouter({  
-    history: createWebHistory(),  
-    routes:[
+const router = createRouter({
+    history: createWebHistory(),
+    routes: [
 
         // 工作室介绍默认
         {
@@ -64,7 +67,7 @@ const router = createRouter({
                 {
                     name: '',
                     path: 'studentRegister',
-                    component: StudentRegister,  
+                    component: StudentRegister,
                 },
 
                 // 管理员注册
@@ -76,60 +79,83 @@ const router = createRouter({
             ]
         },
 
+        // 填写报名表
+        {
+            path: '/Form',
+            name: '',
+            component: Form,
+        },
+
+        // 预约面试时间
+        {
+            path: '/appointment',
+            name: '',
+            component: Appointment,
+        },
+
+        // 查看整体进度
+        {
+            path: '/progress',
+            name: '',
+            component: Progress,
+        },
+
+
+
         //查看已报名学生
         {
-            path:'/checkregistered',
-            name:'',
+            path: '/checkregistered',
+            name: '',
             component: CheckRegistered,
         },
 
         // 查看学生的报名表
         {
-            path:'/checkpersonal',
-            name:'',
+            path: '/checkpersonal',
+            name: '',
             component: CheckPersonal,
         },
 
         //查看管理员个人中心
         {
-            path:'/checkcenter',
-            name:'',
+            path: '/checkcenter',
+            name: '',
             component: CheckCenter,
         },
 
         //修改管理员信息
         {
-            path:'/modifycenter',
-            name:'modifycenter',
+            path: '/modifycenter',
+            name: 'modifycenter',
             component: ModifyCenter,
         },
 
         //对学生进行评分评价
         {
-            path:'/modifyrating',
-            name:'modifyrating',
+            path: '/modifyrating',
+            name: 'modifyrating',
             component: ModifyRating,
         },
 
         //全部学生的评分
         {
-            path:'/modifyratinglist',
-            name:'',
-            component: ModifyRatingList, 
+            path: '/modifyratinglist',
+            name: '',
+            component: ModifyRatingList,
         },
 
         //查看详细分数信息
         {
-            path:'/checkdetialpoint',
-            name:'checkdetialpoint',
-            component: CheckDetialPoint, 
+            path: '/checkdetialpoint',
+            name: 'checkdetialpoint',
+            component: CheckDetialPoint,
         },
 
         //管理预约时间
         {
-            path:'/modifyprocess',
-            name:'modifyprocess',
-            component: ModifyProcess, 
+            path: '/modifyprocess',
+            name: 'modifyprocess',
+            component: ModifyProcess,
         },
 
         //修改进程

@@ -1,0 +1,6 @@
+
+export default {
+    let tips = () =>{
+
+    },
+};
