@@ -1,0 +1,6 @@
+//
+function tips() {
+   
+}
+
+export { tips }
