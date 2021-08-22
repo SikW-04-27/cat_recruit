@@ -24,18 +24,22 @@ import News from '../views/news/News.vue'
 const router = createRouter({  
     history: createWebHistory(),  
     routes:[
+
+        // 工作室介绍默认
         {
             path: '',
             name: '',
             component: Introduction,
         },
 
+        // 工作室介绍
         {
             path: '/introduction',
             name: '',
             component: Introduction,
         },
 
+        // 登录界面
         {
             path: '/login',
             name: '',
@@ -43,11 +47,14 @@ const router = createRouter({
 
         },
 
+        // 注册界面
         {
             path: '/register',
             name: '',
             component: Register,
             children: [
+
+                // 学生注册
                 {
                     name: '',
                     path: '',
@@ -57,7 +64,14 @@ const router = createRouter({
                 {
                     name: '',
                     path: 'studentRegister',
-                    component: StudentRegister,
+                    component: StudentRegister,  
+                },
+
+                // 管理员注册
+                {
+                    name: '',
+                    path: 'manageRegister',
+                    component: ManageRegister,
                 },
             ]
         },

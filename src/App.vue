@@ -1,7 +1,9 @@
 <template>
+    <UserNav></UserNav>
+    <!-- <MyButton padding="10px 20px" color="blue">点击</MyButton> -->
+
   <div class="middle">
-    <!-- <UserNav></UserNav> -->
-    <Manage></Manage>
+    <!-- <Manage></Manage> -->
   </div>
 </template>
 
@@ -9,12 +11,16 @@
 import Register from "./views/register/Register.vue";
 import UserNav from "./components/UserNav.vue";
 import Manage from "./views/manage/manage.vue";
+import MyButton from "./components/MyButton.vue"
+import MyFront from "./components/MyFront.vue"
 
 export default {
   name: "App",
   components: {
     UserNav,
-    Manage
+    Manage,
+    MyButton,
+    MyFront
   }
 }
 </script>
@@ -29,4 +35,5 @@ body {
   width: 1200px;
   margin: 0 auto;
 }
+
 </style>

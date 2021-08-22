@@ -1,5 +1,8 @@
 <template>
-  <div class="banner"></div>
+  <div class="banner">
+    <MyFront>c.a.t工作室欢迎你！</MyFront>
+    <img src="../../assets/img/banner1.jpg" alt="">
+  </div>
   <div id="content">
     <div class="studio-intro">
       <div>
@@ -58,7 +61,13 @@
 </template>
 
 <script>
-export default {};
+
+import MyFront from "../../components/MyFront.vue"
+export default {
+  components: {
+MyFront
+  }
+};
 </script>
 
 <style scoped lang="scss">
@@ -72,9 +81,23 @@ export default {};
 }
 
 .banner {
+  position: relative;
   width: 100%;
   height: 260px;
   background-color: green;
+  span {
+    position: absolute;
+    color: #fff;
+    top: 40%;
+    left: 33%;
+    letter-spacing: 12px;
+    font-size: 35px;
+    font-weight: 700;
+  }
+  img {
+    width: 100%;
+    height: 260px;
+  }
 }
 
 .studio-intro {
