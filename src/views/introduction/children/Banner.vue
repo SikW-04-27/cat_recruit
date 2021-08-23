@@ -18,7 +18,7 @@ export default {
   position: relative;
   width: 100%;
   height: 260px;
-  background-color: #000;
+  background-color: rgba(0, 0, 0, .7);
   span {
     position: absolute;
     color: #fff;

@@ -36,7 +36,7 @@ export default {
   height: 1200px;
   color: #c2c2c2;
   font-size: 14px;
-  background-color: #1e4353;
+  background-color: rgba(0, 0, 0, .5);
 }
 
 

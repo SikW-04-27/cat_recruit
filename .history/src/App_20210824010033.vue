@@ -33,9 +33,13 @@ export default {
 
 
 body {
+<<<<<<< HEAD
+  // background-color: rgb(41, 45, 63);
+=======
   // background-color: #292d3f;
   // background: url('./assets/img/bg.jpg') no-repeat 100% 100%;
   background-image: url('./assets/img/bg1.jpg');
+>>>>>>> cb171f6984d0a66dad5604f1796404f676f2b4d9
 }
 .middle {
   width: 1200px;

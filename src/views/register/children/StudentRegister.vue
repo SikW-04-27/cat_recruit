@@ -1,15 +1,35 @@
 <template>
-  <div id="student-register" class="">
-    <div>邮箱</div>
-    <input type="text">
-    <div>密码</div>
-    <input type="text">
+  <div id="student-register">
+    <input type="text" v-model="studentMail">
+    <input type="text" v-model="studentPassword">
     <div class="tips">邮箱格式错误！</div>
+    
   </div>
 </template>
 
+
 <script>
+import { ref, onUpdated, onMounted, watch} from 'vue'
+import {useStore} from 'vuex'
 export default {
+  name: 'StudentRegister',
+  setup(props, context) {
+    let studentMail = ref('邮箱');
+    let studentPassword = ref('密码');
+
+    const store = useStore();
+
+    	watch([studentMail,studentPassword],(newValue,oldValue)=>{
+        // console.log(newValue)
+			store.state.register.student.studentMail = newValue[0];
+			store.state.register.student.studentPassword = newValue[1];
+      store.state.register.inentity = 1;
+			}) 
+    return {
+      studentMail,
+      studentPassword,
+    }
+  }
 
 }
 </script>

@@ -53,3 +53,20 @@ button, input , textarea{
 .clearfix {
     *zoom: 1;
 }
+
+/* 滚动条的宽度 */
+.el-table__body-wrapper::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* 滚动条的滑块 */
+.el-table__body-wrapper::-webkit-scrollbar-thumb {
+    background-color: #a1a3a9;
+    border-radius: 3px;
+}
+
+/* hover滚动条的滑块 */
+.el-table__body-wrapper::-webkit-scrollbar-thumb:hover{
+  background-color: #c7c9cf;
+  cursor: pointer;
+}

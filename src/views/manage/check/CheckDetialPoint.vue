@@ -1,8 +1,8 @@
 <template>
     <div class="personinfo">
-        <p>姓名：xxxx</p>
-        <p>学号：3120004444</p>
-        <p>阶段：一轮考核</p>
+        <p>姓名：{{user_name}}</p>
+        <p>学号：{{user_id}}</p>
+        <p>阶段：{{user_process}}</p>
         <router-link to="/modifyrating">
             <el-button type="primary">修改分数</el-button>
         </router-link>
@@ -17,17 +17,17 @@
         border
         style="width: 100%">
         <el-table-column
-        prop="name"
+        prop="adminName"
         label="管理员"
         width="180">
         </el-table-column>
         <el-table-column
-        prop="point"
+        prop="score"
         label="分数"
         width="180">
         </el-table-column>
         <el-table-column
-        prop="assess"
+        prop="comment"
         label="评价">
         </el-table-column>
     </el-table>
@@ -40,25 +40,45 @@ import { ref,onMounted, reactive } from "vue";
 import { useRoute } from "vue-router";
 export default {
   setup(props) {
-      let tableData = reactive([{
-          date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-04',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1517 弄'
-        }, {
-          date: '2016-05-01',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1519 弄'
-        }, {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1516 弄'
-        }])
+    let user_name = ref('');
+    let user_id = ref(0); 
+    let user_process = ref(''); 
+    let tableData = reactive([])
+    let route = useRoute()
+    onMounted(()=>{
+      let user_point = JSON.parse( window.sessionStorage.getItem('user_point'));
+      let user_status = JSON.parse( window.sessionStorage.getItem('user_status'));
+      user_name.value = user_point.name;
+      user_id.value = user_point.id;
+      user_process.value = user_status.label;
 
-    return {tableData}
+      
+
+      switch (user_status.label){
+        case '笔试':
+          tableData.push(...user_point.userAppraiseExam);
+          break
+        case '一轮面试':
+          tableData.push(...user_point.userAppraiseFirstInterview);
+          break
+        case '二轮面试':
+          tableData.push(...user_point.userAppraiseSecondInterview);
+          break
+        case '一轮考核':
+          tableData.push(...user_point.userAppraiseFirstReview);
+          break
+        case '二轮考核':
+          tableData.push(...user_point.userAppraiseSecondReview);
+          break
+      }
+    })
+
+    return {
+      user_name,
+      user_id,
+      user_process,
+      tableData
+    }
   },
 };
 </script>

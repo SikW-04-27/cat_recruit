@@ -40,16 +40,15 @@ export const listMajor = p => get('http://47.107.49.231/major/list/{major}', p)
 
 //获取全部专业
 export const listAllMajor = p => get('http://47.107.49.231/major/list')
-
 // 给邮箱发送验证码
 export const sendCkeckNumber = p => post('http://112.74.33.254:2358/user/Verification', p);
 
 //回退上一阶段
-export const toPreviousStatus = p => post('http://112.74.33.254:2358/status/toPreviousStatus', p);
+export const toPreviousStatus = p => post('http://112.74.33.254:2358/status/toPreviousStatus',p);
 
 //查询所有用户分数
-export const listAllUser = p => post('http://112.74.33.254:2358/status/listAllUser', p);
+export const listAllUser = p => post('http://112.74.33.254:2358/status/listAllUser',p);
 
 //打分
-export const addAppraise = p => post('http://112.74.33.254:2358/admin/addAppraise', p);
+export const addAppraise = p => post('http://112.74.33.254:2358/admin/addAppraise',p);
 
