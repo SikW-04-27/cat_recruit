@@ -204,16 +204,6 @@ import {listAppointment,saveNewAppointmentInfo,deleteAppointmentInfo,deleteAllAp
     .process{
         display: flex;
         justify-content: space-between;
-        //滚动条的宽度
-        .el-table-scolled .el-table__body-wrapper::-webkit-scrollbar {
-            width: 5px;
-            height: 10px;
-        }
-        //滚动条的滑块
-        .el-table-scolled .el-table__body-wrapper::-webkit-scrollbar-thumb {
-            background-color: #a1a3a9;
-            border-radius: 3px;
-        }
 
         .block{
             width: 600px;

@@ -3,6 +3,7 @@
     <input type="text" v-model="studentMail">
     <input type="text" v-model="studentPassword">
     <div class="tips">邮箱格式错误！</div>
+    
   </div>
 </template>
 
@@ -17,16 +18,17 @@ export default {
     let studentPassword = ref('密码');
 
     const store = useStore();
+
     	watch([studentMail,studentPassword],(newValue,oldValue)=>{
         // console.log(newValue)
 			store.state.register.student.studentMail = newValue[0];
 			store.state.register.student.studentPassword = newValue[1];
       store.state.register.inentity = 1;
 			}) 
-
     return {
       studentMail,
-      studentPassword
+      studentPassword,
+      aaa
     }
   }
 

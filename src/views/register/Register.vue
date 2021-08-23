@@ -5,12 +5,14 @@
       <router-link to="/register/manageRegister">管理员注册</router-link>
     </div>
     <router-view></router-view>
+    <studentRegister ref="child"></studentRegister>
     <button @click="registerFn">注册</button>
   </div>
 </template>
 
 
 <script>
+
 import { ref, defineComponent, onMounted } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { useStore } from "vuex";
@@ -50,6 +52,7 @@ export default {
         console.log('失败');
         console.log(err);
       })
+
     }
 
     return {

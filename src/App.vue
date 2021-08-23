@@ -1,4 +1,10 @@
 <template>
+    <!-- <UserNav></UserNav> -->
+    <!-- <MyButton padding="10px 20px" color="blue">点击</MyButton> -->
+
+  <!-- <div class="middle">
+    <Manage></Manage>
+  </div> -->
   <UserNav></UserNav>
   <!-- <div class="middle">
     <Manage></Manage>
