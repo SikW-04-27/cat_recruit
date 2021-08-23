@@ -1,9 +1,9 @@
 <template>
-    <UserNav></UserNav>
+    <!-- <UserNav></UserNav> -->
     <!-- <MyButton padding="10px 20px" color="blue">点击</MyButton> -->
 
   <div class="middle">
-    <!-- <Manage></Manage> -->
+    <Manage></Manage>
   </div>
 </template>
 

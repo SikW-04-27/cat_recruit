@@ -2,8 +2,8 @@
     <div class="status">
         <div class="nowstatus">{{status_value}}</div>
         <div class="modifystatus">
-            <el-button type="primary" icon="el-icon-arrow-left" @click="left">上一阶段</el-button>
-            <el-button type="primary" icon="el-icon-arrow-right" @click="right" :disabled='able'>下一阶段</el-button>
+            <el-button type="primary" icon="el-icon-arrow-left" @click="left" :disabled='leftable'>上一阶段</el-button>
+            <el-button type="primary" icon="el-icon-arrow-right" @click="right" :disabled='rightable'>下一阶段</el-button>
         </div>
         
     </div>
@@ -12,44 +12,65 @@
 <script>
 import { onMounted, ref } from 'vue'
 import { ElLoading } from 'element-plus';
-import {getCurrentStatus,updateStatus,updateStatusOnTest} from '../../../request/api'
+import {getCurrentStatus,updateStatus,updateStatusOnTest,toPreviousStatus} from '../../../request/api'
     export default {
         setup(props) {
             let status_value = ref('');
-            let able = ref(false)
+            let leftable = ref(false)
+            let rightable = ref(false)
 
-            let getStatus = function(){
+            // 获取状态并显示的函数封装
+            let getStatus = function(able){
                 getCurrentStatus().then(res => {
                     status_value.value = res.data.status;
-                    if(status_value.value === '最终考核'){
-                        able.value = true
+                    if(status_value.value === '招新未开始'){
+                        leftable.value = true;
+                        return
                     }
-                    console.log(status_value);
+                    if(able === 'right'){
+                        leftable.value = false;
+                        if( status_value.value === '最终考核'){
+                            rightable.value = true;
+                        }else{
+                            rightable.value = false
+                        }
+                    }else{
+                        rightable.value = false;
+                        if( status_value.value ===  '招新未开始'){
+                            leftable.value = true;
+                        }else{
+                            leftable.value = false;
+                        }
+                    }
                 })
             }
 
+            // 刷新页面之后显示状态
             onMounted(()=>{
                 let loadingInstance = ElLoading.service({background:'transparent',target:'.nowstatus'});
-                getStatus();
+                getStatus( 'right');
             })
 
+            // 点击上一阶段
             let left =function(){
-                updateStatusOnTest({"id":7}).then(res => {
-                    console.log(res);
+                let loadingInstance = ElLoading.service({background:'transparent',target:'.nowstatus'});
+                toPreviousStatus().then(res => {
+                    getStatus('left');
                 })
             }
 
+            // 点击下一阶段
             let right = function(){
                 let loadingInstance = ElLoading.service({background:'transparent',target:'.nowstatus'});
                 updateStatus().then(res => {
-                    console.log(res);
-                    getStatus();
+                    getStatus('right');
                 })
             }
 
             return {
                 status_value,
-                able,
+                leftable,
+                rightable,
                 left,
                 right
             }
