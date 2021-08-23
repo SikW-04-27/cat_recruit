@@ -1,9 +1,8 @@
 <template>
   <div id="register">
     <div class="register-option">
-      <router-link to="/register/studentRegister"  ref="student" @fn="fn">学生注册</router-link>
-      <router-link to="/register/manageRegister">管理员注册</router-link
-      >
+      <router-link to="/register/studentRegister">学生注册</router-link>
+      <router-link to="/register/manageRegister">管理员注册</router-link>
     </div>
     <router-view></router-view>
     <button @click="registerFn">注册</button>
@@ -12,45 +11,52 @@
 
 
 <script>
-import {ref, defineComponent, onMounted} from 'vue'
-import {useRouter, useRoute} from 'vue-router'
-import {useStore} from 'vuex'
+import { ref, defineComponent, onMounted } from "vue";
+import { useRouter, useRoute } from "vue-router";
+import { useStore } from "vuex";
+
+import {sendCkeckNumber} from "../../request/api"
 
 export default {
-    name: 'Register',
+  name: "Register",
 
-    setup(props, context) {
-      let student = ref('');
- let store = useStore();
+  setup(props, context) {
+    let student = ref("");
+    let store = useStore();
 
-      function registerFn(){
-        // console.log(student.studentMail);
-   console.log(store.state.studentInformation.studentMail);
-       } 
-      //  console.log(context);
+    function registerFn() {
+      
+      const checkMail = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+      const checkPassword = 1;
 
-       function fn(v) {
-         console.log(v);
-       }
-
-      //  let router = useRouter();
-      //  console.log(router);
-
-      //  let route = useRoute();
-      //  console.log(route);
-       onMounted(() => {
-        //  console.log(this.$refs.student);
-       })
-       return {
-      registerFn,
-      student,
-      fn
-  
+      if (store.state.register.inentity === 1) {
+        let studentMail = store.state.register.student.studentMail;
+        let studentPassword = store.state.register.student.studentPassword;
+        if (reg.test(studentMail)) {
+         
+        } else {
+          console.log(222);
+        }
+       
+      }
+  console.log(11);
+      sendCkeckNumber({
+        "identity": 1,
+        "email": "2909753663@qq.com"
+      }).then((result) => {
+        console.log('成功');
+        console.log(result);
+      }).catch((err) => {
+        console.log('失败');
+        console.log(err);
+      })
     }
 
-    }}
-  
-
+    return {
+      registerFn,
+    };
+  },
+};
 </script>
 
 <style lang="scss" scoped>

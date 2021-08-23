@@ -1,4 +1,4 @@
-import { createStore} from 'vuex'
+import { createStore } from 'vuex'
 
 
 const actions = {}
@@ -6,9 +6,21 @@ const actions = {}
 const mutations = {}
 
 const state = {
-    studentInformation: {
-        studentMail: '',
-        studentpassword: ''
+    register: {
+        // indetity 判断注册的身份，学生为1， 管理员为0
+        identity: Number,
+        student: {
+            studentMail: String,
+            studentPassword: String
+        },
+
+        manager: {
+            managerMail: String,
+            managerPassword: String,
+            managerKey: String
+        }
+
+
     }
 }
 

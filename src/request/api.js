@@ -32,3 +32,6 @@ export const updateStatus = p => post('http://112.74.33.254:2358/status/updateSt
 //调试接口：指定招新状态
 export const updateStatusOnTest = p => post('http://112.74.33.254:2358/status/updateStatusOnTest',p);
 
+// 给邮箱发送验证码
+export const sendCkeckNumber = p => post('http://112.74.33.254:2358/user/Verification', p);
+
