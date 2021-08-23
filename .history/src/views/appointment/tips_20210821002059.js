@@ -1,0 +1,4 @@
+let tips = {
+}
+
+export { tips }

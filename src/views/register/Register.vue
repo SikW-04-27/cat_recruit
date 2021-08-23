@@ -1,28 +1,67 @@
 <template>
   <div id="register">
-    <div class="register-option">
-      <router-link to="/register/studentRegister">学生注册</router-link>
-      <router-link to="/register/manageRegister">管理员注册</router-link>
+    <div class="register-option" >
+      <router-link to="/register/studentRegister"  @fn="fn">学生注册</router-link>
+      <router-link to="/register/manageRegister">管理员注册</router-link
+      >
     </div>
     <router-view></router-view>
-    <button @click="register">注册</button> 
-
+    <studentRegister ref="child"></studentRegister>
+    <button @click="registerFn">注册</button>
   </div>
 </template>
 
 
 <script>
-import {ref} from 'vue'
+import {ref, defineComponent, onMounted, reactive} from 'vue'
+import {useRouter, useRoute} from 'vue-router'
+import {useStore} from 'vuex'
+
+import studentRegister from './children/StudentRegister.vue'
 
 export default {
     name: 'Register',
+    components:{studentRegister},
 
+    setup(props, context) {
+      let student = ref('');
+      let store = useStore();
+
+      let child = ref<HTMLElement>(null)
+
+      function registerFn(){
+        // console.log(student.studentMail);
+        console.log(store.state.studentInformation.studentMail);
+        console.log(child.value.aaa);
+       } 
+      //  console.log(context);
+
+       function fn(v) {
+         console.log(v);
+       }
+
+      //  let router = useRouter();
+      //  console.log(router);
+
+      //  let route = useRoute();
+      //  console.log(route);
+       onMounted(() => {
+        //  console.log(this.$refs.student);
+       })
+       return {
+      registerFn,
+      student,
+      fn,
+      child
   
-}
+    }
+
+    }}
+  
+
 </script>
 
 <style lang="scss" scoped>
-
 #register {
   margin: 100px auto;
   width: 450px;
@@ -55,8 +94,4 @@ export default {
 }
 
 /*  引入特效 */
-
-
-
-
 </style>
