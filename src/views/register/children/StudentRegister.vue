@@ -1,15 +1,38 @@
 <template>
-  <div id="student-register" class="">
-    <div>邮箱</div>
-    <input type="text">
-    <div>密码</div>
-    <input type="text">
+  <div id="student-register">
+    <input type="text" placeholder="邮箱" v-model="studentMail">
+    <input type="text" placeholder="密码" v-model="studentPassword">
     <div class="tips">邮箱格式错误！</div>
   </div>
 </template>
 
+
 <script>
+import { ref, onUpdated, onMounted} from 'vue'
+import {useStore} from 'vuex'
 export default {
+  name: 'StudentRegister',
+  setup(props, {emit}) {
+    let studentMail = ref('123');
+    let studentPassword = ref('');
+
+    const store = useStore();
+
+    store.state.studentInformation.studentMail = studentMail
+
+
+onMounted(() => {
+  // console.log(studentMail);
+      // this.$emit('registerFn', [studentMail.value, studentPassword.value])
+      emit('fn', studentMail);
+
+})
+
+    return {
+      studentMail,
+      studentPassword
+    }
+  }
 
 }
 </script>

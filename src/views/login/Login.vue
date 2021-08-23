@@ -42,6 +42,7 @@ export default {
   margin: 65px auto;
   width: 400px;
   height: 220px;
+  color: #fff;
   text-align: center;
   border: 1px solid #ccc;
   /* background-color: blue; */

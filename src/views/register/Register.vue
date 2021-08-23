@@ -1,28 +1,59 @@
 <template>
   <div id="register">
     <div class="register-option">
-      <router-link to="/register/studentRegister">学生注册</router-link>
-      <router-link to="/register/manageRegister">管理员注册</router-link>
+      <router-link to="/register/studentRegister"  ref="student" @fn="fn">学生注册</router-link>
+      <router-link to="/register/manageRegister">管理员注册</router-link
+      >
     </div>
     <router-view></router-view>
-    <button @click="register">注册</button> 
-
+    <button @click="registerFn">注册</button>
   </div>
 </template>
 
 
 <script>
-import {ref} from 'vue'
+import {ref, defineComponent, onMounted} from 'vue'
+import {useRouter, useRoute} from 'vue-router'
+import {useStore} from 'vuex'
 
 export default {
     name: 'Register',
 
+    setup(props, context) {
+      let student = ref('');
+ let store = useStore();
+
+      function registerFn(){
+        // console.log(student.studentMail);
+   console.log(store.state.studentInformation.studentMail);
+       } 
+      //  console.log(context);
+
+       function fn(v) {
+         console.log(v);
+       }
+
+      //  let router = useRouter();
+      //  console.log(router);
+
+      //  let route = useRoute();
+      //  console.log(route);
+       onMounted(() => {
+        //  console.log(this.$refs.student);
+       })
+       return {
+      registerFn,
+      student,
+      fn
   
-}
+    }
+
+    }}
+  
+
 </script>
 
 <style lang="scss" scoped>
-
 #register {
   margin: 100px auto;
   width: 450px;
@@ -55,8 +86,4 @@ export default {
 }
 
 /*  引入特效 */
-
-
-
-
 </style>
