@@ -17,6 +17,8 @@ import ModifyStatus from '../views/manage/operation/ModifyStatus.vue'
 
 
 import Login from '../views/login/Login.vue'
+import StudentLogin from '../views/login/children/StudentLogin.vue'
+import ManagerLogin from '../views/login/children/managerLogin.vue'
 import StudentRegister from '../views/register/children/StudentRegister.vue'
 import ManageRegister from '../views/register/children/ManageRegister.vue'
 import News from '../views/news/News.vue'
@@ -47,6 +49,26 @@ const router = createRouter({
             path: '/login',
             name: '',
             component: Login,
+            children: [
+
+                {
+                    path: '',
+                    name: '',
+                    component: StudentLogin
+                },
+
+                {
+                    path: 'studentLogin',
+                    name: '',
+                    component: StudentLogin
+                },
+
+                {
+                    path: 'managerLogin',
+                    name: '',
+                    component: ManagerLogin
+                }
+            ]
 
         },
 

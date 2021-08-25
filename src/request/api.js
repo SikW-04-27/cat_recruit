@@ -44,3 +44,6 @@ export const listAllUser = p => post('http://112.74.33.254:2358/status/listAllUs
 //打分
 export const addAppraise = p => post('http://112.74.33.254:2358/admin/addAppraise',p);
 
+// 学生或管理员注册
+export const userRegister = p => post('http://112.74.33.254:2358/user/Regiest', p);
+
