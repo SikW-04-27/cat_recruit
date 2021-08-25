@@ -1,0 +1,40 @@
+<template>
+  <UserNav></UserNav>
+  <!-- <div class="middle">
+    <Manage></Manage>
+  </div> -->
+</template>
+
+<script>
+import UserNav from "./components/UserNav.vue";
+import Manage from "./views/manage/manage.vue";
+
+export default {
+  name: "App",
+  components: {
+    UserNav,
+    Manage,
+  },
+};
+</script>
+
+<style lang="scss">
+@import "./assets/scss/base.scss";
+@import "./assets/scss/base.css";
+@import "./assets/scss/button.scss";
+@import "./assets/scss/front.scss";
+
+
+
+body {
+  // background-color: rgb(41, 45, 63);
+}
+.middle {
+  width: 1200px;
+  margin: 0 auto;
+}
+
+ 
+
+
+</style>

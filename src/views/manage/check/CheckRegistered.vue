@@ -1,14 +1,13 @@
 <template>
   <el-table
-    :data="tableData.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()) || data.city.toLowerCase().includes(search.toLowerCase()))"
+    :data="tableData.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()) || data.direction.toLowerCase().includes(search.toLowerCase()))"
     style="width: 100%;"
     max-height="2500"
     >
     <el-table-column
-      fixed
-      prop="date"
+      prop="registerTime"
       label="报名日期"
-      width="150">
+      width="180">
     </el-table-column>
     <el-table-column
       prop="name"
@@ -16,23 +15,27 @@
       width="120">
     </el-table-column>
     <el-table-column
-      prop="province"
+      prop="direction"
       label="方向"
       width="120">
     </el-table-column>
     <el-table-column
-      prop="city"
+      prop="studentId"
       label="学号"
       width="120">
     </el-table-column>
     <el-table-column
-      prop="address"
-      label="学院专业"
-      width="400">
+      prop="major"
+      label="学院"
+      width="200">
+    </el-table-column>
+    <el-table-column
+      prop="college"
+      label="专业"
+      width="200">
     </el-table-column>
     
     <el-table-column
-      fixed="right"
       label="操作"
       width="240">
       <template #header>
@@ -47,64 +50,24 @@
 </template>
 
 <script>
-  import {ref} from 'vue'
+  import {onMounted, reactive, ref} from 'vue'
+  import {enrolllist} from '../../../request/api'
   export default {
     setup(props) {
+      let tableData = reactive([])
       let search = ref('')
       let personaldetial = function(index, rows) {
         console.log(111);
       }
+
+      onMounted(()=>{
+        enrolllist().then(res => {
+          console.log(res);
+          tableData.push(...res.data)
+        })
+      })
       return{
-        tableData: [{
-          date: '2016-05-03',
-          name: '王小虎去企鹅企鹅111',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
-          zip: 200333
-        }, {
-          date: '2016-05-02',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
-          zip: 200333
-        }, {
-          date: '2016-05-04',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
-          zip: 200333
-        }, {
-          date: '2016-05-01',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
-          zip: 200333
-        }, {
-          date: '2016-05-08',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
-          zip: 200333
-        }, {
-          date: '2016-05-06',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
-          zip: 200333
-        }, {
-          date: '2016-05-07',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
-          zip: 200333
-        }],
+        tableData,
         search,
         personaldetial
       }

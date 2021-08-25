@@ -51,10 +51,10 @@ export default {
           let timer = null;
           timer = setInterval(() => {
             checkNumberTip.value = `${seconds}秒后重新发送`
-            console.log(seconds);
+            console.log('定时器没停止', seconds);
             seconds--;
              if (seconds === 0) {
-               console.log(seconds);
+               console.log('定时器停止', seconds);
               checkNumberTip.value = '重新发送';
               clearInterval(timer);
 

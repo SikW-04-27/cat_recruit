@@ -14,6 +14,7 @@ import ModifyRatingList from '../views/manage/operation/ModifyRatingList.vue'
 import CheckDetialPoint from '../views/manage/check/CheckDetialPoint.vue'
 import ModifyProcess from '../views/manage/operation/ModifyProcess.vue'
 import ModifyStatus from '../views/manage/operation/ModifyStatus.vue'
+import ModifyQueue from '../views/manage/operation/ModifyQueue.vue'
 
 
 import Login from '../views/login/Login.vue'
@@ -185,6 +186,13 @@ const router = createRouter({
             path:'/modifystatus',
             name:'modifystatus',
             component: ModifyStatus, 
+        },
+
+        //管理员修改当前叫号
+        {
+            path:'/modifyqueue',
+            name:'modifyqueue',
+            component: ModifyQueue, 
         },
 
         {

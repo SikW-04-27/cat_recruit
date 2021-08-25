@@ -5,10 +5,10 @@
   <!-- <div class="middle">
     <Manage></Manage>
   </div> -->
-  <UserNav></UserNav>
-  <!-- <div class="middle">
+  <!-- <UserNav></UserNav> -->
+  <div class="middle">
     <Manage></Manage>
-  </div> -->
+  </div>
 </template>
 
 <script>
@@ -36,6 +36,7 @@ body {
   // background-color: #292d3f;
   // background: url('./assets/img/bg.jpg') no-repeat 100% 100%;
   background-image: url('./assets/img/bg1.jpg');
+  background-size: cover;
 }
 .middle {
   width: 1200px;

@@ -5,9 +5,9 @@
       size="medium"
       prefix-icon="el-icon-search"
       placeholder="输入关键字搜索"/>
-    <el-button type="danger" class="eliminate" @click="eliminate" v-show="dangerbutton_1">批量淘汰</el-button>
-    <el-button type="danger" class="canceleliminate" @click="canceleliminate" v-show="dangerbutton_2">取消</el-button>
-    <el-button type="danger" class="confirmeliminate" @click="confirmeliminate" v-show="dangerbutton_2">确认淘汰</el-button>
+    <button class="eliminate myButton" @click="eliminate" v-show="dangerbutton_1">批量淘汰</button>
+    <button class="canceleliminate myButton" @click="canceleliminate" v-show="dangerbutton_2">取消</button>
+    <button class="confirmeliminate myButton" @click="confirmeliminate" v-show="dangerbutton_2">确认淘汰</button>
     <el-table :data="tableData.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
       @cell-click="handle" 
       @cell-mouse-enter='hovercell'
@@ -28,7 +28,7 @@
       </el-table-column>
       <el-table-column prop="secondReviewAvg" sortable label="二轮考核">
       </el-table-column>
-      <el-table-column prop="sum" sortable label="平均分"> </el-table-column>
+      <el-table-column prop="totalAvg" sortable label="平均分"> </el-table-column>
       <el-table-column prop="recruitmentStatus" label="状态"> 
 
       </el-table-column>
@@ -41,13 +41,14 @@
 import { onMounted, reactive, ref } from "vue";
 import { useRouter } from 'vue-router'
 import {listAllUser} from '../../../request/api'
+import {ElLoading, ElMessageBox, ElMessage  } from 'element-plus'
 export default {
   setup(props) {
     let tableData = reactive([]);
     let search = ref('')
     let dangerbutton_1 = ref(true);
     let dangerbutton_2 = ref(false);
-    const router = useRouter()
+    const router = useRouter();
 
     // 点击每一个单元格
     let handle = function (row, column, event, cell) {
@@ -103,11 +104,10 @@ export default {
     }
 
     onMounted(()=>{
+      let loadingInstance = ElLoading.service({fullscreen:false,target:'.el-table-scolled',background:'rgb(41, 45, 63, 0.8)'});
       listAllUser().then(res => {
-        console.log(res);
         tableData.push(...res.data)
-        console.log(...res.data[0].userAppraiseFirstInterview);
-        console.log(tableData);
+        loadingInstance.close()
       })
     })
 
@@ -133,6 +133,7 @@ export default {
   position: relative;
   padding-top: 20px;
   text-align: center;
+  background-color:rgba(0, 0, 0, 0.5) ;
 
   // 设置搜索框长度
   .el-input {
@@ -143,6 +144,20 @@ export default {
   .eliminate,.confirmeliminate{
     position: absolute;
     right: 0;
+  }
+
+  .myButton{
+    color: rgb(167, 95, 95);
+  }
+
+   .myButton:hover{
+     box-shadow: 0 0 50px rgb(238, 146, 9);
+     background-color: rgb(53, 55, 185);
+   }
+
+  .myButton::before{
+    border-top: 2px solid red;
+    border-left: 2px solid red;
   }
 
   .canceleliminate{

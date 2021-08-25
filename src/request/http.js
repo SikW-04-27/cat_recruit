@@ -2,7 +2,7 @@
 import axios from 'axios';
 // import { response } from 'express';
 //引入qs模块，用来序列化post类型的数据
-// import QS from 'qs'
+import qs from 'qs'
 // import resolve from 'resolve';
 
 // 环境的切换
@@ -16,6 +16,8 @@ if (process.env.NOOE_ENV == 'development') {
 
 // 设置请求超时
 axios.defaults.timeout = 10000;
+
+axios.defaults.headers.get['Content-Type'] = 'application/json';
 
 // post请求头的设置
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
@@ -40,7 +42,7 @@ axios.interceptors.response.use(
 export function get(url, params) {
     return new Promise((resolve, reject) => {
         axios.get(url, {
-            params: params
+            params:qs.stringify(params)
         }).then(res => {
             console.log("请求成功");
             resolve(res.data);
