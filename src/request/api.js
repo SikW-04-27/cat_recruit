@@ -51,5 +51,7 @@ export const toPreviousStatus = p => post('http://112.74.33.254:2358/status/toPr
 export const listAllUser = p => post('http://112.74.33.254:2358/status/listAllUser', p);
 
 //打分
-export const addAppraise = p => post('http://112.74.33.254:2358/admin/addAppraise', p);
+export const addAppraise = p => get('http://112.74.33.254:2358/admin/addAppraise', p);
 
+// 查询所有用户的报名信息
+export const enrolllist = p => get('http://47.107.49.231/enroll/list', p);

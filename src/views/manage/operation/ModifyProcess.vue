@@ -42,15 +42,15 @@
             </el-date-picker><br><br>
             <span class="demonstration">预约人数：</span>
             <el-input-number v-model="count" :min="1" label="描述文字" ></el-input-number><br><br>
-            <el-button type="primary" @click="addappointment">添加预约</el-button>
+            <button @click="addappointment" class="myButton">添加预约</button>
 
             <!-- 分割线 -->
             <el-divider ></el-divider>
 
             <!-- 删除预约时间 -->
             <el-input-number v-model="deleteId" :min="1" label="描述文字"></el-input-number>
-            <el-button type="primary" @click="deleteappointment" style="margin-left:30px">删除该时间段</el-button><br><br>
-            <el-button type="danger" @click="deleteAllAppointment">删除全部时间段</el-button><br><br>
+            <button @click="deleteappointment" style="margin-left:30px" class="myButton">删除该时间段</button><br><br>
+            <button @click="deleteAllAppointment" class="myButton">删除全部时间段</button><br><br>
         </div>
 
 
@@ -200,7 +200,7 @@ import {listAppointment,saveNewAppointmentInfo,deleteAppointmentInfo,deleteAllAp
     }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
     .process{
         display: flex;
         justify-content: space-between;
