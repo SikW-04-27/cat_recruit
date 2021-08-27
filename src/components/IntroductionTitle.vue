@@ -8,7 +8,8 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+@import "../assets/scss/button.scss";
 
 #introductin-title {
   margin: 0 auto 8px;
@@ -22,7 +23,7 @@ export default {
   letter-spacing: 2px;
 }
 
-$color: rgb(93, 144, 238);
+$color: rgb(27, 186, 235);
 
 .myButton {
   margin: 0 auto;
