@@ -4,8 +4,8 @@
     <input type="text" v-model="managerMail" placeholder="邮箱" />
     <input type="text" v-model="managerPassword" placeholder="密码" />
     <input type="text" v-model="managerKey" placeholder="管理员秘钥" />
-    <div class="tips">{{ tips }}</div>
-    <button @click="managerRegister">注册</button>
+    <div class="manager-register-tips">{{ tips }}</div>
+    <button @click="managerRegister" class="myButton">注册</button>
   </div>
 </template>
 
@@ -77,21 +77,15 @@ export default {
 <style lang="scss" scoped>
 #manage-register {
   width: 400px;
-  height: 270px;
+  height: 330px;
   text-align: center;
   color: #fff;
   /* background-color: blue; */
 
-  input {
-    margin-top: 28px;
-    width: 280px;
+  .manager-register-tips {
+     font-size: 12px;
     height: 30px;
-    border: 1px solid red;
-    color: red;
-  }
-
-  button {
-    color: #fff;
+    line-height: 30px;
   }
 }
 </style>

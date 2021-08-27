@@ -1,7 +1,17 @@
 <template>
   <AccountOperate>
-    <router-link to="/register/studentRegister">学生注册</router-link>
-    <router-link to="/register/manageRegister">管理员注册</router-link>
+    <router-link
+      to="/register/studentRegister"
+      @click="a = true"
+      :class="{ active: a }"
+      >学生注册</router-link
+    >
+    <router-link
+      to="/register/manageRegister"
+      @click="a = false"
+      :class="{ active: !a }"
+      >管理员注册</router-link
+    >
   </AccountOperate>
 </template>
 
@@ -18,40 +28,25 @@ export default {
   components: {
     AccountOperate,
   },
+  setup() {
+    let a = ref(true);
+
+    return {
+      a,
+    };
+  },
 };
 </script>
 
-<style lang="scss" scoped>
-// #register {
-//   margin: 100px auto;
-//   width: 450px;
-//   // height: 360px;
-//   border: 1px solid #ccc;
+<style lang="scss">
+  a {
+    margin: 0 10px;
+    font-size: 14px;
+    // color: #fff;
+    transition: all .5s;
+  }
 
-//   .register-option {
-//     width: 100%;
-//     height: 40px;
-//     line-height: 40px;
-//     background-color: #1e4353;
-
-//     a {
-//       margin: 0 10px;
-//       font-size: 14px;
-//       color: #fff;
-
-//       &:hover {
-//         color: red;
-//       }
-//     }
-//   }
-
-//   button {
-//     // margin-top: 30px;
-//     margin: 0 0 0 135px;
-//     width: 120px;
-//     height: 36px;
-//   }
-// }
-
-/*  引入特效 */
+  .active {
+    font-size: 20px !important;
+  }
 </style>

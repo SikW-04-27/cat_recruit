@@ -1,6 +1,6 @@
 <template>
   <div id="student-register">
-    <input type="text" v-model="studentName" />
+    <input type="text" v-model="studentName" placeholder="用户名" />
     <input type="text" v-model="studentMail" placeholder="邮箱" />
     <input type="password" v-model="studentPassword" placeholder="密码" />
     <input type="text" v-model="studentCheckNumber" placeholder="验证码" />
@@ -10,8 +10,8 @@
     >
       {{ checkNumberTip }}
     </div>
-    <div class="register-tips">{{ tips }}</div>
-    <button @click="studentRegister">注册</button>
+    <div class="student-register-tips">{{ tips }}</div>
+    <button @click="studentRegister" class="myButton">注册</button>
   </div>
 </template>
 
@@ -19,7 +19,7 @@
 <script>
 import { ref, onUpdated, onMounted, watch } from "vue";
 import { useStore } from "vuex";
-import {useRouter} from 'vue-router';
+import { useRouter } from "vue-router";
 
 import { sendCkeckNumber } from "../../../request/api";
 import { userRegister } from "../../../request/api";
@@ -87,7 +87,7 @@ export default {
       if (!isAllDone.value || !studentCheckNumber.value.trim()) {
         tips.value = "请先完善所有信息";
       } else {
-        tips.value = '';
+        tips.value = "";
         userRegister({
           userName: studentName.value,
           email: studentMail.value,
@@ -98,8 +98,8 @@ export default {
           .then((value) => {
             console.log(value);
             router.push({
-              path: '/login/studentLogin'
-            })
+              path: "/login/studentLogin",
+            });
           })
           .catch((error) => {
             console.log(error);
@@ -122,25 +122,35 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 #student-register {
   position: relative;
   width: 400px;
-  height: 250px;
+  height: 330px;
   text-align: center;
   color: #fff;
-  /* background-color: blue; */
 
   input {
+    // display: block;
     margin-top: 28px;
-    width: 280px;
+    width: 210px;
     height: 30px;
     color: red;
-    border: 1px solid red;
+   font-size: 13px;
   }
 
   .click-checkNumber {
     position: absolute;
+    bottom: 100px;
+    right: 50px;
+    font-size: 12px;
+  }
+
+  .student-register-tips {
+    font-size: 12px;
+    height: 30px;
+    line-height: 30px;
   }
 }
+
 </style>
