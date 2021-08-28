@@ -36,10 +36,10 @@ export const updateStatusOnTest = p => post('http://112.74.33.254:2358/status/up
 export const listAllCollege = p => get('http://47.107.49.231/college/list')
 
 //获取指定学院下的专业
-export const listMajor = p => get('http://47.107.49.231/major/list/{major}', p)
+export const listMajor = p => post('http://47.107.49.231/major/college', p)
 
 //获取全部专业
-export const listAllMajor = p => get('http://47.107.49.231/major/list')
+export const listAllMajor = () => get('http://47.107.49.231/major/list')
 
 // 给邮箱发送验证码
 export const sendCkeckNumber = p => post('http://112.74.33.254:2358/user/Verification', p);
