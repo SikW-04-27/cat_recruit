@@ -49,7 +49,7 @@ export default {
       let user_point = JSON.parse( window.sessionStorage.getItem('user_point'));
       let user_status = JSON.parse( window.sessionStorage.getItem('user_status'));
       user_name.value = user_point.name;
-      user_id.value = user_point.id;
+      user_id.value = user_point.studentId;
       user_process.value = user_status.label;
 
       

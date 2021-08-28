@@ -1,6 +1,6 @@
 <template>
   
-  <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal"  background-color="RGB(41,45,63)" text-color="#fff" active-text-color="#fff">
+  <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal"  background-color="rgba(0, 0, 0, 0.1)" text-color="#fff" active-text-color="#fff">
     <img class="nav_logo" src="../assets/img/catlogo.png" alt="">
     
       <el-menu-item index="3">
@@ -19,6 +19,9 @@
     </el-menu-item>
     <el-menu-item index="2-2">
       <router-link to="/modifystatus">管理阶段</router-link>
+    </el-menu-item>
+    <el-menu-item index="2-3">
+      <router-link to="/modifyqueue">管理叫号</router-link>
     </el-menu-item>
   </el-submenu>
 
@@ -58,6 +61,7 @@
       margin-top: 10px;
       margin-left: 20px;
       width: 70px;
+      float: left;
     }
     .el-menu{
         .el-menu-item,.el-submenu{

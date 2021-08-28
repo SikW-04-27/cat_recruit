@@ -21,6 +21,12 @@ const state = {
         }
 
 
+    },
+
+    // 用户的分数详细信息
+    checkuserinfo: {
+        user_status: String,
+        user_point: String
     }
 }
 
