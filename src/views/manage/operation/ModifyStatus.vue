@@ -2,8 +2,8 @@
     <div class="status">
         <div class="nowstatus">{{status_value}}</div>
         <div class="modifystatus">
-            <el-button type="primary" icon="el-icon-arrow-left" @click="left" :disabled='leftable'>上一阶段</el-button>
-            <el-button type="primary" icon="el-icon-arrow-right" @click="right" :disabled='rightable'>下一阶段</el-button>
+            <ManageButton @click="left" :disabled='leftable'>＜ 上一阶段</ManageButton>
+            <ManageButton @click="right" :disabled='rightable'>下一阶段 ＞</ManageButton>
         </div>
         
     </div>
@@ -11,9 +11,11 @@
 
 <script>
 import { onMounted, ref } from 'vue'
+import ManageButton from '../../../components/ManageButton.vue'
 import { ElLoading } from 'element-plus';
 import {getCurrentStatus,updateStatus,updateStatusOnTest,toPreviousStatus} from '../../../request/api'
     export default {
+        components:{ManageButton},
         setup(props) {
             let status_value = ref('');
             let leftable = ref(false)

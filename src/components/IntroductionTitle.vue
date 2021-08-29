@@ -8,7 +8,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 
 #introductin-title {
   margin: 0 auto 8px;
