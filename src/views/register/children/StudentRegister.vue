@@ -1,11 +1,17 @@
 <template>
   <div id="student-register">
+    <input type="text" v-model="studentName" placeholder="用户名" />
     <input type="text" v-model="studentMail" placeholder="邮箱" />
     <input type="password" v-model="studentPassword" placeholder="密码" />
-    <input type="text" v-model="studentCheckNumber" placeholder="验证码">
-    <div class="click-checkNumber" @click="isCorrectAndSendCheckNumber">{{checkNumberTip}}</div>
-    <div class="register-tips">邮箱格式错误！</div>
-    <button>注册</button>
+    <input type="text" v-model="studentCheckNumber" placeholder="验证码" />
+    <div
+      class="click-checkNumber"
+      @click="flag && isCorrectAndSendCheckNumber()"
+    >
+      {{ checkNumberTip }}
+    </div>
+    <div class="student-register-tips">{{ tips }}</div>
+    <button @click="studentRegister" class="myButton">注册</button>
   </div>
 </template>
 
@@ -13,98 +19,138 @@
 <script>
 import { ref, onUpdated, onMounted, watch } from "vue";
 import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 
 import { sendCkeckNumber } from "../../../request/api";
+import { userRegister } from "../../../request/api";
+import checkAccountFormate from "../../../hooks/checkAccountFormat";
+
 export default {
   name: "StudentRegister",
   setup(props, context) {
-    let studentMail = ref('');
-    let studentPassword = ref('');
-    let studentCheckNumber = ref('');
-    let checkNumberTip = ref('点击发送验证码');
+    let studentName = ref("");
+    let studentMail = ref("");
+    let studentPassword = ref("");
+    let studentCheckNumber = ref("");
+    let checkNumberTip = ref("点击发送验证码");
+    let tips = ref("");
+    // 点击发送验证码后不能重复点击
+    let flag = ref(true);
+    // 点击注册之前判断是否所有的都输入正确
+    let isAllDone = ref(false);
 
+    const router = useRouter();
 
     function isCorrectAndSendCheckNumber() {
-      const checkMail = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
-      const checkPassword = /123/;
-      // 学生注册
-        let checkFlag = 1;
-        if (checkMail.test(studentMail.value)) {
-          checkFlag = 1;
-        } else {
-          console.log("邮箱格式错误");
-          checkFlag = 0;
-        }
+      let checkInfo = checkAccountFormate(
+        studentName.value,
+        studentMail.value,
+        studentPassword.value,
+        1,
+        1
+      );
 
-        if (checkFlag) {
-          if (checkPassword.test(studentPassword.value)) {
-            checkFlag = 1;
-          } else {
-            checkFlag = 0;
-            console.log("密码格式错误");
+      if (!checkInfo[0]) {
+        console.log(checkInfo);
+        tips.value = checkInfo[1];
+      } else {
+        flag.value = false;
+        checkNumberTip.value = "发送成功";
+        let seconds = 10;
+        let timer = null;
+        timer = setInterval(() => {
+          checkNumberTip.value = `${seconds}秒后重新发送`;
+          seconds--;
+          if (seconds === -1) {
+            checkNumberTip.value = "重新发送";
+            clearInterval(timer);
+            flag.value = true;
           }
-        }
-  // "email": studentMail
-        if (checkFlag) {
-          checkNumberTip.value = '发送成功';
-          let seconds = 10;
-          let timer = null;
-          timer = setInterval(() => {
-            checkNumberTip.value = `${seconds}秒后重新发送`
-            console.log('定时器没停止', seconds);
-            seconds--;
-             if (seconds === 0) {
-               console.log('定时器停止', seconds);
-              checkNumberTip.value = '重新发送';
-              clearInterval(timer);
-
-            }
-          }, 1000);
-          sendCkeckNumber({
-            "identity": 1,
-           "email": "2909753663@qq.com",
-          
+        }, 1000);
+        sendCkeckNumber({
+          identity: 1,
+          email: "2909753663@qq.com",
+        })
+          .then((result) => {
+            console.log("成功");
+            console.log(result);
+            isAllDone.value = true;
           })
-            .then((result) => {
-              console.log("成功");
-              console.log(result);
-            })
-            .catch((err) => {
-              console.log("失败");
-              console.log(err);
+          .catch((err) => {
+            console.log("失败");
+            console.log(err);
+          });
+      }
+    }
+
+    function studentRegister() {
+      if (!isAllDone.value || !studentCheckNumber.value.trim()) {
+        tips.value = "请先完善所有信息";
+      } else {
+        tips.value = "";
+        userRegister({
+          userName: studentName.value,
+          email: studentMail.value,
+          password: studentPassword.value,
+          identity: 1,
+          VerificationCode: studentCheckNumber.value,
+        })
+          .then((value) => {
+            console.log(value);
+            router.push({
+              path: "/login/studentLogin",
             });
-        }
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
     }
     return {
+      studentName,
       studentMail,
       studentPassword,
       studentCheckNumber,
       checkNumberTip,
-      isCorrectAndSendCheckNumber
+      tips,
+      flag,
+      isAllDone,
+      isCorrectAndSendCheckNumber,
+      studentRegister,
     };
   },
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 #student-register {
   position: relative;
   width: 400px;
-  height: 250px;
+  height: 330px;
   text-align: center;
   color: #fff;
-  /* background-color: blue; */
 
   input {
+    // display: block;
     margin-top: 28px;
-    width: 280px;
+    width: 210px;
     height: 30px;
     color: red;
-    border: 1px solid red;
+   font-size: 13px;
   }
 
   .click-checkNumber {
     position: absolute;
+    bottom: 100px;
+    right: 50px;
+    font-size: 12px;
+  }
+
+  .student-register-tips {
+    font-size: 12px;
+    height: 30px;
+    line-height: 30px;
   }
 }
+
 </style>

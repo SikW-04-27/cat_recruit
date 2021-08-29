@@ -1,5 +1,5 @@
 <template>
-   <div id="account">
+  <div id="account">
     <div class="account-option">
       <!-- <slot name="student"></slot>
       <slot name="manager"></slot> -->
@@ -10,24 +10,20 @@
 </template>
 
 <script>
-export default {
-
-}
+export default {};
 </script>
 
 <style lang="scss">
 #account {
-  margin: 100px auto;
+  margin: 80px auto 0;
   width: 450px;
   // height: 360px;
-  border: 1px solid #ccc;
+  background-color: rgba(0, 0, 0, 0.4);
 
   .account-option {
     width: 100%;
     height: 40px;
-    line-height: 40px;
-    background-color: #1e4353;
-
+    line-height: 65px;
     a {
       margin: 0 10px;
       font-size: 14px;
@@ -39,6 +35,40 @@ export default {
     }
   }
 
+  input {
+    padding-left: 10px;
+    border-bottom: 2px solid #ffffff;
+    background-color: rgba(0, 0, 0, 0) !important;
+    margin-top: 28px;
+    width: 210px;
+    height: 30px;
+    color: red;
+    font-size: 13px;
+  }
 }
 
+$color: #0bc7f4;
+
+.myButton {
+  color: $color;
+  // padding: 10px 30px;
+  width: 100px;
+  height: 40px;
+  line-height: 40px;
+}
+
+.myButton:hover {
+  background: $color;
+  box-shadow: 0 0 50px $color;
+}
+
+.myButton::before {
+  border-top: 2px solid $color;
+  border-left: 2px solid $color;
+}
+
+.myButton::after {
+  border-bottom: 2px solid $color;
+  border-right: 2px solid $color;
+}
 </style>

@@ -1,14 +1,14 @@
 <template>
-    <!-- <UserNav></UserNav> -->
+    <UserNav></UserNav>
     <!-- <MyButton padding="10px 20px" color="blue">点击</MyButton> -->
 
   <!-- <div class="middle">
     <Manage></Manage>
   </div> -->
   <!-- <UserNav></UserNav> -->
-  <div class="middle">
+  <!-- <div class="middle">
     <Manage></Manage>
-  </div>
+  </div> -->
 </template>
 
 <script>
@@ -35,7 +35,12 @@ export default {
 body {
   // background-color: #292d3f;
   // background: url('./assets/img/bg.jpg') no-repeat 100% 100%;
-  background-image: url('./assets/img/bg2.png');
+  background-image: url('./assets/img/bg6.png');
+  // background-image: url('./assets/img/bg1.jpg');
+  // background-image: url('./assets/img/bg2.png');
+  // background-size: contain;
+  // background-image: url('./assets/img/bg5.jpg');
+
   background-size: cover;
 }
 .middle {
