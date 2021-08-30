@@ -19,13 +19,14 @@ import ModifyQueue from '../views/manage/operation/ModifyQueue.vue'
 
 import Login from '../views/login/Login.vue'
 import StudentLogin from '../views/login/children/StudentLogin.vue'
-import ManagerLogin from '../views/login/children/managerLogin.vue'
+import ManagerLogin from '../views/login/children/ManagerLogin.vue'
 import StudentRegister from '../views/register/children/StudentRegister.vue'
 import ManageRegister from '../views/register/children/ManageRegister.vue'
 import News from '../views/news/News.vue'
 import Appointment from '../views/appointment/Appointment.vue'
 import Progress from '../views/progress/progress.vue'
 import Form from '../views/signup/Form.vue'
+import SignIn from '../views/signIn/signIn.vue'
 
 const router = createRouter({
     history: createWebHistory(),
@@ -123,6 +124,13 @@ const router = createRouter({
             component: Progress,
         },
 
+        // 用户进行签到
+        {
+            path: '/signIn',
+            name: '',
+            component: SignIn,
+        },
+
 
 
         //查看已报名学生
@@ -183,16 +191,16 @@ const router = createRouter({
 
         //修改进程
         {
-            path:'/modifystatus',
-            name:'modifystatus',
-            component: ModifyStatus, 
+            path: '/modifystatus',
+            name: 'modifystatus',
+            component: ModifyStatus,
         },
 
         //管理员修改当前叫号
         {
-            path:'/modifyqueue',
-            name:'modifyqueue',
-            component: ModifyQueue, 
+            path: '/modifyqueue',
+            name: 'modifyqueue',
+            component: ModifyQueue,
         },
 
         {

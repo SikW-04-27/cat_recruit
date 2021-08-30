@@ -42,15 +42,15 @@
             </el-date-picker><br><br>
             <span class="demonstration">预约人数：</span>
             <el-input-number v-model="count" :min="1" label="描述文字" ></el-input-number><br><br>
-            <button @click="addappointment" class="myButton">添加预约</button>
+            <ManageButton @click="addappointment">添加预约</ManageButton>
 
             <!-- 分割线 -->
             <el-divider ></el-divider>
 
             <!-- 删除预约时间 -->
             <el-input-number v-model="deleteId" :min="1" label="描述文字"></el-input-number>
-            <button @click="deleteappointment" style="margin-left:30px" class="myButton">删除该时间段</button><br><br>
-            <button @click="deleteAllAppointment" class="myButton">删除全部时间段</button><br><br>
+            <ManageButton @click="deleteappointment" style="margin-left:30px">删除该时间段</ManageButton><br><br>
+            <ManageButton @click="deleteAllAppointment">删除全部时间段</ManageButton><br><br>
         </div>
 
 
@@ -60,10 +60,12 @@
 
 <script>
 import { reactive,ref } from 'vue'
+import ManageButton from '../../../components/ManageButton.vue'
 import {ElLoading, ElMessageBox, ElMessage  } from 'element-plus'
 import '../../../../node_modules/dayjs/dayjs.min.js'
 import {listAppointment,saveNewAppointmentInfo,deleteAppointmentInfo,deleteAllAppointmentInfo} from '../../../request/api'
     export default {
+        components:{ManageButton},
         setup(props) {
             let id= ref(0)
             let tableData = reactive([])

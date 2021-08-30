@@ -30,7 +30,6 @@
 
       <!-- （提示）已预约 -->
       <div class="tips text-center" v-if="signupStatus">
-        <!-- <el-col :sm="12" :lg="6"></el-col> -->
         <el-result icon="success" class="float-left"></el-result>
         <span class="float-left">预约成功，预约时间为：{{ value }}</span>
       </div>
@@ -174,7 +173,7 @@ export default {
 };
 </script>
 
-<style lang="scss" >
+<style lang="scss">
 #appointment {
   width: 80%;
   margin: 40px auto;
