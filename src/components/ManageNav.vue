@@ -1,6 +1,6 @@
 <template>
   
-  <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal"  background-color="rgba(0, 0, 0, 0.1)" text-color="#fff" active-text-color="#fff">
+  <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal"  background-color="rgba(0, 0, 0, 0)" text-color="#fff" active-text-color="#fff">
     <img class="nav_logo" src="../assets/img/catlogo.png" alt="">
     
       <el-menu-item index="3">
@@ -79,6 +79,7 @@
     }
     .el-popper{
         .el-menu--horizontal{
+          background-color: rgb(14, 70, 97);
           a{
             height: 36px;
             line-height: 36px;

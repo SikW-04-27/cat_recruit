@@ -51,7 +51,7 @@ export const toPreviousStatus = p => post('http://112.74.33.254:2358/status/toPr
 export const listAllUser = p => post('http://112.74.33.254:2358/status/listAllUser', p);
 
 //打分
-export const addAppraise = p => get('http://112.74.33.254:2358/admin/addAppraise', p);
+export const addAppraise = p => post('http://112.74.33.254:2358/admin/addAppraise', p);
 
 // 学生或管理员注册
 export const userRegister = p => post('http://112.74.33.254:2358/user/Regiest', p);
@@ -64,3 +64,11 @@ export const queue = p => post('http://112.74.33.254:2358/queue/signIn', p)
 
 //获取当前签到是否开启
 export const queueStatus = () => post('http://112.74.33.254:2358/queue/checkStatus')
+//管理员开启签到状态
+export const startQueue = p => post('http://112.74.33.254:2358/queue/startQueue',p);
+
+//管理员关闭签到状态
+export const closeQueue = p => post('http://112.74.33.254:2358/queue/closeQueue',p);
+
+//检测管理员当前是否开启签到状态
+export const checkStatus = p => post('http://112.74.33.254:2358/queue/checkStatus',p);

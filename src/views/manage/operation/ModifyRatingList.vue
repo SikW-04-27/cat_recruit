@@ -8,31 +8,36 @@
     <button class="eliminate myButton" @click="eliminate" v-show="dangerbutton_1">批量淘汰</button>
     <button class="canceleliminate myButton" @click="canceleliminate" v-show="dangerbutton_2">取消</button>
     <button class="confirmeliminate myButton" @click="confirmeliminate" v-show="dangerbutton_2">确认淘汰</button>
-    <el-table :data="tableData.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
-      @cell-click="handle" 
-      @cell-mouse-enter='hovercell'
-      @cell-mouse-leave='leavecell'
-      height="480"
-      style="width: 100%"
-      >
+    <transition-group name="animate__animated animate__bounce" enter-active-class="animate__zoomIn">
+      <el-table :data="tableData.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
+        @cell-click="handle" 
+        @cell-mouse-enter='hovercell'
+        @cell-mouse-leave='leavecell'
+        height="480"
+        style="width: 100%"
+        key="1"
+        v-show="hide"
+        >
 
-      
-      <el-table-column type="selection" class-name='play'></el-table-column>
-      <el-table-column prop="name" label="姓名"> </el-table-column>
-      <el-table-column prop="examAvg" sortable label="笔试"> </el-table-column>
-      <el-table-column prop="firstInterviewAvg" sortable label="一轮面试">
-      </el-table-column>
-      <el-table-column prop="secondInterviewAvg" sortable label="二轮面试">
-      </el-table-column>
-      <el-table-column prop="firstReviewAvg" sortable label="一轮考核">
-      </el-table-column>
-      <el-table-column prop="secondReviewAvg" sortable label="二轮考核">
-      </el-table-column>
-      <el-table-column prop="totalAvg" sortable label="平均分"> </el-table-column>
-      <el-table-column prop="recruitmentStatus" label="状态"> 
+        
+        <el-table-column type="selection" class-name='play'></el-table-column>
+        <el-table-column prop="name" label="姓名"> </el-table-column>
+        <el-table-column prop="examAvg" sortable label="笔试"> </el-table-column>
+        <el-table-column prop="firstInterviewAvg" sortable label="一轮面试">
+        </el-table-column>
+        <el-table-column prop="secondInterviewAvg" sortable label="二轮面试">
+        </el-table-column>
+        <el-table-column prop="firstReviewAvg" sortable label="一轮考核">
+        </el-table-column>
+        <el-table-column prop="secondReviewAvg" sortable label="二轮考核">
+        </el-table-column>
+        <el-table-column prop="totalAvg" sortable label="平均分"> </el-table-column>
+        <el-table-column prop="recruitmentStatus" label="状态"> 
 
-      </el-table-column>
-    </el-table>
+        </el-table-column>
+      </el-table>
+    
+    </transition-group>
   </div>
 
 </template>
@@ -42,13 +47,16 @@ import { onMounted, reactive, ref } from "vue";
 import { useRouter } from 'vue-router'
 import {listAllUser} from '../../../request/api'
 import {ElLoading, ElMessageBox, ElMessage  } from 'element-plus'
+import ManageButton from '../../../components/ManageButton.vue'
 export default {
+  components:{ManageButton},
   setup(props) {
     let tableData = reactive([]);
     let search = ref('')
     let dangerbutton_1 = ref(true);
     let dangerbutton_2 = ref(false);
     const router = useRouter();
+    let hide = ref(false)
 
     // 点击每一个单元格
     let handle = function (row, column, event, cell) {
@@ -92,7 +100,6 @@ export default {
       dangerbutton_1.value = true
       dangerbutton_2.value = false
       let cell = document.getElementsByClassName("el-checkbox__inner")
-      console.log(cell);
       for(let i = 0; i < cell.length; i++){
         cell[i].style.visibility = 'hidden'
       }
@@ -104,10 +111,15 @@ export default {
     }
 
     onMounted(()=>{
-      let loadingInstance = ElLoading.service({fullscreen:false,target:'.el-table-scolled',background:'rgb(41, 45, 63, 0.8)'});
+      let loadingInstance = ElLoading.service({fullscreen:false,target:'.ratinglist_block',background:'transparent',text:'拼命加载中'});
       listAllUser().then(res => {
+        console.log(res);
         tableData.push(...res.data)
         loadingInstance.close()
+        hide.value = true
+      }).catch(err => {
+        loadingInstance.close()
+        ElMessage.error('加载错误，请刷新')
       })
     })
 
@@ -116,6 +128,7 @@ export default {
       search,
       dangerbutton_1,
       dangerbutton_2,
+      hide,
       handle,
       hovercell,
       leavecell,
@@ -130,10 +143,11 @@ export default {
 <style lang="scss">
 
 .ratinglist_block{
+  height: 556px;
   position: relative;
   padding-top: 20px;
   text-align: center;
-  background-color:rgba(0, 0, 0, 0.5) ;
+  background-color:transparent;
 
   // 设置搜索框长度
   .el-input {
@@ -144,20 +158,6 @@ export default {
   .eliminate,.confirmeliminate{
     position: absolute;
     right: 0;
-  }
-
-  .myButton{
-    color: rgb(167, 95, 95);
-  }
-
-   .myButton:hover{
-     box-shadow: 0 0 50px rgb(238, 146, 9);
-     background-color: rgb(53, 55, 185);
-   }
-
-  .myButton::before{
-    border-top: 2px solid red;
-    border-left: 2px solid red;
   }
 
   .canceleliminate{
@@ -171,7 +171,7 @@ export default {
 }
 .el-table--enable-row-hover .el-table__body tr:hover > td {
   cursor: pointer;
-  background-color: gray;
+  background-color: rgba(128, 128, 128, 0.548);
 }
 
 

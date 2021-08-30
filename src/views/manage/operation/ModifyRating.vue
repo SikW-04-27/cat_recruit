@@ -33,16 +33,16 @@ export default {
       console.log(desc.value);
       addAppraise({
         "adminId":"FABynYGg",
-        "comment":"2414213",
+        "comment":"啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊",
         "recruitmentId":5,
         "score":55,
-        "userId":1
+        "userId":2
       }).then(res => {
         console.log(res);
       })
-      router.push({
-        path:"/checkdetialpoint"
-      })
+      // router.push({
+      //   path:"/checkdetialpoint"
+      // })
     }
 
     return {

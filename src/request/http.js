@@ -1,8 +1,8 @@
 //引入axios
 import axios from 'axios';
 // import { response } from 'express';
-//引入qs模块，用来序列化post类型的数据
-import qs from 'qs'
+// 引入qs模块，用来序列化post类型的数据
+// import qs from 'qs'
 // import resolve from 'resolve';
 
 // 环境的切换
@@ -42,13 +42,13 @@ axios.interceptors.response.use(
 export function get(url, params) {
     return new Promise((resolve, reject) => {
         axios.get(url, {
-            params:qs.stringify(params)
+            params:params
         }).then(res => {
             console.log("请求成功");
             resolve(res.data);
         }).catch(err => {
             console.log("请求失败");
-            reject(err.data);
+            reject(err);
         })
     })
 }
