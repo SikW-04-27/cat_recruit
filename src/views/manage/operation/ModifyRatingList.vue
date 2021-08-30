@@ -47,7 +47,9 @@ import { onMounted, reactive, ref } from "vue";
 import { useRouter } from 'vue-router'
 import {listAllUser} from '../../../request/api'
 import {ElLoading, ElMessageBox, ElMessage  } from 'element-plus'
+import ManageButton from '../../../components/ManageButton.vue'
 export default {
+  components:{ManageButton},
   setup(props) {
     let tableData = reactive([]);
     let search = ref('')
@@ -98,7 +100,6 @@ export default {
       dangerbutton_1.value = true
       dangerbutton_2.value = false
       let cell = document.getElementsByClassName("el-checkbox__inner")
-      console.log(cell);
       for(let i = 0; i < cell.length; i++){
         cell[i].style.visibility = 'hidden'
       }
@@ -157,21 +158,6 @@ export default {
   .eliminate,.confirmeliminate{
     position: absolute;
     right: 0;
-  }
-
-  .myButton{
-    padding: 10px;
-    color: rgb(167, 95, 95);
-  }
-
-   .myButton:hover{
-     box-shadow: 0 0 50px rgb(238, 146, 9);
-     background-color: rgb(53, 55, 185);
-   }
-
-  .myButton::before{
-    border-top: 2px solid red;
-    border-left: 2px solid red;
   }
 
   .canceleliminate{

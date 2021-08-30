@@ -53,44 +53,58 @@ export default {
 
         // 管理员开启开始签到
         let start_signin = function(){
-            startQueue().then(res => {
-                console.log(res);
-                if(res.code === 1100){
-                    signin_status.value = '当前处于签到状态'
-                    ElMessage.success({
-                        message: `${res.message}`,
-                        type:'success'
-                    })
-                }else if(res.code === 1300){
-                    ElMessage.warning({
-                        message: `${res.message}`,
-                        type:'warning'
-                    })
-                }
-            }).catch(err => {
-                ElMessage.error('请求失败')
+            ElMessageBox.confirm('确定开始签到','提示',{
+                confirmButtonText:'确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+            }).then(()=>{
+                startQueue().then(res => {
+                    console.log(res);
+                    if(res.code === 1100){
+                        signin_status.value = '当前处于签到状态'
+                        ElMessage.success({
+                            message: `${res.message}`,
+                            type:'success'
+                        })
+                    }else if(res.code === 1300){
+                        ElMessage.warning({
+                            message: `${res.message}`,
+                            type:'warning'
+                        })
+                    }
+                }).catch(err => {
+                    ElMessage.error('请求失败')
+                })
             })
+            
         }
 
         // 管理员关闭签到状态
         let end_signin = function(){
-            closeQueue().then(res => {
-                console.log(res);
-                if(res.code === 1104){
-                    signin_status.value = '暂未处于签到状态'
-                    ElMessage.success({
-                        message: `${res.message}`,
-                        type:'success'
-                    })
-                }else{
-                    ElMessage.warning({
-                        message: `${res.message}`,
-                        type:'warning'
-                    })
-                }
-            }).catch(err => {
-                ElMessage.error('请求失败')
+             ElMessageBox.confirm('确定开始签到','提示',{
+                confirmButtonText:'确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+            }).then(()=>{
+                closeQueue().then(res => {
+                    console.log(res);
+                    if(res.code === 1104){
+                        signin_status.value = '暂未处于签到状态'
+                        ElMessage.success({
+                            message: `${res.message}`,
+                            type:'success'
+                        })
+                    }else{
+                        ElMessage.warning({
+                            message: `${res.message}`,
+                            type:'warning'
+                        })
+                    }
+                }).catch(err => {
+                    ElMessage.error('请求失败')
+                })
             })
+            
         }
 
         onMounted(()=>{

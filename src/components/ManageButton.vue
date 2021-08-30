@@ -11,7 +11,9 @@ export default {
 <style lang='scss' scoped>
 @import "../assets/scss/button.scss";
 .myButton{
+    width: auto;
     padding: 10px;
+    line-height: 20px;
 }
 
 </style>
