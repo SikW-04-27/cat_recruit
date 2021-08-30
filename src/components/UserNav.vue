@@ -32,7 +32,7 @@
       ><router-link to="/login">登录</router-link></el-menu-item
     >
 
-    <!-- <el-menu-item index="5"
+    <el-menu-item index="5"
       ><router-link to="/Form">报名</router-link></el-menu-item
     >
     <el-menu-item index="6"
@@ -40,7 +40,7 @@
     >
     <el-menu-item index="7"
       ><router-link to="/progress">查看面试进度</router-link></el-menu-item
-    > -->
+    >
   </el-menu>
 
   <router-view></router-view>
