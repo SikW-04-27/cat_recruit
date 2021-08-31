@@ -29,7 +29,8 @@ export default {
 /* @import '../../assets/scss/normalize.css'; */
  .skip-register {
    position: absolute;
-   top: 0;
+   top: 50%;
+   right: 35%;
    color: #fff;
     font-size: 14px;
   }
