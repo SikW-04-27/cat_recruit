@@ -93,13 +93,14 @@ export default {
           email: studentMail.value,
           password: studentPassword.value,
           identity: 1,
-          VerificationCode: studentCheckNumber.value,
+          phoneNumber: "12334412331",
+          verificationCode: studentCheckNumber.value,
         })
           .then((value) => {
             console.log(value);
-            router.push({
-              path: "/login/studentLogin",
-            });
+            // router.push({
+            //   path: "/login/studentLogin",
+            // });
           })
           .catch((error) => {
             console.log(error);
@@ -136,7 +137,7 @@ export default {
     width: 210px;
     height: 30px;
     color: red;
-   font-size: 13px;
+    font-size: 13px;
   }
 
   .click-checkNumber {
@@ -152,5 +153,4 @@ export default {
     line-height: 30px;
   }
 }
-
 </style>

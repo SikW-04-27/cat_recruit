@@ -67,3 +67,71 @@ export function post(url, params) {
     })
 }
 
+
+
+/*  
+
+export function post11(url, params) {
+axios.defaults.baseURL = 'http://112.74.33.254:2358';
+    return new Promise((resolve, reject) => {
+        axios.post(url, params)
+            .then(res => {
+                console.log("请求成功");
+                resolve(res.data);
+            }).catch(err => {
+                console.log("请求失败");
+                reject(err);
+            })
+    })
+}
+
+export function post22(url, params) {
+    axios.defaults.baseURL = 'http://47.107.49.231';
+        return new Promise((resolve, reject) => {
+            axios.get(url, params)
+                .then(res => {
+                    console.log("请求成功");
+                    resolve(res.data);
+                }).catch(err => {
+                    console.log("请求失败");
+                    reject(err);
+                })
+        })
+    }
+
+     const instance = axios.create({
+        baseURL: 'http://47.107.49.231'
+    })
+
+    export function instance11(url, params) {
+        return new Promise((resolve, reject) => {
+            instance.get(url, params)
+                .then(res => {
+                    console.log("请求成功");
+                    resolve(res.data);
+                }).catch(err => {
+                    console.log("请求失败");
+                    reject(err);
+                })
+        })
+    }
+
+    const instance11 = axios.create({
+        baseURL: 'http://112.74.33.254:2358'
+    })
+
+    export function instance22(url, params) {
+        return new Promise((resolve, reject) => {
+            instance11.post(url, params)
+                .then(res => {
+                    console.log("请求成功");
+                    resolve(res.data);
+                }).catch(err => {
+                    console.log("请求失败");
+                    reject(err);
+                })
+        })
+    }
+
+*/
+

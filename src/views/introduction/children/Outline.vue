@@ -15,10 +15,10 @@ export default {};
 <style lang="scss">
 .studio-intro {
   position: relative;
-  height: 450px;
+  height: 380px;
   overflow: hidden;
   .studio-intro-words {
-    margin: 50px auto 0;
+    margin: 60px auto 0;
     padding: 10px 20px;
     width: 250px;
     // height: 300px;
@@ -41,23 +41,34 @@ export default {};
   .a {
     width: 160px;
     height: 160px;
-    border-radius: 50%;
-    background-color: #77fdd7;
+    // border-radius: 50%;
+    // background-color: #77fdd7;
+    background-image: url('../../../assets/img/catlogo.png');
+    background-size: 160px 160px;
     position: absolute;
-    top: 20px;
-    right: 235px;
+    // top: 20px;
+    top: 35%;
+    right: 27%;
+    // transform: translate(-50%);
+    // right: 235px;
     z-index: -99;
   }
+
   .b {
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    background-color: #e9d14a;
+    width: 160px;
+    height: 160px;
+    // border-radius: 50%;
+    // background-color: #77fdd7;
+    background-image: url('../../../assets/img/catlogo.png');
+    background-size: 160px 160px;
     position: absolute;
-    bottom: 55px;
-    left: 220px;
+    // top: 20px;
+    top: 35%;
+    right: 57%;
+    // transform: translate(-50%);
+    // right: 235px;
     z-index: -99;
-  }
+    }
 
   img {
     float: left;
