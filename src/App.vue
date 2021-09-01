@@ -15,12 +15,18 @@
 import UserNav from "./components/UserNav.vue";
 import Manage from "./views/manage/manage.vue";
 
+
 export default {
   name: "App",
   components: {
     UserNav,
     Manage,
   },
+
+  setup() {
+console.log(localStorage.getItem('token'));
+
+  }
 };
 </script>
 

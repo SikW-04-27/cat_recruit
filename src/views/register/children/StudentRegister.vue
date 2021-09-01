@@ -69,7 +69,7 @@ export default {
         }, 1000);
         sendCkeckNumber({
           identity: 1,
-          email: "2909753663@qq.com",
+          email: studentMail.value,
         })
           .then((result) => {
             console.log("成功");
@@ -93,14 +93,14 @@ export default {
           email: studentMail.value,
           password: studentPassword.value,
           identity: 1,
-          phoneNumber: "12334412331",
+          phoneNumber: "123341111",
           verificationCode: studentCheckNumber.value,
         })
           .then((value) => {
             console.log(value);
-            // router.push({
-            //   path: "/login/studentLogin",
-            // });
+            router.push({
+              path: "/login/studentLogin",
+            });
           })
           .catch((error) => {
             console.log(error);
