@@ -5,7 +5,11 @@
   <!-- <div class="middle">
     <Manage></Manage>
   </div> -->
+<<<<<<< HEAD
+  <UserNav></UserNav>
+=======
   <!-- <UserNav></UserNav> -->
+>>>>>>> 287220c5a81083c920d03a3f8bda22844290bae1
   <!-- <div class="middle">
     <Manage></Manage>
   </div> -->

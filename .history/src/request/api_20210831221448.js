@@ -69,6 +69,15 @@ export const queue = p => post(`${url1}queue/signIn`, p);
 //获取当前签到是否开启
 export const queueStatus = () => post(`${url1}queue/checkStatus`);
 //管理员开启签到状态
+<<<<<<< HEAD
+export const startQueue = p => post('http://112.74.33.254:2358/queue/startQueue', p);
+
+//管理员关闭签到状态
+export const closeQueue = p => post('http://112.74.33.254:2358/queue/closeQueue', p);
+
+//检测管理员当前是否开启签到状态
+export const checkStatus = p => post('http://112.74.33.254:2358/queue/checkStatus', p);
+=======
 export const startQueue = p => post(`${url1}queue/startQueue`,p);
 
 //管理员关闭签到状态
@@ -87,3 +96,4 @@ export const userLogin = p => post(`${url1}user/Login`, p);
 // export const login222 = p => instance22('/user/Login', p);
 
 
+>>>>>>> 287220c5a81083c920d03a3f8bda22844290bae1

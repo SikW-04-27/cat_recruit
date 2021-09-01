@@ -34,10 +34,13 @@
     </el-timeline-item>
   </el-timeline>
 </div>
+
 </template>
 
-<script>
-  
+<script setup>
+import {onMounted} from 'vue'
+
+console.dir(WebSocket);
 </script>
 
 <style lang="scss" scoped>

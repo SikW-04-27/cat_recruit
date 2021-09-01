@@ -23,6 +23,10 @@ export default {
 <style lang="scss">
 
 .studio-happy {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 25px;
+  padding-bottom: 50px;
   img {
     width: 200px;
     height: 200px;
