@@ -30,7 +30,8 @@
       ><router-link to="/news">消息中心</router-link></el-menu-item
     >
     <el-menu-item index="4"
-      ><router-link to="/login">登录</router-link></el-menu-item
+      > <a href="javascript:;" v-if="loginStatus">已登录</a>
+      <router-link to="/login" v-else>登录</router-link></el-menu-item
     >
 
     <el-menu-item index="5"
@@ -48,15 +49,22 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import { ref, onMounted, onUpdated } from "vue";
 export default {
   setup() {
     let activeIndex = ref("1");
     let activeIndex2 = ref("1");
+    let loginStatus = ref('');
+
+onMounted(() => {
+  // console.log(localStorage.getItem('token'));
+  loginStatus.value = localStorage.getItem('token')? 1 : 0;
+})
 
     return {
       activeIndex,
       activeIndex2,
+      loginStatus
     };
   },
   methods: {

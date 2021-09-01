@@ -16,6 +16,7 @@ let studentMail = ref("");
 let studentPassword = ref("");
 let tips = ref("");
 
+ const router = useRouter();
 function studentLogin() {
   // console.log(studentMail.value);
   console.log(studentMail.value.trim());
@@ -32,7 +33,6 @@ function studentLogin() {
         if (code === 2000) {
           localStorage.setItem("token", result.data.token);
 
-          const router = useRouter();
           router.push({
             path: '/introduction'
           })
