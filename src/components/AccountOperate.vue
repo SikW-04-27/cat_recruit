@@ -1,11 +1,7 @@
 <template>
   <div id="account">
-    <div class="account-option">
-      <!-- <slot name="student"></slot>
-      <slot name="manager"></slot> -->
+   
       <slot></slot>
-    </div>
-    <router-view></router-view>
   </div>
 </template>
 
@@ -20,20 +16,6 @@ export default {};
   // height: 360px;
   background-color: rgba(0, 0, 0, 0.4);
 
-  .account-option {
-    width: 100%;
-    height: 40px;
-    line-height: 65px;
-    a {
-      margin: 0 10px;
-      font-size: 14px;
-      color: #fff;
-
-      &:hover {
-        color: red;
-      }
-    }
-  }
 
   input {
     padding-left: 10px;

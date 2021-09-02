@@ -18,10 +18,10 @@ import ModifyQueue from '../views/manage/operation/ModifyQueue.vue'
 
 
 import Login from '../views/login/Login.vue'
-import StudentLogin from '../views/login/children/StudentLogin.vue'
-import ManagerLogin from '../views/login/children/ManagerLogin.vue'
-import StudentRegister from '../views/register/children/StudentRegister.vue'
-import ManageRegister from '../views/register/children/ManageRegister.vue'
+// import StudentLogin from '../views/login/children/StudentLogin.vue'
+// import ManagerLogin from '../views/login/children/ManagerLogin.vue'
+// import StudentRegister from '../views/register/children/StudentRegister.vue'
+// import ManageRegister from '../views/register/children/ManageRegister.vue'
 import News from '../views/news/News.vue'
 import Appointment from '../views/appointment/Appointment.vue'
 import Progress from '../views/progress/progress.vue'
@@ -51,26 +51,26 @@ const router = createRouter({
             path: '/login',
             name: '',
             component: Login,
-            children: [
+            // children: [
 
-                {
-                    path: '',
-                    name: '',
-                    component: StudentLogin
-                },
+            //     {
+            //         path: '',
+            //         name: '',
+            //         component: StudentLogin
+            //     },
 
-                {
-                    path: 'studentLogin',
-                    name: '',
-                    component: StudentLogin
-                },
+            //     {
+            //         path: 'studentLogin',
+            //         name: '',
+            //         component: StudentLogin
+            //     },
 
-                {
-                    path: 'managerLogin',
-                    name: '',
-                    component: ManagerLogin
-                }
-            ]
+            //     {
+            //         path: 'managerLogin',
+            //         name: '',
+            //         component: ManagerLogin
+            //     }
+            // ]
 
         },
 
@@ -79,28 +79,28 @@ const router = createRouter({
             path: '/register',
             name: '',
             component: Register,
-            children: [
+            // children: [
 
-                // 学生注册
-                {
-                    name: '',
-                    path: '',
-                    component: StudentRegister,
-                },
+            //     // 学生注册
+            //     {
+            //         name: '',
+            //         path: '',
+            //         component: StudentRegister,
+            //     },
 
-                {
-                    name: '',
-                    path: 'studentRegister',
-                    component: StudentRegister,
-                },
+            //     {
+            //         name: '',
+            //         path: 'studentRegister',
+            //         component: StudentRegister,
+            //     },
 
-                // 管理员注册
-                {
-                    name: '',
-                    path: 'manageRegister',
-                    component: ManageRegister,
-                },
-            ]
+            //     // 管理员注册
+            //     {
+            //         name: '',
+            //         path: 'manageRegister',
+            //         component: ManageRegister,
+            //     },
+            // ]
         },
 
         // 填写报名表
@@ -203,11 +203,6 @@ const router = createRouter({
             component: ModifyQueue,
         },
 
-        {
-            name: '',
-            path: '/manageRegister',
-            component: ManageRegister
-        },
 
         {
             name: '',

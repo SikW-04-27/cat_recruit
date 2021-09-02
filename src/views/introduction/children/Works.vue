@@ -46,7 +46,7 @@ export default {
   },
   setup() {
     function fn(a,b) {
-      console.log(a, b);
+      // console.log(a, b);
     }
 
     return {
