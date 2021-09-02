@@ -5,19 +5,27 @@
     class="el-menu-demo"
     mode="horizontal"
     @select="handleSelect"
-    background-color="#1b213a"
+    background-color="rgb(34 36 38 / 65%)"
     text-color="#fff"
-    active-text-color="red"
+    active-text-color="#2f86b6"
   >
     <el-menu-item index="1"
       ><router-link to="/introduction">工作室介绍</router-link></el-menu-item
     >
     <el-submenu index="2">
       <template #title>我的工作台</template>
-      <el-menu-item index="2-1"><router-link to="/Form">报名</router-link></el-menu-item>
-      <el-menu-item index="2-2"><router-link to="/appointment">预约</router-link></el-menu-item>
-      <el-menu-item index="2-3"><router-link to="/progress">查看进度</router-link></el-menu-item>
-      <el-menu-item index="2-4"><router-link to="/signIn">签到</router-link></el-menu-item>
+      <el-menu-item index="2-1"
+        ><router-link to="/Form">报名</router-link></el-menu-item
+      >
+      <el-menu-item index="2-2"
+        ><router-link to="/appointment">预约</router-link></el-menu-item
+      >
+      <el-menu-item index="2-3"
+        ><router-link to="/progress">查看进度</router-link></el-menu-item
+      >
+      <el-menu-item index="2-4"
+        ><router-link to="/signIn">签到</router-link></el-menu-item
+      >
       <el-submenu index="2-5">
         <template #title>选项4</template>
         <el-menu-item index="2-5-1">选项1</el-menu-item>
