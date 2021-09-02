@@ -40,7 +40,7 @@ function studentLogin() {
         const code = result.code;
         if (code === 2000) {
           localStorage.setItem("token", result.data.token);
-
+          localStorage.setItem("userName", result.data.user.userName)
           router.push({
             path: '/introduction'
           })

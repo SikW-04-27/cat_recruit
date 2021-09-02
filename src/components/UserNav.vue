@@ -30,7 +30,7 @@
       ><router-link to="/news">消息中心</router-link></el-menu-item
     >
     <el-menu-item index="4"
-      > <a href="javascript:;" v-if="loginStatus">已登录</a>
+      > <a href="javascript:;" v-if="loginStatus">{{`你好，${userName}`}}</a>
       <router-link to="/login" v-else>登录</router-link></el-menu-item
     >
 
@@ -55,16 +55,21 @@ export default {
     let activeIndex = ref("1");
     let activeIndex2 = ref("1");
     let loginStatus = ref('');
+    let userName = ref('');
 
 onMounted(() => {
   // console.log(localStorage.getItem('token'));
   loginStatus.value = localStorage.getItem('token')? 1 : 0;
+  if(loginStatus.value) {
+    userName.value = localStorage.getItem('userName');
+  }
 })
 
     return {
       activeIndex,
       activeIndex2,
-      loginStatus
+      loginStatus,
+      userName
     };
   },
   methods: {
