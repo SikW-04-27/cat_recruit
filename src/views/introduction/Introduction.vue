@@ -36,7 +36,8 @@ export default {
   height: 1375px;
   color: #c2c2c2;
   font-size: 14px;
-  background-color: rgba(0, 0, 0, .5);
+  border-radius: 10px;
+  background-color: rgba(78, 78, 78, 0.5);
 }
 
 
