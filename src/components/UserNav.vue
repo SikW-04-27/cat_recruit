@@ -53,11 +53,11 @@
     >
   </el-menu>
 
-  <router-view></router-view>
 </template>
 
 <script>
-import { ref, onMounted, onUpdated } from "vue";
+import { ref, onMounted, onUpdated, watch } from "vue";
+import { useRoute } from 'vue-router';
 export default {
   setup() {
     let activeIndex = ref("1");
@@ -72,6 +72,20 @@ onMounted(() => {
     userName.value = localStorage.getItem('userName');
   }
 })
+
+console.log();
+const route = useRoute()
+
+// watch(() => route.path,() => {
+// console.log('监听到变化');
+// console.log(route.path);
+// })
+
+watch(() => localStorage.getItem('token'), () => {
+  console.log(1111);
+})
+  
+
 
     return {
       activeIndex,
