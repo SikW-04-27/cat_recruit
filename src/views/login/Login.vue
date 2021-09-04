@@ -1,56 +1,81 @@
 <template>
-<AccountOperate>
-  <div id="student-login" class="">
-    <input type="text" v-model="studentMail" placeholder="邮箱" />
-    <input type="text" v-model="studentPassword" placeholder="密码" />
-     <div class="skip-register">
-        <router-link to='/register'>账号注册</router-link>
+  <AccountOperate>
+    <!-- <el-table v-loading="true"> -->
+    <div
+      id="student-login"
+      class=""
+      v-loading="loading"
+      element-loading-text="登录中..."
+      element-loading-background="rgba(0, 0, 0, .5)"
+    >
+      <input type="text" v-model="studentMail" placeholder="邮箱" />
+      <input type="text" v-model="studentPassword" placeholder="密码" />
+      <div class="skip-register">
+        <router-link to="/register">账号注册</router-link>
+      </div>
+      <div class="student-login-tips">{{ tips }}</div>
+      <button @click="studentLogin">登录</button>
     </div>
-    <div class="student-login-tips">{{ tips }}</div>
-    <button @click="studentLogin">登录</button>
-  </div>
-</AccountOperate>
+    <!-- </el-table> -->
+  </AccountOperate>
 </template>
 
 <script setup>
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { userLogin } from "../../request/api";
+import { useStore } from "vuex";
 
-import AccountOperate from '../../components/AccountOperate.vue'
-
+import AccountOperate from "../../components/AccountOperate.vue";
 
 let studentMail = ref("");
 let studentPassword = ref("");
 let tips = ref("");
+let loading = ref("");
+// isTimeOut 判断登录是否超时, 接口坏了时使用
+let isTimeOut = ref(false);
 
- const router = useRouter();
+const router = useRouter();
+
+const store = useStore();
+store.state.loginStatus = false;
+let timer = ref(null);
 function studentLogin() {
   // console.log(studentMail.value);
-  console.log(studentMail.value.trim());
+  // console.log(studentMail.value.trim());
   if (!studentMail.value.trim() || !studentPassword.value.trim()) {
     tips.value = "邮箱或密码不能为空";
   } else {
+    tips.value = "";
+    loading.value = true;
+    timer = setTimeout(() => {
+      loading.value = false;
+      tips.value = "登录超时";
+      isTimeOut.value = true;
+    }, 5000);
     userLogin({
       keyWord: studentMail.value,
       password: studentPassword.value,
     })
       .then((result) => {
-        console.log(result);
-        const code = result.code;
-        if (code === 2000) {
-          localStorage.setItem("token", result.data.token);
-          localStorage.setItem("userName", result.data.user.userName)
-          localStorage.setItem("userName", result.data.user.id)
-          router.push({
-            path: '/introduction'
-          })
-        } else if (code === 2202) {
-          tips.value = "用户名不存在，登录失败";
-        } else if (code === 2201) {
-          tips.value = "密码错误，登录失败";
-        } else if (code === 2402) {
-          tips.value = "系统错误";
+        if (!isTimeOut.value) {
+          console.log('未超时');
+          loading.value = false;
+          clearTimeout(timer);
+          console.log(result);
+
+          if (result.code === 2000) {
+            store.state.loginStatus = true;
+
+            localStorage.setItem("token", result.data.token);
+            localStorage.setItem("userName", result.data.user.userName);
+            localStorage.setItem("userId", result.data.user.id);
+            router.push({
+              path: "/introduction",
+            });
+          } else {
+            tips.value = result.message;
+          }
         }
       })
       .catch((e) => {
@@ -63,7 +88,7 @@ function studentLogin() {
 <style lang="scss">
 #student-login {
   //   margin: 65px auto;
-  width: 400px;
+  width: 100%;
   height: 220px;
   color: #fff;
   text-align: center;
@@ -91,10 +116,10 @@ function studentLogin() {
   }
 
   .skip-register {
-   position: absolute;
-   top: 50%;
-   right: 35%;
-   color: #fff;
+    position: absolute;
+    top: 50%;
+    right: 35%;
+    color: #fff;
     font-size: 14px;
   }
 }

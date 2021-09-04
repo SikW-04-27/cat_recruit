@@ -14,7 +14,7 @@ export default {};
   margin: 80px auto 0;
   width: 450px;
   // height: 360px;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(78, 78, 78, 0.5);
 
 
   input {

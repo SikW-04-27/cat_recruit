@@ -27,7 +27,10 @@ const state = {
     checkuserinfo: {
         user_status: String,
         user_point: String
-    }
+    },
+
+    // 判断用户是否有登录
+    loginStatus: Boolean
 }
 
 const store = createStore({

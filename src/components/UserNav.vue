@@ -37,8 +37,8 @@
     <el-menu-item index="3"
       ><router-link to="/news">消息中心</router-link></el-menu-item
     >
-    <el-menu-item index="4"
-      > <a href="javascript:;" v-if="loginStatus">{{`你好，${userName}`}}</a>
+    <el-menu-item index="4">
+      <a href="javascript:;" v-if="loginStatus">{{ `你好，${userName}` }}</a>
       <router-link to="/login" v-else>登录</router-link></el-menu-item
     >
 
@@ -52,46 +52,55 @@
       ><router-link to="/progress">查看面试进度</router-link></el-menu-item
     >
   </el-menu>
-
 </template>
 
 <script>
 import { ref, onMounted, onUpdated, watch } from "vue";
-import { useRoute } from 'vue-router';
+import { useRoute } from "vue-router";
+import { useStore } from "vuex";
 export default {
   setup() {
     let activeIndex = ref("1");
     let activeIndex2 = ref("1");
-    let loginStatus = ref('');
-    let userName = ref('');
+    let loginStatus = ref("");
+    let userName = ref("");
 
-onMounted(() => {
-  // console.log(localStorage.getItem('token'));
-  loginStatus.value = localStorage.getItem('token')? 1 : 0;
-  if(loginStatus.value) {
-    userName.value = localStorage.getItem('userName');
-  }
-})
+    const store = useStore();
 
-console.log();
-const route = useRoute()
+    onMounted(() => {
+      // console.log(localStorage.getItem('token'));
+      loginStatus.value = localStorage.getItem("token") ? 1 : 0;
+      if (loginStatus.value) {
+        userName.value = localStorage.getItem("userName");
+      }
+      console.dir(store.state.loginStatus);
+    });
 
-// watch(() => route.path,() => {
-// console.log('监听到变化');
-// console.log(route.path);
-// })
+    watch(
+      () => store.state.loginStatus,
+      () => {
+        console.log(store.state.loginStatus, '改变了111111111');
+        loginStatus.value = store.state.loginStatus || localStorage.getItem("token")? 1 : 0;
+        if (loginStatus.value) {
+          userName.value = localStorage.getItem("userName");
+        }
+      }
+    );
 
-watch(() => localStorage.getItem('token'), () => {
-  console.log(1111);
-})
-  
+    console.log();
+    const route = useRoute();
+
+    // watch(() => route.path,() => {
+    // console.log('监听到变化');
+    // console.log(route.path);
+    // })
 
 
     return {
       activeIndex,
       activeIndex2,
       loginStatus,
-      userName
+      userName,
     };
   },
   methods: {

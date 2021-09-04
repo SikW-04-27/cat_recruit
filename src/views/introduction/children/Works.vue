@@ -80,7 +80,7 @@ export default {
   letter-spacing: 2px;
   border-radius: 10px;
   // background-color: linear-gradient(left, #FD6585, #0D25B9);
-  background: -webkit-linear-gradient(left, #EE9AE5, #5961F9);
+  background: -webkit-linear-gradient(left, #8cd0e5, #8edae5, #90e2e5);
  p {
    margin-bottom: 10px;
    font-size: 20px;
