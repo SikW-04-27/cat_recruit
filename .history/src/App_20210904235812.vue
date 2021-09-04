@@ -31,13 +31,13 @@ export default {
 body {
   // background-color: #292d3f;
   // background: url('./assets/img/bg.jpg') no-repeat 100% 100%;
-  background-image: url("./assets/img/下载 (1).png");
+  background-image: url("./assets/img/下载（）.png");
   // background-image: url('./assets/img/bg1.jpg');
   // background-image: url('./assets/img/bg2.png');
   // background-size: contain;
   // background-image: url('./assets/img/bg5.jpg');
 
-  background-size: contain;
+  background-size: cover;
 }
 .middle {
   width: 1200px;

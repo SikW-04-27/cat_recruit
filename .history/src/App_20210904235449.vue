@@ -1,13 +1,15 @@
 <template>
-  <UserNav></UserNav>
-  <!-- <MyButton padding="10px 20px" color="blue">点击</MyButton> -->
+    <UserNav></UserNav>
+    <!-- <MyButton padding="10px 20px" color="blue">点击</MyButton> -->
 
   <router-view></router-view>
+  
 </template>
 
 <script>
 import UserNav from "./components/UserNav.vue";
 import Manage from "./views/manage/manage.vue";
+
 
 export default {
   name: "App",
@@ -17,8 +19,9 @@ export default {
   },
 
   setup() {
-    console.log(localStorage.getItem("token"));
-  },
+console.log(localStorage.getItem('token'));
+
+  }
 };
 </script>
 
@@ -28,19 +31,24 @@ export default {
 @import "./assets/scss/button.scss";
 @import "./assets/scss/front.scss";
 
+
 body {
   // background-color: #292d3f;
   // background: url('./assets/img/bg.jpg') no-repeat 100% 100%;
-  background-image: url("./assets/img/下载 (1).png");
+  background-image: url('./assets/img/下载.png');
   // background-image: url('./assets/img/bg1.jpg');
   // background-image: url('./assets/img/bg2.png');
   // background-size: contain;
   // background-image: url('./assets/img/bg5.jpg');
 
-  background-size: contain;
+  background-size: cover;
 }
 .middle {
   width: 1200px;
   margin: 0 auto;
 }
+
+ 
+
+
 </style>

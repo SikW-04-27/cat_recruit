@@ -37,7 +37,8 @@ body {
   // background-size: contain;
   // background-image: url('./assets/img/bg5.jpg');
 
-  background-size: contain;
+  background-size: contain
+  ;
 }
 .middle {
   width: 1200px;
