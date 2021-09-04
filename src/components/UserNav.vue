@@ -38,7 +38,7 @@
       ><router-link to="/news">消息中心</router-link></el-menu-item
     >
     <el-menu-item index="4"
-      > <a href="javascript:;" v-if="loginStatus">已登录</a>
+      > <a href="javascript:;" v-if="loginStatus">{{`你好，${userName}`}}</a>
       <router-link to="/login" v-else>登录</router-link></el-menu-item
     >
 
@@ -53,26 +53,45 @@
     >
   </el-menu>
 
-  <router-view></router-view>
 </template>
 
 <script>
-import { ref, onMounted, onUpdated } from "vue";
+import { ref, onMounted, onUpdated, watch } from "vue";
+import { useRoute } from 'vue-router';
 export default {
   setup() {
     let activeIndex = ref("1");
     let activeIndex2 = ref("1");
     let loginStatus = ref('');
+    let userName = ref('');
 
 onMounted(() => {
   // console.log(localStorage.getItem('token'));
   loginStatus.value = localStorage.getItem('token')? 1 : 0;
+  if(loginStatus.value) {
+    userName.value = localStorage.getItem('userName');
+  }
 })
+
+console.log();
+const route = useRoute()
+
+// watch(() => route.path,() => {
+// console.log('监听到变化');
+// console.log(route.path);
+// })
+
+watch(() => localStorage.getItem('token'), () => {
+  console.log(1111);
+})
+  
+
 
     return {
       activeIndex,
       activeIndex2,
-      loginStatus
+      loginStatus,
+      userName
     };
   },
   methods: {

@@ -2,6 +2,7 @@
     <UserNav></UserNav>
     <!-- <MyButton padding="10px 20px" color="blue">点击</MyButton> -->
 
+  <router-view></router-view>
   
 </template>
 

@@ -78,7 +78,9 @@ export default {
    padding: 15px 20px;
   color: #fff;
   letter-spacing: 2px;
-  background-color: rgba(0, 0, 0, .5);
+  border-radius: 10px;
+  // background-color: linear-gradient(left, #FD6585, #0D25B9);
+  background: -webkit-linear-gradient(left, #EE9AE5, #5961F9);
  p {
    margin-bottom: 10px;
    font-size: 20px;
