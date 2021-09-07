@@ -58,6 +58,8 @@
 import { ref, onMounted, onUpdated, watch } from "vue";
 import { useRoute } from "vue-router";
 import { useStore } from "vuex";
+import {getCookie} from '../utils/myCookie'
+
 export default {
   setup() {
     let activeIndex = ref("1");
@@ -69,9 +71,13 @@ export default {
 
     onMounted(() => {
       // console.log(localStorage.getItem('token'));
-      loginStatus.value = localStorage.getItem("token") ? 1 : 0;
+      // console.log(getCookie('studentToken'));
+      console.log(document.cookie);
+      console.log(111);
+      loginStatus.value = getCookie('studentToken') ? 1 : 0;
       if (loginStatus.value) {
-        userName.value = localStorage.getItem("userName");
+        console.log(111);
+        userName.value = sessionStorage.getItem("userName");
       }
       console.dir(store.state.loginStatus);
     });
@@ -80,9 +86,9 @@ export default {
       () => store.state.loginStatus,
       () => {
         console.log(store.state.loginStatus, '改变了111111111');
-        loginStatus.value = store.state.loginStatus || localStorage.getItem("token")? 1 : 0;
+        loginStatus.value = store.state.loginStatus || getCookie('studentToken')? 1 : 0;
         if (loginStatus.value) {
-          userName.value = localStorage.getItem("userName");
+          userName.value = sessionStorage.getItem("userName");
         }
       }
     );

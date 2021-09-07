@@ -26,6 +26,9 @@ import { useRouter } from "vue-router";
 import { userLogin } from "../../request/api";
 import { useStore } from "vuex";
 
+import {setCookie, getCookie} from '../../utils/myCookie'
+
+
 import AccountOperate from "../../components/AccountOperate.vue";
 
 let studentMail = ref("");
@@ -52,7 +55,7 @@ function studentLogin() {
       loading.value = false;
       tips.value = "登录超时";
       isTimeOut.value = true;
-    }, 5000);
+    }, 10000);
     userLogin({
       keyWord: studentMail.value,
       password: studentPassword.value,
@@ -66,10 +69,11 @@ function studentLogin() {
 
           if (result.code === 2000) {
             store.state.loginStatus = true;
-
-            localStorage.setItem("token", result.data.token);
-            localStorage.setItem("userName", result.data.user.userName);
-            localStorage.setItem("userId", result.data.user.id);
+            
+            setCookie("studentToken", result.data.token, 7)
+            // localStorage.setItem("token", result.data.token);
+            sessionStorage.setItem("userName", result.data.user.userName);
+            sessionStorage.setItem("userId", result.data.user.id);
             router.push({
               path: "/introduction",
             });

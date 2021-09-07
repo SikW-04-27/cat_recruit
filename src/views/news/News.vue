@@ -39,7 +39,17 @@
 <script setup>
 import { onMounted } from "vue";
 
+import { getStudentNews } from "../../request/api";
+
 console.dir(WebSocket);
+
+getStudentNews()
+  .then((v) => console.log(v))
+  .catch((e) => {
+    console.log(e);
+  });
+
+/*
 
 const token = localStorage.getItem("token");
 let socketUrl = `http://112.74.33.254:2358/ws/"+${token}`;
@@ -57,7 +67,7 @@ console.log('socket打开了');
 }
 
 socket.onmessage = function() {
-
+  
 }
 
 socket.onclose = function() {
@@ -68,6 +78,7 @@ socket.onerror = function() {
 
 }
 
+*/
 </script>
 
 <style lang="scss" scoped>

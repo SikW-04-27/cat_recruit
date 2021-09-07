@@ -35,6 +35,7 @@
       <el-result icon="danger"></el-result>
       <span>{{closeMessage}}</span>
     </div>
+  </div>
 
 </template>
 

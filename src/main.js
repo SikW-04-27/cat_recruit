@@ -16,8 +16,7 @@ import store from './store/index'
 const app = createApp(App)
 
 app.use(router)
-app.use(store)
-
-app.use(ElementPlus)
-// 挂载
-app.mount('#app')
+    .use(store)
+    .use(ElementPlus)
+    // 挂载
+    .mount('#app')

@@ -7,8 +7,14 @@
 </template>
 
 <script>
+
+import {onMounted, onBeforeMount} from 'vue';
+
+import {setCookie, getCookie} from './utils/myCookie'
+
 import UserNav from "./components/UserNav.vue";
 import Manage from "./views/manage/manage.vue";
+
 
 
 export default {
@@ -20,6 +26,16 @@ export default {
 
   setup() {
 console.log(localStorage.getItem('token'));
+
+
+  onBeforeMount(() => {
+    document.cookie = "nameqq=wwww"
+    // 页面在挂载之前，就判断是否有登录
+    if(getCookie('studentToken')) {
+      sessionStorage.setItem("userName", 11111)
+    }
+  })
+
 
   }
 };

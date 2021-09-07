@@ -1,24 +1,24 @@
 <template>
-<AccountOperate>
-  <div id="student-register">
-    <input type="text" v-model="studentName" placeholder="用户名" />
-    <input type="text" v-model="studentMail" placeholder="邮箱" />
-    <input type="password" v-model="studentPassword" placeholder="密码" />
-    <input type="text" v-model="studentCheckNumber" placeholder="验证码" />
-    <div
-      class="click-checkNumber"
-      @click="flag && isCorrectAndSendCheckNumber()"
-    >
-      {{ checkNumberTip }}
+  <AccountOperate>
+    <div id="student-register" v-loading="loading">
+      <input type="text" v-model="studentName" placeholder="用户名" />
+      <input type="text" v-model="studentMail" placeholder="邮箱" />
+      <input type="password" v-model="studentPassword" placeholder="密码" />
+      <input type="text" v-model="studentCheckNumber" placeholder="验证码" />
+      <div
+        class="click-checkNumber"
+        @click="flag && isCorrectAndSendCheckNumber()"
+      >
+        {{ checkNumberTip }}
+      </div>
+      <div class="student-register-tips">{{ tips }}</div>
+      <button @click="studentRegister" class="myButton">注册</button>
     </div>
-    <div class="student-register-tips">{{ tips }}</div>
-    <button @click="studentRegister" class="myButton">注册</button>
-  </div>
-</AccountOperate>
+  </AccountOperate>
 </template>
 
 
-<script>
+<script setup>
 import { ref, onUpdated, onMounted, watch } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
@@ -28,111 +28,117 @@ import { userRegister } from "../../request/api";
 import checkAccountFormate from "../../utils/checkAccountFormat";
 import AccountOperate from "../../components/AccountOperate.vue";
 
+let studentName = ref("");
+let studentMail = ref("");
+let studentPassword = ref("");
+let studentCheckNumber = ref("");
+let checkNumberTip = ref("点击发送验证码");
+let tips = ref("");
+// 点击发送验证码后不能重复点击
+let flag = ref(true);
+// 点击注册之前判断是否所有的都输入正确
+let isAllDone = ref(false);
 
+let isTimeOut = ref(false);
 
-export default {
-  name: "StudentRegister",
-  components: {
-AccountOperate
-  },
-  setup(props, context) {
-    let studentName = ref("");
-    let studentMail = ref("");
-    let studentPassword = ref("");
-    let studentCheckNumber = ref("");
-    let checkNumberTip = ref("点击发送验证码");
-    let tips = ref("");
-    // 点击发送验证码后不能重复点击
-    let flag = ref(true);
-    // 点击注册之前判断是否所有的都输入正确
-    let isAllDone = ref(false);
+let registerTimer = ref(null);
 
-    const router = useRouter();
+let loading = ref(false);
 
-    function isCorrectAndSendCheckNumber() {
-      let checkInfo = checkAccountFormate(
-        studentName.value,
-        studentMail.value,
-        studentPassword.value,
-      );
+const router = useRouter();
 
-      if (!checkInfo[0]) {
-        console.log(checkInfo);
-        tips.value = checkInfo[1];
-      } else {
-        flag.value = false;
-        checkNumberTip.value = "发送成功";
-        let seconds = 10;
-        let timer = null;
-        timer = setInterval(() => {
-          checkNumberTip.value = `${seconds}秒后重新发送`;
-          seconds--;
-          if (seconds === -1) {
-            checkNumberTip.value = "重新发送";
-            clearInterval(timer);
-            flag.value = true;
-          }
-        }, 1000);
-        sendCkeckNumber({
-          identity: 1,
-          email: studentMail.value,
-        })
-          .then((result) => {
-            console.log("成功");
-            console.log(result);
-            isAllDone.value = true;
-          })
-          .catch((err) => {
-            console.log("失败");
-            console.log(err);
-          });
+function isCorrectAndSendCheckNumber() {
+  let checkInfo = checkAccountFormate(
+    studentName.value,
+    studentMail.value,
+    studentPassword.value
+  );
+
+  if (!checkInfo[0]) {
+    console.log(checkInfo);
+    tips.value = checkInfo[1];
+  } else {
+    flag.value = false;
+    checkNumberTip.value = "发送成功";
+    let seconds = 10;
+    let timer = null;
+    timer = setInterval(() => {
+      checkNumberTip.value = `${seconds}秒后重新发送`;
+      seconds--;
+      if (seconds === -1) {
+        checkNumberTip.value = "重新发送";
+        clearInterval(timer);
+        flag.value = true;
       }
-    }
+    }, 1000);
+    sendCkeckNumber({
+      identity: 1,
+      email: studentMail.value,
+    })
+      .then((result) => {
+        console.log("成功");
+        console.log(result);
+        isAllDone.value = true;
+      })
+      .catch((err) => {
+        console.log("失败");
+        console.log(err);
+      });
+  }
+}
 
-    function studentRegister() {
-      if (!isAllDone.value || !studentCheckNumber.value.trim()) {
-        tips.value = "请先完善所有信息";
-      } else {
-        tips.value = "";
-        userRegister({
-          userName: studentName.value,
-          email: studentMail.value,
-          password: studentPassword.value,
-          identity: 1,
-          // 调用的时候要改一下号码
-          phoneNumber: "13511111",
-          verificationCode: studentCheckNumber.value,
-        })
-          .then((result) => {
-            console.log(result);
-            if(result.code === 3000) {
-               router.push({
-              path: "/login",
-            });
-            } else {
-              tips.value = result.message;
-            }
-           
-          })
-          .catch((error) => {
-            console.log(error);
+function studentRegister() {
+  if (!isAllDone.value || !studentCheckNumber.value.trim()) {
+    tips.value = "请先完善所有信息";
+  } else {
+    tips.value = "";
+    loading.value = true;
+    registerTimer = setTimeout(() => {
+      loading.value = false;
+      tips.value = "登录超时";
+      isTimeOut.value = true;
+    }, 5000);
+    userRegister({
+      userName: studentName.value,
+      email: studentMail.value,
+      password: studentPassword.value,
+      identity: 1,
+      // 调用的时候要改一下号码
+      phoneNumber: "15817940391",
+      verificationCode: studentCheckNumber.value,
+    })
+      .then((result) => {
+        if(!isTimeOut) {
+          console.log(result);
+        clearTimeout(registerTimer);
+        loading.value = false;
+        if (result.code === 3000) {
+          router.push({
+            path: "/login",
           });
-      }
-    }
-    return {
-      studentName,
-      studentMail,
-      studentPassword,
-      studentCheckNumber,
-      checkNumberTip,
-      tips,
-      flag,
-      isAllDone,
-      isCorrectAndSendCheckNumber,
-      studentRegister,
-    };
-  },
-};
+        } else {
+          tips.value = result.message;
+        }
+        }
+        
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+}
+// return {
+//   studentName,
+//   studentMail,
+//   studentPassword,
+//   studentCheckNumber,
+//   checkNumberTip,
+//   tips,
+//   flag,
+//   isAllDone,
+//   isCorrectAndSendCheckNumber,
+//   studentRegister,
+// };
 </script>
 
 <style lang="scss">
