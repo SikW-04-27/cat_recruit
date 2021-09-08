@@ -15,16 +15,16 @@
     <el-submenu index="2">
       <template #title>我的工作台</template>
       <el-menu-item index="2-1"
-        ><router-link to="/Form">报名</router-link></el-menu-item
+        ><router-link to="/Form">报名表</router-link></el-menu-item
       >
       <el-menu-item index="2-2"
-        ><router-link to="/appointment">预约</router-link></el-menu-item
+        ><router-link to="/appointment">预约面试</router-link></el-menu-item
       >
       <el-menu-item index="2-3"
-        ><router-link to="/progress">查看进度</router-link></el-menu-item
+        ><router-link to="/signIn">到场签到</router-link></el-menu-item
       >
       <el-menu-item index="2-4"
-        ><router-link to="/signIn">签到</router-link></el-menu-item
+        ><router-link to="/progress">查看进度</router-link></el-menu-item
       >
       <el-submenu index="2-5">
         <template #title>选项4</template>
@@ -42,17 +42,11 @@
       <router-link to="/login" v-else>登录</router-link></el-menu-item
     >
 
-    <el-menu-item index="5"
-      ><router-link to="/Form">报名</router-link></el-menu-item
-    >
-    <el-menu-item index="6"
-      ><router-link to="/appointment">预约面试时间</router-link></el-menu-item
-    >
-    <el-menu-item index="7"
-      ><router-link to="/progress">查看面试进度</router-link></el-menu-item
-    >
+   
     <el-menu-item @click="unLoad" v-if="isLoad">退出登录</el-menu-item>
   </el-menu>
+
+ 
 </template>
 
 <script>
@@ -60,6 +54,13 @@ import { ref, onMounted, onUpdated, watch } from "vue";
 import { useRoute } from "vue-router";
 import { useStore } from "vuex";
 import { getCookie, removeCookie } from "../utils/myCookie";
+
+import {
+  getCurrentStatus,
+  getSubmit,
+  getBriefInfo,
+  getUserStatus,
+} from "../request/api";
 
 export default {
   setup() {
@@ -86,6 +87,44 @@ export default {
         isLoad.value = false;
       }
       console.dir(store.state.loginStatus);
+
+      //获取当前招新状态
+      getCurrentStatus({})
+        .then((res) => {
+          window.sessionStorage.setItem(
+            "CurrentStatus",
+            JSON.stringify(res.data)
+          );
+        })
+        .catch((err) => {
+        });
+      getBriefInfo({})
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      //获取用户id
+      getUserStatus({})
+        .then((res) => {
+          window.sessionStorage.setItem("userId", res.data.uuid);
+        })
+        .catch((err) => {});
+      //判断用户是否报名
+      if (getCookie("studentToken")) {
+        getSubmit({ uuid: window.sessionStorage.getItem("userId") })
+          .then((res) => {
+            if (res.data) {
+              //已报名的状态
+              window.sessionStorage.setItem("hasSignUp", true);
+            } else {
+              //未报名
+              window.sessionStorage.setItem("hasSignUp", false);
+            }
+          })
+          .catch((err) => {});
+      }
     });
 
     watch(

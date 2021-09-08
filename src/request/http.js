@@ -29,6 +29,8 @@ let token = getCookie("studentToken");
 console.log('获取到token', token);
 axios.interceptors.request.use(
     config => {
+        console.log(token);
+        // let token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MzA0NjYxNzcsInV1aWQiOiJzV2pEQ05BQSJ9.b5W4hneOfbJThKQDPGV7zkgOA1_Y2NqGQ8qJWEPYwW0";
         config.headers.accessToken = token;
         return config;
     },
