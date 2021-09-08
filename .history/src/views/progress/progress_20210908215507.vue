@@ -3,7 +3,7 @@
     <router-link to="/introduction">
       <el-page-header @back="goBack" content="面试进度"> </el-page-header>
     </router-link>
-    <div class="block" v-if="allowing && stuId">
+    <div class="block" v-if="!allowing && stuId">
       <el-timeline>
         <!-- <el-timeline-item
           v-for="(activity, index) in activities"
@@ -41,7 +41,7 @@ const goBack = () => {
 //检测用户是否能查询
 let allowing = ref(true);
 let closeMessage = ref("查询进度失败，请先报名");
-let stuId = window.sessionStorage.getItem("userId");
+let stuId = window.localStorage.getItem("userId");
 let activities = reactive([]);
 let warningMessage = "失败";
 //定义提示函数：

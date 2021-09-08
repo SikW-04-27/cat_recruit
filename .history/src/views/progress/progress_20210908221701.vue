@@ -1,5 +1,5 @@
 <template>
-  <div id="progress">
+  <div id="progress" v-loading="loading">
     <router-link to="/introduction">
       <el-page-header @back="goBack" content="面试进度"> </el-page-header>
     </router-link>

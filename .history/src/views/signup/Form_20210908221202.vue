@@ -391,7 +391,7 @@ let changeImg = function (e) {
 onMounted(() => {
   console.log("mounted");
   if (stuId) {
-    loading.value = false;
+    loading.value -
     if (currentStatusId === 2) {
       //处于报名阶段
       console.log("处于报名状态");
@@ -413,7 +413,6 @@ onMounted(() => {
         })
         .catch((err) => {
           //未报名
-          loading.value = false;
           window.sessionStorage.setItem("hasSignUp", false);
           listAllCollege({}).then((res) => {
             institutes.push(...res.data);

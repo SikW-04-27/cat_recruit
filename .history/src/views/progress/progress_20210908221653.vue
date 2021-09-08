@@ -1,5 +1,5 @@
 <template>
-  <div id="progress">
+  <div id="progress" v-loading="loading">
     <router-link to="/introduction">
       <el-page-header @back="goBack" content="面试进度"> </el-page-header>
     </router-link>
@@ -44,6 +44,8 @@ let closeMessage = ref("查询进度失败，请先报名");
 let stuId = window.sessionStorage.getItem("userId");
 let activities = reactive([]);
 let warningMessage = "失败";
+let loading = ref(false);
+loading.value = 
 //定义提示函数：
 const warning = () => {
   ElMessage.warning({

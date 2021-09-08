@@ -315,6 +315,7 @@ let btnClick = () => {
       studentId: stuNumber.value,
     })
       .then((res) => {
+        
         if (res.code === 200 || res.code === 200) {
           success();
           //报名表禁用
@@ -391,14 +392,13 @@ let changeImg = function (e) {
 onMounted(() => {
   console.log("mounted");
   if (stuId) {
-    loading.value = false;
     if (currentStatusId === 2) {
       //处于报名阶段
       console.log("处于报名状态");
 
       getBriefInfo({})
         .then((res) => {
-          loading.value = false;
+          
           if (res.data.userStatusId === 1) {
             //已报名
             window.sessionStorage.setItem("hasSignUp", true);
@@ -413,7 +413,6 @@ onMounted(() => {
         })
         .catch((err) => {
           //未报名
-          loading.value = false;
           window.sessionStorage.setItem("hasSignUp", false);
           listAllCollege({}).then((res) => {
             institutes.push(...res.data);

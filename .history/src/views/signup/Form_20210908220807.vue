@@ -226,7 +226,6 @@ let radio1 = ref("");
 let radio2 = ref("");
 let warningMessage = ref("");
 let stuId = window.sessionStorage.getItem("userId");
-let loading = ref(true);
 //定义warning函数
 const warning = () => {
   ElMessage.warning({
@@ -391,14 +390,12 @@ let changeImg = function (e) {
 onMounted(() => {
   console.log("mounted");
   if (stuId) {
-    loading.value = false;
     if (currentStatusId === 2) {
       //处于报名阶段
       console.log("处于报名状态");
 
       getBriefInfo({})
         .then((res) => {
-          loading.value = false;
           if (res.data.userStatusId === 1) {
             //已报名
             window.sessionStorage.setItem("hasSignUp", true);
@@ -413,7 +410,6 @@ onMounted(() => {
         })
         .catch((err) => {
           //未报名
-          loading.value = false;
           window.sessionStorage.setItem("hasSignUp", false);
           listAllCollege({}).then((res) => {
             institutes.push(...res.data);

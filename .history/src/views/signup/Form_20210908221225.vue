@@ -414,6 +414,7 @@ onMounted(() => {
         .catch((err) => {
           //未报名
           loading.value = false;
+
           window.sessionStorage.setItem("hasSignUp", false);
           listAllCollege({}).then((res) => {
             institutes.push(...res.data);

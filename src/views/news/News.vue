@@ -1,14 +1,20 @@
 
 <template>
-  <div class="block" id="content">
-    <el-timeline>
-      <el-timeline-item timestamp="2021/4/12" placement="top" color="#0bbd87">
+  <div class="block" id="news-content">
+    <el-timeline v-loading="loading" v-if="isFinishLoad">
+      <el-timeline-item
+        :timestamp="item.time"
+        placement="top"
+        color="#0bbd87"
+        v-for="(item, index) of studentNews"
+        :key="index"
+      >
         <el-card class="active">
-          <h4>面试结果</h4>
+          <h4>{{ item.content }}</h4>
           <p>你无了。。。</p>
         </el-card>
       </el-timeline-item>
-      <el-timeline-item timestamp="2018/4/12" placement="top" color="#0bbd87">
+      <!-- <el-timeline-item timestamp="2018/4/12" placement="top" color="#0bbd87">
         <el-card>
           <h4>面试结果</h4>
           <p>你无了。。。</p>
@@ -31,15 +37,56 @@
           <h4>报名</h4>
           <p>报名成功</p>
         </el-card>
-      </el-timeline-item>
+      </el-timeline-item> -->
     </el-timeline>
+    <div v-else class="noLoad">{{newsTip}}</div>
   </div>
 </template>
 
 <script setup>
-import { onMounted } from "vue";
+import { onMounted, onBeforeMount, reactive, ref } from "vue";
 
-console.dir(WebSocket);
+import { getStudentNews } from "../../request/api";
+import { getCookie } from "../../utils/myCookie";
+
+let studentNews = reactive([]);
+
+let loading = ref(true);
+
+let isFinishLoad = ref(true);
+
+let newsTip = ref("请先登录！");
+// console.dir(WebSocket);
+
+onBeforeMount(() => {
+  const studentToken = getCookie("studentToken");
+  console.log(studentToken);
+  if (studentToken) {
+    getStudentNews()
+      .then((result) => {
+        loading.value = false;
+        console.log(result);
+        if (result.code === 1801) {
+          console.log(result.data);
+          studentNews.push(...result.data);
+          // studentNews = result.data;
+          studentNews.reverse();
+          console.log(studentNews);
+        } else {
+          newsTip.value = result.message;
+          isFinishLoad.value = false;
+        }
+      })
+      .catch((e) => {
+        // console.log(e);
+        // isFinishLoad.value = false;
+      });
+  } else {
+    isFinishLoad.value = false;
+  }
+});
+
+/*
 
 const token = localStorage.getItem("token");
 let socketUrl = `http://112.74.33.254:2358/ws/"+${token}`;
@@ -57,7 +104,7 @@ console.log('socket打开了');
 }
 
 socket.onmessage = function() {
-
+  
 }
 
 socket.onclose = function() {
@@ -68,15 +115,22 @@ socket.onerror = function() {
 
 }
 
+*/
 </script>
 
 <style lang="scss" scoped>
-#content {
+#news-content {
   margin: 50px auto 0;
   width: 70%;
 }
 
 .active {
   border: 1px solid red;
+}
+
+.noLoad {
+  color: #fff;
+  font-weight: 700;
+  font-size: 20px;
 }
 </style>

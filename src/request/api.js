@@ -99,4 +99,5 @@ export const userLogin = p => post(`${url1}user/Login`, p);
 // export const login111 = p => instance11('/major/list', p);
 // export const login222 = p => instance22('/user/Login', p);
 
+export const getStudentNews = p => post(`${url1}message/list`)
 

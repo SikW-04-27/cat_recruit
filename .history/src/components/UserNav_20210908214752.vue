@@ -95,8 +95,7 @@ export default {
             JSON.stringify(res.data)
           );
         })
-        .catch((err) => {
-        });
+        .catch((err) => {});
       getBriefInfo({})
         .then((res) => {
           console.log(res);

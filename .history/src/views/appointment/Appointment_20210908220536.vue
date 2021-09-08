@@ -174,20 +174,16 @@ onMounted(() => {
     });
 
   //查看目前总体招新状态
-  getCurrentStatus({})
-    .then((res) => {
-      //当目前是报名阶段时，关闭预约功能
-      if (res.data.id === 2) {
-        close.value = true;
-        data.value = "无";
-      } else {
-        close.value = false;
-        data.value = res.data.status;
-      }
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  getCurrentStatus({}).then((res) => {
+    //当目前是报名阶段时，关闭预约功能
+    if (res.data.id === 2) {
+      close.value = true;
+      data.value = "无";
+    } else {
+      close.value = false;
+      data.value = res.data.status;
+    }
+  });
 
   //用户已经预约时，显示预约成功的界面
   getUserStatus({})

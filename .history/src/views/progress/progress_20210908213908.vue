@@ -41,9 +41,9 @@ const goBack = () => {
 //检测用户是否能查询
 let allowing = ref(true);
 let closeMessage = ref("查询进度失败，请先报名");
-let stuId = window.sessionStorage.getItem("userId");
+let stuId = window.localStorage.getItem("userId");
 let activities = reactive([]);
-let warningMessage = "失败";
+let warningMessage =""
 //定义提示函数：
 const warning = () => {
   ElMessage.warning({

@@ -96,6 +96,7 @@ export default {
           );
         })
         .catch((err) => {
+          console.log();
         });
       getBriefInfo({})
         .then((res) => {

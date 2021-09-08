@@ -64,7 +64,7 @@ import {
   getBriefInfo,
   getUserStatus,
 } from "../request/api";
-import { getCookie } from "../utils/myCookie";
+import {getCookie} from '../utils/myCookie'
 
 export default {
   setup() {
@@ -80,7 +80,7 @@ export default {
       // console.log(getCookie('studentToken'));
       console.log(document.cookie);
       console.log(111);
-      loginStatus.value = getCookie("studentToken") ? 1 : 0;
+      loginStatus.value = getCookie('studentToken') ? 1 : 0;
       if (loginStatus.value) {
         console.log(111);
         userName.value = sessionStorage.getItem("userName");
@@ -90,13 +90,12 @@ export default {
       //获取当前招新状态
       getCurrentStatus({})
         .then((res) => {
-          window.sessionStorage.setItem(
+          window.localStorage.setItem(
             "CurrentStatus",
             JSON.stringify(res.data)
           );
         })
-        .catch((err) => {
-        });
+        .catch((err) => {});
       getBriefInfo({})
         .then((res) => {
           console.log(res);
@@ -107,19 +106,19 @@ export default {
       //获取用户id
       getUserStatus({})
         .then((res) => {
-          window.sessionStorage.setItem("userId", res.data.uuid);
+          window.localStorage.setItem("userId", res.data.uuid);
         })
         .catch((err) => {});
       //判断用户是否报名
-      if (getCookie("studentToken")) {
-        getSubmit({ uuid: window.sessionStorage.getItem("userId") })
+      if (window.localStorage.getItem("token")) {
+        getSubmit({ uuid: window.localStorage.getItem("userId") })
           .then((res) => {
             if (res.data) {
               //已报名的状态
-              window.sessionStorage.setItem("hasSignUp", true);
+              window.localStorage.setItem("hasSignUp", true);
             } else {
               //未报名
-              window.sessionStorage.setItem("hasSignUp", false);
+              window.localStorage.setItem("hasSignUp", false);
             }
           })
           .catch((err) => {});
@@ -129,9 +128,8 @@ export default {
     watch(
       () => store.state.loginStatus,
       () => {
-        console.log(store.state.loginStatus, "改变了111111111");
-        loginStatus.value =
-          store.state.loginStatus || getCookie("studentToken") ? 1 : 0;
+        console.log(store.state.loginStatus, '改变了111111111');
+        loginStatus.value = store.state.loginStatus || getCookie('studentToken')? 1 : 0;
         if (loginStatus.value) {
           userName.value = sessionStorage.getItem("userName");
         }

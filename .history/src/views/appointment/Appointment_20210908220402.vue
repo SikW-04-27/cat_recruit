@@ -75,7 +75,7 @@ import Select from "../signup/select.vue";
 let data = ref("");
 
 // 预约日期
-let day = reactive([]);
+let day = reactive([id:]);
 // 选择框的值
 let value = ref("");
 //判断是否已预约
@@ -161,33 +161,25 @@ let cancel = () => {
 
 onMounted(() => {
   // 查看全部预约时间(调接口)
-  listAppointment({})
-    .then((res) => {
-      for (var i = 0; i < res.data.length; i++) {
-        res.data[i].totalTime =
-          res.data[i].beginTime + " ~ " + res.data[i].endTime;
-      }
-      day.push(...res.data);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  listAppointment({}).then((res) => {
+    for (var i = 0; i < res.data.length; i++) {
+      res.data[i].totalTime =
+        res.data[i].beginTime + " ~ " + res.data[i].endTime;
+    }
+    day.push(...res.data);
+  });
 
   //查看目前总体招新状态
-  getCurrentStatus({})
-    .then((res) => {
-      //当目前是报名阶段时，关闭预约功能
-      if (res.data.id === 2) {
-        close.value = true;
-        data.value = "无";
-      } else {
-        close.value = false;
-        data.value = res.data.status;
-      }
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  getCurrentStatus({}).then((res) => {
+    //当目前是报名阶段时，关闭预约功能
+    if (res.data.id === 2) {
+      close.value = true;
+      data.value = "无";
+    } else {
+      close.value = false;
+      data.value = res.data.status;
+    }
+  });
 
   //用户已经预约时，显示预约成功的界面
   getUserStatus({})

@@ -95,8 +95,7 @@ export default {
             JSON.stringify(res.data)
           );
         })
-        .catch((err) => {
-        });
+        .catch((err) => {});
       getBriefInfo({})
         .then((res) => {
           console.log(res);
@@ -111,7 +110,7 @@ export default {
         })
         .catch((err) => {});
       //判断用户是否报名
-      if (getCookie("studentToken")) {
+      if (window.sessionStorage.getItem("token")) {
         getSubmit({ uuid: window.sessionStorage.getItem("userId") })
           .then((res) => {
             if (res.data) {
