@@ -16,7 +16,7 @@ export function getCookie(name){
     // 防止有空格干扰
         if(arr2[0].trim() === name){ 
             // console.log(arr2[1]);
-            return arr2[1]; 
+            return arr2[1].trim(); 
         } 
     } 
     return false; 

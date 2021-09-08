@@ -2,7 +2,10 @@
   <UserNav></UserNav>
   <!-- <MyButton padding="10px 20px" color="blue">点击</MyButton> -->
 
+<keep-alive>
   <router-view></router-view>
+
+</keep-alive>
 </template>
 
 <script>
@@ -14,11 +17,8 @@ import {setCookie, getCookie} from './utils/myCookie'
 import UserNav from "./components/UserNav.vue";
 import Manage from "./views/manage/manage.vue";
 
-<<<<<<< HEAD
 
 
-=======
->>>>>>> 17de54b65484b2b73462c169589d30126c181282
 export default {
   name: "App",
   components: {
@@ -27,7 +27,6 @@ export default {
   },
 
   setup() {
-<<<<<<< HEAD
 console.log(localStorage.getItem('token'));
 
 
@@ -41,10 +40,6 @@ console.log(localStorage.getItem('token'));
 
 
   }
-=======
-    console.log(localStorage.getItem("token"));
-  },
->>>>>>> 17de54b65484b2b73462c169589d30126c181282
 };
 </script>
 

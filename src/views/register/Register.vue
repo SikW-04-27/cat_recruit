@@ -41,11 +41,11 @@ let isAllDone = ref(false);
 
 let isTimeOut = ref(false);
 
-let registerTimer = ref(null);
 
 let loading = ref(false);
 
 const router = useRouter();
+
 
 function isCorrectAndSendCheckNumber() {
   let checkInfo = checkAccountFormate(
@@ -88,6 +88,8 @@ function isCorrectAndSendCheckNumber() {
 }
 
 function studentRegister() {
+let registerTimer = null;
+
   if (!isAllDone.value || !studentCheckNumber.value.trim()) {
     tips.value = "请先完善所有信息";
   } else {
@@ -97,18 +99,18 @@ function studentRegister() {
       loading.value = false;
       tips.value = "登录超时";
       isTimeOut.value = true;
-    }, 5000);
+    }, 10000);
     userRegister({
       userName: studentName.value,
       email: studentMail.value,
       password: studentPassword.value,
       identity: 1,
       // 调用的时候要改一下号码
-      phoneNumber: "15817940391",
+      phoneNumber: "15817940991",
       verificationCode: studentCheckNumber.value,
     })
       .then((result) => {
-        if(!isTimeOut) {
+        if(!isTimeOut.value) {
           console.log(result);
         clearTimeout(registerTimer);
         loading.value = false;
