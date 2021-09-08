@@ -14,6 +14,8 @@ import {onMounted, onBeforeMount} from 'vue';
 
 import {setCookie, getCookie} from './utils/myCookie'
 
+import {getStudentInfo} from './request/api'
+
 import UserNav from "./components/UserNav.vue";
 import Manage from "./views/manage/manage.vue";
 
@@ -31,10 +33,19 @@ console.log(localStorage.getItem('token'));
 
 
   onBeforeMount(() => {
-    document.cookie = "nameqq=wwww"
+    // document.cookie = "nameqq=wwww"
     // 页面在挂载之前，就判断是否有登录
     if(getCookie('studentToken')) {
-      sessionStorage.setItem("userName", 11111)
+      getStudentInfo({
+        'token': getCookie('studentToken')
+      }).then((result) => {
+console.log(result);
+      sessionStorage.setItem("userName", result.data.user.userName);
+      sessionStorage/setItem("userId", result.data.user.id);
+
+      }).catch((error) => {
+        console.log(error);
+      })
     }
   })
 

@@ -23,6 +23,6 @@ export function getCookie(name){
 } 
 
  //删除cookie
- function removeCookie(name){ 
-    setCookie(name,"",0) 
+export function removeCookie(name){ 
+    setCookie(name,"",-1) 
 } 

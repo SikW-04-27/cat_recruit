@@ -51,6 +51,7 @@
     <el-menu-item index="7"
       ><router-link to="/progress">查看面试进度</router-link></el-menu-item
     >
+    <el-menu-item @click="unLoad" v-if="isLoad">退出登录</el-menu-item>
   </el-menu>
 </template>
 
@@ -58,7 +59,7 @@
 import { ref, onMounted, onUpdated, watch } from "vue";
 import { useRoute } from "vue-router";
 import { useStore } from "vuex";
-import {getCookie} from '../utils/myCookie'
+import { getCookie, removeCookie } from "../utils/myCookie";
 
 export default {
   setup() {
@@ -67,6 +68,8 @@ export default {
     let loginStatus = ref("");
     let userName = ref("");
 
+    let isLoad = ref(true);
+
     const store = useStore();
 
     onMounted(() => {
@@ -74,10 +77,13 @@ export default {
       // console.log(getCookie('studentToken'));
       console.log(document.cookie);
       console.log(111);
-      loginStatus.value = getCookie('studentToken') ? 1 : 0;
+      loginStatus.value = getCookie("studentToken") ? 1 : 0;
       if (loginStatus.value) {
         console.log(111);
         userName.value = sessionStorage.getItem("userName");
+        isLoad.value = true;
+      } else {
+        isLoad.value = false;
       }
       console.dir(store.state.loginStatus);
     });
@@ -85,13 +91,25 @@ export default {
     watch(
       () => store.state.loginStatus,
       () => {
-        console.log(store.state.loginStatus, '改变了111111111');
-        loginStatus.value = store.state.loginStatus || getCookie('studentToken')? 1 : 0;
+        console.log(store.state.loginStatus, "改变了111111111");
+        loginStatus.value =
+          store.state.loginStatus || getCookie("studentToken") ? 1 : 0;
         if (loginStatus.value) {
           userName.value = sessionStorage.getItem("userName");
+          isLoad.value = true;
+        } else {
+          isLoad.value = false;
         }
       }
     );
+
+    function unLoad() {
+      removeCookie("studentToken");
+      store.state.loginStatus = false;
+      isLoad.value = false;
+
+      window.location.reload();
+    }
 
     console.log();
     const route = useRoute();
@@ -101,12 +119,13 @@ export default {
     // console.log(route.path);
     // })
 
-
     return {
       activeIndex,
       activeIndex2,
       loginStatus,
       userName,
+      isLoad,
+      unLoad,
     };
   },
   methods: {

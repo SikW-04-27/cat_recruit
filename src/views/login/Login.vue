@@ -109,6 +109,7 @@ function studentLogin() {
 
   .student-login-tips {
     height: 40px;
+    color: red;
     line-height: 40px;
     transition: all 0.5s;
   }
