@@ -12,36 +12,38 @@
 
 import {onMounted, onBeforeMount} from 'vue';
 
+import { useStore } from "vuex";
+
+
 import {setCookie, getCookie} from './utils/myCookie'
 
 import {getStudentInfo} from './request/api'
 
 import UserNav from "./components/UserNav.vue";
-import Manage from "./views/manage/manage.vue";
-
 
 
 export default {
   name: "App",
   components: {
     UserNav,
-    Manage,
   },
 
   setup() {
-console.log(localStorage.getItem('token'));
 
+const store = useStore();
 
-  onBeforeMount(() => {
+  onMounted(() => {
     // document.cookie = "nameqq=wwww"
     // 页面在挂载之前，就判断是否有登录
     if(getCookie('studentToken')) {
       getStudentInfo({
-        'token': getCookie('studentToken')
+       
       }).then((result) => {
 console.log(result);
-      sessionStorage.setItem("userName", result.data.user.userName);
-      sessionStorage/setItem("userId", result.data.user.id);
+      window.sessionStorage.setItem("userName", result.data.user.userName);
+      window.sessionStorage.setItem("userId", result.data.user.id);
+      store.state.loginStatus = true;
+      console.log('loginstatus修改了');
 
       }).catch((error) => {
         console.log(error);

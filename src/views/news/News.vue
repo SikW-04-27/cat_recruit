@@ -11,7 +11,7 @@
       >
         <el-card class="active">
           <h4>{{ item.content }}</h4>
-          <p>你无了。。。</p>
+          <!-- <p>你无了。。。</p> -->
         </el-card>
       </el-timeline-item>
       <!-- <el-timeline-item timestamp="2018/4/12" placement="top" color="#0bbd87">

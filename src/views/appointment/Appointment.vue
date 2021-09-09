@@ -7,7 +7,7 @@
     <el-divider>目前预约：{{ data }}</el-divider>
 
     <!-- 预约 -->
-    <div class="a_content" v-if="!close && stuId">
+    <div class="a_content" v-if="close && stuId">
       <span>请选择预约时间：</span>
       <!-- 预约日期 -->
       <el-select
@@ -49,7 +49,7 @@
       </div>
     </div>
     <!-- 未开放预约的状态  -->
-    <div class="close" v-if="close && stuId">{{ closeMessage }}</div>
+    <div class="close" v-if="!close && stuId">{{ closeMessage }}</div>
 
     <!-- 用户未登录 -->
     <div class="unLogin" v-if="!stuId">
@@ -177,8 +177,10 @@ onMounted(() => {
   getCurrentStatus({})
     .then((res) => {
       //当目前是报名阶段时，关闭预约功能
+      console.log(res);
       if (res.data.id === 2) {
         close.value = true;
+        console.log(close);
         data.value = "无";
       } else {
         close.value = false;

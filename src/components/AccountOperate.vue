@@ -14,28 +14,45 @@ export default {};
   margin: 80px auto 0;
   width: 450px;
   // height: 360px;
-  background-color: rgba(78, 78, 78, 0.5);
+  // background-color: rgba(78, 78, 78, 0.5);
 
 
+  // input {
+  //   // padding-left: 10px;
+  //   // border-bottom: 2px solid #ffffff;
+  //   display: block;
+  //   margin: 0 auto;
+  //   width: 300px;
+  //   height: 40px;
+  //   color: red;
+  //   font-size: 13px;
+  //   border-radius: 10px;
+  // }
   input {
-    padding-left: 10px;
-    border-bottom: 2px solid #ffffff;
-    background-color: rgba(0, 0, 0, 0) !important;
-    margin-top: 28px;
-    width: 210px;
-    height: 30px;
-    color: red;
-    font-size: 13px;
+    width: 380px;
+    height: 45px;
+    border-color: rgb(255, 255, 255);
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 30px;
+    font-size: 14px;
+    padding: 0px;
+    text-align: center;
+    line-height: 20px;
+    font-weight: normal;
+    font-style: normal;
+      background-color: rgba(255, 255, 255, .8) !important;
   }
 }
 
-$color: #0bc7f4;
+$color: #3a62d7;
 
+/*
 .myButton {
   color: $color;
   // padding: 10px 30px;
-  width: 100px;
-  height: 40px;
+   width: 380px;
+    height: 45px;
   line-height: 40px;
 }
 
@@ -53,4 +70,11 @@ $color: #0bc7f4;
   border-bottom: 2px solid $color;
   border-right: 2px solid $color;
 }
+
+.myButton {
+  // border-radius: 10px;
+  background-color: #6689f0;
+}
+
+*/
 </style>

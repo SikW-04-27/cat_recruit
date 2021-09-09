@@ -7,12 +7,10 @@
     @select="handleSelect"
     background-color="rgb(34 36 38 / 65%)"
     text-color="#fff"
-    active-text-color="#2f86b6"
+    active-text-color="red"
   >
-    <el-menu-item index="1"
-      ><router-link to="/introduction">工作室介绍</router-link></el-menu-item
-    >
-    <el-submenu index="2">
+   
+    <el-submenu index="2" v-if="isLoad">
       <template #title>我的工作台</template>
       <el-menu-item index="2-1"
         ><router-link to="/Form">报名表</router-link></el-menu-item
@@ -26,6 +24,11 @@
       <el-menu-item index="2-4"
         ><router-link to="/progress">查看进度</router-link></el-menu-item
       >
+        <el-menu-item index="3"
+      ><router-link to="/news">消息中心</router-link></el-menu-item
+    >
+       <el-menu-item @click="unLoad" v-if="isLoad">退出登录</el-menu-item>
+
       <el-submenu index="2-5">
         <template #title>选项4</template>
         <el-menu-item index="2-5-1">选项1</el-menu-item>
@@ -34,16 +37,17 @@
       </el-submenu>
     </el-submenu>
     <!-- <el-menu-item index="3" disabled>消息中心</el-menu-item> -->
-    <el-menu-item index="3"
-      ><router-link to="/news">消息中心</router-link></el-menu-item
-    >
+   
     <el-menu-item index="4">
       <a href="javascript:;" v-if="loginStatus">{{ `你好，${userName}` }}</a>
       <router-link to="/login" v-else>登录</router-link></el-menu-item
     >
 
    
-    <el-menu-item @click="unLoad" v-if="isLoad">退出登录</el-menu-item>
+   
+     <el-menu-item index="1"
+      ><router-link to="/introduction">工作室介绍</router-link></el-menu-item
+    >
   </el-menu>
 
  
@@ -146,7 +150,7 @@ export default {
       removeCookie("studentToken");
       store.state.loginStatus = false;
       isLoad.value = false;
-
+      sessionStorage.clear();
       window.location.reload();
     }
 
@@ -176,4 +180,14 @@ export default {
 </script>
 
 <style>
+
+ul {
+  padding: 0 90px;
+  /* height: 30px; */
+  /* border-bottom: 0 !important; */
+}
+
+.activeIndex2 {
+  background-color: green;
+}
 </style>

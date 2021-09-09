@@ -10,11 +10,12 @@
     >
       <input type="text" v-model="studentMail" placeholder="邮箱" />
       <input type="text" v-model="studentPassword" placeholder="密码" />
-      <div class="skip-register">
+     
+      <div class="student-login-tips">{{ tips }}</div>
+      <div @click="studentLogin" id="check-login">登录</div>
+       <div class="skip-register">
         <router-link to="/register">账号注册</router-link>
       </div>
-      <div class="student-login-tips">{{ tips }}</div>
-      <button @click="studentLogin">登录</button>
     </div>
     <!-- </el-table> -->
   </AccountOperate>
@@ -74,6 +75,7 @@ function studentLogin() {
             // localStorage.setItem("token", result.data.token);
             sessionStorage.setItem("userName", result.data.user.userName);
             sessionStorage.setItem("userId", result.data.user.id);
+            window.window.location.reload();
             router.push({
               path: "/introduction",
             });
@@ -99,12 +101,11 @@ function studentLogin() {
   /* background-color: blue; */
 
   input {
-    margin-top: 28px;
-    width: 280px;
-    height: 30px;
-    color: red;
+    margin-top: 30px;
+    color: #fff;
+    letter-spacing: 2px;
+    font-weight: 700;
     padding-left: 8px;
-    border: 1px solid red;
   }
 
   .student-login-tips {
@@ -112,20 +113,38 @@ function studentLogin() {
     color: red;
     line-height: 40px;
     transition: all 0.5s;
+    
   }
 
-  button {
-    margin-top: 5px;
-    width: 120px;
-    height: 36px;
-  }
+  // button {
+  //   margin-top: 5px;
+  //   width: 120px;
+  //   height: 36px;
+  // }
 
   .skip-register {
-    position: absolute;
-    top: 50%;
-    right: 35%;
+    // position: absolute;
+    // top: 50%;
+    // right: 35%;
+    margin: 25px 0 0 250px;
     color: #fff;
     font-size: 14px;
+    
+  }
+
+  #check-login {
+    margin: 0 auto;
+    width: 380px;
+    height: 45px;
+    line-height: 45px;
+    border-radius: 30px;
+     padding-left: 8px;
+  background: -webkit-linear-gradient(left, #12c2e9, #c471ed, #f64f59);
+ box-shadow: 0 15px 25px rgba(0,0,0,.6);
+&:hover {
+  cursor: pointer;
+
+}
   }
 }
 </style>
