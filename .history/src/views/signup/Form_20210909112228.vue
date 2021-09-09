@@ -228,7 +228,7 @@ let radio2 = ref("");
 let warningMessage = ref("");
 let stuId = window.sessionStorage.getItem("userId");
 let loading = ref(true);
-let avatarimg = ref("");
+let avatarimg = ref("url(../../assets/im)");
 //定义warning函数
 const warning = () => {
   ElMessage.warning({
@@ -317,7 +317,7 @@ let btnClick = () => {
       studentId: stuNumber.value,
     })
       .then((res) => {
-        if (res.code === 200 || res.code === 2001) {
+        if (res.code === 200 || res.code === 200) {
           success();
           //报名表禁用
           disabled.value = ref(true);

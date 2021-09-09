@@ -91,7 +91,7 @@ export const closeQueue = p => post(`${url1}queue/closeQueue`, p);
 export const checkStatus = p => post(`${url1}queue/checkStatus`, p);
 
 // 用户登录
-export const userLogin = p => post(`${url1}user/Login`, p);
+export const userLogin = p => post(`${url2}user/Login`, p);
 
 
 // export const login111 = p => post11('/user/Login', p);

@@ -162,10 +162,11 @@ let cancel = () => {
 };
 
 onMounted(() => {
-    loading.value = false;
   // 查看全部预约时间(调接口)
   listAppointment({})
     .then((res) => {
+        loading.value = false;
+
       for (var i = 0; i < res.data.length; i++) {
         res.data[i].totalTime =
           res.data[i].beginTime + " ~ " + res.data[i].endTime;

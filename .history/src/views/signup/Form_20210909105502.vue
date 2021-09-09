@@ -135,7 +135,7 @@
           accept="image/*"
           name="file"
           style="display: none"
-          @change="changeImg"
+          @change="handleFileChange"
         />
       </div>
       <!-- 方向 -->
@@ -198,8 +198,7 @@
 
 <script setup>
 import { defineComponent, ref, reactive, onMounted } from "vue";
-import { ElMessage, ElMessageBox, ElLoading } from "element-plus";
-import axios from "axios";
+import { ElMessage, ElMessageBox } from "element-plus";
 // import submit from "../../request/api.js";
 import {
   listAllCollege,
@@ -317,7 +316,7 @@ let btnClick = () => {
       studentId: stuNumber.value,
     })
       .then((res) => {
-        if (res.code === 200 || res.code === 2001) {
+        if (res.code === 200 || res.code === 200) {
           success();
           //报名表禁用
           disabled.value = ref(true);
@@ -341,6 +340,11 @@ let btnClick = () => {
     warningMessage.value = "请完善全部信息";
     warning();
   }
+};
+
+let handleFileChange = (e) => {
+  let fileData = e;
+  console.log(fileData.target.files[0]);
 };
 
 //头像
@@ -375,9 +379,11 @@ let changeImg = function (e) {
       })
       .then((res) => {
         loadingInstance.close();
+        console.log(res);
         avatarimg.value = res.data.data;
       })
       .catch((err) => {
+        console.log(err);
         loadingInstance.close();
       });
   });
@@ -524,9 +530,7 @@ $zhutise: rgb(41, 45, 63);
       vertical-align: top;
       img {
         width: 100px;
-        height: 100px;
-        background-image: url(../../assets/img/点击上传图片.png);
-        background-size: contain;
+        heigth: ;
       }
     }
   }

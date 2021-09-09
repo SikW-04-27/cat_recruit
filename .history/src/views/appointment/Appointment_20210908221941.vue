@@ -91,7 +91,7 @@ let stuId = window.sessionStorage.getItem("userId");
 //closeMessage
 let closeMessage = ref("预约暂未开放，请耐心等候");
 //loading
-let loading = ref(true);
+let loading = ref(true)
 //点击返回按钮
 const goBack = () => {
   console.log("go back");
@@ -162,7 +162,7 @@ let cancel = () => {
 };
 
 onMounted(() => {
-    loading.value = false;
+  loading.value = 
   // 查看全部预约时间(调接口)
   listAppointment({})
     .then((res) => {

@@ -4,6 +4,7 @@
 
 <script>
 export default {};
+location.reload();
 </script>
 
 <style lang="scss" scoped>

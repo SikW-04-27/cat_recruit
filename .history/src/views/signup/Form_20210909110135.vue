@@ -317,7 +317,7 @@ let btnClick = () => {
       studentId: stuNumber.value,
     })
       .then((res) => {
-        if (res.code === 200 || res.code === 2001) {
+        if (res.code === 200 || res.code === 200) {
           success();
           //报名表禁用
           disabled.value = ref(true);
@@ -341,6 +341,11 @@ let btnClick = () => {
     warningMessage.value = "请完善全部信息";
     warning();
   }
+};
+
+let handleFileChange = (e) => {
+  let fileData = e;
+  console.log(fileData.target.files[0]);
 };
 
 //头像
@@ -525,8 +530,6 @@ $zhutise: rgb(41, 45, 63);
       img {
         width: 100px;
         height: 100px;
-        background-image: url(../../assets/img/点击上传图片.png);
-        background-size: contain;
       }
     }
   }

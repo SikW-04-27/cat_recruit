@@ -210,9 +210,8 @@ onMounted(() => {
           closeMessage.value = "用户未预约，请先预约";
         }
       })
-      .catch(err => {
-        closeMessage.value = err.data.message;
-        warningMessage = err.data.message;
+      .catch((err) => {
+        warningMessage = err.message;
         warning();
       });
   }

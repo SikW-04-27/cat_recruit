@@ -162,7 +162,6 @@ let cancel = () => {
 };
 
 onMounted(() => {
-    loading.value = false;
   // 查看全部预约时间(调接口)
   listAppointment({})
     .then((res) => {

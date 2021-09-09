@@ -67,7 +67,7 @@ let value = ref("*");
 //消息提示
 let message = ref("");
 //其他情况下显示的提示
-let closeMessage = ref("未开放签到");
+let closeMessage = ref("");
 //是否报名
 let hasSignUp = JSON.parse(window.sessionStorage.getItem("hasSignUp"));
 let CurrentStatusId = JSON.parse(window.sessionStorage.getItem("CurrentStatus"))
@@ -210,8 +210,7 @@ onMounted(() => {
           closeMessage.value = "用户未预约，请先预约";
         }
       })
-      .catch(err => {
-        closeMessage.value = err.data.message;
+      .catch((err) => {
         warningMessage = err.data.message;
         warning();
       });

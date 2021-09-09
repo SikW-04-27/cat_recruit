@@ -96,6 +96,12 @@ export default {
           );
         })
         .catch((err) => {});
+      //获取用户状态
+      getUserStatus({})
+        .then((res) => {
+          window.sessionStorage.setItem("userId", res.data.uuid);
+        })
+        .catch((err) => {});
       //判断用户是否报名
       if (getCookie("studentToken")) {
         getSubmit({ uuid: window.sessionStorage.getItem("userId") })

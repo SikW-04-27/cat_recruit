@@ -317,7 +317,7 @@ let btnClick = () => {
       studentId: stuNumber.value,
     })
       .then((res) => {
-        if (res.code === 200 || res.code === 2001) {
+        if (res.code === 200 || res.code === 200) {
           success();
           //报名表禁用
           disabled.value = ref(true);
@@ -343,6 +343,11 @@ let btnClick = () => {
   }
 };
 
+let handleFileChange = (e) => {
+  let fileData = e;
+  console.log(fileData.target.files[0]);
+};
+
 //头像
 let changeImg = function (e) {
   ElMessageBox.confirm("确定添加头像?", "提示", {
@@ -353,6 +358,7 @@ let changeImg = function (e) {
     let file = new FormData();
     file.append("file", e.target.files[0]);
     let token = getCookie("studentToken");
+    console.log("垃圾" + token);
     let loadingInstance = ElLoading.service({
       fullscreen: false,
       target: ".avatar",
@@ -525,8 +531,6 @@ $zhutise: rgb(41, 45, 63);
       img {
         width: 100px;
         height: 100px;
-        background-image: url(../../assets/img/点击上传图片.png);
-        background-size: contain;
       }
     }
   }

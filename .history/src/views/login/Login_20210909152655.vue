@@ -73,6 +73,7 @@ function studentLogin() {
             // localStorage.setItem("token", result.data.token);
             sessionStorage.setItem("userName", result.data.user.userName);
             sessionStorage.setItem("userId", result.data.user.id);
+            location.reload();
             router.push({
               path: "/introduction",
             });

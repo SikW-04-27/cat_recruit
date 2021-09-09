@@ -95,6 +95,13 @@ export default {
             JSON.stringify(res.data)
           );
         })
+        .catch((err) => {
+        });
+      //获取用户id
+      getUserStatus({})
+        .then((res) => {
+          window.sessionStorage.setItem("userId", res.data.uuid);
+        })
         .catch((err) => {});
       //判断用户是否报名
       if (getCookie("studentToken")) {

@@ -1,9 +1,11 @@
 <template>
-  <div id="introductin-title" class="myButton"><slot></slot></div>
+   <div id="introductin-title" class="myButton"><slot></slot></div>
 </template>
 
 <script>
-export default {};
+export default {
+
+}
 </script>
 
 <style lang="scss" scoped>
@@ -31,15 +33,19 @@ $color: rgb(27, 186, 235);
 .myButton:hover {
   background: $color;
   box-shadow: 0 0 50px $color;
+
 }
 
 .myButton::before {
-  border-top: 2px solid $color;
+   border-top: 2px solid $color;
   border-left: 2px solid $color;
 }
 
 .myButton::after {
-  border-bottom: 2px solid $color;
+   border-bottom: 2px solid $color;
   border-right: 2px solid $color;
 }
+
+
+
 </style>

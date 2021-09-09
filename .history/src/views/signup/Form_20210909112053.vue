@@ -317,7 +317,7 @@ let btnClick = () => {
       studentId: stuNumber.value,
     })
       .then((res) => {
-        if (res.code === 200 || res.code === 2001) {
+        if (res.code === 200 || res.code === 200) {
           success();
           //报名表禁用
           disabled.value = ref(true);
@@ -525,8 +525,7 @@ $zhutise: rgb(41, 45, 63);
       img {
         width: 100px;
         height: 100px;
-        background-image: url(../../assets/img/点击上传图片.png);
-        background-size: contain;
+        background-image: url(../../);
       }
     }
   }

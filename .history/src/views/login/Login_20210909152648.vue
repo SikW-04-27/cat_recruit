@@ -26,7 +26,8 @@ import { useRouter } from "vue-router";
 import { userLogin } from "../../request/api";
 import { useStore } from "vuex";
 
-import { setCookie, getCookie } from "../../utils/myCookie";
+import {setCookie, getCookie} from '../../utils/myCookie'
+
 
 import AccountOperate from "../../components/AccountOperate.vue";
 
@@ -61,18 +62,19 @@ function studentLogin() {
     })
       .then((result) => {
         if (!isTimeOut.value) {
-          console.log("未超时");
+          console.log('未超时');
           loading.value = false;
           clearTimeout(timer);
           console.log(result);
 
           if (result.code === 2000) {
             store.state.loginStatus = true;
-
-            setCookie("studentToken", result.data.token, 7);
+            
+            setCookie("studentToken", result.data.token, 7)
             // localStorage.setItem("token", result.data.token);
             sessionStorage.setItem("userName", result.data.user.userName);
             sessionStorage.setItem("userId", result.data.user.id);
+            loc
             router.push({
               path: "/introduction",
             });

@@ -211,7 +211,7 @@ onMounted(() => {
         }
       })
       .catch(err => {
-        closeMessage.value = err.data.message;
+        close
         warningMessage = err.data.message;
         warning();
       });
