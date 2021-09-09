@@ -166,6 +166,7 @@ function studentRegister() {
   .student-register-tips {
     font-size: 12px;
     height: 30px;
+    color: red;
     line-height: 30px;
   }
 }
