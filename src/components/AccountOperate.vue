@@ -13,7 +13,7 @@ export default {};
 #account {
   position: relative;
   // margin: 80px auto 0;
-  top: 100px;
+  top: 120px;
   left: 400px;
   width: 450px;
   // height: 360px;
@@ -44,7 +44,12 @@ export default {};
     line-height: 20px;
     font-weight: normal;
     font-style: normal;
-      background-color: rgba(255, 255, 255, .8) !important;
+    margin-top: 30px;
+    color: #fff;
+    letter-spacing: 2px;
+    font-weight: 700;
+    padding-left: 8px;
+    background-color: rgba(255, 255, 255, .7) !important;
   }
 }
 

@@ -9,7 +9,6 @@
     text-color="#fff"
     active-text-color="red"
   >
-   
     <el-submenu index="2" v-if="isLoad">
       <template #title>我的工作台</template>
       <el-menu-item index="2-1"
@@ -24,10 +23,10 @@
       <el-menu-item index="2-4"
         ><router-link to="/progress">查看进度</router-link></el-menu-item
       >
-        <el-menu-item index="3"
-      ><router-link to="/news">消息中心</router-link></el-menu-item
-    >
-       <el-menu-item @click="unLoad" v-if="isLoad">退出登录</el-menu-item>
+      <el-menu-item index="3"
+        ><router-link to="/news">消息中心</router-link></el-menu-item
+      >
+      <el-menu-item @click="unLoad" v-if="isLoad">退出登录</el-menu-item>
 
       <el-submenu index="2-5">
         <template #title>选项4</template>
@@ -37,25 +36,28 @@
       </el-submenu>
     </el-submenu>
     <!-- <el-menu-item index="3" disabled>消息中心</el-menu-item> -->
-   
+
     <el-menu-item index="4">
       <a href="javascript:;" v-if="loginStatus">{{ `你好，${userName}` }}</a>
       <router-link to="/login" v-else>登录</router-link></el-menu-item
     >
 
-   
-   
-     <el-menu-item index="1"
+    <el-menu-item index="1"
       ><router-link to="/introduction">工作室介绍</router-link></el-menu-item
     >
   </el-menu>
-
- 
 </template>
 
 <script>
-import { ref, onMounted, onUpdated, watch } from "vue";
-import { useRoute } from "vue-router";
+import {
+  ref,
+  onMounted,
+  onUpdated,
+  onBeforeUpdate,
+  onUnmounted,
+  watch,
+} from "vue";
+import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 import { getCookie, removeCookie } from "../utils/myCookie";
 
@@ -76,6 +78,8 @@ export default {
     let isLoad = ref(true);
 
     const store = useStore();
+
+    const router = useRouter();
 
     onMounted(() => {
       // console.log(localStorage.getItem('token'));
@@ -137,11 +141,14 @@ export default {
       store.state.loginStatus = false;
       isLoad.value = false;
       sessionStorage.clear();
-      window.location.reload();
+      router.push({
+        path: "/introduction",
+      });
     }
 
-    console.log();
-    const route = useRoute();
+    onUnmounted(() => {
+      location.reload();
+    });
 
     // watch(() => route.path,() => {
     // console.log('监听到变化');
@@ -166,8 +173,6 @@ export default {
 </script>
 
 <style>
-
-
 ul {
   padding: 0 90px;
   /* height: 30px; */

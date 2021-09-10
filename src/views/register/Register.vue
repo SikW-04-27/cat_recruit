@@ -12,7 +12,7 @@
         {{ checkNumberTip }}
       </div>
       <div class="student-register-tips">{{ tips }}</div>
-      <button @click="studentRegister" class="myButton">注册</button>
+      <div id="check-register" @click="studentRegister" >注册</div>
     </div>
   </AccountOperate>
 </template>
@@ -147,14 +147,14 @@ function studentRegister() {
   text-align: center;
   color: #fff;
 
-  input {
-    // display: block;
-    margin-top: 28px;
-    width: 210px;
-    height: 30px;
-    color: red;
-    font-size: 13px;
-  }
+  // input {
+  //   // display: block;
+  //   margin-top: 28px;
+  //   width: 210px;
+  //   height: 30px;
+  //   color: red;
+  //   font-size: 13px;
+  // }
 
   .click-checkNumber {
     position: absolute;
@@ -168,6 +168,21 @@ function studentRegister() {
     height: 30px;
     color: red;
     line-height: 30px;
+  }
+
+  #check-register {
+    margin: 0 auto;
+    width: 380px;
+    height: 45px;
+    line-height: 45px;
+    border-radius: 30px;
+     padding-left: 8px;
+  background: -webkit-linear-gradient(left, #12c2e9, #c471ed, #f64f59);
+ box-shadow: 0 15px 25px rgba(0,0,0,.6);
+&:hover {
+  cursor: pointer;
+
+}
   }
 }
 </style>

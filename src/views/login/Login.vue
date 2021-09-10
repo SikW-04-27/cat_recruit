@@ -8,6 +8,7 @@
       element-loading-text="登录中..."
       element-loading-background="rgba(0, 0, 0, .5)"
     >
+    <div class="login-words">LOGIN</div>
       <input type="text" v-model="studentMail" placeholder="邮箱" />
       <input type="text" v-model="studentPassword" placeholder="密码" />
      
@@ -22,7 +23,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, onUnmounted } from "vue";
 import { useRouter } from "vue-router";
 import { userLogin } from "../../request/api";
 import { useStore } from "vuex";
@@ -90,6 +91,11 @@ function studentLogin() {
       });
   }
 }
+
+onUnmounted(() => {
+  console.log('页面刷新了');
+  location.reload();
+})
 </script>
 
 <style lang="scss">
@@ -101,13 +107,20 @@ function studentLogin() {
   text-align: center;
   /* background-color: blue; */
 
-  input {
-    margin-top: 30px;
-    color: #fff;
-    letter-spacing: 2px;
-    font-weight: 700;
-    padding-left: 8px;
-  }
+.login-words {
+  margin-bottom: 5px;
+  color: #fff;
+  font-size: 20px;
+  letter-spacing: 2px;
+}
+
+  // input {
+  //   margin-top: 30px;
+  //   color: #fff;
+  //   letter-spacing: 2px;
+  //   font-weight: 700;
+  //   padding-left: 8px;
+  // }
 
   .student-login-tips {
     height: 40px;
