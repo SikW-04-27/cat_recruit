@@ -120,7 +120,9 @@ socket.onerror = function() {
 
 <style lang="scss" scoped>
 #news-content {
-  margin: 50px auto 0;
+  position: relative;
+  top: 120px;
+  margin: 0 auto;
   width: 70%;
 }
 

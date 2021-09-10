@@ -8,12 +8,12 @@
       element-loading-text="登录中..."
       element-loading-background="rgba(0, 0, 0, .5)"
     >
-    <div class="login-words">LOGIN</div>
+    <p class="login-words myFront" data-text="LOGIN">LOGIN</p>
       <input type="text" v-model="studentMail" placeholder="邮箱" />
       <input type="text" v-model="studentPassword" placeholder="密码" />
      
       <div class="student-login-tips">{{ tips }}</div>
-      <div @click="studentLogin" id="check-login">登录</div>
+      <div id="check-login" @click="studentLogin">登录</div>
        <div class="skip-register">
         <router-link to="/register">账号注册</router-link>
       </div>
@@ -21,6 +21,7 @@
     <!-- </el-table> -->
   </AccountOperate>
 </template>
+
 
 <script setup>
 import { ref, onUnmounted } from "vue";
@@ -102,16 +103,21 @@ onUnmounted(() => {
 #student-login {
   //   margin: 65px auto;
   width: 100%;
-  height: 220px;
+  height: 350px;
   color: #fff;
   text-align: center;
   /* background-color: blue; */
 
 .login-words {
-  margin-bottom: 5px;
-  color: #fff;
-  font-size: 20px;
-  letter-spacing: 2px;
+  position: relative;
+  top: 0;
+  left: 0;
+  // margin-bottom: 5px;
+  // color: #fff;
+  font-size: 25px;
+  letter-spacing: 4px;
+  // color: skyblue;
+  text-shadow: 0 0 20px #6d1014;
 }
 
   // input {

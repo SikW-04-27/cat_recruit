@@ -14,7 +14,8 @@ export default {};
   position: relative;
   // margin: 80px auto 0;
   top: 120px;
-  left: 400px;
+  // left: 420px;
+  margin: 0 auto;
   width: 450px;
   // height: 360px;
   // background-color: rgba(78, 78, 78, 0.5);
@@ -31,6 +32,7 @@ export default {};
   //   font-size: 13px;
   //   border-radius: 10px;
   // }
+
   input {
     width: 380px;
     height: 45px;
@@ -45,13 +47,37 @@ export default {};
     font-weight: normal;
     font-style: normal;
     margin-top: 30px;
-    color: #fff;
+    // color: red;
     letter-spacing: 2px;
-    font-weight: 700;
+    // font-weight: 700;
     padding-left: 8px;
     background-color: rgba(255, 255, 255, .7) !important;
+    &::placeholder {
+      color: #fff;
+      letter-spacing: 0;
+    }
   }
+
+  
 }
+
+// input::placeholder {
+//   color: red !important;
+// }
+
+// input::-webkit-input-placeholder {
+//     color: red !important;
+//   }
+
+//   input::-moz-placeholder {
+//     color: red;
+//   }
+
+//   input::-ms-input-placeholder {
+//     color: red;
+//   }
+
+
 
 $color: #3a62d7;
 
