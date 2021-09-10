@@ -120,7 +120,7 @@ let options_Change = ($event) => {
 let comfirm = () => {
   // 当选择框内有内容时
   if (value.value != "") {
-    loading.value = true;
+        loading.value = true;
     updateUserInfo({
       id: stuId,
       appointmentId: key,

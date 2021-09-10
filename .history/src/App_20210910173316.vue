@@ -1,17 +1,20 @@
 <template>
   <Background></Background>
-  <UserNav> </UserNav>
-  <router-view class="userNav"></router-view>
+  <UserNav> </UserNav>    <router-view class="userNav"></router-view>
+  </keep-alive>
 
   <!-- <MyButton padding="10px 20px" color="blue">点击</MyButton> -->
 </template>
 
 <script>
-import { onMounted, onBeforeMount } from "vue";
+
+
+import {onMounted, onBeforeMount} from 'vue';
 
 import { useStore } from "vuex";
 
-import { setCookie, getCookie } from "./utils/myCookie";
+
+import {setCookie, getCookie} from './utils/myCookie'
 
 import { getStudentInfo } from "./request/api";
 
@@ -23,33 +26,34 @@ export default {
   name: "App",
   components: {
     UserNav,
-    Background,
+    Background
   },
 
   setup() {
-    const store = useStore();
 
-    onMounted(() => {
-      // document.cookie = "nameqq=wwww"
-      // 页面在挂载之前，就判断是否有登录
-      if (getCookie("studentToken")) {
-        getStudentInfo({})
-          .then((result) => {
-            console.log(result);
-            window.sessionStorage.setItem(
-              "userName",
-              result.data.user.userName
-            );
-            window.sessionStorage.setItem("userId", result.data.user.id);
-            store.state.loginStatus = true;
-            console.log("loginstatus修改了");
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      }
-    });
-  },
+const store = useStore();
+
+  onMounted(() => {
+    // document.cookie = "nameqq=wwww"
+    // 页面在挂载之前，就判断是否有登录
+    if(getCookie('studentToken')) {
+      getStudentInfo({
+       
+      }).then((result) => {
+console.log(result);
+      window.sessionStorage.setItem("userName", result.data.user.userName);
+      window.sessionStorage.setItem("userId", result.data.user.id);
+      store.state.loginStatus = true;
+      console.log('loginstatus修改了');
+
+      }).catch((error) => {
+        console.log(error);
+      })
+    }
+  })
+
+
+  }
 };
 </script>
 

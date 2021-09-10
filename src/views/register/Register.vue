@@ -1,18 +1,20 @@
 <template>
   <AccountOperate>
     <div id="student-register" v-loading="loading">
-      <input type="text" v-model="studentName" placeholder="用户名" />
+      <p class="register-word myFront" data-text="REGISTER">REGISTER</p>
+      <input type="text" v-model="studentName" placeholder="用户名（2-20， 只包含汉字字母数字和下划线）" />
       <input type="text" v-model="studentMail" placeholder="邮箱" />
-      <input type="password" v-model="studentPassword" placeholder="密码" />
-      <input type="text" v-model="studentCheckNumber" placeholder="验证码" />
+      <input type="password" v-model="studentPassword" placeholder="密码（8-18，只包含字母和数字）" />
       <div
         class="click-checkNumber"
         @click="flag && isCorrectAndSendCheckNumber()"
       >
         {{ checkNumberTip }}
       </div>
+      <input type="text" v-model="studentCheckNumber" placeholder="验证码" />
+
       <div class="student-register-tips">{{ tips }}</div>
-      <button @click="studentRegister" class="myButton">注册</button>
+      <div id="check-register" @click="studentRegister">注册</div>
     </div>
   </AccountOperate>
 </template>
@@ -51,7 +53,7 @@ function isCorrectAndSendCheckNumber() {
     studentMail.value,
     studentPassword.value
   );
-
+  console.log(1111111111111111111111);
   if (!checkInfo[0]) {
     console.log(checkInfo);
     tips.value = checkInfo[1];
@@ -147,20 +149,36 @@ function studentRegister() {
   text-align: center;
   color: #fff;
 
-  input {
-    // display: block;
-    margin-top: 28px;
-    width: 210px;
-    height: 30px;
-    color: red;
-    font-size: 13px;
-  }
+  // input {
+  //   // display: block;
+  //   margin-top: 28px;
+  //   width: 210px;
+  //   height: 30px;
+  //   color: red;
+  //   font-size: 13px;
+  // }
+
+  .register-word {
+  position: relative;
+  top: 0;
+  left: 0;
+  // margin-bottom: 5px;
+  // color: #fff;
+  font-size: 25px;
+  letter-spacing: 4px;
+  // color: skyblue;
+  text-shadow: 0 0 20px #6d1014;
+}
 
   .click-checkNumber {
-    position: absolute;
-    bottom: 100px;
-    right: 50px;
+    // 加上定位后元素才不会被遮挡
+    position: relative;
+    margin: 10px 0 -15px 240px;
     font-size: 12px;
+    z-index: 5;
+    &:hover {
+      cursor: pointer;
+    }
   }
 
   .student-register-tips {
@@ -168,6 +186,20 @@ function studentRegister() {
     height: 30px;
     color: red;
     line-height: 30px;
+  }
+
+  #check-register {
+    margin: 0 auto;
+    width: 380px;
+    height: 45px;
+    line-height: 45px;
+    border-radius: 30px;
+    padding-left: 8px;
+    background: -webkit-linear-gradient(left, #12c2e9, #c471ed, #f64f59);
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+    &:hover {
+      cursor: pointer;
+    }
   }
 }
 </style>

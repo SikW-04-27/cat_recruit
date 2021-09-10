@@ -154,7 +154,7 @@ onMounted(() => {
       .then((res) => {
         if (res.data.beginTime) {
           //已经预约的情况
-
+console.log(11);
           //4.获取当前签到是否开启
           queueStatus({}).then((res) => {
             console.log(res);
@@ -162,6 +162,7 @@ onMounted(() => {
               //处于签到状态
               data.value = res.message;
               opening.value = true;
+              console.log(opening);
               //5.检测用户是否已经签到
               checkUserStatus({ id: stuId })
                 .then((res) => {

@@ -11,7 +11,7 @@
     <el-divider>目前预约：{{ data }}</el-divider>
 
     <!-- 预约 -->
-    <div class="a_content" v-if="!close && stuId">
+    <div class="a_content" v-if="!close && !stuId">
       <span>请选择预约时间：</span>
       <!-- 预约日期 -->
       <el-select
@@ -53,7 +53,7 @@
       </div>
     </div>
     <!-- 未开放预约的状态  -->
-    <div class="close" v-if="close && stuId">{{ closeMessage }}</div>
+    <div class="close" v-if="close && !stuId">{{ closeMessage }}</div>
 
     <!-- 用户未登录 -->
     <div class="unLogin" v-if="!stuId">
@@ -120,7 +120,7 @@ let options_Change = ($event) => {
 let comfirm = () => {
   // 当选择框内有内容时
   if (value.value != "") {
-    loading.value = true;
+        loading.value = true;
     updateUserInfo({
       id: stuId,
       appointmentId: key,
