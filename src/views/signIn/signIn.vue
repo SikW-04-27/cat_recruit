@@ -1,5 +1,5 @@
 <template>
-  <div class="signIn">
+  <div class="signIn" v-loading="loading">
     <!-- 页眉 -->
     <router-link to="/introduction">
       <el-page-header @back="goBack" content="面试签到"> </el-page-header>
@@ -67,7 +67,7 @@ let value = ref("*");
 //消息提示
 let message = ref("");
 //其他情况下显示的提示
-let closeMessage = ref("");
+let closeMessage = ref("未开放签到");
 //是否报名
 let hasSignUp = JSON.parse(window.sessionStorage.getItem("hasSignUp"));
 let CurrentStatusId = JSON.parse(window.sessionStorage.getItem("CurrentStatus"))
@@ -76,6 +76,8 @@ console.log(CurrentStatusId);
 //warning:
 let warningMessage = ref("");
 let stuId = window.sessionStorage.getItem("userId");
+//loading
+let loading = ref(true);
 const warning = () => {
   ElMessage.warning({
     message: warningMessage,
@@ -122,6 +124,8 @@ let comfirm = () => {
 };
 
 onMounted(() => {
+  loading.value = false;
+
   //1.若无登录：
   if (!stuId) {
     return;
@@ -207,7 +211,8 @@ console.log(11);
           closeMessage.value = "用户未预约，请先预约";
         }
       })
-      .catch((err) => {
+      .catch(err => {
+        closeMessage.value = err.data.message;
         warningMessage = err.data.message;
         warning();
       });

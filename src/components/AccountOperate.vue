@@ -11,7 +11,10 @@ export default {};
 
 <style lang="scss">
 #account {
-  margin: 80px auto 0;
+  position: relative;
+  // margin: 80px auto 0;
+  top: 100px;
+  left: 400px;
   width: 450px;
   // height: 360px;
   // background-color: rgba(78, 78, 78, 0.5);

@@ -36,7 +36,7 @@ export const enrolllist = p => get(`${url2}enroll/list`, p);
 //通过ID获得某个用户的进度信息
 export const getUserStatus = p => post(`${url1}status/getUserStatus`, p);
 //新接口：获取用户阶段信息
-export const getBriefInfo = () => post(`${url1}/status/getBriefInfo`)
+export const getBriefInfo = () => post(`${url1}status/getBriefInfo`)
 //获取所有的招新阶段
 export const getAllStatus = () => post(`${url1}status/listAll`)
 export const deleteAllAppointmentInfo = p => post(`${url1}appointment/delteAllInfo`, p);

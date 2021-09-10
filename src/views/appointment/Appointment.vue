@@ -1,5 +1,5 @@
 <template>
-  <div id="appointment">
+  <div id="appointment" v-loading="loading">
     <!-- 页眉 -->
     <router-link to="/introduction">
       <el-page-header @back="goBack" content="预约面试时间"> </el-page-header>
@@ -7,7 +7,7 @@
     <el-divider>目前预约：{{ data }}</el-divider>
 
     <!-- 预约 -->
-    <div class="a_content" v-if="close && stuId">
+    <div class="a_content" v-if="!close && stuId">
       <span>请选择预约时间：</span>
       <!-- 预约日期 -->
       <el-select
@@ -49,7 +49,7 @@
       </div>
     </div>
     <!-- 未开放预约的状态  -->
-    <div class="close" v-if="!close && stuId">{{ closeMessage }}</div>
+    <div class="close" v-if="close && stuId">{{ closeMessage }}</div>
 
     <!-- 用户未登录 -->
     <div class="unLogin" v-if="!stuId">
@@ -90,6 +90,8 @@ let close = ref(true);
 let stuId = window.sessionStorage.getItem("userId");
 //closeMessage
 let closeMessage = ref("预约暂未开放，请耐心等候");
+//loading
+let loading = ref(true);
 //点击返回按钮
 const goBack = () => {
   console.log("go back");
@@ -114,11 +116,13 @@ let options_Change = ($event) => {
 let comfirm = () => {
   // 当选择框内有内容时
   if (value.value != "") {
+        loading.value = true;
     updateUserInfo({
       id: stuId,
       appointmentId: key,
     })
       .then((res) => {
+        loading.value = false;
         signupStatus.value = !signupStatus.value; //切换预约状态
         disabled.value = !disabled.value; //切换选择框是否禁选
         //预约成功后查看用户的状态
@@ -160,6 +164,7 @@ let cancel = () => {
 };
 
 onMounted(() => {
+  loading.value = false;
   // 查看全部预约时间(调接口)
   listAppointment({})
     .then((res) => {

@@ -100,20 +100,6 @@ export default {
             JSON.stringify(res.data)
           );
         })
-        .catch((err) => {
-        });
-      getBriefInfo({})
-        .then((res) => {
-          console.log(res);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-      //获取用户id
-      getUserStatus({})
-        .then((res) => {
-          window.sessionStorage.setItem("userId", res.data.uuid);
-        })
         .catch((err) => {});
       //判断用户是否报名
       if (getCookie("studentToken")) {
@@ -181,6 +167,7 @@ export default {
 
 <style>
 
+
 ul {
   padding: 0 90px;
   /* height: 30px; */
@@ -189,5 +176,12 @@ ul {
 
 .activeIndex2 {
   background-color: green;
+}
+.el-menu-demo {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 10;
+  width: 100%;
 }
 </style>
