@@ -1,11 +1,13 @@
 
 <template>
-  <div class="block" id="news-content">
-    <el-timeline v-loading="loading" v-if="isFinishLoad">
+
+  <div class="block" id="news-content" key="1" v-loading="loading">
+<transition-group name="animate__animated animate__bounce" enter-active-class="animate__rubberBand">
+    <el-timeline v-if="isFinishLoad" v-show="isHide">
       <el-timeline-item
         :timestamp="item.time"
         placement="top"
-        color="#0bbd87"
+        color="#4eb5ff"
         v-for="(item, index) of studentNews"
         :key="index"
       >
@@ -40,7 +42,9 @@
       </el-timeline-item> -->
     </el-timeline>
     <div v-else class="noLoad">{{newsTip}}</div>
-  </div>
+ 
+</transition-group>
+ </div>
 </template>
 
 <script setup>
@@ -58,6 +62,8 @@ let isFinishLoad = ref(true);
 let newsTip = ref("请先登录！");
 // console.dir(WebSocket);
 
+let isHide = ref(false);
+
 onBeforeMount(() => {
   const studentToken = getCookie("studentToken");
   console.log(studentToken);
@@ -69,9 +75,14 @@ onBeforeMount(() => {
         if (result.code === 1801) {
           console.log(result.data);
           studentNews.push(...result.data);
+          // isFinishLoad.value = true;
           // studentNews = result.data;
           studentNews.reverse();
           console.log(studentNews);
+          setTimeout(() => {
+            isHide.value = true;
+          }, 1000)
+          
         } else {
           newsTip.value = result.message;
           isFinishLoad.value = false;

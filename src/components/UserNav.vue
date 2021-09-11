@@ -46,6 +46,12 @@
       ><router-link to="/introduction">工作室介绍</router-link></el-menu-item
     >
   </el-menu>
+
+  <!-- <nav>
+    <ul>
+      <li><router-link to="/introduction">工作室介绍</router-link></li>
+    </ul>
+  </nav> -->
 </template>
 
 <script>
@@ -172,11 +178,15 @@ export default {
 };
 </script>
 
-<style>
-ul {
+<style lang="scss">
+.el-menu-demo{
+  float: right;
   padding: 0 90px;
   /* height: 30px; */
   /* border-bottom: 0 !important; */
+  li {
+    float: right !important;
+  }
 }
 
 .activeIndex2 {
@@ -188,5 +198,13 @@ ul {
   right: 0;
   z-index: 10;
   width: 100%;
+}
+
+nav {
+  ul {
+    li {
+      color: red;
+    }
+  }
 }
 </style>

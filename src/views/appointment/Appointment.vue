@@ -126,13 +126,19 @@ let comfirm = () => {
       appointmentId: key,
     })
       .then((res) => {
-        loading.value = false;
-        signupStatus.value = !signupStatus.value; //切换预约状态
-        disabled.value = !disabled.value; //切换选择框是否禁选
-        //预约成功后查看用户的状态
-        getUserStatus({}).then((res) => {
-          console.log(res);
-        });
+        if(res.code===1204){
+          loading.value = false;
+          signupStatus.value = !signupStatus.value; //切换预约状态
+          disabled.value = !disabled.value; //切换选择框是否禁选
+          //预约成功后查看用户的状态
+          getUserStatus({}).then((res) => {
+            console.log(res);
+          });
+        }else{
+          warningMessage = res.data.message;
+          warning();
+          return
+        }
       })
       .catch((err) => {
         warningMessage = err.data.message;
@@ -178,7 +184,7 @@ onMounted(() => {
     .then((res) => {
       //当目前是报名阶段时，关闭预约功能
       console.log(res);
-      if (res.data.id === 2) {
+      if (res.data.id === 2 || 1) {
         close.value = true;
         console.log(close);
         data.value = "无";
@@ -203,7 +209,7 @@ onMounted(() => {
         return;
       } else if (res.code === 1208) {
         //已经开放预约
-
+        close.value=false;
         //当已经开放，但用户已经预约时，显示已预约成功的界面
         getUserStatus({})
           .then((res) => {
