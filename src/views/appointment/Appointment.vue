@@ -19,7 +19,7 @@
           placeholder="请选择预约日期"
           class="el-select"
           :disabled="disabled"
-          @change="options_Change($event)"
+          @change="optionsChange($event)"
         >
           <el-option
             v-for="item in day"
@@ -177,13 +177,14 @@ let check_Allappointment = () => {
     .then((res) => {
       //当目前是报名阶段时，关闭预约功能
       console.log(res);
-      if (res.data.id === 2 || 1) {
+      if ((res.data.id === 2) || (res.data.id === 1)) {
         close.value = true;
         console.log(close);
         data.value = "无";
         return;
       } else {
-        data.value = res.data.status;
+        // haorui 改
+        // data.value = res.data.status;
         for (var i = 0; i < res.data.length; i++) {
           res.data[i].totalTime =
             res.data[i].beginTime + " ~ " + res.data[i].endTime;
@@ -213,6 +214,7 @@ let check_Appointmenton = () => {
         close.value = false;
         getUserStatus({})
           .then((res) => {
+            // data.value = res.data[0].recruitmentStatus;
             if (res.data.beginTime) {
               //用户已经预约的情况
               signupStatus.value = true;
@@ -226,6 +228,7 @@ let check_Appointmenton = () => {
             warningMessage.value = err.data.message;
             warning();
           });
+
 
         check_Allappointment();
       }
@@ -247,7 +250,10 @@ onMounted(() => {
         closeMessage.value = "当前仍处于报名阶段，请先报名后耐心等候";
         data.value = res.data.status;
         return;
+      } else {
+        data.value = res.data.status;
       }
+
 
       //非报名阶段，全部用户可以预约
       //获取预约是否开放

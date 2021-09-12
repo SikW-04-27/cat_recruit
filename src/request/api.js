@@ -2,7 +2,9 @@
 import { get, post } from './http'
 
 const url1 = 'http://112.74.33.254:2358/';
+// const url2 = 'http://112.74.33.254:2358/';
 
+// const url1 = 'http://47.107.49.231/';
 const url2 = 'http://47.107.49.231/';
 
 //预约
@@ -38,12 +40,12 @@ export const enrolllist = p => get(`${url2}enroll/list`, p);
 //通过ID获得某个用户的进度信息
 export const getUserStatus = p => post(`${url1}status/getUserStatus`, p);
 //新接口：获取用户阶段信息
-export const getBriefInfo = () => post(`${url1}status/getBriefInfo`)
+export const getBriefInfo = () => post(`${url2}status/getBriefInfo`)
 //获取所有的招新阶段
 export const getAllStatus = () => post(`${url1}status/listAll`)
 export const deleteAllAppointmentInfo = p => post(`${url1}appointment/delteAllInfo`, p);
 //获取当前总体招新阶段
-export const getCurrentStatus = p => post(`${url1}status/getCurrentStatus`, p);
+export const getCurrentStatus = p => post(`${url2}status/getCurrentStatus`, p);
 
 //签到
 //获取当前签到是否开启
@@ -101,6 +103,6 @@ export const userLogin = p => post(`${url2}user/Login`, p);
 // export const login111 = p => instance11('/major/list', p);
 // export const login222 = p => instance22('/user/Login', p);
 
-export const getStudentNews = p => post(`${url1}message/list`);
+export const getStudentNews = p => post(`${url2}message/list`);
 
 export const getStudentInfo = p => get(`${url2}user/now`);

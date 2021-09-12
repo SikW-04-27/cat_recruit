@@ -3,7 +3,7 @@
     <div id="form" v-loading="loading" element-loading-background="rgba(0, 0, 0, .5)">
         <el-page-header content="报名表"> </el-page-header>
         <!-- 登陆 处于报名阶段 未报名 -->
-        <div class="content" v-if="currentStatusId === 2 && stuId && isSignUp">
+        <div class="content" v-if="currentStatusId === 2 && stuId && !isSignUp">
           <!-- 姓名 -->
           <div class="name">
             <span>姓名：</span>
@@ -176,7 +176,7 @@
           </div>
         </div>
         <!-- 登录 处于报名阶 已报名 -->
-        <div class="hasSignUp" v-if="currentStatusId === 2 && stuId && !isSignUp">
+        <div class="hasSignUp" v-if="currentStatusId === 2 && stuId && isSignUp">
           <span>您已报名，请耐心等候一轮面试</span>
         </div>
         <!-- 登录 但 未处于报名阶段 -->

@@ -138,11 +138,12 @@ let getUserQueue = function () {
         //等待队列未空
         value.value = 0;
       } else {
-        for (var i = 0; i < res.data.length; i++) {
+        for (let i = 0; i < res.data.length; i++) {
           console.log(stuId);
           if (res.data[i].id === stuId) {
             value.value = ref(i + 1);
             console.log(value);
+            break;
           }
         }
       }
@@ -212,13 +213,17 @@ getUserStatus({})
                 //未签到，未处于等待队列，请签到
                 UserCheck.value = false;
               } else {
-                warningMessage.value = res.message;
-                warning();
+                // warningMessage.value = res.message;
+                // warning();  
+                closeMessage.value = res.message
+                opening.value = false;
               }
             })
             .catch((err) => {
               warningMessage.value = err.message;
               warning();
+        
+
             });
         } else {
           //未处于签到状态

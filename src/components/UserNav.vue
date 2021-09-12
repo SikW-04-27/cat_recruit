@@ -12,7 +12,7 @@
     <el-submenu index="2" v-if="isLoad">
       <template #title
         ><el-badge :is-dot="isDot">
-          <el-icon size="30" color="#409EFC">
+          <el-icon :size="30" color="#409EFC">
             <avatar />
           </el-icon>&nbsp; &nbsp; </el-badge
       ></template>

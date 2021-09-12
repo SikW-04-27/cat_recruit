@@ -24,7 +24,7 @@ export function openSocket(socketUrl = `http://112.74.33.254:2358/ws/message/`, 
         // console.log(
         //     "websocket 断开: " + e.code + " " + e.reason + " " + e.wasClean
         // );
-        openSocket();
+        // openSocket();
     };
     return socket
 };

@@ -48,6 +48,8 @@ let loading = ref(false);
 const router = useRouter();
 
 function isCorrectAndSendCheckNumber() {
+   tips.value = '';
+
   let checkInfo = checkAccountFormate(
     studentName.value,
     studentMail.value,
@@ -78,11 +80,18 @@ function isCorrectAndSendCheckNumber() {
       .then((result) => {
         console.log("成功");
         console.log(result);
-        isAllDone.value = true;
+        if(result.code === 1407) {
+        
+          isAllDone.value = true;
+        } else {
+ tips.value = result.message
+        }
+        
       })
       .catch((err) => {
         console.log("失败");
         console.log(err);
+         tips.value = error.message
       });
   }
 }
@@ -123,6 +132,7 @@ function studentRegister() {
       })
       .catch((error) => {
         console.log(error);
+         tips.value = error.message;
       });
   }
 }
