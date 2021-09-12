@@ -266,9 +266,9 @@ getUserStatus({})
 <style lang="scss" scoped>
 .el-page-header {
   padding: 30px 0 0 0;
-  :deep .el-page-header__content {
-    color: #fff;
-  }
+  // :deep .el-page-header__content {
+  //   color: #fff;
+  // }
 }
 .signIn {
   margin: 0 auto 0;

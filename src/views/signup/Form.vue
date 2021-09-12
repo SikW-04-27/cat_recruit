@@ -517,10 +517,10 @@ $zhutise: rgb(41, 45, 63);
     margin-top: 5px;
     display: inline-block;
     padding: 0;
-    :deep .icon-success {
-      width: 30px;
-      height: auto;
-    }
+    // :deep .icon-success {
+    //   width: 30px;
+    //   height: auto;
+    // }
   }
 
   .commit_btn {
