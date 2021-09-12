@@ -209,6 +209,12 @@ ul {
   z-index: 10;
   width: 100%;
 }
+.nav_logo {
+  margin-top: 10px;
+  margin-left: 20px;
+  width: 70px;
+  float: left;
+}
 .el-menu {
   .el-menu-item,
   .el-submenu {
@@ -233,7 +239,7 @@ ul {
   }
 }
 .el-submenu__title{
-  background-color: #fff;
+  background-color: #fff; !important
 }
 
 </style>

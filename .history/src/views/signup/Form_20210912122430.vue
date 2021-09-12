@@ -427,6 +427,8 @@ onMounted(() => {
     warning();
     return;
   }
+
+  warning("报名已截止");
 });
 </script>
 

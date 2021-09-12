@@ -70,7 +70,6 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
-//-----------------------------------------------------------------------------------------
 .progress_block{
   padding-top: 40px;
 }

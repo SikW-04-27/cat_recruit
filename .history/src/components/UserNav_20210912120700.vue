@@ -210,6 +210,7 @@ ul {
   width: 100%;
 }
 .el-menu {
+  marginb
   .el-menu-item,
   .el-submenu {
     padding: 0 20px;

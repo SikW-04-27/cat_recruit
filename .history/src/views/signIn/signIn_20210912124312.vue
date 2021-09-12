@@ -263,7 +263,7 @@ onMounted(() => {
   color: #fff;
 }
 .s-main {
-  background-color: rgba(78, 78, 78, 0.5);
+  // background-color: rgba(78, 78, 78, 0.5);
   width: 1000px;
   height: 480px;
   padding: 0 50px;

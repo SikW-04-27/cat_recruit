@@ -1,5 +1,5 @@
 <template>
-  <div class="signIn" v-loading="loading" element-loading-background="rgba(0, 0, 0, .5)">
+  <div class="signIn" v-loading="loading">
     <div class="s-main">
       <!-- 页眉 -->
       <el-page-header @back="goBack" content="面试签到"> </el-page-header>

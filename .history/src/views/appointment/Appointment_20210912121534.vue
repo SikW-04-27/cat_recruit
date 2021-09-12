@@ -1,5 +1,5 @@
 <template>
-<div class="appointment_block">
+.appointment
   <div
     id="appointment"
     v-loading="loading"
@@ -59,8 +59,6 @@
       <span>您还未登录，请先登录</span>
     </div>
   </div>
-</div>
-  
 </template>
 
 <script setup>
@@ -253,12 +251,8 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
-.appointment_block{
-  padding-top: 70px;
-}
 #appointment {
-  width: 1000px;
-  height: 480px;
+  width: 80%;
   margin: 60px auto 0;
   padding: 0 50px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
@@ -266,6 +260,7 @@ onMounted(() => {
   position: relative;
   background-color: rgba(78, 78, 78, 0.5);
   color: azure;
+  border-radius: 10px;
 }
 .el-result {
   :deep .icon-success {

@@ -72,7 +72,7 @@ onMounted(() => {
 <style scoped lang="scss">
 //-----------------------------------------------------------------------------------------
 .progress_block{
-  padding-top: 40px;
+  // padding-top: 40px;
 }
 #progress {
   width: 1000px;

@@ -5,7 +5,7 @@
     class="el-menu-demo"
     mode="horizontal"
     @select="handleSelect"
-    background-color="rgb(34 36 38 / 65%)"
+    background-color="blue"
     text-color="#fff"
     active-text-color="red"
   >
@@ -208,6 +208,12 @@ ul {
   right: 0;
   z-index: 10;
   width: 100%;
+}
+.nav_logo {
+  margin-top: 10px;
+  margin-left: 20px;
+  width: 70px;
+  float: left;
 }
 .el-menu {
   .el-menu-item,

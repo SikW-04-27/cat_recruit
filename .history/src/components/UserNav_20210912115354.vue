@@ -7,7 +7,7 @@
     @select="handleSelect"
     background-color="rgb(34 36 38 / 65%)"
     text-color="#fff"
-    active-text-color="red"
+    active-text-color="#red"
   >
     <el-submenu index="2" v-if="isLoad">
       <template #title
@@ -208,6 +208,12 @@ ul {
   right: 0;
   z-index: 10;
   width: 100%;
+}
+.nav_logo {
+  margin-top: 10px;
+  margin-left: 20px;
+  width: 70px;
+  float: left;
 }
 .el-menu {
   .el-menu-item,

@@ -258,7 +258,7 @@ onMounted(() => {
 }
 #appointment {
   width: 1000px;
-  height: 480px;
+  h480
   margin: 60px auto 0;
   padding: 0 50px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);

@@ -2,32 +2,32 @@
   <div class="progress_block">
     <div id="progress">
       <el-page-header @back="goBack" content="面试进度"> </el-page-header>
-      <div class="block" v-if="allowing && stuId">
-        <el-timeline>
-          <!-- <el-timeline-item
-            v-for="(activity, index) in activities"
-            :key="index"
-            :icon="activity.icon"
-            :type="activity.type"
-            :color="activity.color"
-            :size="activity.size"
-            :timestamp="activity.timestamp"
-          > -->
-          <el-timeline-item v-for="(activity, index) in activities" :key="index">
-            <el-alert :title="activity" type="info" :closable="false"> </el-alert>
-            <!-- {{ activity.content }} -->
-          </el-timeline-item>
-        </el-timeline>
-      </div>
-      <!-- 当无法查询时的页面 -->
-      <div class="close" v-if="!allowing && stuId">{{ closeMessage }}</div>
-  
-      <!-- 未登陆时 -->
-      <div class="unLogin" v-if="!stuId">
-        <span>您还未登录，请先登录</span>
-      </div>
+    <div class="block" v-if="allowing && stuId">
+      <el-timeline>
+        <!-- <el-timeline-item
+          v-for="(activity, index) in activities"
+          :key="index"
+          :icon="activity.icon"
+          :type="activity.type"
+          :color="activity.color"
+          :size="activity.size"
+          :timestamp="activity.timestamp"
+        > -->
+        <el-timeline-item v-for="(activity, index) in activities" :key="index">
+          <el-alert :title="activity" type="info" :closable="false"> </el-alert>
+          <!-- {{ activity.content }} -->
+        </el-timeline-item>
+      </el-timeline>
+    </div>
+    <!-- 当无法查询时的页面 -->
+    <div class="close" v-if="!allowing && stuId">{{ closeMessage }}</div>
+  </div>
+  <!-- 未登陆时 -->
+    <div class="unLogin" v-if="!stuId">
+      <span>您还未登录，请先登录</span>
     </div>
   </div>
+  
 </template>
 
 <script setup>
@@ -70,10 +70,6 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
-//-----------------------------------------------------------------------------------------
-.progress_block{
-  padding-top: 40px;
-}
 #progress {
   width: 1000px;
   height: 480px;

@@ -1,5 +1,5 @@
 <template>
-  <div class="signIn" v-loading="loading" element-loading-background="rgba(0, 0, 0, .5)">
+  <div class="signIn" v-loading="loading">
     <div class="s-main">
       <!-- 页眉 -->
       <el-page-header @back="goBack" content="面试签到"> </el-page-header>
@@ -259,15 +259,15 @@ onMounted(() => {
 }
 .signIn {
   margin: 60px auto 0;
+  width: 1000px;
   padding: 20px 50px 0 50px;
   color: #fff;
 }
 .s-main {
   background-color: rgba(78, 78, 78, 0.5);
   width: 1000px;
-  height: 480px;
   padding: 0 50px;
-  margin: 50px auto 0;
+  margin: 50px auto;
 }
 .s_btn {
   margin-top: 100px;

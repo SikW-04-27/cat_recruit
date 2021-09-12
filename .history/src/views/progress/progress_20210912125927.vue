@@ -23,10 +23,10 @@
       <div class="close" v-if="!allowing && stuId">{{ closeMessage }}</div>
   
       <!-- 未登陆时 -->
-      <div class="unLogin" v-if="!stuId">
-        <span>您还未登录，请先登录</span>
-      </div>
+    <div class="unLogin" v-if="!stuId">
+      <span>您还未登录，请先登录</span>
     </div>
+  </div>
   </div>
 </template>
 
@@ -70,7 +70,6 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
-//-----------------------------------------------------------------------------------------
 .progress_block{
   padding-top: 40px;
 }
