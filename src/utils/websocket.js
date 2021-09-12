@@ -1,18 +1,24 @@
 import { getCookie } from './myCookie'
 
-export function openSocket() {
-    let socket;
-    let token = getCookie("studentToken");
-    let socketUrl = `http://112.74.33.254:2358/ws/message/${token}`;
-    socketUrl = socketUrl.replace("https", "ws").replace("http", "ws");
-    if (socket != null) {
-        socket.close();
-        socket = null;
+const replaceHttpToWebSocket = (url) => {
+    return url.replace("https", "ws").replace("http", "ws");
+}
+
+export function openSocket(socketUrl = `http://112.74.33.254:2358/ws/message/`, token = getCookie("studentToken"), customConfig = {onopen: () => {console.log("websocket已打开111");}}) {
+    const socket = new WebSocket(replaceHttpToWebSocket(`${socketUrl}${token}`));
+    // let token = ;
+    // var socketUrl = `${socketUrl}${token}`;
+    // socketUrl = socketUrl.replace("https", "ws").replace("http", "ws");
+    // todo 检查
+
+    const config = {
+        onopen: () => {
+            console.log("websocket已打开");
+        }
     }
-    socket = new WebSocket(socketUrl);
-    socket.onopen = function () {
-        // console.log("websocket已打开");
-    };
+
+    const mergeConfig = Object.assign(config, customConfig)
+    socket.onopen=mergeConfig.onopen
 
     socket.onclose = function (e) {
         // console.log(
@@ -22,3 +28,4 @@ export function openSocket() {
     };
     return socket
 };
+

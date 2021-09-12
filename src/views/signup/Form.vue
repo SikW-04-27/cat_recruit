@@ -1,8 +1,8 @@
 <template>
   <div id="form" v-loading="loading">
-      <el-page-header content="报名表"> </el-page-header>
+    <el-page-header content="报名表"> </el-page-header>
     <!-- 登陆 处于报名阶段 未报名 -->
-    <div class="content" v-if="currentStatusId === 2 && stuId && !isSignUp">
+    <div class="content" v-if="currentStatusId === 2 && stuId && isSignUp">
       <!-- 姓名 -->
       <div class="name">
         <span>姓名：</span>
@@ -175,7 +175,7 @@
       </div>
     </div>
     <!-- 登录 处于报名阶 已报名 -->
-    <div class="hasSignUp" v-if="currentStatusId === 2 && stuId && isSignUp">
+    <div class="hasSignUp" v-if="currentStatusId === 2 && stuId && !isSignUp">
       <span>您已报名，请耐心等候一轮面试</span>
     </div>
     <!-- 登录 但 未处于报名阶段 -->
@@ -245,6 +245,10 @@ const success = () => {
 let currentStatusId;
 let isSignUp;
 let currentStatus;
+
+
+
+// todo const getItemBySessionStorage()
 if (getCookie("studentToken")) {
   console.log(123);
   currentStatusId = JSON.parse(window.sessionStorage.getItem("CurrentStatus"))
@@ -273,7 +277,7 @@ let majorChange = () => {
   });
 };
 let phoneChange = ($event) => {
-  if ($event.length == 11) {
+  if ($event.length === 11) {
     phoneCheck.value = true;
   } else {
     phoneCheck.value = false;
@@ -281,7 +285,7 @@ let phoneChange = ($event) => {
 };
 
 let numChange = ($event) => {
-  if ($event.length == 10) {
+  if ($event.length === 10) {
     numCheck.value = true;
   } else {
     numCheck.value = false;
@@ -389,46 +393,47 @@ let changeImg = function (e) {
 onMounted(() => {
   console.log("mounted");
   loading.value = false;
-  if (stuId) {
-    if (currentStatusId === 2) {
-      //处于报名阶段
-      console.log("处于报名状态");
 
-      getBriefInfo({})
-        .then((res) => {
-          if (res.data.userStatusId === 1) {
-            //已报名
-            window.sessionStorage.setItem("hasSignUp", true);
-            return;
-          } else {
-            //未报名
-            window.sessionStorage.setItem("hasSignUp", false);
-            listAllCollege({}).then((res) => {
-              institutes.push(...res.data);
-            });
-          }
-        })
-        .catch((err) => {
+  if (!stuId) return;
+
+  if (currentStatusId === 2) {
+    //处于报名阶段
+    console.log("处于报名状态");
+
+    getBriefInfo({})
+      .then((res) => {
+        if (res.data.userStatusId === 1) {
+          //已报名
+          window.sessionStorage.setItem("hasSignUp", true);
+          return;
+        } else {
           //未报名
           window.sessionStorage.setItem("hasSignUp", false);
           listAllCollege({}).then((res) => {
             institutes.push(...res.data);
           });
-          warningMessage = err.data.message;
-          warning();
+        }
+      })
+      .catch((err) => {
+        //未报名
+        window.sessionStorage.setItem("hasSignUp", false);
+        listAllCollege({}).then((res) => {
+          institutes.push(...res.data);
         });
-    }
-    //未处于报名时间段
-    else if (currentStatusId === 1) {
-      warningMessage.value = "招新未开始，请耐心等候";
-      warning();
-      return;
-    } else {
-      warningMessage.value = "报名已截止";
-      warning();
-      return;
-    }
+        warningMessage = err.data.message;
+        warning();
+      });
+
+    return;
   }
+  //未处于报名时间段
+  if (currentStatusId === 1) {
+    warningMessage.value = "招新未开始，请耐心等候";
+    warning();
+    return;
+  }
+
+  warning("报名已截止");
 });
 </script>
 

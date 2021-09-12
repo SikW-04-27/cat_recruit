@@ -107,12 +107,12 @@ let goBack = () => {
 };
 
 //定义提示函数：
-const warning = () => {
-  ElMessage.warning(warningMessage.value);
+const warning = (message) => {
+  ElMessage.warning(message || warningMessage.value);
 };
 
 //当选择框里面的值改变时：(传递的参数就是选择框里的值)
-let options_Change = ($event) => {
+let optionsChange = ($event) => {
   [...day].filter((item) => {
     if (item.totalTime === $event) {
       key.value = item.id;
@@ -129,20 +129,6 @@ let comfirm = () => {
       appointmentId: key.value,
     })
       .then((res) => {
-<<<<<<< HEAD
-        if(res.code===1204){
-          loading.value = false;
-          signupStatus.value = !signupStatus.value; //切换预约状态
-          disabled.value = !disabled.value; //切换选择框是否禁选
-          //预约成功后查看用户的状态
-          getUserStatus({}).then((res) => {
-            console.log(res);
-          });
-        }else{
-          warningMessage = res.data.message;
-          warning();
-          return
-=======
         loading.value = false;
         if (res.code === 1204) {
           signupStatus.value = !signupStatus.value; //切换预约状态
@@ -150,7 +136,6 @@ let comfirm = () => {
         } else {
           warningMessage.value = res.message;
           warning();
->>>>>>> c7024b6834952c68f9f236dca5ca43119b56d5b1
         }
       })
       .catch((err) => {
@@ -187,8 +172,8 @@ let cancel = () => {
 // 查看全部预约时间(调接口)
 let check_Allappointment = () => {
   listAppointment({})
+
     .then((res) => {
-<<<<<<< HEAD
       //当目前是报名阶段时，关闭预约功能
       console.log(res);
       if (res.data.id === 2 || 1) {
@@ -198,14 +183,13 @@ let check_Allappointment = () => {
         return;
       } else {
         data.value = res.data.status;
-=======
       for (var i = 0; i < res.data.length; i++) {
         res.data[i].totalTime =
           res.data[i].beginTime + " ~ " + res.data[i].endTime;
->>>>>>> c7024b6834952c68f9f236dca5ca43119b56d5b1
       }
       day.push(...res.data);
-    })
+       }})
+    
     .catch((err) => {
       warningMessage.value = err.data.message;
       warning();
@@ -261,7 +245,6 @@ onMounted(() => {
         closeMessage.value = "当前仍处于报名阶段，请先报名后耐心等候"
         data.value = res.data.status;
         return;
-<<<<<<< HEAD
       } else if (res.code === 1208) {
         //已经开放预约
         close.value=false;
@@ -296,11 +279,9 @@ onMounted(() => {
             warningMessage = err.data.message;
             warning();
           });
-=======
       } else {
         data.value = res.data.status;
         check_Appointmenton();
->>>>>>> c7024b6834952c68f9f236dca5ca43119b56d5b1
       }
     })
     .catch((err) => {
