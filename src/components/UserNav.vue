@@ -10,7 +10,13 @@
     active-text-color="red"
   >
     <el-submenu index="2" v-if="isLoad">
-      <template #title>我的工作台</template>
+      <template #title
+        ><el-badge :is-dot="isDot"> 
+           我的工作台</el-badge
+        ></template
+      >
+   
+      
       <el-menu-item index="2-1"
         ><router-link to="/Form">报名表</router-link></el-menu-item
       >
@@ -20,15 +26,17 @@
       <el-menu-item index="2-3"
         ><router-link to="/signIn">到场签到</router-link></el-menu-item
       >
-      <el-menu-item index="2-4"
+      <el-menu-item index="2-4" @click="unDot"
         ><router-link to="/progress">查看进度</router-link></el-menu-item
       >
       <el-menu-item index="3"
-        ><router-link to="/news">消息中心</router-link></el-menu-item
+        ><router-link to="/news"
+          ><el-badge :is-dot="isDot">消息中心</el-badge></router-link
+        ></el-menu-item
       >
       <el-menu-item @click="unLoad" v-if="isLoad">退出登录</el-menu-item>
 
-      <el-submenu index="2-5">
+      <!-- <el-submenu index="2-5">
         <template #title>选项4</template>
         <el-menu-item index="2-5-1">选项1</el-menu-item>
         <el-menu-item index="2-5-2">选项2</el-menu-item>
@@ -37,16 +45,19 @@
     </el-submenu>
     <!-- <el-menu-item index="3" disabled>消息中心</el-menu-item> -->
 
-    <el-menu-item index="4">
-      <a href="javascript:;" v-if="loginStatus">{{ `你好，${userName}` }}</a>
-      <router-link to="/login" v-else>登录</router-link></el-menu-item
+    <li class="myLi" v-if="loginStatus">{{ `你好，${userName}` }}</li>
+    <el-menu-item index="4" v-else>
+      <router-link to="/login">登录</router-link></el-menu-item
     >
-
     <el-menu-item index="1"
       ><router-link to="/introduction">工作室介绍</router-link></el-menu-item
     >
   </el-menu>
-
+        <el-icon size='20' color="red"><avatar /></el-icon>
+<el-icon>
+  <avatar />
+</el-icon>
+      
   <!-- <nav>
     <ul>
       <li><router-link to="/introduction">工作室介绍</router-link></li>
@@ -66,7 +77,7 @@ import {
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 import { getCookie, removeCookie } from "../utils/myCookie";
-
+import { openSocket } from "../utils/websocket";
 import {
   getCurrentStatus,
   getSubmit,
@@ -86,6 +97,8 @@ export default {
     const store = useStore();
 
     const router = useRouter();
+
+    let isDot = ref(false);
 
     onMounted(() => {
       // console.log(localStorage.getItem('token'));
@@ -125,6 +138,12 @@ export default {
           })
           .catch((err) => {});
       }
+
+      //websocket更新小红点
+      openSocket().onmessage = function () {
+        isDot.value = true;
+        console.log("小红点");
+      };
     });
 
     watch(
@@ -152,6 +171,12 @@ export default {
       });
     }
 
+    //点击消息中心，取消小红点
+    const unDot = () => {
+      isDot.value = false;
+      console.log("取消小红点");
+    };
+
     onUnmounted(() => {
       location.reload();
     });
@@ -168,6 +193,8 @@ export default {
       userName,
       isLoad,
       unLoad,
+      isDot,
+      unDot,
     };
   },
   methods: {
@@ -179,7 +206,7 @@ export default {
 </script>
 
 <style lang="scss">
-.el-menu-demo{
+.el-menu-demo {
   float: right;
   padding: 0 90px;
   /* height: 30px; */
@@ -187,6 +214,11 @@ export default {
   li {
     float: right !important;
   }
+}
+
+.myLi {
+  color: red;
+  line-height: 60px;
 }
 
 .activeIndex2 {
@@ -200,10 +232,26 @@ export default {
   width: 100%;
 }
 
-nav {
-  ul {
-    li {
-      color: red;
+.el-menu {
+  .el-menu-item,
+  .el-submenu {
+    padding: 0 20px;
+    // float: right;
+    a {
+      display: inline-block;
+      height: 100%;
+      width: 100%;
+    }
+  }
+}
+.el-popper {
+  .el-menu--horizontal {
+    background-color: #000;
+    a {
+      display: inline-block;
+      height: 100%;
+      width: 100%;
+      padding-left: 0;
     }
   }
 }

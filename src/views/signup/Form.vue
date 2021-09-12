@@ -1,8 +1,6 @@
 <template>
   <div id="form" v-loading="loading">
-    <router-link to="/introduction">
       <el-page-header content="报名表"> </el-page-header>
-    </router-link>
     <!-- 登陆 处于报名阶段 未报名 -->
     <div class="content" v-if="currentStatusId === 2 && stuId && !isSignUp">
       <!-- 姓名 -->
@@ -442,10 +440,14 @@ $zhutise: rgb(41, 45, 63);
   height: 90%;
   margin: 60px auto 0;
   padding: 20px 0 0 50px;
-  background-color: #fff;
+  background-color: rgba(78, 78, 78, 0.5);
+  color: #fff;
 }
 .el-page-header {
   padding: 10px 0 30px 0;
+  :deep .el-page-header__content {
+    color: #fff;
+  }
 }
 .i_select {
   margin-left: 20px;
