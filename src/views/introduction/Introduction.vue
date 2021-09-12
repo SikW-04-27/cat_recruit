@@ -33,7 +33,7 @@ export default {
 #content {
   margin: 0 auto;
   // width: 70%;
-  height: 1375px;
+  height: 1500px;
   color: #c2c2c2;
   font-size: 14px;
   border-radius: 10px;

@@ -51,6 +51,7 @@ export default {};
     letter-spacing: 2px;
     // font-weight: 700;
     padding-left: 8px;
+    color: black;
     background-color: rgba(255, 255, 255, .7) !important;
     &::placeholder {
       color: #fff;

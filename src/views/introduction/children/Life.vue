@@ -1,11 +1,12 @@
 <template>
-<IntroductionTitle>工作室日常</IntroductionTitle>
+<div id="life-content"><IntroductionTitle>工作室日常</IntroductionTitle>
      <div class="studio-happy">
       <img src="../../../assets/img/happy1.jpg" alt="" />
       <img src="../../../assets/img/happy2.jpg" alt="" />
       <img src="../../../assets/img/happy3.jpg" alt="" />
       <img src="../../../assets/img/happy4.jpg" alt="" />
-    </div>
+    </div></div>
+
 </template>
 
 
@@ -22,9 +23,17 @@ export default {
 
 <style lang="scss">
 
+#life-content {
+  margin-top: 30px;
+  padding: 30px 120px;
+  height: 500px;
+  background-color: rgba(0, 0, 0, .5);
+}
+
 .studio-happy {
   display: flex;
   justify-content: space-between;
+  overflow: hidden;
   margin-top: 25px;
   padding-bottom: 50px;
   img {

@@ -65,7 +65,7 @@ export default {
 
 <style lang="scss" scoped>
 #works-content {
-  height: 70vh;
+  height: 65vh;
   padding: 50px 0;
   // background-image: url("../../../assets/img/row背景.png");
   // background-size: cover;
@@ -95,7 +95,7 @@ export default {
       border-radius: 10px;
       // background-color: linear-gradient(left, #FD6585, #0D25B9);
       // background: -webkit-linear-gradient(left, #8cd0e5, #8edae5, #90e2e5);
-      background-image: url("../../../assets/img/row背景.png");
+      background-image: url("../../../assets/img/worksbg.jpg");
       background-size: cover;
 
       p {

@@ -105,7 +105,6 @@ function studentRegister() {
       email: studentMail.value,
       password: studentPassword.value,
       identity: 1,
-      // 调用的时候要改一下号码
       verificationCode: studentCheckNumber.value,
     })
       .then((result) => {

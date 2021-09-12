@@ -251,45 +251,45 @@ onMounted(() => {
 
       //非报名阶段，全部用户可以预约
       //获取预约是否开放
-      check_Appointmenton();
-      // if (res.code === 1208) {
-      //   //已经开放预约
-      //   close.value = false;
-      //   //当已经开放，但用户已经预约时，显示已预约成功的界面
-      //   getUserStatus({})
-      //     .then((res) => {
-      //       if (res.data.beginTime) {
-      //         //已经预约的情况
-      //         signupStatus.value = true;
-      //         disabled.value = true;
-      //         value.value = res.data.beginTime + "~" + res.data.endTime;
-      //         return;
-      //       } else {
-      //         signupStatus.value = false;
-      //       }
-      //     })
-      //     .catch((err) => {
-      //       warningMessage = err.data.message;
-      //       warning();
-      //     });
+      check_Appointmenton;
+      if (res.code === 1208) {
+        //已经开放预约
+        close.value = false;
+        //当已经开放，但用户已经预约时，显示已预约成功的界面
+        getUserStatus({})
+          .then((res) => {
+            if (res.data.beginTime) {
+              //已经预约的情况
+              signupStatus.value = true;
+              disabled.value = true;
+              value.value = res.data.beginTime + "~" + res.data.endTime;
+              return;
+            } else {
+              signupStatus.value = false;
+            }
+          })
+          .catch((err) => {
+            warningMessage = err.data.message;
+            warning();
+          });
 
-      //   // 查看全部预约时间(调接口)
-      //   listAppointment({})
-      //     .then((res) => {
-      //       for (var i = 0; i < res.data.length; i++) {
-      //         res.data[i].totalTime =
-      //           res.data[i].beginTime + " ~ " + res.data[i].endTime;
-      //       }
-      //       day.push(...res.data);
-      //     })
-      //     .catch((err) => {
-      //       warningMessage = err.data.message;
-      //       warning();
-      //     });
-      // } else {
-      //   data.value = res.data.status;
-      //   check_Appointmenton();
-      // }
+        // 查看全部预约时间(调接口)
+        listAppointment({})
+          .then((res) => {
+            for (var i = 0; i < res.data.length; i++) {
+              res.data[i].totalTime =
+                res.data[i].beginTime + " ~ " + res.data[i].endTime;
+            }
+            day.push(...res.data);
+          })
+          .catch((err) => {
+            warningMessage = err.data.message;
+            warning();
+          });
+      } else {
+        data.value = res.data.status;
+        check_Appointmenton();
+      }
     })
     .catch((err) => {
       warningMessage.value = err.data.message;

@@ -21,9 +21,9 @@ export function openSocket(socketUrl = `http://112.74.33.254:2358/ws/message/`, 
     socket.onopen=mergeConfig.onopen
 
     socket.onclose = function (e) {
-        console.log(
-            "websocket 断开: " + e.code + " " + e.reason + " " + e.wasClean
-        );
+        // console.log(
+        //     "websocket 断开: " + e.code + " " + e.reason + " " + e.wasClean
+        // );
         openSocket();
     };
     return socket

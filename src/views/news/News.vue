@@ -1,11 +1,13 @@
 
 <template>
-  <div class="block" id="news-content">
-    <el-timeline v-loading="loading" v-if="isFinishLoad">
+
+  <div class="block" id="news-content" key="1" v-loading="loading">
+<transition-group name="animate__animated animate__bounce" enter-active-class="animate__rubberBand">
+    <el-timeline v-if="isFinishLoad" v-show="isHide">
       <el-timeline-item
         :timestamp="item.time"
         placement="top"
-        color="#0bbd87"
+        color="#4eb5ff"
         v-for="(item, index) of studentNews"
         :key="index"
       >
@@ -14,8 +16,10 @@
         </el-card>
       </el-timeline-item>
     </el-timeline>
-    <div v-else class="noLoad">{{ newsTip }}</div>
-  </div>
+    <div v-else class="noLoad">{{newsTip}}</div>
+ 
+</transition-group>
+ </div>
 </template>
 
 <script setup>
@@ -36,6 +40,35 @@ let isFinishLoad = ref(true);
 let newsTip = ref("请先登录！");
 // console.dir(WebSocket);
 
+let isHide = ref(false);
+//实时更新数据
+// let openSocket = function () {
+//   var socket;
+//   let token = getCookie("studentToken");
+//   var socketUrl = `http://112.74.33.254:2358/ws/message/${token}`;
+//   socketUrl = socketUrl.replace("https", "ws").replace("http", "ws");
+//   if (socket != null) {
+//     socket.close();
+//     socket = null;
+//   }
+//   socket = new WebSocket(socketUrl);
+//   socket.onopen = function () {
+//     console.log("websocket已打开");
+//   };
+//   socket.onmessage = function (msg) {
+//     console.log(msg);
+//     let msgDay = JSON.parse(msg.data);
+//     msgDay.time = dayjs(msgDay.time).format("YYYY-MM-DD HH:mm:ss");
+//     msgDay.id = 1;
+//     studentNews.unshift(msgDay);
+//   };
+//   socket.onclose = function (e) {
+//     console.log(
+//       "websocket 断开: " + e.code + " " + e.reason + " " + e.wasClean
+//     );
+//     openSocket();
+//   };
+// };
 
 onBeforeMount(() => {
   const studentToken = getCookie("studentToken");
@@ -48,9 +81,14 @@ onBeforeMount(() => {
         if (result.code === 1801) {
           console.log(result.data);
           studentNews.push(...result.data);
+          // isFinishLoad.value = true;
           // studentNews = result.data;
           studentNews.reverse();
           console.log(studentNews);
+          setTimeout(() => {
+            isHide.value = true;
+          }, 1000)
+          
         } else {
           newsTip.value = result.message;
           isFinishLoad.value = false;

@@ -5,7 +5,7 @@
     class="el-menu-demo"
     mode="horizontal"
     @select="handleSelect"
-    background-color="rgb(34 36 38 / 65%)"
+    <!-- background-color="rgb(34 36 38 / 65%)" -->
     text-color="#fff"
     active-text-color="#4eb5ff"
   >

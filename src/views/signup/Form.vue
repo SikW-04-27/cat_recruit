@@ -318,6 +318,7 @@ let btnClick = () => {
       phoneNumber: phone.value,
       selfIntroduction: textarea2.value,
       studentId: stuNumber.value,
+      // formData: imgUrl
     })
       .then((res) => {
         if (res.code === 200 || res.code === 2001) {
@@ -347,6 +348,8 @@ let btnClick = () => {
 };
 
 //头像
+
+let imgUrl = '';
 let changeImg = function (e) {
   ElMessageBox.confirm("确定添加头像?", "提示", {
     confirmButtonText: "确定",
@@ -377,6 +380,8 @@ let changeImg = function (e) {
         },
       })
       .then((res) => {
+        console.log(res);
+        imgUrl = res.data.data;
         loadingInstance.close();
         avatarimg.value = res.data.data;
       })

@@ -237,6 +237,10 @@ export default {
   z-index: 10;
   width: 100%;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0b431c7d6e71b45febbcc749c600fddc6d2a210c
 .el-menu {
   .el-menu-item,
   .el-submenu {
