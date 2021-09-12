@@ -7,16 +7,16 @@
     @select="handleSelect"
     background-color="rgb(34 36 38 / 65%)"
     text-color="#fff"
-    active-text-color="red"
+    active-text-color="#4eb5ff"
   >
     <el-submenu index="2" v-if="isLoad">
       <template #title
-        ><el-badge :is-dot="isDot"> 
-           我的工作台</el-badge
-        ></template
-      >
-   
-      
+        ><el-badge :is-dot="isDot">
+          <el-icon size="30" color="#409EFC">
+            <avatar />
+          </el-icon>&nbsp; &nbsp; </el-badge
+      ></template>
+
       <el-menu-item index="2-1"
         ><router-link to="/Form">报名表</router-link></el-menu-item
       >
@@ -53,11 +53,7 @@
       ><router-link to="/introduction">工作室介绍</router-link></el-menu-item
     >
   </el-menu>
-        <el-icon size='20' color="red"><avatar /></el-icon>
-<el-icon>
-  <avatar />
-</el-icon>
-      
+
   <!-- <nav>
     <ul>
       <li><router-link to="/introduction">工作室介绍</router-link></li>
@@ -213,13 +209,23 @@ export default {
   /* border-bottom: 0 !important; */
   li {
     float: right !important;
+    padding: 0 !important;
   }
-}
 
-.myLi {
-  color: red;
+  a {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    padding: 0 20px;
+  }.myLi {
+  padding: 0 20px !important;
+  color: #fff;
+  font-size: 14px;
   line-height: 60px;
 }
+}
+
+
 
 .activeIndex2 {
   background-color: green;

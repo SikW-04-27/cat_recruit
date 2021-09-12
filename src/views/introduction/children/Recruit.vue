@@ -1,6 +1,6 @@
 <template>
 
-<IntroductionTitle>招新方向</IntroductionTitle>
+<div id="recruit-content"><IntroductionTitle>招新方向</IntroductionTitle>
 <div class="container">
       <div class="card">
             <span></span>
@@ -21,7 +21,8 @@
                 </p>
             </div>
         </div>
-</div>
+</div></div>
+
 
 </template>
 
@@ -39,8 +40,15 @@ export default {
 
 <style lang="scss">
 
+#recruit-content {
+    margin-top: 30px;
+}
+
+
+
 .container{
-    background-color: rgb(31, 31, 31);
+    // background-color: rgb(31, 31, 31);
+    margin-top: 10px;
     position: relative;
     display: flex;
     justify-content: center;
@@ -56,7 +64,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 20px 30px;
+    margin: 20px 60px;
     transition: .5s;
 }
 .container .card:hover{

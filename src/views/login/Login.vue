@@ -10,7 +10,7 @@
     >
       <p class="login-words myFront" data-text="LOGIN">LOGIN</p>
       <input type="text" v-model="studentMail" placeholder="邮箱" />
-      <input type="text" v-model="studentPassword" placeholder="密码" />
+      <input type="password" v-model="studentPassword" placeholder="密码" />
 
       <div class="student-login-tips">{{ tips }}</div>
       <div id="check-login" @click="studentLogin">登录</div>

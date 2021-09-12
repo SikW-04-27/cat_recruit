@@ -19,6 +19,6 @@ const app = createApp(App)
 app.use(router)
     .use(store)
     .use(ElementPlus)
-    .component('avater', Avatar)
+    .component('avatar', Avatar)
     // 挂载
     .mount('#app')

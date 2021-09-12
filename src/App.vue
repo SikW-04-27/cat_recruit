@@ -72,6 +72,7 @@ body {
   // background-size: contain;
 
   // background-size: contain;
+  min-width: 1200px;
   background-color: rgb(1, 5, 61);
 }
 .middle {
