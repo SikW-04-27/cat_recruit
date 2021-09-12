@@ -12,10 +12,9 @@
     <el-submenu index="2" v-if="isLoad">
       <template #title
         ><el-badge :is-dot="isDot">
-          <el-icon :size="30" color="#409EFC">
-            <avatar />
-          </el-icon>&nbsp; &nbsp; </el-badge
-      ></template>
+          <el-icon size=30 color="#409EFC"> <avatar /> </el-icon>&nbsp; &nbsp;
+        </el-badge></template
+      >
 
       <el-menu-item index="2-1"
         ><router-link to="/Form">报名表</router-link></el-menu-item

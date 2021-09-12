@@ -54,6 +54,7 @@ export default {
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
+    cur
 }
 .container .card{
     position: relative;
@@ -66,7 +67,6 @@ export default {
     align-items: center;
     margin: 20px 60px;
     transition: .5s;
-    cursor: pointer;
 }
 .container .card:hover{
     transform: translateY(-25px);

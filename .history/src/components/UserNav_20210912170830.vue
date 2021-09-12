@@ -12,7 +12,7 @@
     <el-submenu index="2" v-if="isLoad">
       <template #title
         ><el-badge :is-dot="isDot">
-          <el-icon :size="30" color="#409EFC">
+          <el-icon size="30" color="#409EFC">
             <avatar />
           </el-icon>&nbsp; &nbsp; </el-badge
       ></template>
@@ -217,14 +217,15 @@ export default {
     width: 100%;
     height: 100%;
     padding: 0 20px;
-  }
-  .myLi {
-    padding: 0 20px !important;
-    color: #fff;
-    font-size: 14px;
-    line-height: 60px;
-  }
+  }.myLi {
+  padding: 0 20px !important;
+  color: #fff;
+  font-size: 14px;
+  line-height: 60px;
 }
+}
+
+
 
 .activeIndex2 {
   background-color: green;
@@ -237,7 +238,7 @@ export default {
   width: 100%;
 }
 .el-menu {
-  .el-menu-item {
+  .el-menu-item{
     background-color: rgba(255, 255, 255, 0);
   }
   .el-menu-item,
@@ -262,4 +263,8 @@ export default {
     }
   }
 }
+.el-submenu__title{
+  background-color: #fff;
+}
+
 </style>

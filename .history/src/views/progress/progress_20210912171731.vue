@@ -1,6 +1,6 @@
 <template>
   <div class="progress_block">
-    <div id="progress" :v-loading="loading">
+    <div id="progress" v-loading="loading">
       <el-page-header @back="goBack" content="面试进度"> </el-page-header>
       <div class="block" v-if="allowing && stuId">
         <el-timeline>

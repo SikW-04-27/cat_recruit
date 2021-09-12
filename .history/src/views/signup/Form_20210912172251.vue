@@ -3,7 +3,7 @@
     <div id="form" v-loading="loading" element-loading-background="rgba(0, 0, 0, .5)">
         <el-page-header content="报名表"> </el-page-header>
         <!-- 登陆 处于报名阶段 未报名 -->
-        <div class="content" v-if="currentStatusId === 2 && stuId && !isSignUp">
+        <div class="content" v-if="currentStatusId === 2 && stuId && isSignUp">
           <!-- 姓名 -->
           <div class="name">
             <span>姓名：</span>
@@ -443,7 +443,7 @@ $zhutise: rgb(41, 45, 63);
 #form {
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
   width: 1000px;
-  min-height: 480px;
+  height: 480px;
   margin: 60px auto 0;
   padding: 20px 50px 0 50px;
   background-color: rgba(78, 78, 78, 0.5);

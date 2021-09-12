@@ -443,7 +443,7 @@ $zhutise: rgb(41, 45, 63);
 #form {
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
   width: 1000px;
-  min-height: 480px;
+  height: 480px;
   margin: 60px auto 0;
   padding: 20px 50px 0 50px;
   background-color: rgba(78, 78, 78, 0.5);

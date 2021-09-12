@@ -1,6 +1,6 @@
 <template>
   <div class="progress_block">
-    <div id="progress" :v-loading="loading">
+    <div id="progress" v-loading="loading">
       <el-page-header @back="goBack" content="面试进度"> </el-page-header>
       <div class="block" v-if="allowing && stuId">
         <el-timeline>
@@ -13,19 +13,15 @@
             :size="activity.size"
             :timestamp="activity.timestamp"
           > -->
-          <el-timeline-item
-            v-for="(activity, index) in activities"
-            :key="index"
-          >
-            <el-alert :title="activity" type="info" :closable="false">
-            </el-alert>
+          <el-timeline-item v-for="(activity, index) in activities" :key="index">
+            <el-alert :title="activity" type="info" :closable="false"> </el-alert>
             <!-- {{ activity.content }} -->
           </el-timeline-item>
         </el-timeline>
       </div>
       <!-- 当无法查询时的页面 -->
       <div class="close" v-if="!allowing && stuId">{{ closeMessage }}</div>
-
+  
       <!-- 未登陆时 -->
       <div class="unLogin" v-if="!stuId">
         <span>您还未登录，请先登录</span>
@@ -53,7 +49,6 @@ let closeMessage = ref("查询进度失败，请先报名");
 let stuId = window.sessionStorage.getItem("userId");
 let activities = reactive([]);
 let warningMessage = "失败";
-let loading = ref(true);
 //定义提示函数：
 const warning = () => {
   ElMessage.warning({
@@ -62,7 +57,6 @@ const warning = () => {
   });
 };
 onMounted(() => {
-  loading.value = false;
   getBriefInfo({})
     .then((res) => {
       activities.push(...res.data.recruitmentHistoryInfo);
@@ -77,7 +71,7 @@ onMounted(() => {
 
 <style scoped lang="scss">
 //-----------------------------------------------------------------------------------------
-.progress_block {
+.progress_block{
   padding-top: 40px;
 }
 #progress {

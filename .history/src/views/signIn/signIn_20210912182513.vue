@@ -1,9 +1,5 @@
 <template>
-  <div
-    class="signIn"
-    v-loading="loading"
-    element-loading-background="rgba(0, 0, 0, .5)"
-  >
+  <div class="signIn" v-loading="loading" element-loading-background="rgba(0, 0, 0, .5)">
     <div class="s-main">
       <!-- 页眉 -->
       <el-page-header @back="goBack" content="面试签到"> </el-page-header>
@@ -129,7 +125,7 @@ let comfirm = () => {
       }
     })
     .catch((err) => {
-      warningMessage.value = "签到失败";
+      warningMessage.value ="签到失败";
       warning();
     });
 };
@@ -142,12 +138,11 @@ let getUserQueue = function () {
         //等待队列未空
         value.value = 0;
       } else {
-        for (let i = 0; i < res.data.length; i++) {
+        for (var i = 0; i < res.data.length; i++) {
           console.log(stuId);
           if (res.data[i].id === stuId) {
             value.value = ref(i + 1);
             console.log(value);
-            break;
           }
         }
       }
@@ -160,11 +155,7 @@ let getUserQueue = function () {
 
 onMounted(() => {
   loading.value = false;
-  openSocket("http://112.74.33.254:2358/ws/queue/", undefined, {
-    onopen: () => {
-      console.log(1212121212);
-    },
-  }).onmessage = getUserQueue;
+  openSocket().onmessage = getUserQueue();
 
   //1.若无登录：
   if (!stuId) {
@@ -220,18 +211,15 @@ getUserStatus({})
               } else if (res.code === 1103) {
                 //未签到，未处于等待队列，请签到
                 UserCheck.value = false;
-              } else {
-                // warningMessage.value = res.message;
-                // warning();  
-                closeMessage.value = res.message
-                opening.value = false;
+              } else if(res.code === 1321){
+                  
+                warningMessage.value = res.message;
+                warning();
               }
             })
             .catch((err) => {
               warningMessage.value = err.message;
               warning();
-        
-
             });
         } else {
           //未处于签到状态
@@ -271,8 +259,8 @@ getUserStatus({})
   }
 }
 .signIn {
-  margin: 0 auto 0;
-  padding: 80px 50px 0 50px;
+  margin: 60px auto 0;
+  padding: 20px 50px 0 50px;
   color: #fff;
 }
 .s-main {

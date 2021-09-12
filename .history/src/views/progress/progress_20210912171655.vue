@@ -1,6 +1,6 @@
 <template>
   <div class="progress_block">
-    <div id="progress" :v-loading="loading">
+    <div id="progress" v-loading="loading">
       <el-page-header @back="goBack" content="面试进度"> </el-page-header>
       <div class="block" v-if="allowing && stuId">
         <el-timeline>
@@ -53,7 +53,7 @@ let closeMessage = ref("查询进度失败，请先报名");
 let stuId = window.sessionStorage.getItem("userId");
 let activities = reactive([]);
 let warningMessage = "失败";
-let loading = ref(true);
+let loading = 
 //定义提示函数：
 const warning = () => {
   ElMessage.warning({
@@ -62,7 +62,6 @@ const warning = () => {
   });
 };
 onMounted(() => {
-  loading.value = false;
   getBriefInfo({})
     .then((res) => {
       activities.push(...res.data.recruitmentHistoryInfo);

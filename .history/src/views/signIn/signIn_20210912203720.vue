@@ -142,12 +142,11 @@ let getUserQueue = function () {
         //等待队列未空
         value.value = 0;
       } else {
-        for (let i = 0; i < res.data.length; i++) {
+        for (var i = 0; i < res.data.length; i++) {
           console.log(stuId);
           if (res.data[i].id === stuId) {
             value.value = ref(i + 1);
             console.log(value);
-            break;
           }
         }
       }
@@ -164,7 +163,7 @@ onMounted(() => {
     onopen: () => {
       console.log(1212121212);
     },
-  }).onmessage = getUserQueue;
+  }).onmessage = function(msg){};
 
   //1.若无登录：
   if (!stuId) {
@@ -192,64 +191,63 @@ onMounted(() => {
     return;
   }
 
-    //3.处于面试考核等阶段，需要获取用户是否已经预约时间
-    //是否预约
-getUserStatus({})
-  .then((res) => {
-    
-    if (res.data.beginTime) {
-      //已经预约的情况
-      console.log(11);
-      //4.获取当前签到是否开启
-      queueStatus({}).then((res) => {
-        console.log(res);
-        if (res.code === 1101) {
-          //处于签到状态
-          data.value = res.message;
-          opening.value = true;
-          console.log(opening);
-          //5.检测用户是否已经签到
-          checkUserStatus({ id: stuId })
-            .then((res) => {
-              if (res.code === 1303 || res.code === 1308) {
-                //用户已签到,已处于等待队列，等待叫号
-                console.log(res);
-                console.log("12345678765432");
-                UserCheck.value = true;
-                getUserQueue();
-              } else if (res.code === 1103) {
-                //未签到，未处于等待队列，请签到
-                UserCheck.value = false;
-              } else {
-                // warningMessage.value = res.message;
-                // warning();  
-                closeMessage.value = res.message
-                opening.value = false;
-              }
-            })
-            .catch((err) => {
-              warningMessage.value = err.message;
-              warning();
-        
-
-            });
-        } else {
-          //未处于签到状态
-          opening.value = false;
-          closeMessage.value = "您已预约时间，暂未开放签到，请耐心等候";
-        }
-      });
-    } else {
-      //未预约
-      opening.value = false;
-      closeMessage.value = "用户未预约，请先预约";
-    }
-  })
-  .catch((err) => {
-    closeMessage.value = err.data.message;
-    warningMessage = err.data.message;
-    warning();
-  });
+  //3.处于面试考核等阶段，需要获取用户是否已经预约时间
+  //是否预约
+  getUserStatus({})
+    .then((res) => {
+      if (res.data.beginTime) {
+        //已经预约的情况
+        console.log(11);
+        //4.获取当前签到是否开启
+        queueStatus({}).then((res) => {
+          console.log(res);
+          if (res.code === 1101) {
+            //处于签到状态
+            data.value = res.message;
+            opening.value = true;
+            console.log(opening);
+            //5.检测用户是否已经签到
+            checkUserStatus({ id: stuId })
+              .then((res) => {
+                if (res.code === 1303 || res.code === 1308) {
+                  //用户已签到,已处于等待队列，等待叫号
+                  console.log(res);
+                  console.log("12345678765432");
+                  UserCheck.value = true;
+                  getUserQueue();
+                } else if (res.code === 1103) {
+                  //未签到，未处于等待队列，请签到
+                  UserCheck.value = false;
+                } else if (res.code === 1321) {
+                  UserCheck.value = true;
+                  warningMessage.value = res.message;
+                  warning();
+                } else {
+                  warningMessage.value = res.message;
+                  warning();
+                }
+              })
+              .catch((err) => {
+                warningMessage.value = err.message;
+                warning();
+              });
+          } else {
+            //未处于签到状态
+            opening.value = false;
+            closeMessage.value = "您已预约时间，暂未开放签到，请耐心等候";
+          }
+        });
+      } else {
+        //未预约
+        opening.value = false;
+        closeMessage.value = "用户未预约，请先预约";
+      }
+    })
+    .catch((err) => {
+      closeMessage.value = err.data.message;
+      warningMessage = err.data.message;
+      warning();
+    });
 
   //点击签到按钮
   //4，取消签到（不在页面展示该功能）
