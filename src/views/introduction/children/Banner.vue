@@ -41,7 +41,7 @@ export default {
 
   // text-align: center;
   // background-color: rgba(0, 0, 0, 0.925);
-  background-image: url("../../../assets/img/banner背景 (4).jpg");
+  background-image: url("../../../assets/img/banner2.jpg");
   background-size: cover;
   span {
     position: absolute;
