@@ -19,7 +19,7 @@ import ModifyQueue from '../views/manage/operation/ModifyQueue.vue'
 
 import Login from '../views/login/Login.vue'
 import StudentLogin from '../views/login/children/StudentLogin.vue'
-import ManagerLogin from '../views/login/children/managerLogin.vue'
+import ManagerLogin from '../views/login/children/ManagerLogin.vue'
 import StudentRegister from '../views/register/children/StudentRegister.vue'
 import ManageRegister from '../views/register/children/ManageRegister.vue'
 import News from '../views/news/News.vue'
