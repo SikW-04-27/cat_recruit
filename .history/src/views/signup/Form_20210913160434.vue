@@ -390,8 +390,6 @@ let changeImg = function (e) {
       })
       .catch((err) => {
         loadingInstance.close();
-        warningMessage.value = err.message;
-        warning();
       });
   });
 };
@@ -494,14 +492,12 @@ $zhutise: rgb(41, 45, 63);
   .direction {
     height: 50px;
     margin-right: 30px;
+    widows: ;
     .i_select {
       display: inline-block;
     }
     .el-input {
       margin: 0 0 0 20px;
-    }
-    .el-select {
-      width: 400px;
     }
   }
   .self_intro {

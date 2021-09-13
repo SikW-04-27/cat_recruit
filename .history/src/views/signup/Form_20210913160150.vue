@@ -7,7 +7,7 @@
     >
       <el-page-header content="报名表"> </el-page-header>
       <!-- 登陆 处于报名阶段 未报名 -->
-      <div class="content" v-if="currentStatusId === 2 && stuId && !isSignUp">
+      <div class="content" v-if="currentStatusId === 2 && stuId && isSignUp">
         <!-- 姓名 -->
         <div class="name">
           <span>姓名：</span>
@@ -390,8 +390,6 @@ let changeImg = function (e) {
       })
       .catch((err) => {
         loadingInstance.close();
-        warningMessage.value = err.message;
-        warning();
       });
   });
 };
@@ -494,23 +492,22 @@ $zhutise: rgb(41, 45, 63);
   .direction {
     height: 50px;
     margin-right: 30px;
+    width: 400px;
     .i_select {
       display: inline-block;
     }
     .el-input {
       margin: 0 0 0 20px;
     }
-    .el-select {
-      width: 400px;
-    }
   }
   .self_intro {
+    // width: 500px;
     height: 130px;
     span {
       float: left;
     }
     .s_input {
-      width: 400px;
+      width: 300px;
       display: inline-block;
     }
   }
