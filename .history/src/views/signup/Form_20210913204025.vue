@@ -422,9 +422,8 @@ onMounted(() => {
       .catch((err) => {
         //未报名
         window.sessionStorage.setItem("hasSignUp", false);
-        warningMessage = err.data.message;
+                warningMessage = err.data.message;
         warning();
-
         listAllCollege({})
           .then((res) => {
             institutes.push(...res.data);

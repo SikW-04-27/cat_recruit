@@ -424,7 +424,6 @@ onMounted(() => {
         window.sessionStorage.setItem("hasSignUp", false);
         warningMessage = err.data.message;
         warning();
-
         listAllCollege({})
           .then((res) => {
             institutes.push(...res.data);

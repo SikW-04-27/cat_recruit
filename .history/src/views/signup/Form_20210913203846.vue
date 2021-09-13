@@ -422,17 +422,11 @@ onMounted(() => {
       .catch((err) => {
         //未报名
         window.sessionStorage.setItem("hasSignUp", false);
+        listAllCollege({}).then((res) => {
+          institutes.push(...res.data);
+        });
         warningMessage = err.data.message;
         warning();
-
-        listAllCollege({})
-          .then((res) => {
-            institutes.push(...res.data);
-          })
-          .catch((err) => {
-            warningMessage = err.data.message;
-            warning();
-          });
       });
 
     return;
