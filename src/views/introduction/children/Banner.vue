@@ -1,7 +1,8 @@
 <template>
   <div class="banner">
     <!-- <div class="myFront" data-text="c.a.t工作室欢迎你！"> c.a.t工作室欢迎你！</div> -->
-
+      <video class="bgVideo" src="../../../assets/img/pexels-anna-hinckel-6128683.mp4" autoplay loop width="110%" height="100%" playbackRate=2></video>
+      <div class="block"></div>
     <div class="main">
       <input type="radio" name="choice" id="c1" checked />
       <input type="radio" name="choice" id="c2" />
@@ -13,7 +14,22 @@
       <label for="c3" id="l3" style="--l: 3"></label>
       <label for="c4" id="l4" style="--l: 4"></label>
       <label for="c5" id="l5" style="--l: 5"></label> -->
-      <h1 data-text="Create Ambitious Team！">Create Ambitious Team！</h1>
+      <!-- <h1 data-text="C" class="round">C</h1>
+      <h1 data-text="reate">reate</h1>
+      <h1 data-text="A" class="left_round" style="padding-top:100px">A</h1> 
+      <h1 data-text="mbitious">mbitious</h1> 
+      <h1 data-text="T" class="round" style="padding-top:200px">T</h1>
+      <h1 data-text="eam！" >eam！</h1> -->
+      <transition-group
+        name="animate__animated animate__bounce"
+        enter-active-class="animate__lightSpeedInLeft"
+      >
+        <h1 data-text="Create" key="1" v-show="create_h1">Create</h1>
+        <h1 data-text="Ambitious" key="2" v-show="create_h2">Ambitious</h1>
+        <h1 data-text="Team！" key="3" v-show="create_h3">Team！</h1>
+      </transition-group>
+      
+
     </div>
 
     <!-- <img src="../../assets/img/banner2.jpg" alt=""> -->
@@ -21,14 +37,27 @@
 </template>
 
 <script>
-import { onMounted } from "vue";
+import { onMounted, ref } from "vue";
 export default {
   setup(props) {
-    // onMounted(() => {
-    //   setTimeout(() => {
-    //     window.scrollTo(0, 100);
-    //   }, 2000);
-    // });
+    let create_h1 = ref(false)
+    let create_h2 = ref(false)
+    let create_h3 = ref(false)
+    onMounted(() => {
+      create_h1.value = true;
+      setTimeout(() => {
+        create_h2.value = true;
+      }, 1000);
+      setTimeout(() => {
+        create_h3.value = true;
+      }, 2000);
+      
+    });
+    return {
+      create_h1,  
+      create_h2,  
+      create_h3,  
+    }
   },
 };
 </script>
@@ -38,6 +67,7 @@ export default {
   position: relative;
   width: 100%;
   height: 100vh;
+  overflow: hidden;
 
   // text-align: center;
   // background-color: rgba(0, 0, 0, 0.925);
@@ -68,6 +98,7 @@ export default {
 
 .main {
   width: 70%;
+  height: 300px;
   position: absolute;
   left: 65%;
   top: 45%;
@@ -77,12 +108,80 @@ export default {
 .main input {
   display: none;
 }
+.main .round{
+  position: absolute;
+  font-size: 80px;
+  left: -60px;
+  animation: round 1s ease-in alternate infinite;
+}
+.main .left_round{
+  position: absolute;
+  font-size: 80px;
+  top: 0;
+  left: -60px;
+  animation: left_round 5s ease-in alternate infinite;
+}
+.bgVideo{
+  width: 100%;
+  position: absolute;
+}
+.block{
+  background-color: rgba(0, 0, 0, 0.363);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+// @keyframes round{
+//   from{
+//     top: 0;
+//   }
+//   to{
+//     top:-15px
+//   }
+// }
+// @keyframes left_round{
+//   0%{
+//     left: -60px;
+//     top: 0;
+//   }
+//   20%{
+//     top: 0;
+//     left: -150px;
+//     rotate: deg(0);
+//   }
+//   40%{
+//     left: -150px;
+//     top: -200px;
+//   }
+//   50%{
+//     top: -200px;
+//     left: 450px;
+//   }
+//   60%{
+//     left: 450px;
+//     top: 180px;
+//   }
+//   70%{
+//     top: 180px;
+//     left: -150px;
+//     rotate: deg(180);
+//   }
+//   80%{
+//     left: -150px;
+//     top: 0;
+//   }
+//   100%{
+//     left: -60px;
+//     top: 0;
+//   }
+// }
 .main h1 {
   width: 800px;
   // height:100%;
   font-size: 80px;
   // text-align: center;
   color: white;
+  padding-left:0px ;
   line-height: 100px;
   transition: all 1s;
   font-family: fantasy;
@@ -90,10 +189,10 @@ export default {
 }
 .main h1::after {
   width: 800px;
-  height: 100%;
+  height: 100px;
   position: absolute;
-  left: 0;
-  top: 0;
+  left: 0px;
+  // top: 0;
   content: attr(data-text);
   filter: blur(5px);
   z-index: -1;

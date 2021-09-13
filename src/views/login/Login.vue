@@ -100,7 +100,7 @@ onUnmounted(() => {
 
 <style lang="scss" >
 #student-login {
-  margin: 60px auto;
+  margin: 0 auto;
   width: 100%;
   height: 350px;
   color: #fff;

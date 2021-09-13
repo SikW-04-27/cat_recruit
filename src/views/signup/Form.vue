@@ -126,7 +126,7 @@
           <div class="avatar">
             <span>个人头像：</span>
             <label for="file">
-              <img :src="avatarimg" alt="" />
+              <img :src="avatarimg" alt=""  class="avatarimgblock"/>
             </label>
             <input
               type="file"
@@ -361,7 +361,7 @@ let changeImg = function (e) {
     let token = getCookie("studentToken");
     let loadingInstance = ElLoading.service({
       fullscreen: false,
-      target: ".avatar",
+      target: ".avatarimgblock",
       background: "rgba(55, 55, 55, 0.699)",
     });
     axios.interceptors.request.use(

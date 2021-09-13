@@ -25,20 +25,22 @@ export default {
 
 #life-content {
   margin-top: 30px;
-  padding: 30px 120px;
-  height: 500px;
-  background-color: rgba(0, 0, 0, .5);
+  padding: 30px 60px 0;
+  // height: 500px;
+  // background-color: rgba(0, 0, 0, .5);
 }
 
 .studio-happy {
+  width: 1200px;
+  margin: 0 auto;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   overflow: hidden;
   margin-top: 25px;
   padding-bottom: 50px;
   img {
-    width: 200px;
-    height: 200px;
+    width: 180px;
+    height: 180px;
     border-radius: 10px;
   }
 }

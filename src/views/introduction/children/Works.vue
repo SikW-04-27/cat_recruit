@@ -65,14 +65,14 @@ export default {
 
 <style lang="scss" scoped>
 #works-content {
-  height: 65vh;
+  // height: 65vh;
   padding: 50px 0;
   // background-image: url("../../../assets/img/row背景.png");
   // background-size: cover;
-  background: rgb(31, 31, 31);
+  // background: rgb(31, 31, 31);
 
   .w-main {
-    width: 80%;
+    width: 1200px;
     margin: 0 auto;
   }
   .el-carousel {
