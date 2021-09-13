@@ -28,7 +28,8 @@ import { onMounted, onBeforeMount, reactive, ref } from "vue";
 import { getStudentNews } from "../../request/api";
 import { getCookie } from "../../utils/myCookie";
 //引入修改时间戳
-import "../../../node_modules/dayjs/dayjs.min.js";
+import "../../../../node_modules/dayjs/dayjs.min.js";
+import day from '../../'
 import {openSocket} from '../../utils/websocket'
 
 let studentNews = reactive([]);

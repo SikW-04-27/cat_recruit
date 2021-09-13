@@ -30,7 +30,7 @@ import SignIn from '../views/signIn/signIn.vue'
 
 const router = createRouter({
     history: createWebHistory(),
-    mode: "hash",
+    mode: "hash";
     routes: [
 
         // 工作室介绍默认

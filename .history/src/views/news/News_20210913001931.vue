@@ -29,6 +29,7 @@ import { getStudentNews } from "../../request/api";
 import { getCookie } from "../../utils/myCookie";
 //引入修改时间戳
 import "../../../node_modules/dayjs/dayjs.min.js";
+import day from '../../../node_modules/'
 import {openSocket} from '../../utils/websocket'
 
 let studentNews = reactive([]);
