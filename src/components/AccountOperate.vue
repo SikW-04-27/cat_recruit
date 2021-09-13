@@ -1,11 +1,7 @@
 <template>
   <div id="account">
-    <div class="account-option">
-      <!-- <slot name="student"></slot>
-      <slot name="manager"></slot> -->
+   
       <slot></slot>
-    </div>
-    <router-view></router-view>
   </div>
 </template>
 
@@ -15,45 +11,83 @@ export default {};
 
 <style lang="scss">
 #account {
-  margin: 80px auto 0;
+  position: relative;
+  // margin: 80px auto 0;
+  top: 120px;
+  // left: 420px;
+  margin: 0 auto;
   width: 450px;
   // height: 360px;
-  background-color: rgba(0, 0, 0, 0.4);
+  // background-color: rgba(78, 78, 78, 0.5);
 
-  .account-option {
-    width: 100%;
-    height: 40px;
-    line-height: 65px;
-    a {
-      margin: 0 10px;
-      font-size: 14px;
+
+  // input {
+  //   // padding-left: 10px;
+  //   // border-bottom: 2px solid #ffffff;
+  //   display: block;
+  //   margin: 0 auto;
+  //   width: 300px;
+  //   height: 40px;
+  //   color: red;
+  //   font-size: 13px;
+  //   border-radius: 10px;
+  // }
+
+  input {
+    width: 380px;
+    height: 45px;
+    border-color: rgb(255, 255, 255);
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 30px;
+    font-size: 14px;
+    padding: 0px;
+    text-align: center;
+    line-height: 20px;
+    font-weight: normal;
+    font-style: normal;
+    margin-top: 30px;
+    // color: red;
+    letter-spacing: 2px;
+    // font-weight: 700;
+    padding-left: 8px;
+    color: black;
+    background-color: rgba(255, 255, 255, .7) !important;
+    &::placeholder {
       color: #fff;
-
-      &:hover {
-        color: red;
-      }
+      letter-spacing: 0;
     }
   }
 
-  input {
-    padding-left: 10px;
-    border-bottom: 2px solid #ffffff;
-    background-color: rgba(0, 0, 0, 0) !important;
-    margin-top: 28px;
-    width: 210px;
-    height: 30px;
-    color: red;
-    font-size: 13px;
-  }
+  
 }
 
-$color: #0bc7f4;
+// input::placeholder {
+//   color: red !important;
+// }
 
+// input::-webkit-input-placeholder {
+//     color: red !important;
+//   }
+
+//   input::-moz-placeholder {
+//     color: red;
+//   }
+
+//   input::-ms-input-placeholder {
+//     color: red;
+//   }
+
+
+
+$color: #3a62d7;
+
+/*
 .myButton {
   color: $color;
   // padding: 10px 30px;
-  width: 100px;
-  height: 40px;
+   width: 380px;
+    height: 45px;
   line-height: 40px;
 }
 
@@ -71,4 +105,11 @@ $color: #0bc7f4;
   border-bottom: 2px solid $color;
   border-right: 2px solid $color;
 }
+
+.myButton {
+  // border-radius: 10px;
+  background-color: #6689f0;
+}
+
+*/
 </style>

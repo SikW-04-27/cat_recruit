@@ -5,27 +5,28 @@ import Introduction from '../views/introduction/Introduction.vue'
 import Register from '../views/register/Register.vue'
 
 //管理端组件
-import CheckRegistered from '../views/manage/check/CheckRegistered.vue'
-import CheckPersonal from '../views/manage/check/CheckPersonal.vue'
-import CheckCenter from '../views/manage/check/CheckCenter.vue'
-import ModifyCenter from '../views/manage/operation/ModifyCenter.vue'
-import ModifyRating from '../views/manage/operation/ModifyRating.vue'
-import ModifyRatingList from '../views/manage/operation/ModifyRatingList.vue'
-import CheckDetialPoint from '../views/manage/check/CheckDetialPoint.vue'
-import ModifyProcess from '../views/manage/operation/ModifyProcess.vue'
-import ModifyStatus from '../views/manage/operation/ModifyStatus.vue'
-import ModifyQueue from '../views/manage/operation/ModifyQueue.vue'
+// import CheckRegistered from '../views/manage/check/CheckRegistered.vue'
+// import CheckPersonal from '../views/manage/check/CheckPersonal.vue'
+// import CheckCenter from '../views/manage/check/CheckCenter.vue'
+// import ModifyCenter from '../views/manage/operation/ModifyCenter.vue'
+// import ModifyRating from '../views/manage/operation/ModifyRating.vue'
+// import ModifyRatingList from '../views/manage/operation/ModifyRatingList.vue'
+// import CheckDetialPoint from '../views/manage/check/CheckDetialPoint.vue'
+// import ModifyProcess from '../views/manage/operation/ModifyProcess.vue'
+// import ModifyStatus from '../views/manage/operation/ModifyStatus.vue'
+// import ModifyQueue from '../views/manage/operation/ModifyQueue.vue'
 
 
 import Login from '../views/login/Login.vue'
-import StudentLogin from '../views/login/children/StudentLogin.vue'
-import ManagerLogin from '../views/login/children/ManagerLogin.vue'
-import StudentRegister from '../views/register/children/StudentRegister.vue'
-import ManageRegister from '../views/register/children/ManageRegister.vue'
+// import StudentLogin from '../views/login/children/StudentLogin.vue'
+// import ManagerLogin from '../views/login/children/ManagerLogin.vue'
+// import StudentRegister from '../views/register/children/StudentRegister.vue'
+// import ManageRegister from '../views/register/children/ManageRegister.vue'
 import News from '../views/news/News.vue'
 import Appointment from '../views/appointment/Appointment.vue'
 import Progress from '../views/progress/progress.vue'
 import Form from '../views/signup/Form.vue'
+import SignIn from '../views/signIn/signIn.vue'
 
 const router = createRouter({
     history: createWebHistory(),
@@ -43,6 +44,7 @@ const router = createRouter({
             path: '/introduction',
             name: '',
             component: Introduction,
+
         },
 
         // 登录界面
@@ -50,26 +52,6 @@ const router = createRouter({
             path: '/login',
             name: '',
             component: Login,
-            children: [
-
-                {
-                    path: '',
-                    name: '',
-                    component: StudentLogin
-                },
-
-                {
-                    path: 'studentLogin',
-                    name: '',
-                    component: StudentLogin
-                },
-
-                {
-                    path: 'managerLogin',
-                    name: '',
-                    component: ManagerLogin
-                }
-            ]
 
         },
 
@@ -78,28 +60,6 @@ const router = createRouter({
             path: '/register',
             name: '',
             component: Register,
-            children: [
-
-                // 学生注册
-                {
-                    name: '',
-                    path: '',
-                    component: StudentRegister,
-                },
-
-                {
-                    name: '',
-                    path: 'studentRegister',
-                    component: StudentRegister,
-                },
-
-                // 管理员注册
-                {
-                    name: '',
-                    path: 'manageRegister',
-                    component: ManageRegister,
-                },
-            ]
         },
 
         // 填写报名表
@@ -123,8 +83,15 @@ const router = createRouter({
             component: Progress,
         },
 
+        // 用户进行签到
+        {
+            path: '/signIn',
+            name: '',
+            component: SignIn,
+        },
 
 
+/*
         //查看已报名学生
         {
             path: '/checkregistered',
@@ -183,24 +150,19 @@ const router = createRouter({
 
         //修改进程
         {
-            path:'/modifystatus',
-            name:'modifystatus',
-            component: ModifyStatus, 
+            path: '/modifystatus',
+            name: 'modifystatus',
+            component: ModifyStatus,
         },
 
         //管理员修改当前叫号
         {
-            path:'/modifyqueue',
-            name:'modifyqueue',
-            component: ModifyQueue, 
+            path: '/modifyqueue',
+            name: 'modifyqueue',
+            component: ModifyQueue,
         },
 
-        {
-            name: '',
-            path: '/manageRegister',
-            component: ManageRegister
-        },
-
+*/
         {
             name: '',
             path: '/news',

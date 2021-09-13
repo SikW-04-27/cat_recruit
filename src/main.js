@@ -3,6 +3,7 @@ import { createApp } from 'vue'
 
 // 引入全部组件库
 import ElementPlus from 'element-plus';
+import {Avatar} from '@element-plus/icons';
 import '../node_modules/element-plus/lib/theme-chalk/index.css';
 
 import "animate.css"
@@ -16,8 +17,8 @@ import store from './store/index'
 const app = createApp(App)
 
 app.use(router)
-app.use(store)
-
-app.use(ElementPlus)
-// 挂载
-app.mount('#app')
+    .use(store)
+    .use(ElementPlus)
+    .component('avatar', Avatar)
+    // 挂载
+    .mount('#app')
