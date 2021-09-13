@@ -9,7 +9,7 @@
     text-color="#fff"
     active-text-color="#4eb5ff"
   >
-    <el-submenu index="2" v-if="isLoad">
+    <el-submenu  v-if="isLoad">
       <template #title
         ><el-badge :is-dot="isDot">
           <el-icon :size="30" color="#409EFC">
@@ -49,7 +49,7 @@
     <el-menu-item index="4" v-else>
       <router-link to="/login">登录</router-link></el-menu-item
     >
-    <el-menu-item index="1"
+    <el-menu-item 
       ><router-link to="/introduction">工作室介绍</router-link></el-menu-item
     >
   </el-menu>
