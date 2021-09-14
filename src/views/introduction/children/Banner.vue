@@ -1,7 +1,7 @@
 <template>
   <div class="banner">
     <!-- <div class="myFront" data-text="c.a.t工作室欢迎你！"> c.a.t工作室欢迎你！</div> -->
-      <video class="bgVideo" src="../../../assets/img/pexels-anna-hinckel-6128683.mp4" autoplay loop width="110%" height="100%" playbackRate=2></video>
+      <video class="bgVideo" src="../../../assets/img/pexels-anna-hinckel-6128683.mp4" autoplay loop width="110%" height="100%" playbackRate=0.3></video>
       <div class="block"></div>
     <div class="main">
       <input type="radio" name="choice" id="c1" checked />
@@ -71,8 +71,9 @@ export default {
 
   // text-align: center;
   // background-color: rgba(0, 0, 0, 0.925);
-  background-image: url("../../../assets/img/banner (4).jpg");
-  background-size: cover;
+  // background-image: url("../../../assets/img/banner2.jpg");
+  // background-image: url("../../../assets/img/banner (4).jpg");
+  // background-size: cover;
   span {
     position: absolute;
     color: #fff;
