@@ -60,6 +60,7 @@ export default {
 @import "./assets/scss/front.scss";
 
 body {
+  background-color: rgb(233, 233, 233);
   // background-color: #292d3f;
   // background: url('./assets/img/bg.jpg') no-repeat 100% 100%;
   // background-image: url("./assets/img/下载 (1).png");

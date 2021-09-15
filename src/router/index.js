@@ -2,6 +2,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 import Introduction from '../views/introduction/Introduction.vue'
+import Recruit from '../views/introduction/children/Recruit.vue'
+import Banner from '../views/introduction/children/Banner.vue'
+import Works from '../views/introduction/children/Works.vue'
 import Register from '../views/register/Register.vue'
 
 //管理端组件
@@ -45,7 +48,20 @@ const router = createRouter({
             path: '/introduction',
             name: '',
             component: Introduction,
-
+            children: [
+                {
+                    path: 'banner',
+                    component: Banner
+                },
+                {
+                    path: 'recruit',
+                    component: Recruit
+                },
+                {
+                    path: 'works',
+                    component: Works
+                }
+            ]
         },
 
         // 登录界面

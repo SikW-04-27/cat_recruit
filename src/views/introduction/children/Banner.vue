@@ -1,48 +1,57 @@
 <template>
   <div class="banner">
-    <!-- <div class="myFront" data-text="c.a.t工作室欢迎你！"> c.a.t工作室欢迎你！</div> -->
-      <video class="bgVideo" src="../../../assets/img/pexels-anna-hinckel-6128683.mp4" autoplay loop width="110%" height="100%" playbackRate=0.3></video>
-      <div class="block"></div>
-    <div class="main">
-      <input type="radio" name="choice" id="c1" checked />
-      <input type="radio" name="choice" id="c2" />
-      <input type="radio" name="choice" id="c3" />
-      <input type="radio" name="choice" id="c4" />
-      <input type="radio" name="choice" id="c5" />
-      <!-- <label for="c1" id="l1" style="--l: 1"></label>
-      <label for="c2" id="l2" style="--l: 2"></label>
-      <label for="c3" id="l3" style="--l: 3"></label>
-      <label for="c4" id="l4" style="--l: 4"></label>
-      <label for="c5" id="l5" style="--l: 5"></label> -->
-      <!-- <h1 data-text="C" class="round">C</h1>
-      <h1 data-text="reate">reate</h1>
-      <h1 data-text="A" class="left_round" style="padding-top:100px">A</h1> 
-      <h1 data-text="mbitious">mbitious</h1> 
-      <h1 data-text="T" class="round" style="padding-top:200px">T</h1>
-      <h1 data-text="eam！" >eam！</h1> -->
-      <transition-group
+      <transition
         name="animate__animated animate__bounce"
-        enter-active-class="animate__lightSpeedInLeft"
+        leave-active-class="animate__lightSpeedOutLeft"
       >
-        <h1 data-text="Create" key="1" v-show="create_h1">Create</h1>
-        <h1 data-text="Ambitious" key="2" v-show="create_h2">Ambitious</h1>
-        <h1 data-text="Team！" key="3" v-show="create_h3">Team！</h1>
-      </transition-group>
+        <div class="banner_left" v-show="hide">
+            <h1 data-text="Create">Create</h1>
+            <h1 data-text="Ambitious">Ambitious</h1>
+            <h1 data-text="Team！">Team！</h1>
+            <p class="info_text">C.A.T工作室，成立于2017年，指导老师为梁祖红老师，分为前端和后台两个小组，致力于政府及企业级的大型项目开发，团队与玉兰集团、南方电网等公司建立了长期合作关系，近年来研发过广东省专家匹配系统、智能塑料回收瓶箱（与羊城通合作）等，同时组队参与App、小程序大赛并获得奖项，已有毕业师兄就职于一线互联网大厂。</p>
+          <!-- <img src="../../../assets/img/illustration_2.png" alt="" class="illustration_img banner_illustration_2"> -->
+        </div>
+      </transition>
+      <transition
+        name="animate__animated animate__bounce"
+        leave-active-class="animate__lightSpeedOutRight"
+      >
+        <div class="banner_right" v-show="hide">
+          <img src="../../../assets/img/illustration_3.png" alt="" class="banner_right_img ">
+        </div>
+      </transition>
+    
+  <router-view></router-view>
+
+    <transition
+        name="animate__animated animate__bounce"
+        leave-active-class="animate__zoomOut"
+    >
+      <button class="banner_enter" @click="bannerEnter" v-show="hide">Learn More</button>
+    </transition>
+    
       
 
-    </div>
-
-    <!-- <img src="../../assets/img/banner2.jpg" alt=""> -->
   </div>
 </template>
 
 <script>
 import { onMounted, ref } from "vue";
+import {useRouter} from 'vue-router'
 export default {
   setup(props) {
     let create_h1 = ref(false)
     let create_h2 = ref(false)
     let create_h3 = ref(false)
+    let hide = ref(true)
+    const router = useRouter()
+
+    const bannerEnter = () => {
+      hide.value = false
+      router.push({
+        path:'/introduction/works'
+      })
+    }
     onMounted(() => {
       create_h1.value = true;
       setTimeout(() => {
@@ -57,6 +66,8 @@ export default {
       create_h1,  
       create_h2,  
       create_h3,  
+      hide,
+      bannerEnter,
     }
   },
 };
@@ -66,56 +77,82 @@ export default {
 .banner {
   position: relative;
   width: 100%;
-  height: 100vh;
+  margin: 0 auto;
+  height: 700px;
   overflow: hidden;
+  display: flex;
+  justify-content: space-between;
 
-  // text-align: center;
-  // background-color: rgba(0, 0, 0, 0.925);
-  // background-image: url("../../../assets/img/banner2.jpg");
-  // background-image: url("../../../assets/img/banner (4).jpg");
-  // background-size: cover;
-  span {
+  .banner_left {
+    width: 600px;
+    height: 300px;
+    padding-top: 150px;
+    .info_text{
+      width: 750px;
+      padding-left: 100px;
+      line-height: 35px;
+      padding-top: 20px;
+      font-family:Verdana, Geneva, Tahoma, sans-serif;
+    }
+  }
+
+  .banner_right{
+    width: 700px;
+    height: 400px;
+    padding-top: 40px;
+    .banner_right_img{
+      width: 700px;
+    }
+  }
+  
+  .banner_illustration_1{
     position: absolute;
-    color: #fff;
-    top: 40%;
-    left: 33%;
-    letter-spacing: 12px;
-    font-size: 35px;
+    width: 200px;
+    right: 100px;
+    margin-top: 70px;
+    animation-delay: 1.5s;
+  }
+  .banner_illustration_2{
+    position: absolute;
+    width: 200px;
+    left: 100px;
+  }
+
+  .banner_enter{
+    width: 230px;
+    height: 60px;
+    background-color: rgba(90, 184, 46, 0.699);
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    margin-left: -115px;
+    border-radius: 30px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-weight: 700;
+    font-size: 26px;
+    color: white;
+    box-shadow: 3px 3px 3px rgba(122, 122, 122, 0.63);
+    &:hover{
+      background-color: rgba(87, 173, 46, 0.699);
+    }
+    &:active{
+      background-color: rgba(73, 145, 39, 0.699);
+      box-shadow: 3px 3px 3px rgba(97, 97, 97, 0.774);
+    }
   }
 }
 
-.myFront {
-  position: absolute;
-  top: 40%;
-  left: 40%;
-  font-size: 40px;
-  font-weight: 700;
-  letter-spacing: 3px;
-  text-shadow: 0 0 20px #bd242b;
-}
 
-/////////////
-
-.main {
-  width: 70%;
-  height: 300px;
-  position: absolute;
-  left: 65%;
-  top: 45%;
-  transform: translate(-50%, -50%);
-  // text-align: center;
-}
-.main input {
+.banner_left input {
   display: none;
 }
-.main .round{
+.banner_left .round{
   position: absolute;
   font-size: 80px;
   left: -60px;
   animation: round 1s ease-in alternate infinite;
 }
-.main .left_round{
+.banner_left .left_round{
   position: absolute;
   font-size: 80px;
   top: 0;
@@ -176,30 +213,30 @@ export default {
 //     top: 0;
 //   }
 // }
-.main h1 {
+.banner_left h1 {
   width: 800px;
   // height:100%;
   font-size: 80px;
   // text-align: center;
-  color: white;
-  padding-left:0px ;
-  line-height: 100px;
+  color: rgb(88, 122, 81);
+  padding-left:100px ;
+  line-height: 90px;
   transition: all 1s;
   font-family: fantasy;
   letter-spacing: 20px;
 }
-.main h1::after {
+.banner_left h1::after {
   width: 800px;
   height: 100px;
   position: absolute;
-  left: 0px;
+  left: 100px;
   // top: 0;
   content: attr(data-text);
   filter: blur(5px);
   z-index: -1;
 }
 
-.main label {
+.banner_left label {
   position: absolute;
   width: 30px;
   height: 10px;
@@ -208,18 +245,18 @@ export default {
   left: calc(120px * var(--l));
 }
 
-.main label:hover {
+.banner_left label:hover {
   cursor: pointer;
 }
 
 #l1 {
   border-color: #fc5c65;
 }
-.main #c1:checked ~ #l1 {
+.banner_left #c1:checked ~ #l1 {
   background: #fc5c65;
   box-shadow: 0 0 5px #fc5c65;
 }
-.main #c1:checked ~ h1 {
+.banner_left #c1:checked ~ h1 {
   text-shadow: 0 0 20px #ff878700;
 }
 #l2 {
@@ -235,31 +272,31 @@ export default {
 #l3 {
   border-color: #26de81;
 }
-.main #c3:checked ~ #l3 {
+.banner_left #c3:checked ~ #l3 {
   background: #26de81;
   box-shadow: 0 0 5px #26de81;
 }
-.main #c3:checked ~ h1 {
+.banner_left #c3:checked ~ h1 {
   text-shadow: 0 0 20px #26de8260;
 }
 #l4 {
   border-color: #45aaf2;
 }
-.main #c4:checked ~ #l4 {
+.banner_left #c4:checked ~ #l4 {
   background: #45aaf2;
   box-shadow: 0 0 5px #45aaf2;
 }
-.main #c4:checked ~ h1 {
+.banner_left #c4:checked ~ h1 {
   text-shadow: 0 0 20px #45aaf260;
 }
 #l5 {
   border-color: #a55eea;
 }
-.main #c5:checked ~ #l5 {
+.banner_left #c5:checked ~ #l5 {
   background: #a55eea;
   box-shadow: 0 0 5px #a55eea;
 }
-.main #c5:checked ~ h1 {
+.banner_left #c5:checked ~ h1 {
   text-shadow: 0 0 20px #a55eea60;
 }
 </style>

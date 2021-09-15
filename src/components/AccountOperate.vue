@@ -16,7 +16,7 @@ export default {};
   top: 120px;
   // left: 420px;
   margin: 0 auto;
-  width: 450px;
+  width: 360px;
   // height: 360px;
   // background-color: rgba(78, 78, 78, 0.5);
 
@@ -34,7 +34,7 @@ export default {};
   // }
 
   input {
-    width: 380px;
+    width: 200px;
     height: 45px;
     border-color: rgb(255, 255, 255);
     border-width: 1px;
