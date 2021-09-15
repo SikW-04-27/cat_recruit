@@ -7,7 +7,7 @@
     >
       <el-page-header content="报名表"> </el-page-header>
       <!-- 登陆 处于报名阶段 未报名 -->
-      <div class="content" v-if="currentStatusId === 2 && stuId && !isSignUp">
+      <div class="content" v-if="true">
         <!-- 姓名 -->
         <div class="name">
           <span>姓名：</span>
@@ -19,6 +19,7 @@
               show-word-limit
               @change="change($event)"
               :disabled="disabled.value"
+              clearable
             >
             </el-input>
           </div>
@@ -43,7 +44,7 @@
             <el-input
               placeholder="请输入十位学号"
               v-model="stuNumber"
-              clearable
+              clearable="false"
               maxlength="10"
               @input="numChange($event)"
               :disabled="disabled.value"
@@ -181,7 +182,7 @@
       </div>
       <!-- 登录 处于报名阶 已报名 -->
       <div class="hasSignUp" v-if="currentStatusId === 2 && stuId && isSignUp">
-        <span>您已报名，请耐心等候一轮面试</span>
+        <span>您已报名，请耐心等候面试</span>
       </div>
       <!-- 登录 但 未处于报名阶段 -->
       <div class="close" v-if="!(currentStatusId === 2) && stuId">
@@ -205,6 +206,7 @@ import { defineComponent, ref, reactive, onMounted } from "vue";
 import { ElMessage, ElMessageBox, ElLoading } from "element-plus";
 import axios from "axios";
 // import submit from "../../request/api.js";
+import isSendForm from '../../utils/isSendForm'
 import {
   listAllCollege,
   listAllMajor,
@@ -216,6 +218,7 @@ import {
 } from "../../request/api";
 import Choice from "./choice.vue";
 import { getCookie } from "../../utils/myCookie";
+
 
 let change = ($event) => {};
 //定义各个值
@@ -281,6 +284,7 @@ let majorChange = () => {
   });
 };
 let phoneChange = ($event) => {
+  // console.log($event);
   if ($event.length === 11) {
     phoneCheck.value = true;
   } else {
@@ -324,10 +328,11 @@ let btnClick = () => {
       // formData: imgUrl
     })
       .then((res) => {
+        console.log(res);
         if (res.code === 200 || res.code === 2001) {
           success();
           //报名表禁用
-          disabled.value = ref(true);
+          disabled.value = true;
           window.sessionStorage.setItem("hasSignUp", true);
         } else {
           warningMessage.value = res.message;
@@ -335,7 +340,7 @@ let btnClick = () => {
           if (res.code === 4006) {
             //已经提交过报名表
             //报名表禁用
-            disabled.value = ref(true);
+            disabled.value = true;
             window.sessionStorage.setItem("hasSignUp", true);
           }
         }
@@ -354,6 +359,7 @@ let btnClick = () => {
 
 let imgUrl = "";
 let changeImg = function (e) {
+  console.log(e);
   ElMessageBox.confirm("确定添加头像?", "提示", {
     confirmButtonText: "确定",
     cancelButtonText: "取消",
@@ -384,19 +390,29 @@ let changeImg = function (e) {
       })
       .then((res) => {
         console.log(res);
+        if(res.data.code == 200) {
+          //  console.log(res);
         imgUrl = res.data.data;
         loadingInstance.close();
         avatarimg.value = res.data.data;
+        } else {
+        loadingInstance.close();
+           warningMessage.value = res.data.message;
+        warning();
+        }
+       
       })
       .catch((err) => {
         loadingInstance.close();
-        warningMessage.value = err.message;
+        warningMessage.value = '请5秒之后再试';
         warning();
       });
   });
 };
 
 onMounted(() => {
+  // console.log(isSendForm());
+  
   loading.value = false;
 
   if (!stuId) return;
@@ -425,7 +441,7 @@ onMounted(() => {
         listAllCollege({}).then((res) => {
           institutes.push(...res.data);
         });
-        warningMessage = err.data.message;
+        warningMessage.value = err.data.message;
         warning();
       });
 

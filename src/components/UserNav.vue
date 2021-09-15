@@ -99,7 +99,7 @@ export default {
     onMounted(() => {
       // console.log(localStorage.getItem('token'));
       // console.log(getCookie('studentToken'));
-      console.log(document.cookie);
+      // console.log(document.cookie);
       console.log(111);
       loginStatus.value = getCookie("studentToken") ? 1 : 0;
       if (loginStatus.value) {
@@ -124,6 +124,7 @@ export default {
       if (getCookie("studentToken")) {
         getSubmit({ uuid: window.sessionStorage.getItem("userId") })
           .then((res) => {
+            console.log(res);
             if (res.data) {
               //已报名的状态
               window.sessionStorage.setItem("hasSignUp", true);
