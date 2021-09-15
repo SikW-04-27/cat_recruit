@@ -94,44 +94,12 @@
               </el-option>
             </el-select>
           </div>
-          <!-- <el-result icon="success" v-show="major"> </el-result> -->
-        </div>
-        <!-- 班级 -->
-        <div class="classes" v-if="major">
-          <span>班级：</span>
-          <div class="c_input">
-            <el-input
-              placeholder="请输入班级（例如：一班）"
-              v-model="clazz"
-              clearable
-              maxlength="3"
-              :disabled="disabled.value"
-            >
-            </el-input>
-          </div>
-          <!-- <el-result icon="success" v-show="clazz"> </el-result> -->
-        </div>
-        <!-- 手机号码 -->
-        <div class="phone">
-          <span>手机号码：</span>
-          <div class="p_input">
-            <el-input
-              placeholder="请输入十一位手机号码"
-              v-model="phone"
-              clearable
-              maxlength="11"
-              @input="phoneChange($event)"
-              :disabled="disabled.value"
-            >
-            </el-input>
-          </div>
-          <!-- <el-result icon="success" v-show="phoneCheck"> </el-result> -->
         </div>
         <!-- 上传个人真实头像 -->
         <div class="avatar">
           <span>个人头像：</span>
           <label for="file">
-            <img :src="avatarimg" alt="" />
+            <img :src="avatarimg" alt="" class="avatarimgblock" />
           </label>
           <input
             type="file"
@@ -168,6 +136,38 @@
             </el-input>
           </div>
           <!-- <el-result icon="success" v-show="textarea2"> </el-result> -->
+          <!-- <el-result icon="success" v-show="major"> </el-result> -->
+        </div>
+        <!-- 班级 -->
+        <div class="classes" v-if="major">
+          <span>班级：</span>
+          <div class="c_input">
+            <el-input
+              placeholder="请输入班级（例如：一班）"
+              v-model="clazz"
+              clearable
+              maxlength="3"
+              :disabled="disabled.value"
+            >
+            </el-input>
+          </div>
+          <!-- <el-result icon="success" v-show="clazz"> </el-result> -->
+        </div>
+        <!-- 手机号码 -->
+        <div class="phone">
+          <span>手机号码：</span>
+          <div class="p_input">
+            <el-input
+              placeholder="请输入十一位手机号码"
+              v-model="phone"
+              clearable
+              maxlength="11"
+              @input="phoneChange($event)"
+              :disabled="disabled.value"
+            >
+            </el-input>
+          </div>
+          <!-- <el-result icon="success" v-show="phoneCheck"> </el-result> -->
         </div>
         <!-- 提交按钮 -->
         <div class="commit_btn">
@@ -258,10 +258,12 @@ let currentStatus;
 // todo const getItemBySessionStorage()
 if (getCookie("studentToken")) {
   console.log(123);
-  currentStatusId = JSON.parse(window.sessionStorage.getItem("CurrentStatus"))
-    .id;
-  currentStatus = JSON.parse(window.sessionStorage.getItem("CurrentStatus"))
-    .status;
+  currentStatusId = JSON.parse(
+    window.sessionStorage.getItem("CurrentStatus")
+  ).id;
+  currentStatus = JSON.parse(
+    window.sessionStorage.getItem("CurrentStatus")
+  ).status;
   //判断是否报名
   isSignUp = JSON.parse(window.sessionStorage.getItem("hasSignUp"));
 }
@@ -370,7 +372,7 @@ let changeImg = function (e) {
     let token = getCookie("studentToken");
     let loadingInstance = ElLoading.service({
       fullscreen: false,
-      target: ".avatar",
+      target: ".avatarimgblock",
       background: "rgba(55, 55, 55, 0.699)",
     });
     axios.interceptors.request.use(

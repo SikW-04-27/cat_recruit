@@ -250,10 +250,9 @@ onMounted(() => {
         closeMessage.value = "当前仍处于报名阶段，请先报名后耐心等候";
         data.value = res.data.status;
         return;
-      } else {
+      } 
+      
         data.value = res.data.status;
-      }
-
 
       //非报名阶段，全部用户可以预约
       //获取预约是否开放

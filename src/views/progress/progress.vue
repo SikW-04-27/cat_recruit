@@ -64,7 +64,7 @@ const warning = () => {
 onMounted(() => {
   loading.value = false;
   getBriefInfo({})
-    .then((res) => {
+    .then(({res}) => {
       activities.push(...res.data.recruitmentHistoryInfo);
     })
     .catch((err) => {
@@ -91,10 +91,13 @@ onMounted(() => {
 .el-page-header {
   padding: 30px;
   color: #ffffff;
-  :deep .el-page-header__content {
-    color: #fff;
-  }
+  
 }
+
+:deep(.el-page-header__content) {
+  color: #fff;
+}
+
 .block,
 .close {
   padding: 0 60px;
