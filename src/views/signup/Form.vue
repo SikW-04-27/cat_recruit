@@ -7,7 +7,7 @@
     >
       <el-page-header content="报名表"> </el-page-header>
       <!-- 登陆 处于报名阶段 未报名 -->
-      <div class="content" v-if="true">
+      <div class="content" v-if="currentStatusId === 2 && stuId && !isSignUp">
         <!-- 姓名 -->
         <div class="name">
           <span>姓名：</span>
