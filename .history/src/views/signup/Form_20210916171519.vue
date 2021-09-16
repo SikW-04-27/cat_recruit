@@ -15,7 +15,7 @@
             <el-input
               placeholder="请输入姓名"
               v-model="name"
-              maxlength="10"
+              maxlength="10"g'i't
               show-word-limit
               @change="change($event)"
               :disabled="disabled.value"
