@@ -110,3 +110,5 @@ export const userLogin = p => post(`${url2}user/Login`, p);
 export const getStudentNews = p => post(`${url2}message/list`);
 
 export const getStudentInfo = p => get(`${url2}user/now`);
+
+export const getStudentFormStatus = ()=> post(`${url1}status/checkEnroll`);

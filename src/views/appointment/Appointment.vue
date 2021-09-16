@@ -225,7 +225,7 @@ onMounted(() => {
           console.log(55555555555);
           close.value = true;
           closeMessage.value =
-            "感谢你对cat工作室招新工作的支持，很抱歉你未能通过上一轮阶段。";
+            "很抱歉你未能通过，感谢你对cat工作室招新工作的支持。";
           return;
         }
         //未被淘汰

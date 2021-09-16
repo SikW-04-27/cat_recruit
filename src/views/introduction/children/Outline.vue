@@ -59,7 +59,7 @@ export default {};
     height: 160px;
     // border-radius: 50%;
     // background-color: #77fdd7;
-    background-image: url("../../../assets/img/catlogo.png");
+    // background-image: url("../../../assets/img/catlogo.png");
     background-size: 160px 160px;
     position: absolute;
     // top: 20px;

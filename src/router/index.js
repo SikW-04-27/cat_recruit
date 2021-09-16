@@ -2,6 +2,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 import Introduction from '../views/introduction/Introduction.vue'
+import Recruit from '../views/introduction/children/Recruit.vue'
+import Banner from '../views/introduction/children/Banner.vue'
+import Works from '../views/introduction/children/Works.vue'
 import Register from '../views/register/Register.vue'
 
 //管理端组件
@@ -27,6 +30,7 @@ import Appointment from '../views/appointment/Appointment.vue'
 import Progress from '../views/progress/progress.vue'
 import Form from '../views/signup/Form.vue'
 import SignIn from '../views/signIn/signIn.vue'
+import ForgetPass from '../views/forgetPassword/ForgetPass.vue'
 
 const router = createRouter({
     history: createWebHistory(),
@@ -45,7 +49,20 @@ const router = createRouter({
             path: '/introduction',
             name: '',
             component: Introduction,
-
+            children: [
+                {
+                    path: 'banner',
+                    component: Banner
+                },
+                {
+                    path: 'recruit',
+                    component: Recruit
+                },
+                {
+                    path: 'works',
+                    component: Works
+                }
+            ]
         },
 
         // 登录界面
@@ -92,82 +109,16 @@ const router = createRouter({
         },
 
 
-        /*
-                //查看已报名学生
-                {
-                    path: '/checkregistered',
-                    name: '',
-                    component: CheckRegistered,
-                },
-        
-                // 查看学生的报名表
-                {
-                    path: '/checkpersonal',
-                    name: '',
-                    component: CheckPersonal,
-                },
-        
-                //查看管理员个人中心
-                {
-                    path: '/checkcenter',
-                    name: '',
-                    component: CheckCenter,
-                },
-        
-                //修改管理员信息
-                {
-                    path: '/modifycenter',
-                    name: 'modifycenter',
-                    component: ModifyCenter,
-                },
-        
-                //对学生进行评分评价
-                {
-                    path: '/modifyrating',
-                    name: 'modifyrating',
-                    component: ModifyRating,
-                },
-        
-                //全部学生的评分
-                {
-                    path: '/modifyratinglist',
-                    name: '',
-                    component: ModifyRatingList,
-                },
-        
-                //查看详细分数信息
-                {
-                    path: '/checkdetialpoint',
-                    name: 'checkdetialpoint',
-                    component: CheckDetialPoint,
-                },
-        
-                //管理预约时间
-                {
-                    path: '/modifyprocess',
-                    name: 'modifyprocess',
-                    component: ModifyProcess,
-                },
-        
-                //修改进程
-                {
-                    path: '/modifystatus',
-                    name: 'modifystatus',
-                    component: ModifyStatus,
-                },
-        
-                //管理员修改当前叫号
-                {
-                    path: '/modifyqueue',
-                    name: 'modifyqueue',
-                    component: ModifyQueue,
-                },
-        
-        */
         {
             name: '',
             path: '/news',
             component: News
+        },
+
+        {
+            name: 'forgetPass',
+            path: '/forgetPass',
+            component: ForgetPass
         }
 
     ]

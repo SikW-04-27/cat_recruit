@@ -40,6 +40,7 @@ import { ElMessage } from "element-plus";
 import { getBriefInfo } from "../../request/api";
 import _ from "lodash";
 import { useRouter } from "vue-router";
+import { success, warning } from "../../utils/usualUse";
 const router = useRouter();
 //点击返回按钮
 let goBack = () => {
@@ -52,26 +53,18 @@ let allowing = ref(true);
 let closeMessage = ref("查询进度失败，请先报名");
 let stuId = window.sessionStorage.getItem("userId");
 let activities = reactive([]);
-let warningMessage = "失败";
 let loading = ref(true);
 //定义提示函数：
-const warning = () => {
-  ElMessage.warning({
-    message: warningMessage,
-    type: "warning",
-  });
-};
 onMounted(() => {
-  loading.value = false;
   getBriefInfo({})
     .then((res) => {
       activities.push(...res.data.recruitmentHistoryInfo);
     })
     .catch((err) => {
       allowing.value = false;
-      warningMessage = err.data.message;
-      warning();
+      warning(err.message);
     });
+  loading.value = false;
 });
 </script>
 
@@ -91,13 +84,17 @@ onMounted(() => {
 .el-page-header {
   padding: 30px;
   color: #ffffff;
-  :deep .el-page-header__content {
-    color: #fff;
-  }
 }
+
+:deep(.el-page-header__content) {
+  color: #fff;
+}
+
 .block,
 .close {
   padding: 0 60px;
+  width: 1000px;
+  background: rgba(0, 0, 0, 0);
 }
 .close {
   width: 100%;

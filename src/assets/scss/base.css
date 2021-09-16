@@ -70,3 +70,16 @@ button, input , textarea{
   background-color: #c7c9cf;
   cursor: pointer;
 }
+
+/* 悬浮效果 */
+.illustration_img{
+    animation: illustration 2s infinite alternate;
+}
+@keyframes illustration {
+    from{
+      top: 0px;
+    }
+    to{
+      top: 20px;
+    }
+  }

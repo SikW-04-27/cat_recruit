@@ -4,12 +4,11 @@
     :default-active="activeIndex2"
     class="el-menu-demo"
     mode="horizontal"
-    @select="handleSelect"
     background-color="rgb(34 36 38 / 65%)"
     text-color="#fff"
     active-text-color="#4eb5ff"
   >
-    <el-submenu  v-if="isLoad">
+    <el-submenu index=""  v-if="isLoad">
       <template #title
         ><el-badge :is-dot="isDot">
           <el-icon :size="30" color="#409EFC">
@@ -29,12 +28,12 @@
       <el-menu-item index="2-4" @click="unDot"
         ><router-link to="/progress">查看进度</router-link></el-menu-item
       >
-      <el-menu-item index="3"
+      <el-menu-item index="2-5"
         ><router-link to="/news"
           ><el-badge :is-dot="isDot">消息中心</el-badge></router-link
         ></el-menu-item
       >
-      <el-menu-item @click="unLoad" v-if="isLoad">退出登录</el-menu-item>
+      <el-menu-item index="2-6" @click="unLoad" v-if="isLoad">退出登录</el-menu-item>
 
       <!-- <el-submenu index="2-5">
         <template #title>选项4</template>
@@ -49,7 +48,7 @@
     <el-menu-item index="4" v-else>
       <router-link to="/login">登录</router-link></el-menu-item
     >
-    <el-menu-item 
+    <el-menu-item index="1"
       ><router-link to="/introduction">工作室介绍</router-link></el-menu-item
     >
   </el-menu>
@@ -97,13 +96,8 @@ export default {
     let isDot = ref(false);
 
     onMounted(() => {
-      // console.log(localStorage.getItem('token'));
-      // console.log(getCookie('studentToken'));
-      console.log(document.cookie);
-      console.log(111);
       loginStatus.value = getCookie("studentToken") ? 1 : 0;
       if (loginStatus.value) {
-        console.log(111);
         userName.value = sessionStorage.getItem("userName");
         isLoad.value = true;
       } else {
@@ -124,6 +118,7 @@ export default {
       if (getCookie("studentToken")) {
         getSubmit({ uuid: window.sessionStorage.getItem("userId") })
           .then((res) => {
+            console.log(res);
             if (res.data) {
               //已报名的状态
               window.sessionStorage.setItem("hasSignUp", true);
@@ -192,11 +187,6 @@ export default {
       isDot,
       unDot,
     };
-  },
-  methods: {
-    handleSelect(key, keyPath) {
-      console.log(key, keyPath);
-    },
   },
 };
 </script>

@@ -49,6 +49,7 @@ export default {
 .container{
     // background-color: rgb(31, 31, 31);
     margin-top: 10px;
+    margin: 10px auto;
     position: relative;
     display: flex;
     justify-content: center;
