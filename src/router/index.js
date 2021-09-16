@@ -5,6 +5,7 @@ import Introduction from '../views/introduction/Introduction.vue'
 import Recruit from '../views/introduction/children/Recruit.vue'
 import Banner from '../views/introduction/children/Banner.vue'
 import Works from '../views/introduction/children/Works.vue'
+import Life from '../views/introduction/children/Life.vue'
 import Register from '../views/register/Register.vue'
 
 //管理端组件
@@ -60,6 +61,10 @@ const router = createRouter({
                 {
                     path: 'works',
                     component: Works
+                },
+                {
+                    path: 'life',
+                    component: Life
                 }
             ]
         },
