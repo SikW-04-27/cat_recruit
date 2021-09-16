@@ -118,6 +118,7 @@ export default {
       if (getCookie("studentToken")) {
         getSubmit({ uuid: window.sessionStorage.getItem("userId") })
           .then((res) => {
+            console.log(res);
             if (res.data) {
               //已报名的状态
               window.sessionStorage.setItem("hasSignUp", true);
