@@ -100,6 +100,8 @@
           <span>个人头像：</span>
           <label for="file">
             <img :src="avatarimg" alt="" class="avatarimgblock" />
+          <div class="addOrChangeImg">{{changeImgTips}}</div>
+
           </label>
           <input
             type="file"
@@ -109,6 +111,7 @@
             style="display: none"
             @change="changeImg"
           />
+
         </div>
         <!-- 方向 -->
         <div class="direction">
@@ -236,6 +239,8 @@ let warningMessage = ref("");
 let stuId = window.sessionStorage.getItem("userId");
 let loading = ref(true);
 let avatarimg = ref("");
+let changeImgTips = ref("点击发送头像")
+
 //定义warning函数
 const warning = () => {
   ElMessage.warning({
@@ -361,6 +366,9 @@ let btnClick = () => {
 
 let imgUrl = "";
 let changeImg = function (e) {
+  console.log(e.target.files);
+  if(e.target.files.length) {
+    console.log(111);
   console.log(e);
   ElMessageBox.confirm("确定添加头像?", "提示", {
     confirmButtonText: "确定",
@@ -397,6 +405,7 @@ let changeImg = function (e) {
         imgUrl = res.data.data;
         loadingInstance.close();
         avatarimg.value = res.data.data;
+        changeImgTips.value = "更换头像"
         } else {
         loadingInstance.close();
            warningMessage.value = res.data.message;
@@ -409,7 +418,12 @@ let changeImg = function (e) {
         warningMessage.value = '请5秒之后再试';
         warning();
       });
-  });
+  })
+  .catch(() => {
+    console.log(55555);
+  })
+  }
+  
 };
 
 onMounted(() => {
@@ -577,4 +591,20 @@ $zhutise: rgb(41, 45, 63);
   text-align: center;
   padding: 100px 0;
 }
+
+.avatar {
+
+position: relative;
+
+  .addOrChangeImg {
+    position: absolute;
+    bottom: 10px;
+    left: 100px;
+  width: 100px;
+  height: 30px;
+  background-color: red;
+}
+}
+
+
 </style>>

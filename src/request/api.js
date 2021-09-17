@@ -111,4 +111,4 @@ export const getStudentFormStatus = ()=> post(`${url1}status/checkEnroll`);
 
 export const resetSendEmail = p => post(`${url1}user/resetSendEmail`, p);
 
-export const resetPassword = p => post(`${url1}user/resetSendEmail`, p)
+export const resetPassword = p => post(`${url1}user/resetPassword`, p)

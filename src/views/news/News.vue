@@ -1,9 +1,11 @@
 
 <template>
-
   <div class="block" id="news-content" key="1" v-loading="loading">
-<transition-group name="animate__animated animate__bounce" enter-active-class="animate__rubberBand">
-    <el-timeline v-if="isFinishLoad" v-show="isHide">
+    <transition-group
+      name="animate__animated animate__bounce"
+      enter-active-class="animate__rubberBand"
+    >
+      <!-- <el-timeline v-if="isFinishLoad" v-show="isHide">
       <el-timeline-item
         :timestamp="item.time"
         placement="top"
@@ -15,11 +17,15 @@
           <h4>{{ item.content }}</h4>
         </el-card>
       </el-timeline-item>
-    </el-timeline>
-    <div v-else class="noLoad">{{newsTip}}</div>
- 
-</transition-group>
- </div>
+    </el-timeline> -->
+      <ul id="news-ul" v-if="isFinishLoad" v-show="isHide">
+        <li id="news-li" v-for="(item, index) of studentNews" :key="index">
+          <div class="news-word">{{ item.content }}</div>
+        </li>
+      </ul>
+      <div v-else class="noLoad">{{ newsTip }}</div>
+    </transition-group>
+  </div>
 </template>
 
 <script setup>
@@ -29,7 +35,7 @@ import { getStudentNews } from "../../request/api";
 import { getCookie } from "../../utils/myCookie";
 //引入修改时间戳
 import "../../../node_modules/dayjs/dayjs.min.js";
-import {openSocket} from '../../utils/websocket'
+import { openSocket } from "../../utils/websocket";
 
 let studentNews = reactive([]);
 
@@ -87,8 +93,7 @@ onBeforeMount(() => {
           console.log(studentNews);
           setTimeout(() => {
             isHide.value = true;
-          }, 1000)
-          
+          }, 1000);
         } else {
           newsTip.value = result.message;
           isFinishLoad.value = false;
@@ -120,6 +125,41 @@ onMounted(() => {
   top: 120px;
   margin: 0 auto;
   width: 70%;
+  background-color: #fff;
+
+  .el-timeline {
+    background-color: #fff;
+
+    .el-timeline-item {
+      // float: right;
+      // margin: 10px 10px;
+      // padding: 20px;
+      width: 400px;
+      background-color: red;
+    }
+  }
+
+#news-ul {
+  position: relative;
+
+#news-li {
+
+  position: absolute;
+  margin: 10px;
+  width: 200px;
+  height: 200px;
+&:nth-child(2n) {
+  right: 10px;
+  }
+   .news-word {
+    background-color: red;
+  }
+}
+  
+
+}
+
+ 
 }
 
 .active {
