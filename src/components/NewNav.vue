@@ -14,7 +14,7 @@
       <ul class="login_before" v-else>
           <!-- <li><router-link to="/introduction/banner">工作室介绍</router-link></li>
           <span class="line">|</span> -->
-          <li ><router-link to="/login">登录 / 注册</router-link></li>
+          <li ><router-link to="/loginregister/login">登录 / 注册</router-link></li>
       </ul>
   </div>
 </template>

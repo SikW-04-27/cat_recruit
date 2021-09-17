@@ -6,7 +6,6 @@ import Recruit from '../views/introduction/children/Recruit.vue'
 import Banner from '../views/introduction/children/Banner.vue'
 import Works from '../views/introduction/children/Works.vue'
 import Life from '../views/introduction/children/Life.vue'
-import Register from '../views/register/Register.vue'
 
 //管理端组件
 // import CheckRegistered from '../views/manage/check/CheckRegistered.vue'
@@ -20,8 +19,9 @@ import Register from '../views/register/Register.vue'
 // import ModifyStatus from '../views/manage/operation/ModifyStatus.vue'
 // import ModifyQueue from '../views/manage/operation/ModifyQueue.vue'
 
-
-import Login from '../views/login/Login.vue'
+import LoginRegister from '../views/login/LoginRegister.vue'
+import Login from '../views/login/children/Login.vue'
+import Register from '../views/login/children/Register.vue'
 // import StudentLogin from '../views/login/children/StudentLogin.vue'
 // import ManagerLogin from '../views/login/children/ManagerLogin.vue'
 // import StudentRegister from '../views/register/children/StudentRegister.vue'
@@ -70,20 +70,23 @@ const router = createRouter({
             ]
         },
 
-        // 登录界面
+        // 登录注册
         {
-            path: '/login',
+            path: '/loginregister',
             name: '',
-            component: Login,
-
+            component: LoginRegister,
+            children: [
+                {
+                    path: 'login',
+                    component: Login,
+                },
+                {
+                    path: 'register',
+                    component: Register,
+                },
+            ]
         },
 
-        // 注册界面
-        {
-            path: '/register',
-            name: '',
-            component: Register,
-        },
 
         // 填写报名表
         {

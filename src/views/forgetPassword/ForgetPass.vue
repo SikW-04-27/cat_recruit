@@ -1,12 +1,12 @@
 <template>
   <AccountOperate>
       <div id="forget-pass-content">
-<input type="text" placeholder="邮箱" v-model="loginMail">
-<input type="text" placeholder="新密码" v-model="newPassword">
-<input type="text" placeholder="验证码" v-model="newCheckNum">
-<div @click="isCorrectAndSendCheckNumber">{{checkNumberTip}}</div>
-<div>{{tips}}</div>
-<div @click="newLogin">重置密码</div>
+        <input type="text" placeholder="邮箱" v-model="loginMail">
+        <input type="text" placeholder="新密码" v-model="newPassword">
+        <input type="text" placeholder="验证码" v-model="newCheckNum">
+        <div @click="isCorrectAndSendCheckNumber">{{checkNumberTip}}</div>
+        <div>{{tips}}</div>
+        <div @click="newLogin">重置密码</div>
       </div>
   </AccountOperate>
 </template>
