@@ -330,7 +330,7 @@ let btnClick = () => {
         if (res.code === 200 || res.code === 2001) {
           success();
           //报名表禁用
-          disabled.value = true;
+          disabled.value = false;
           window.sessionStorage.setItem("hasSignUp", true);
         } else {
           warningMessage.value = res.message;
@@ -344,11 +344,11 @@ let btnClick = () => {
         }
       })
       .catch((err) => {
-        warningMessage.value = err.data.message;
+        warningMessage.value = err.message
         warning();
       });
   } else {
-    warningMessage.value = "请完善全部信息";
+    warningMessage.
     warning();
   }
 };

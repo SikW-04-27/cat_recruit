@@ -333,8 +333,7 @@ let btnClick = () => {
           disabled.value = true;
           window.sessionStorage.setItem("hasSignUp", true);
         } else {
-          warningMessage.value = res.message;
-          warning();
+          warning(res.message);
           if (res.code === 4006) {
             //已经提交过报名表
             //报名表禁用
@@ -344,12 +343,10 @@ let btnClick = () => {
         }
       })
       .catch((err) => {
-        warningMessage.value = err.data.message;
-        warning();
+        warning(err.message);
       });
   } else {
-    warningMessage.value = "请完善全部信息";
-    warning();
+    warning("请完善全部信息");
   }
 };
 

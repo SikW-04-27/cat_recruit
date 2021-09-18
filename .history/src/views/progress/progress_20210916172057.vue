@@ -50,7 +50,7 @@ let goBack = () => {
 };
 //检测用户是否能查询
 let allowing = ref(true);
-let closeMessage = ref("查询进度失败，请先报名");
+let closeMessage = ref("123");
 let stuId = window.sessionStorage.getItem("userId");
 let activities = reactive([]);
 let loading = ref(true);
@@ -62,7 +62,7 @@ onMounted(() => {
     })
     .catch((err) => {
       allowing.value = false;
-      warning("请先报名");
+      warning("查询进度失败，请先报名");
     });
   loading.value = false;
 });

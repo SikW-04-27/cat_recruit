@@ -62,7 +62,7 @@ onMounted(() => {
     })
     .catch((err) => {
       allowing.value = false;
-      warning("请先报名");
+      warning("查询进度失败，请先报名");
     });
   loading.value = false;
 });
