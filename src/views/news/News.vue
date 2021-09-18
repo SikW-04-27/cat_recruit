@@ -126,7 +126,7 @@ onMounted(() => {
 }
 
 .noLoad {
-  color: #fff;
+  color: rgb(175 149 112);
   font-weight: 700;
   font-size: 20px;
 }

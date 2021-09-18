@@ -1,9 +1,5 @@
 <template>
-  <div
-    class="signIn"
-    v-loading="loading"
-    element-loading-background="rgba(0, 0, 0, .5)"
-  >
+  <div class="signIn"  v-loading="loading"   element-loading-background="rgba(0, 0, 0, .5)">
     <div class="s-main">
       <!-- 页眉 -->
       <el-page-header @back="goBack" content="面试签到"> </el-page-header>
@@ -60,6 +56,8 @@ import {
   getBriefInfo,
 } from "../../request/api";
 import { warning, success } from "../../utils/usualUse";
+import { getCookie } from "../../utils/myCookie";
+
 
 const router = useRouter();
 //点击返回按钮
@@ -135,6 +133,16 @@ let getUserQueue = function () {
 };
 
 onMounted(() => {
+
+  //未登录的话直接退出
+  if (!getCookie("studentToken")) {
+    console.log(11111111111);
+    router.push({
+      path: "/introduction/banner",
+    });
+  }
+
+
   openSocket("http://112.74.33.254:2358/ws/queue/", undefined, {
     onopen: () => {
       console.log(1212121212);
@@ -330,8 +338,9 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
+$fontColor:rgba(20, 20, 20, 0.68);
 .el-page-header {
-  padding: 30px 0 0 0;
+  padding: 30px 0 30px 0;
   // :deep .el-page-header__content {
   //   color: #fff;
   // }
@@ -339,22 +348,29 @@ onMounted(() => {
 .signIn {
   margin: 0 auto 0;
   padding: 80px 50px 0 50px;
-  color: #fff;
+  color: $fontColor;
+  font-weight: 600;
 }
 .s-main {
-  background-color: rgba(78, 78, 78, 0.5);
+  background-color: transparent;
   width: 1000px;
   height: 480px;
   padding: 0 50px;
-  margin: 50px auto 0;
+  margin: 0 auto;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
 }
 .s_btn {
-  margin-top: 100px;
+  margin-top: 150px;
   padding-bottom: 50px;
   text-align: center;
   .c_btn {
     display: block;
     margin: 0 auto;
+    border: none;
+    background-color: rgba(233, 208, 95, 0.77);
+    font-weight: 600;
+    letter-spacing: 2px;
   }
   .tips {
     display: inline-block;
@@ -362,6 +378,7 @@ onMounted(() => {
     padding: 0;
     span {
       line-height: 30px;
+      color: $fontColor;
     }
   }
 }
@@ -369,12 +386,12 @@ onMounted(() => {
 .hasCheck {
   display: block;
   text-align: center;
-  padding: 50px 0;
+  padding: 120px 0;
   span {
     line-height: 30px;
     display: inline-block;
     vertical-align: middle;
-    color: #fff;
+    color: $fontColor;
   }
 }
 .el-result {
@@ -402,9 +419,21 @@ onMounted(() => {
   text-align: center;
   padding: 100px 0;
 }
-.el-page-header :deep {
-  .el-page-header__content {
-    color: rgb(236, 236, 236);
+.el-page-header {
+  :deep(.el-page-header__content) {
+    color: $fontColor;
   }
 }
+:deep(.el-divider__text) {
+    width: 300px;
+    height: 40px;
+    background-color: rgb(173, 230, 181);
+    line-height: 40px;
+    border-radius: 20px;
+    color: white;
+    font-weight: 600;
+    font-size: 16px;
+    text-align: center;
+  }
+
 </style>
