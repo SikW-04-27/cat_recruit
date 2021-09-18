@@ -1,6 +1,6 @@
 <template>
   <div class="nav">
-      <div class="logo">
+      <div class="logo" @click="mainPage">
           <img src="../../src/assets/img/catlogo.png" alt="">
       </div>
       <ul class="login_after" v-if="isLoad">
@@ -9,7 +9,7 @@
           <li><router-link to="/signIn">到场签到</router-link></li>
           <li><router-link to="/progress">查看进度</router-link></li>
           <li><router-link to="/news"><el-badge :is-dot="isDot">消息中心</el-badge></router-link></li>
-          <li  @click="unLoad" v-if="isLoad"><router-link to="/introduction">退出登录</router-link></li>
+          <li  @click="unLoad">退出登录</li>
       </ul>
       <ul class="login_before" v-else>
           <!-- <li><router-link to="/introduction/banner">工作室介绍</router-link></li>
@@ -115,9 +115,23 @@ export default {
       store.state.loginStatus = false;
       isLoad.value = false;
       sessionStorage.clear();
+      console.log(12345678);
+      
+      setTimeout(() => {  
+        console.log(4554654456465);
+        router.push({
+          path: "/introduction/banner",
+        });
+          location.reload();
+      },2000);
+    
+    }
+
+    //点击logo返回首页
+    const mainPage = () => {
       router.push({
-        path: "/introduction",
-      });
+        path:"/introduction/banner"
+      })
     }
 
     //点击消息中心，取消小红点
@@ -126,9 +140,6 @@ export default {
       console.log("取消小红点");
     };
 
-    onUnmounted(() => {
-      location.reload();
-    });
 
     // watch(() => route.path,() => {
     // console.log('监听到变化');
@@ -144,6 +155,7 @@ export default {
       unLoad,
       isDot,
       unDot,
+      mainPage,
     };
   },
 };
@@ -170,6 +182,11 @@ export default {
             img{
                 width: 80px;
                 line-height: 80px;
+                cursor: pointer;
+                transition: 1s;
+                &:hover{
+                  transform: scale(1.05);
+                }
             }
         }
         .login_before,.login_after{
@@ -190,6 +207,12 @@ export default {
                 &:active{
                     color: rgb(176, 179, 175);
                 }
+              a{
+                display: block;
+                &:focus{
+                  color: rgb(224, 157, 69) ;
+                }
+              }
             }
         }
         .login_after{

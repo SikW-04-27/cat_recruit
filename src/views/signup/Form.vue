@@ -1,41 +1,33 @@
 <template>
-  <div class="form_block">
+<transition
+  name="animate__animated animate__bounce"
+  enter-active-class="animate__headShake"
+>
+  <div class="form_block" v-show="hide">
     <div
       id="form"
       v-loading="loading"
-      element-loading-background="rgba(0, 0, 0, .5)"
+      element-loading-background="rgb(255 255 255 / 41%)"
     >
       <el-page-header content="报名表"> </el-page-header>
       <!-- 登陆 处于报名阶段 未报名 -->
       <div class="content" v-if="currentStatusId === 2 && stuId && !isSignUp">
-        <!-- 姓名 -->
-        <div class="name">
-          <span>姓名：</span>
-          <div class="n_input">
-            <el-input
-              placeholder="请输入姓名"
-              v-model="name"
-              maxlength="10"
-              show-word-limit
-              @change="change($event)"
-              :disabled="disabled.value"
-              clearable
-            >
-            </el-input>
+        <div class="content_left">
+          <!-- 姓名 -->
+          <div class="name">
+            <span>姓名：</span>
+            <div class="n_input">
+              <el-input
+                placeholder="请输入姓名"
+                v-model="name"
+                maxlength="10"
+                clearable
+                @focus="focusing($event)"
+                @blur="bluring($event)"
+              >
+              </el-input>
+            </div>
           </div>
-          <!-- <el-result icon="success" v-show="name" id="icon" el-result-color="red"
-              >.el-result__icon svg
-            </el-result> -->
-        </div>
-        <!-- 性别 -->
-        <div class="sex">
-          <span>报名组别：</span>
-          <el-radio-group v-model="radio2" :disabled="disabled.value">
-            <el-radio-button label="男"></el-radio-button>
-            <el-radio-button label="女"></el-radio-button>
-          </el-radio-group>
-          <!-- <el-result icon="success" v-show="sex"> </el-result> -->
-        </div>
         <!-- 学号 -->
         <div class="stuNumber">
           <span>学号：</span>
@@ -45,12 +37,31 @@
               v-model="stuNumber"
               clearable="false"
               maxlength="10"
-              @input="numChange($event)"
               :disabled="disabled.value"
+              @focus="focusing($event)"
+              @blur="bluring($event)"
             >
             </el-input>
           </div>
           <!-- <el-result icon="success" v-show="numCheck"> </el-result> -->
+        </div>
+        
+        <!-- 手机号码 -->
+        <div class="phone">
+          <span>电话：</span>
+          <div class="p_input">
+            <el-input
+              placeholder="请输入十一位手机号码"
+              v-model="phone"
+              clearable
+              maxlength="11"
+              :disabled="disabled.value"
+              @focus="focusing($event)"
+              @blur="bluring($event)"
+            >
+            </el-input>
+          </div>
+          <!-- <el-result icon="success" v-show="phoneCheck"> </el-result> -->
         </div>
         <!-- 学院 -->
         <div class="institute">
@@ -109,66 +120,68 @@
           </div>
           <!-- <el-result icon="success" v-show="clazz"> </el-result> -->
         </div>
-        <!-- 手机号码 -->
-        <div class="phone">
-          <span>手机号码：</span>
-          <div class="p_input">
-            <el-input
-              placeholder="请输入十一位手机号码"
-              v-model="phone"
-              clearable
-              maxlength="11"
-              @input="phoneChange($event)"
-              :disabled="disabled.value"
-            >
-            </el-input>
-          </div>
-          <!-- <el-result icon="success" v-show="phoneCheck"> </el-result> -->
-        </div>
 
-        <!-- 上传个人真实头像 -->
-        <div class="avatar">
-          <span>个人头像：</span>
-          <label for="file">
-            <img :src="avatarimg" alt="" class="avatarimgblock" />
-          </label>
-          <input
-            type="file"
-            id="file"
-            accept="image/*"
-            name="file"
-            style="display: none"
-            @change="changeImg"
-          />
+        
+       
+
         </div>
-        <!-- 方向 -->
-        <div class="direction">
-          <span>报名组别：</span>
-          <el-radio-group v-model="radio1" :disabled="disabled.value">
-            <el-radio-button label="前端"></el-radio-button>
-            <el-radio-button label="后台"></el-radio-button>
-          </el-radio-group>
-          <!-- <el-result icon="success" v-show="direction"> </el-result> -->
-        </div>
-        <!-- 自我介绍 -->
-        <div class="self_intro">
-          <span>自我介绍：</span>
-          <div class="s_input">
-            <el-input
-              type="textarea"
-              :autosize="{ minRows: 4, maxRows: 4 }"
-              placeholder="请做一段简单的自我介绍"
-              v-model="textarea2"
-              resize="none"
-              show-word-limit
-              :disabled="disabled.value"
-              maxlength="200"
-            >
-            </el-input>
+        <div class="content_right">
+          <!-- 上传个人真实头像 -->
+          <div class="avatar">
+            <span>头像：</span>
+            <label for="file">
+              <img :src="avatarimg" alt="" class="avatarimgblock" />
+            </label>
+            <input
+              type="file"
+              id="file"
+              accept="image/*"
+              name="file"
+              style="display: none"
+              @change="changeImg"
+            />
           </div>
-          <!-- <el-result icon="success" v-show="textarea2"> </el-result> -->
-          <!-- <el-result icon="success" v-show="major"> </el-result> -->
+
+          <!-- 性别 -->
+          <div class="sex">
+            <span>性别：</span>
+            <el-radio-group v-model="radio2" :disabled="disabled.value"  fill='rgb(226, 240, 217)'>
+              <el-radio-button label="男"></el-radio-button>
+              <el-radio-button label="女"></el-radio-button>
+            </el-radio-group>
+          </div>
+
+          <!-- 方向 -->
+          <div class="direction">
+            <span>方向：</span>
+            <el-radio-group v-model="radio1" :disabled="disabled.value" fill='rgb(226, 240, 217)'>
+              <el-radio-button label="前端"></el-radio-button>
+              <el-radio-button label="后台"></el-radio-button>
+            </el-radio-group>
+            <!-- <el-result icon="success" v-show="direction"> </el-result> -->
+          </div>
+
+          <!-- 自我介绍 -->
+          <div class="self_intro">
+            <span>简介：</span>
+            <div class="s_input">
+              <el-input
+                type="textarea"
+                :autosize="{ minRows: 4}"
+                placeholder="请做一段简单的自我介绍"
+                v-model="textarea2"
+                resize="none"
+                show-word-limit
+                :disabled="disabled.value"
+                maxlength="150"
+              >
+              </el-input>
+            </div>
+            <!-- <el-result icon="success" v-show="textarea2"> </el-result> -->
+            <!-- <el-result icon="success" v-show="major"> </el-result> -->
+          </div>
         </div>
+         
         <!-- 提交按钮 -->
         <div class="commit_btn">
           <el-button
@@ -179,6 +192,7 @@
             >提交</el-button
           >
         </div>
+        
       </div>
       <!-- 登录 处于报名阶 已报名 -->
       <div class="hasSignUp" v-if="currentStatusId === 2 && stuId && isSignUp">
@@ -199,12 +213,15 @@
       </div>
     </div>
   </div>
+</transition>
+
 </template>
 
 <script setup>
 import { defineComponent, ref, reactive, onMounted } from "vue";
 import { ElMessage, ElMessageBox, ElLoading } from "element-plus";
 import axios from "axios";
+import { useRouter } from "vue-router";
 // import submit from "../../request/api.js";
 import isSendForm from "../../utils/isSendForm";
 import {
@@ -215,11 +232,11 @@ import {
   getUserStatus,
   getSubmit,
   getBriefInfo,
+  checkEnroll,
 } from "../../request/api";
 import Choice from "./choice.vue";
 import { getCookie } from "../../utils/myCookie";
-
-let change = ($event) => {};
+const router = useRouter();
 //定义各个值
 let name = ref("");
 let institute = ref("");
@@ -235,6 +252,7 @@ let warningMessage = ref("");
 let stuId = window.sessionStorage.getItem("userId");
 let loading = ref(true);
 let avatarimg = ref("");
+let hide = ref(false)
 //定义warning函数
 const warning = () => {
   ElMessage.warning({
@@ -257,10 +275,12 @@ let currentStatus;
 // todo const getItemBySessionStorage()
 if (getCookie("studentToken")) {
   console.log(123);
-  currentStatusId = JSON.parse(window.sessionStorage.getItem("CurrentStatus"))
-    .id;
-  currentStatus = JSON.parse(window.sessionStorage.getItem("CurrentStatus"))
-    .status;
+  currentStatusId = JSON.parse(
+    window.sessionStorage.getItem("CurrentStatus")
+  ).id;
+  currentStatus = JSON.parse(
+    window.sessionStorage.getItem("CurrentStatus")
+  ).status;
   //判断是否报名
   isSignUp = JSON.parse(window.sessionStorage.getItem("hasSignUp"));
 }
@@ -343,10 +363,10 @@ let btnClick = () => {
         }
       })
       .catch((err) => {
-        warning(err.data.message);
+        ElMessage.warning(err.data.message);
       });
   } else {
-    warning("请完善全部信息");
+    ElMessage.warning("请完善全部信息");
   }
 };
 
@@ -404,25 +424,46 @@ let changeImg = function (e) {
   });
 };
 
+const focusing = function($event){
+  console.log($event.currentTarget.parentElement.parentElement.parentElement.className);
+  $event.currentTarget.parentElement.parentElement.parentElement.firstElementChild.style = ' font-size: 16px'
+  $event.currentTarget.parentElement.parentElement.parentElement.style = 'margin:10px 0'
+  $event.currentTarget.parentElement.style = ' font-size:16px'
+  $event.currentTarget.style = 'width:310px'
+}
+
+const bluring = function($event){
+  $event.currentTarget.parentElement.parentElement.parentElement.firstElementChild.style = ''
+  $event.currentTarget.parentElement.parentElement.parentElement.style = ''
+  $event.currentTarget.parentElement.style = ''
+  $event.currentTarget.style = ''
+
+}
+
 onMounted(() => {
   // console.log(isSendForm());
 
-  loading.value = false;
-
   //未登录的话直接退出
-  if (!stuId) return;
+  if (!getCookie("studentToken")) {
+    console.log(11111111111);
+    router.push({
+      path: "/introduction/banner",
+    });
+  }
 
   //当处于报名阶段的时候
   if (currentStatusId === 2) {
-    //获取用户阶段信息
-    getBriefInfo({})
+    //检查是否报名
+    checkEnroll({})
       .then((res) => {
-        if (res.data.userStatusId === 1) {
-          //已报名
+        //已经报名
+        if (res.code === 800) {
           window.sessionStorage.setItem("hasSignUp", true);
           return;
-        } else {
-          //未报名
+        }
+        //未报名
+        if (res.code === 700) {
+          hide.value = true
           window.sessionStorage.setItem("hasSignUp", false);
           listAllCollege({}).then((res) => {
             institutes.push(...res.data);
@@ -430,22 +471,50 @@ onMounted(() => {
         }
       })
       .catch((err) => {
-        //未报名
-        window.sessionStorage.setItem("hasSignUp", false);
-        listAllCollege({}).then((res) => {
-          institutes.push(...res.data);
-        });
-        warningMessage.value = err.data.message;
-        warning();
+        warning(err.message);
       });
 
-    return;
+    //获取用户阶段信息
+    // getBriefInfo({})
+    //   .then((res) => {
+    //     console.log(res);
+    //     //未报名
+    //     if(res.code === 1405){
+    //       window.sessionStorage.setItem("hasSignUp", false);
+    //       listAllCollege({}).then((res) => {
+    //         console.log(33333333333333);
+    //         institutes.push(...res.data);
+    //       });
+    //     }
+    //     if (res.userStatusId === 1) {
+    //       //已报名
+    //       window.sessionStorage.setItem("hasSignUp", true);
+    //       return;
+    //     } else {
+    //       //未报名
+    //       window.sessionStorage.setItem("hasSignUp", false);
+    //       listAllCollege({}).then((res) => {
+    //         institutes.push(...res.data);
+    //       });
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     //未报名
+    //     console.log(err);
+    //     window.sessionStorage.setItem("hasSignUp", false);
+    //     listAllCollege({}).then((res) => {
+    //       institutes.push(...res.data);
+    //     });
+    //     warningMessage.value = err.message;
+    //     warning();
+    //   });
   }
   //未处于报名时间段
   if (currentStatusId === 1) {
     warning("招新未开始，请耐心等候");
     return;
   }
+  loading.value = false;
 });
 </script>
 
@@ -457,77 +526,103 @@ $zhutise: rgb(41, 45, 63);
 #form {
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
   width: 1000px;
-  min-height: 480px;
-  margin: 60px auto 0;
+  height: 564px;
+  margin: 10px auto 0;
   padding: 20px 50px 0 50px;
-  background-color: rgba(78, 78, 78, 0.5);
-  color: #fff;
+  color: rgba(20, 20, 20, 0.678);
+  font-weight: 600;
+  border-radius: 20px;
+  // background: url('../../assets/img/formBg.jpg');
+  background-size: cover;
 }
 .el-page-header {
   padding: 10px 0 30px 0;
-  :deep .el-page-header__content {
-    color: #fff;
+  :deep(.el-page-header__content) {
+    color: rgba(20, 20, 20, 0.678);
   }
 }
-.i_select {
-  margin-left: 20px;
-}
+// .i_select {
+//   // margin-left: 20px;
+// }
 .content {
-  height: auto;
+  width: 100%;
+  height: 500px;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  :deep(.el-input__inner) {
+    width: 300px;
+    border: none;
+    background-color: transparent;
+    border-bottom: rgb(174, 184, 183) 1px solid;
+    border-radius: 0;
+    padding: 0;
+    transition: .3s;
+  }
   span {
     display: inline-block;
-    width: 80px;
     text-align: right;
+    font-size: 14px;
+    transition: .3s;
   }
+
+  .content_left {
+    width: 55%;
+  }
+  .content_right{
+    width: 45%;
+  }
+
   .name,
   .stuNumber,
   .sex,
   .classes,
-  .phone {
-    height: 50px;
-  }
-  .n_input,
-  .s_input,
-  .c_input,
-  .p_input {
-    display: inline-block;
-    height: 30px;
-    margin-right: 30px;
-    width: 400px;
-    .el-input {
-      margin: 0 20px;
-    }
-  }
-  .institute,
+  .phone,
+  .institute 
   .majors,
-  .direction {
-    height: 50px;
-    margin-right: 30px;
-    .i_select {
-      display: inline-block;
-    }
-    .el-input {
-      margin: 0 0 0 20px;
-    }
-    .el-select {
-      width: 400px;
-    }
+  .direction{
+    width: 300px;
+    height: 70px;
+    margin: 0;
+    transition: 0.3s;
   }
+
+  .classes,
+  .majors,
+  .institute {
+    margin-top: 10px;
+  }
+  .s_input{
+    display: inline-block;
+    margin-left: 20px;
+  }
+  
+  //  {
+  //   height: 50px;
+  //   margin-right: 30px;
+  //   .i_select {
+  //     display: inline-block;
+  //   }
+  //   .el-input {
+  //     margin: 0 0 0 20px;
+  //   }
+  //   .el-select {
+  //     width: 400px;
+  //   }
+  // }
   .self_intro {
-    height: 130px;
+    // height: 130px;
     span {
       float: left;
     }
     .s_input {
-      width: 400px;
-      display: inline-block;
+      width: 300px;
     }
   }
   .commit_btn {
     margin: 0 auto;
   }
-  .el-radio-group,
-  .el-textarea {
+  .el-radio-group{
     margin: 0 20px;
   }
   .el-result {
@@ -535,33 +630,63 @@ $zhutise: rgb(41, 45, 63);
     margin-top: 5px;
     display: inline-block;
     padding: 0;
-    // :deep .icon-success {
-    //   width: 30px;
-    //   height: auto;
-    // }
+  }
+  :deep(.el-radio-button__inner){
+    &:hover{
+      color: rgb(190, 199, 184);
+    }
   }
 
   .commit_btn {
-    padding-left: 130px;
-    padding-bottom: 30px;
+    width: 80px;
+    position: absolute;
+    left: 50%;
+    margin-left: -70px;
+    bottom: 50px;
+    :deep(.el-button){
+      width: 120px;
+      height: 45px;
+      background-color: rgba(233, 208, 95, 0.767);
+      border: none;
+      color: rgb(255, 255, 255);
+      font-weight: 600;
+      letter-spacing: 5px;
+      &:hover{
+        background-color: rgba(233, 208, 95, 0.829);
+        box-shadow: 0 0 1px rgba(82, 81, 81, 0.685)
+      };
+      &:active{
+        background-color: rgba(233, 208, 95, 0.918);
+        box-shadow: 0 0 1px rgba(82, 81, 81, 0.815)
+      }
+    }
   }
   .avatar {
-    padding: 10px 0;
+    padding: 10px 0 30px;
     label {
       display: inline-block;
       line-height: 30px;
       margin-left: 20px;
-      background-color: #000;
       vertical-align: top;
+      background-image: url(../../assets/img/updateAvatar.png);
+      background-size: cover;
+      cursor: pointer;
       img {
         width: 100px;
         height: 100px;
-        background-image: url(../../assets/img/点击上传图片.png);
         background-size: contain;
+      }
+      img[src=''],img:not([src]){
+        opacity: 0;
       }
     }
   }
 }
+
+.changeBig{
+  font-size: 18px;
+}
+
 .close,
 .unLogin,
 .hasSignUp {

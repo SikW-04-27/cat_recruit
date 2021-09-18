@@ -27,6 +27,7 @@ export default {
     // const router = useRouter();
     const router = useRouter()
     onMounted(()=>{
+      console.log(2131234214);
       router.push({
         path:'/introduction/banner'
       })
