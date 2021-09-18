@@ -24,13 +24,13 @@
           id="news-li"
           v-for="(item, index) of studentNews"
           :key="index"
-          :style="{ backgroundColor: colorOptions[index] }"
+          :style="{ backgroundColor: colorOptions[index%colorOptions.length] }"
         >
           <div
             class="li-line"
-            :style="{ backgroundColor: colorOptions[index] }"
+            :style="{ backgroundColor: colorOptions[index%colorOptions.length] }"
           ></div>
-          <i :style="{ backgroundColor: colorOptions[colorOptions.length%index] }">{{index + 1}}</i>
+          <i :style="{ backgroundColor: colorOptions[index%colorOptions.length] }">{{index + 1}}</i>
           <span class="news-time">{{ item.time }}</span>
           <div class="news-word">{{ item.content }}</div>
         </li>
@@ -238,7 +238,7 @@ $distance: -50px;
 }
 
 .noLoad {
-  color: #fff;
+  color: rgb(175 149 112);
   font-weight: 700;
   font-size: 20px;
 }

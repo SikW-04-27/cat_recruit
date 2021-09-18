@@ -3,7 +3,7 @@
     <div
       id="appointment"
       v-loading="loading"
-      element-loading-background="rgba(0, 0, 0, .5)"
+      element-loading-background="rgb(255 255 255 / 41%)"
     >
       <!-- 页眉 -->
       <el-page-header @back="goBack" content="预约面试时间"> </el-page-header>
@@ -75,6 +75,8 @@ import {
 } from "../../request/api.js";
 import { useRouter } from "vue-router";
 import { warning, success, getSessionValue } from "../../utils/usualUse.js";
+import { getCookie } from "../../utils/myCookie";
+
 // 预约日期
 let day = reactive([]);
 //判断是否已预约
@@ -207,6 +209,15 @@ let isAppointeds = () => {
 let isEnroll = ref(false);
 
 onMounted(() => {
+
+  //未登录的话直接退出
+  if (!getCookie("studentToken")) {
+    console.log(11111111111);
+    router.push({
+      path: "/introduction/banner",
+    });
+  }
+
   currentStatus.value = "...";
   //获取当前阶段
   getCurrentStatus({})
@@ -358,13 +369,13 @@ onMounted(() => {
 #appointment {
   width: 1000px;
   height: 480px;
-  margin: 60px auto 0;
-  padding: 0 50px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
+  margin: 10px auto 0;
+  padding: 20px 50px 0 50px;
+  border-radius: 20px;
+  font-weight: 600;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
   text-align: center;
   position: relative;
-  background-color: rgba(78, 78, 78, 0.5);
-  color: azure;
 }
 .el-result {
   :deep .icon-success {
@@ -374,13 +385,23 @@ onMounted(() => {
 }
 
 .el-page-header {
-  padding: 30px 0 0 0;
-  :deep .el-page-header__content {
-    color: azure;
+  padding: 10px 0 30px 0;
+  :deep(.el-page-header__content) {
+    color: rgba(20, 20, 20, 0.678);
   }
 }
 .el-divider {
-  margin-bottom: 80px;
+  margin-bottom: 120px;
+  :deep(.el-divider__text){
+    width: 300px;
+    height: 40px;
+    background-color: rgb(173, 230, 181);
+    line-height: 40px;
+    border-radius: 20px;
+    color: rgb(255, 255, 255);
+    font-weight: 600;
+    font-size: 16px;
+  }
 }
 .a_content {
   height: 250px;
@@ -395,6 +416,9 @@ span {
 }
 .el-input__inner {
   text-align: center;
+  &:focus{
+    border-color: #66b171;
+  }
 }
 .el-result {
   display: inline-block;
@@ -414,10 +438,11 @@ span {
 .a_btn {
   margin-top: 50px;
   .el-button {
-    background-color: #2f86b6;
-    border: #ffffff00;
-    border-radius: 5px;
-  }
+    background-color: rgb(239 207 137);
+    border: none;
+    border-radius: 20px;
+    font-weight: 600;
+    letter-spacing: 2px;  }
 }
 .c_btn {
   margin-top: 50px;
@@ -435,6 +460,7 @@ span {
   }
 }
 .close {
+  color:rgba(20, 20, 20, 0.678);
   padding-bottom: 100px;
 }
 </style>

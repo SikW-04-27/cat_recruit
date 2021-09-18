@@ -378,9 +378,6 @@ let btnClick = () => {
 
 let imgUrl = "";
 let changeImg = function (e) {
-  console.log(e.target.files);
-  if(e.target.files.length) {
-    console.log(111);
   console.log(e);
   ElMessageBox.confirm("确定添加头像?", "提示", {
     confirmButtonText: "确定",
@@ -414,10 +411,9 @@ let changeImg = function (e) {
         console.log(res);
         if (res.data.code == 200) {
           //  console.log(res);
-        imgUrl = res.data.data;
-        loadingInstance.close();
-        avatarimg.value = res.data.data;
-        changeImgTips.value = "更换头像"
+          imgUrl = res.data.data;
+          loadingInstance.close();
+          avatarimg.value = res.data.data;
         } else {
           loadingInstance.close();
           warningMessage.value = res.data.message;
@@ -429,12 +425,7 @@ let changeImg = function (e) {
         warningMessage.value = "请5秒之后再试";
         warning();
       });
-  })
-  .catch(() => {
-    console.log(55555);
-  })
-  }
-  
+  });
 };
 
 const focusing = function ($event) {
@@ -709,20 +700,4 @@ $zhutise: rgb(41, 45, 63);
   text-align: center;
   padding: 100px 0;
 }
-
-.avatar {
-
-position: relative;
-
-  .addOrChangeImg {
-    position: absolute;
-    bottom: 10px;
-    left: 100px;
-  width: 100px;
-  height: 30px;
-  background-color: red;
-}
-}
-
-
 </style>>

@@ -1,225 +1,220 @@
 <template>
-  <transition
-    name="animate__animated animate__bounce"
-    enter-active-class="animate__headShake"
-  >
-    <div class="form_block" v-show="hide">
-      <div
-        id="form"
-        v-loading="loading"
-        element-loading-background="rgb(255 255 255 / 41%)"
-      >
-        <el-page-header content="报名表"> </el-page-header>
-        <!-- 登陆 处于报名阶段 未报名 -->
-        <div class="content" v-if="currentStatusId === 2 && stuId && !isSignUp">
-          <div class="content_left">
-            <!-- 姓名 -->
-            <div class="name">
-              <span>姓名：</span>
-              <div class="n_input">
-                <el-input
-                  placeholder="请输入姓名"
-                  v-model="name"
-                  maxlength="10"
-                  clearable
-                  @focus="focusing($event)"
-                  @blur="bluring($event)"
-                >
-                </el-input>
-              </div>
-            </div>
-            <!-- 学号 -->
-            <div class="stuNumber">
-              <span>学号：</span>
-              <div class="n_input">
-                <el-input
-                  placeholder="请输入十位学号"
-                  v-model="stuNumber"
-                  clearable="false"
-                  maxlength="10"
-                  :disabled="disabled.value"
-                  @focus="focusing($event)"
-                  @blur="bluring($event)"
-                >
-                </el-input>
-              </div>
-              <!-- <el-result icon="success" v-show="numCheck"> </el-result> -->
-            </div>
-
-            <!-- 手机号码 -->
-            <div class="phone">
-              <span>电话：</span>
-              <div class="p_input">
-                <el-input
-                  placeholder="请输入十一位手机号码"
-                  v-model="phone"
-                  clearable
-                  maxlength="11"
-                  :disabled="disabled.value"
-                  @focus="focusing($event)"
-                  @blur="bluring($event)"
-                >
-                </el-input>
-              </div>
-              <!-- <el-result icon="success" v-show="phoneCheck"> </el-result> -->
-            </div>
-            <!-- 学院 -->
-            <div class="institute">
-              <span>学院：</span>
-              <div class="i_select">
-                <el-select
-                  v-model="institute"
-                  filterable
-                  placeholder="请选择所在学院"
-                  :disabled="disabled.value"
-                >
-                  <el-option
-                    v-for="item in institutes"
-                    :key="item.name"
-                    :label="item.name"
-                    :value="item.name"
-                  >
-                  </el-option>
-                </el-select>
-              </div>
-              <!-- <el-result icon="success" v-show="institute"> </el-result> -->
-            </div>
-            <!-- 专业 -->
-            <div class="majors" v-if="institute">
-              <span>专业：</span>
-              <div class="i_select">
-                <el-select
-                  v-model="major"
-                  filterable
-                  placeholder="请选择所在专业"
-                  :disabled="disabled.value"
-                  @focus="majorChange()"
-                >
-                  <el-option
-                    v-for="item in majors"
-                    :key="item.name"
-                    :label="item.name"
-                    :value="item.name"
-                  >
-                  </el-option>
-                </el-select>
-              </div>
-            </div>
-            <!-- 班级 -->
-            <div class="classes" v-if="major">
-              <span>班级：</span>
-              <div class="c_input">
-                <el-input
-                  placeholder="请输入班级（例如：一班）"
-                  v-model="clazz"
-                  clearable
-                  maxlength="3"
-                  :disabled="disabled.value"
-                >
-                </el-input>
-              </div>
-              <!-- <el-result icon="success" v-show="clazz"> </el-result> -->
+<transition
+  name="animate__animated animate__bounce"
+  enter-active-class="animate__headShake"
+>
+  <div class="form_block" v-show="hide">
+    <div
+      id="form"
+      v-loading="loading"
+      element-loading-background="rgb(255 255 255 / 41%)"
+    >
+      <el-page-header content="报名表"> </el-page-header>
+      <!-- 登陆 处于报名阶段 未报名 -->
+      <div class="content" v-if="currentStatusId === 2 && stuId && !isSignUp">
+        <div class="content_left">
+          <!-- 姓名 -->
+          <div class="name">
+            <span>姓名：</span>
+            <div class="n_input">
+              <el-input
+                placeholder="请输入姓名"
+                v-model="name"
+                maxlength="10"
+                clearable
+                @focus="focusing($event)"
+                @blur="bluring($event)"
+              >
+              </el-input>
             </div>
           </div>
-          <div class="content_right">
-            <!-- 上传个人真实头像 -->
-            <div class="avatar">
-              <span>头像：</span>
-              <label for="file">
-                <img :src="avatarimg" alt="" class="avatarimgblock" />
-              </label>
-              <input
-                type="file"
-                id="file"
-                accept="image/*"
-                name="file"
-                style="display: none"
-                @change="changeImg"
-              />
-            </div>
-
-            <!-- 性别 -->
-            <div class="sex">
-              <span>性别：</span>
-              <el-radio-group
-                v-model="radio2"
-                :disabled="disabled.value"
-                fill="rgb(226, 240, 217)"
-              >
-                <el-radio-button label="男"></el-radio-button>
-                <el-radio-button label="女"></el-radio-button>
-              </el-radio-group>
-            </div>
-
-            <!-- 方向 -->
-            <div class="direction">
-              <span>方向：</span>
-              <el-radio-group
-                v-model="radio1"
-                :disabled="disabled.value"
-                fill="rgb(226, 240, 217)"
-              >
-                <el-radio-button label="前端"></el-radio-button>
-                <el-radio-button label="后台"></el-radio-button>
-              </el-radio-group>
-              <!-- <el-result icon="success" v-show="direction"> </el-result> -->
-            </div>
-
-            <!-- 自我介绍 -->
-            <div class="self_intro">
-              <span>简介：</span>
-              <div class="s_input">
-                <el-input
-                  type="textarea"
-                  :autosize="{ minRows: 4 }"
-                  placeholder="请做一段简单的自我介绍"
-                  v-model="textarea2"
-                  resize="none"
-                  show-word-limit
-                  :disabled="disabled.value"
-                  maxlength="150"
-                >
-                </el-input>
-              </div>
-              <!-- <el-result icon="success" v-show="textarea2"> </el-result> -->
-              <!-- <el-result icon="success" v-show="major"> </el-result> -->
-            </div>
-          </div>
-
-          <!-- 提交按钮 -->
-          <div class="commit_btn">
-            <el-button
-              type="primary"
-              round
-              @click="btnClick()"
+        <!-- 学号 -->
+        <div class="stuNumber">
+          <span>学号：</span>
+          <div class="n_input">
+            <el-input
+              placeholder="请输入十位学号"
+              v-model="stuNumber"
+              clearable="false"
+              maxlength="10"
               :disabled="disabled.value"
-              >提交</el-button
+              @focus="focusing($event)"
+              @blur="bluring($event)"
             >
+            </el-input>
+          </div>
+          <!-- <el-result icon="success" v-show="numCheck"> </el-result> -->
+        </div>
+        
+        <!-- 手机号码 -->
+        <div class="phone">
+          <span>电话：</span>
+          <div class="p_input">
+            <el-input
+              placeholder="请输入十一位手机号码"
+              v-model="phone"
+              clearable
+              maxlength="11"
+              :disabled="disabled.value"
+              @focus="focusing($event)"
+              @blur="bluring($event)"
+            >
+            </el-input>
+          </div>
+          <!-- <el-result icon="success" v-show="phoneCheck"> </el-result> -->
+        </div>
+        <!-- 学院 -->
+        <div class="institute">
+          <span>学院：</span>
+          <div class="i_select">
+            <el-select
+              v-model="institute"
+              filterable
+              placeholder="请选择所在学院"
+              :disabled="disabled.value"
+            >
+              <el-option
+                v-for="item in institutes"
+                :key="item.name"
+                :label="item.name"
+                :value="item.name"
+              >
+              </el-option>
+            </el-select>
+          </div>
+          <!-- <el-result icon="success" v-show="institute"> </el-result> -->
+        </div>
+        <!-- 专业 -->
+        <div class="majors" v-if="institute">
+          <span>专业：</span>
+          <div class="i_select">
+            <el-select
+              v-model="major"
+              filterable
+              placeholder="请选择所在专业"
+              :disabled="disabled.value"
+              @focus="majorChange()"
+            >
+              <el-option
+                v-for="item in majors"
+                :key="item.name"
+                :label="item.name"
+                :value="item.name"
+              >
+              </el-option>
+            </el-select>
           </div>
         </div>
-        <!-- 登录 处于报名阶 已报名 -->
-        <div
-          class="hasSignUp"
-          v-if="currentStatusId === 2 && stuId && isSignUp"
+        <!-- 班级 -->
+        <div class="classes" v-if="major">
+          <span>班级：</span>
+          <div class="c_input">
+            <el-input
+              placeholder="请输入班级（例如：一班）"
+              v-model="clazz"
+              clearable
+              maxlength="3"
+              :disabled="disabled.value"
+            >
+            </el-input>
+          </div>
+          <!-- <el-result icon="success" v-show="clazz"> </el-result> -->
+        </div>
+
+        
+       
+
+        </div>
+        <div class="content_right">
+          <!-- 上传个人真实头像 -->
+          <div class="avatar">
+            <span>头像：</span>
+            <label for="file">
+              <img :src="avatarimg" alt="" class="avatarimgblock" />
+            </label>
+            <input
+              type="file"
+              id="file"
+              accept="image/*"
+              name="file"
+              style="display: none"
+              @change="changeImg"
+            />
+          </div>
+
+          <!-- 性别 -->
+          <div class="sex">
+            <span>性别：</span>
+            <el-radio-group v-model="radio2" :disabled="disabled.value"  fill='rgb(226, 240, 217)'>
+              <el-radio-button label="男"></el-radio-button>
+              <el-radio-button label="女"></el-radio-button>
+            </el-radio-group>
+          </div>
+
+          <!-- 方向 -->
+          <div class="direction">
+            <span>方向：</span>
+            <el-radio-group v-model="radio1" :disabled="disabled.value" fill='rgb(226, 240, 217)'>
+              <el-radio-button label="前端"></el-radio-button>
+              <el-radio-button label="后台"></el-radio-button>
+            </el-radio-group>
+            <!-- <el-result icon="success" v-show="direction"> </el-result> -->
+          </div>
+
+          <!-- 自我介绍 -->
+          <div class="self_intro">
+            <span>简介：</span>
+            <div class="s_input">
+              <el-input
+                type="textarea"
+                :autosize="{ minRows: 4}"
+                placeholder="请做一段简单的自我介绍"
+                v-model="textarea2"
+                resize="none"
+                show-word-limit
+                :disabled="disabled.value"
+                maxlength="150"
+              >
+              </el-input>
+            </div>
+            <!-- <el-result icon="success" v-show="textarea2"> </el-result> -->
+            <!-- <el-result icon="success" v-show="major"> </el-result> -->
+          </div>
+        </div>
+         
+        <!-- 提交按钮 -->
+        <div class="commit_btn">
+          <el-button
+            type="primary"
+            round
+            @click="btnClick()"
+            :disabled="disabled.value"
+            >提交</el-button
+          >
+        </div>
+        
+      </div>
+      <!-- 登录 处于报名阶 已报名 -->
+      <div class="hasSignUp" v-if="currentStatusId === 2 && stuId && isSignUp">
+        <span>您已报名，请耐心等候面试</span>
+      </div>
+      <!-- 登录 但 未处于报名阶段 -->
+      <div class="close" v-if="!(currentStatusId === 2) && stuId">
+        <span v-if="!(currentStatusId === 1)"
+          >当前处于 {{ currentStatus }} 阶段，报名通道已关闭</span
         >
-          <span>您已报名，请耐心等候面试</span>
-        </div>
-        <!-- 登录 但 未处于报名阶段 -->
-        <div class="close" v-if="!(currentStatusId === 2) && stuId">
-          <span v-if="!(currentStatusId === 1)"
-            >当前处于 {{ currentStatus }} 阶段，报名通道已关闭</span
-          >
-          <span v-if="currentStatusId === 1"
-            >当前招新还未开始，请耐心等待报名通道的开放</span
-          >
-        </div>
-        <!-- 未登录 -->
-        <div class="unLogin" v-if="!stuId">
-          <span>您还未登录，请先登录</span>
-        </div>
+        <span v-if="currentStatusId === 1"
+          >当前招新还未开始，请耐心等待报名通道的开放</span
+        >
+      </div>
+      <!-- 未登录 -->
+      <div class="unLogin" v-if="!stuId">
+        <span>您还未登录，请先登录</span>
       </div>
     </div>
-  </transition>
+  </div>
+</transition>
+
 </template>
 
 <script setup>
@@ -257,7 +252,7 @@ let warningMessage = ref("");
 let stuId = window.sessionStorage.getItem("userId");
 let loading = ref(true);
 let avatarimg = ref("");
-let hide = ref(true);
+let hide = ref(false)
 //定义warning函数
 const warning = () => {
   ElMessage.warning({
@@ -280,10 +275,12 @@ let currentStatus;
 // todo const getItemBySessionStorage()
 if (getCookie("studentToken")) {
   console.log(123);
-  currentStatusId = JSON.parse(window.sessionStorage.getItem("CurrentStatus"))
-    .id;
-  currentStatus = JSON.parse(window.sessionStorage.getItem("CurrentStatus"))
-    .status;
+  currentStatusId = JSON.parse(
+    window.sessionStorage.getItem("CurrentStatus")
+  ).id;
+  currentStatus = JSON.parse(
+    window.sessionStorage.getItem("CurrentStatus")
+  ).status;
   //判断是否报名
   isSignUp = JSON.parse(window.sessionStorage.getItem("hasSignUp"));
 }
@@ -378,9 +375,6 @@ let btnClick = () => {
 
 let imgUrl = "";
 let changeImg = function (e) {
-  console.log(e.target.files);
-  if(e.target.files.length) {
-    console.log(111);
   console.log(e);
   ElMessageBox.confirm("确定添加头像?", "提示", {
     confirmButtonText: "确定",
@@ -414,10 +408,9 @@ let changeImg = function (e) {
         console.log(res);
         if (res.data.code == 200) {
           //  console.log(res);
-        imgUrl = res.data.data;
-        loadingInstance.close();
-        avatarimg.value = res.data.data;
-        changeImgTips.value = "更换头像"
+          imgUrl = res.data.data;
+          loadingInstance.close();
+          avatarimg.value = res.data.data;
         } else {
           loadingInstance.close();
           warningMessage.value = res.data.message;
@@ -429,33 +422,24 @@ let changeImg = function (e) {
         warningMessage.value = "请5秒之后再试";
         warning();
       });
-  })
-  .catch(() => {
-    console.log(55555);
-  })
-  }
-  
+  });
 };
 
-const focusing = function ($event) {
-  console.log(
-    $event.currentTarget.parentElement.parentElement.parentElement.className
-  );
-  $event.currentTarget.parentElement.parentElement.parentElement.firstElementChild.style =
-    " font-size: 16px";
-  $event.currentTarget.parentElement.parentElement.parentElement.style =
-    "margin:10px 0";
-  $event.currentTarget.parentElement.style = " font-size:16px";
-  $event.currentTarget.style = "width:310px";
-};
+const focusing = function($event){
+  console.log($event.currentTarget.parentElement.parentElement.parentElement.className);
+  $event.currentTarget.parentElement.parentElement.parentElement.firstElementChild.style = ' font-size: 16px'
+  $event.currentTarget.parentElement.parentElement.parentElement.style = 'margin:10px 0'
+  $event.currentTarget.parentElement.style = ' font-size:16px'
+  $event.currentTarget.style = 'width:310px'
+}
 
-const bluring = function ($event) {
-  $event.currentTarget.parentElement.parentElement.parentElement.firstElementChild.style =
-    "";
-  $event.currentTarget.parentElement.parentElement.parentElement.style = "";
-  $event.currentTarget.parentElement.style = "";
-  $event.currentTarget.style = "";
-};
+const bluring = function($event){
+  $event.currentTarget.parentElement.parentElement.parentElement.firstElementChild.style = ''
+  $event.currentTarget.parentElement.parentElement.parentElement.style = ''
+  $event.currentTarget.parentElement.style = ''
+  $event.currentTarget.style = ''
+
+}
 
 onMounted(() => {
   // console.log(isSendForm());
@@ -480,6 +464,7 @@ onMounted(() => {
         }
         //未报名
         if (res.code === 700) {
+          hide.value = true
           window.sessionStorage.setItem("hasSignUp", false);
           listAllCollege({}).then((res) => {
             institutes.push(...res.data);
@@ -573,19 +558,19 @@ $zhutise: rgb(41, 45, 63);
     border-bottom: rgb(174, 184, 183) 1px solid;
     border-radius: 0;
     padding: 0;
-    transition: 0.3s;
+    transition: .3s;
   }
   span {
     display: inline-block;
     text-align: right;
     font-size: 14px;
-    transition: 0.3s;
+    transition: .3s;
   }
 
   .content_left {
     width: 55%;
   }
-  .content_right {
+  .content_right{
     width: 45%;
   }
 
@@ -594,8 +579,9 @@ $zhutise: rgb(41, 45, 63);
   .sex,
   .classes,
   .phone,
-  .institute .majors,
-  .direction {
+  .institute 
+  .majors,
+  .direction{
     width: 300px;
     height: 70px;
     margin: 0;
@@ -607,11 +593,11 @@ $zhutise: rgb(41, 45, 63);
   .institute {
     margin-top: 10px;
   }
-  .s_input {
+  .s_input{
     display: inline-block;
     margin-left: 20px;
   }
-
+  
   //  {
   //   height: 50px;
   //   margin-right: 30px;
@@ -637,7 +623,7 @@ $zhutise: rgb(41, 45, 63);
   .commit_btn {
     margin: 0 auto;
   }
-  .el-radio-group {
+  .el-radio-group{
     margin: 0 20px;
   }
   .el-result {
@@ -646,8 +632,8 @@ $zhutise: rgb(41, 45, 63);
     display: inline-block;
     padding: 0;
   }
-  :deep(.el-radio-button__inner) {
-    &:hover {
+  :deep(.el-radio-button__inner){
+    &:hover{
       color: rgb(190, 199, 184);
     }
   }
@@ -658,7 +644,7 @@ $zhutise: rgb(41, 45, 63);
     left: 50%;
     margin-left: -70px;
     bottom: 50px;
-    :deep(.el-button) {
+    :deep(.el-button){
       width: 120px;
       height: 45px;
       background-color: rgba(233, 208, 95, 0.767);
@@ -666,13 +652,13 @@ $zhutise: rgb(41, 45, 63);
       color: rgb(255, 255, 255);
       font-weight: 600;
       letter-spacing: 5px;
-      &:hover {
+      &:hover{
         background-color: rgba(233, 208, 95, 0.829);
-        box-shadow: 0 0 1px rgba(82, 81, 81, 0.685);
-      }
-      &:active {
+        box-shadow: 0 0 1px rgba(82, 81, 81, 0.685)
+      };
+      &:active{
         background-color: rgba(233, 208, 95, 0.918);
-        box-shadow: 0 0 1px rgba(82, 81, 81, 0.815);
+        box-shadow: 0 0 1px rgba(82, 81, 81, 0.815)
       }
     }
   }
@@ -691,15 +677,14 @@ $zhutise: rgb(41, 45, 63);
         height: 100px;
         background-size: contain;
       }
-      img[src=""],
-      img:not([src]) {
+      img[src=''],img:not([src]){
         opacity: 0;
       }
     }
   }
 }
 
-.changeBig {
+.changeBig{
   font-size: 18px;
 }
 
@@ -709,20 +694,4 @@ $zhutise: rgb(41, 45, 63);
   text-align: center;
   padding: 100px 0;
 }
-
-.avatar {
-
-position: relative;
-
-  .addOrChangeImg {
-    position: absolute;
-    bottom: 10px;
-    left: 100px;
-  width: 100px;
-  height: 30px;
-  background-color: red;
-}
-}
-
-
 </style>>

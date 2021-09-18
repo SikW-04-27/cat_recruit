@@ -13,9 +13,9 @@
       <div :class="login_right">
           <div id="student-register">
             <p class="register-word" data-text="REGISTER">REGISTER</p>
-            <input type="text" v-model="studentName" placeholder="用户名（2-20,只包含汉字字母数字和下划线）" />
+            <input type="text" v-model="studentName" placeholder="用户名（2~20字）符号仅支持下划线" />
             <input type="text" v-model="studentMailNum" placeholder="邮箱" />
-            <input :type="password" v-model="studentPasswordNum" placeholder="密码（8-18，只包含字母和数字）" />
+            <input :type="password" v-model="studentPasswordNum" placeholder="密码（8-18，仅字母和数字）" />
             <div class="el-icon-view view" @click="viewpassword" v-if="hidepassword"></div>
             <div class="el-icon-key noview" @click="noviewpassword" v-else></div>
             <div
@@ -41,7 +41,7 @@
 import { ref, onUpdated, onMounted, watch } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
-import { ElMessage } from 'element-plus'
+import { ElMessage,ElLoading } from 'element-plus'
 
 import { sendCkeckNumber } from "../../../request/api";
 import { userRegister } from "../../../request/api";
@@ -131,7 +131,7 @@ function studentRegister() {
           loadingInstance.close();
           if (result.code === 3000) {
             router.push({
-              path: "/login",
+              path: "/loginregister/login",
             });
           } else {
             ElMessage.warning(result.message)

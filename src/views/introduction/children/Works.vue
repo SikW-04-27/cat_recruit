@@ -174,7 +174,7 @@ export default {
       .line{
         width: 2px;
         height: 340px;
-        background-color: #000;
+        background-color: rgba(49, 49, 49, 0.73);
       }
     }
   }
