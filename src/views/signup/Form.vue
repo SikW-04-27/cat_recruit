@@ -36,7 +36,6 @@
           </el-radio-group>
           <!-- <el-result icon="success" v-show="sex"> </el-result> -->
         </div>
-
         <!-- 学号 -->
         <div class="stuNumber">
           <span>学号：</span>
@@ -95,6 +94,38 @@
             </el-select>
           </div>
         </div>
+        <!-- 班级 -->
+        <div class="classes" v-if="major">
+          <span>班级：</span>
+          <div class="c_input">
+            <el-input
+              placeholder="请输入班级（例如：一班）"
+              v-model="clazz"
+              clearable
+              maxlength="3"
+              :disabled="disabled.value"
+            >
+            </el-input>
+          </div>
+          <!-- <el-result icon="success" v-show="clazz"> </el-result> -->
+        </div>
+        <!-- 手机号码 -->
+        <div class="phone">
+          <span>手机号码：</span>
+          <div class="p_input">
+            <el-input
+              placeholder="请输入十一位手机号码"
+              v-model="phone"
+              clearable
+              maxlength="11"
+              @input="phoneChange($event)"
+              :disabled="disabled.value"
+            >
+            </el-input>
+          </div>
+          <!-- <el-result icon="success" v-show="phoneCheck"> </el-result> -->
+        </div>
+
         <!-- 上传个人真实头像 -->
         <div class="avatar">
           <span>个人头像：</span>
@@ -141,37 +172,6 @@
           <!-- <el-result icon="success" v-show="textarea2"> </el-result> -->
           <!-- <el-result icon="success" v-show="major"> </el-result> -->
         </div>
-        <!-- 班级 -->
-        <div class="classes" v-if="major">
-          <span>班级：</span>
-          <div class="c_input">
-            <el-input
-              placeholder="请输入班级（例如：一班）"
-              v-model="clazz"
-              clearable
-              maxlength="3"
-              :disabled="disabled.value"
-            >
-            </el-input>
-          </div>
-          <!-- <el-result icon="success" v-show="clazz"> </el-result> -->
-        </div>
-        <!-- 手机号码 -->
-        <div class="phone">
-          <span>手机号码：</span>
-          <div class="p_input">
-            <el-input
-              placeholder="请输入十一位手机号码"
-              v-model="phone"
-              clearable
-              maxlength="11"
-              @input="phoneChange($event)"
-              :disabled="disabled.value"
-            >
-            </el-input>
-          </div>
-          <!-- <el-result icon="success" v-show="phoneCheck"> </el-result> -->
-        </div>
         <!-- 提交按钮 -->
         <div class="commit_btn">
           <el-button
@@ -209,7 +209,7 @@ import { defineComponent, ref, reactive, onMounted } from "vue";
 import { ElMessage, ElMessageBox, ElLoading } from "element-plus";
 import axios from "axios";
 // import submit from "../../request/api.js";
-import isSendForm from '../../utils/isSendForm'
+import isSendForm from "../../utils/isSendForm";
 import {
   listAllCollege,
   listAllMajor,
@@ -221,7 +221,6 @@ import {
 } from "../../request/api";
 import Choice from "./choice.vue";
 import { getCookie } from "../../utils/myCookie";
-
 
 let change = ($event) => {};
 //定义各个值
@@ -263,12 +262,10 @@ let currentStatus;
 // todo const getItemBySessionStorage()
 if (getCookie("studentToken")) {
   console.log(123);
-  currentStatusId = JSON.parse(
-    window.sessionStorage.getItem("CurrentStatus")
-  ).id;
-  currentStatus = JSON.parse(
-    window.sessionStorage.getItem("CurrentStatus")
-  ).status;
+  currentStatusId = JSON.parse(window.sessionStorage.getItem("CurrentStatus"))
+    .id;
+  currentStatus = JSON.parse(window.sessionStorage.getItem("CurrentStatus"))
+    .status;
   //判断是否报名
   isSignUp = JSON.parse(window.sessionStorage.getItem("hasSignUp"));
 }
@@ -306,7 +303,6 @@ let numChange = ($event) => {
     numCheck.value = false;
   }
 };
-
 //点击提交按钮
 let btnClick = () => {
   //判断是否全部值都已经填好
@@ -342,8 +338,7 @@ let btnClick = () => {
           disabled.value = true;
           window.sessionStorage.setItem("hasSignUp", true);
         } else {
-          warningMessage.value = res.message;
-          warning();
+          warning(res.message);
           if (res.code === 4006) {
             //已经提交过报名表
             //报名表禁用
@@ -353,12 +348,10 @@ let btnClick = () => {
         }
       })
       .catch((err) => {
-        warningMessage.value = err.data.message;
-        warning();
+        warning(err.data.message);
       });
   } else {
-    warningMessage.value = "请完善全部信息";
-    warning();
+    warning("请完善全部信息");
   }
 };
 
@@ -400,22 +393,21 @@ let changeImg = function (e) {
       })
       .then((res) => {
         console.log(res);
-        if(res.data.code == 200) {
+        if (res.data.code == 200) {
           //  console.log(res);
         imgUrl = res.data.data;
         loadingInstance.close();
         avatarimg.value = res.data.data;
         changeImgTips.value = "更换头像"
         } else {
-        loadingInstance.close();
-           warningMessage.value = res.data.message;
-        warning();
+          loadingInstance.close();
+          warningMessage.value = res.data.message;
+          warning();
         }
-       
       })
       .catch((err) => {
         loadingInstance.close();
-        warningMessage.value = '请5秒之后再试';
+        warningMessage.value = "请5秒之后再试";
         warning();
       });
   })
@@ -428,15 +420,15 @@ let changeImg = function (e) {
 
 onMounted(() => {
   // console.log(isSendForm());
-  
+
   loading.value = false;
 
+  //未登录的话直接退出
   if (!stuId) return;
 
+  //当处于报名阶段的时候
   if (currentStatusId === 2) {
-    //处于报名阶段
-    console.log("处于报名状态");
-
+    //获取用户阶段信息
     getBriefInfo({})
       .then((res) => {
         if (res.data.userStatusId === 1) {
@@ -465,8 +457,7 @@ onMounted(() => {
   }
   //未处于报名时间段
   if (currentStatusId === 1) {
-    warningMessage.value = "招新未开始，请耐心等候";
-    warning();
+    warning("招新未开始，请耐心等候");
     return;
   }
 });

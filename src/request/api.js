@@ -18,6 +18,8 @@ export const updateUserInfo = p => post(`${url1}appointment/updateUserInfo`, p);
 export const cancelAppointment = p => post(`${url1}appointment/cancelAppointment`, p);
 //获得管理员是否开放预约
 export const checkAppointment = () => post(`${url1}appointment/check`);
+//查看用户是否能预约
+export const isAppointed = () => post(`${url1}status/checkAppointment`);
 
 //报名
 //用户报名接口
@@ -34,13 +36,15 @@ export const listMajor = p => post(`${url2}major/college`, p);
 export const listAllMajor = () => get(`${url2}major/list`);
 // 查询所有用户的报名信息
 export const enrolllist = p => get(`${url2}enroll/list`, p);
+//检测用户是否报名
+export const checkEnroll = () => post(`${url1}status/checkEnroll`)
 
 
 
 //通过ID获得某个用户的进度信息
 export const getUserStatus = p => post(`${url1}status/getUserStatus`, p);
 //新接口：获取用户阶段信息
-export const getBriefInfo = () => post(`${url2}status/getBriefInfo`)
+export const getBriefInfo = () => post(`${url1}status/getBriefInfo`)
 //获取所有的招新阶段
 export const getAllStatus = () => post(`${url1}status/listAll`)
 export const deleteAllAppointmentInfo = p => post(`${url1}appointment/delteAllInfo`, p);

@@ -1,6 +1,6 @@
 <template>
   <Background></Background>
-  <UserNav> </UserNav>
+  <NewNav> </NewNav>
   <router-view class="userNav"></router-view>
 
   <!-- <MyButton padding="10px 20px" color="blue">点击</MyButton> -->
@@ -17,12 +17,14 @@ import { getStudentInfo } from "./request/api";
 
 import UserNav from "./components/UserNav.vue";
 
+import NewNav from './components/NewNav.vue'
+
 import Background from "./views/background/background.vue";
 
 export default {
   name: "App",
   components: {
-    UserNav,
+    NewNav,
     Background,
   },
 
@@ -61,6 +63,7 @@ export default {
 
 body {
   background-color: rgb(233, 233, 233);
+  background: url(./assets/img/background.png);
   // background-color: #292d3f;
   // background: url('./assets/img/bg.jpg') no-repeat 100% 100%;
   // background-image: url("./assets/img/下载 (1).png");

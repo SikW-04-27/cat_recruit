@@ -8,7 +8,7 @@
             <h1 data-text="Create">Create</h1>
             <h1 data-text="Ambitious">Ambitious</h1>
             <h1 data-text="Team！">Team！</h1>
-            <p class="info_text">C.A.T工作室，成立于2017年，指导老师为梁祖红老师，分为前端和后台两个小组，致力于政府及企业级的大型项目开发，团队与玉兰集团、南方电网等公司建立了长期合作关系，近年来研发过广东省专家匹配系统、智能塑料回收瓶箱（与羊城通合作）等，同时组队参与App、小程序大赛并获得奖项，已有毕业师兄就职于一线互联网大厂。</p>
+            <p class="info_text">C.A.T工作室，成立于2017年，指导老师为梁祖红老师，分为前端和后台两个小组。致力于政府及企业级的大型项目开发，团队与玉兰集团、南方电网等公司建立了长期合作关系。近年来研发过广东省专家匹配系统、智能塑料回收瓶箱等，同时组队参与App、小程序大赛并获得奖项，已有毕业师兄就职于一线互联网大厂。</p>
           <!-- <img src="../../../assets/img/illustration_2.png" alt="" class="illustration_img banner_illustration_2"> -->
         </div>
       </transition>
@@ -21,7 +21,7 @@
         </div>
       </transition>
     
-  <router-view></router-view>
+  <!-- <router-view></router-view> -->
 
     <transition
         name="animate__animated animate__bounce"
@@ -48,9 +48,12 @@ export default {
 
     const bannerEnter = () => {
       hide.value = false
-      router.push({
-        path:'/introduction/works'
-      })
+      setTimeout(() => {
+        router.push({
+          path:'/introduction/works'
+        })
+      }, 800);
+      
     }
     onMounted(() => {
       create_h1.value = true;
@@ -73,31 +76,32 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .banner {
   position: relative;
-  width: 100%;
+  width: 1200px;
   margin: 0 auto;
-  height: 700px;
-  overflow: hidden;
+  height: 600px;
+  // overflow: hidden;
   display: flex;
   justify-content: space-between;
 
   .banner_left {
-    width: 600px;
+    width: 500px;
     height: 300px;
-    padding-top: 150px;
+    padding-top: 100px;
     .info_text{
-      width: 750px;
-      padding-left: 100px;
-      line-height: 35px;
-      padding-top: 20px;
-      font-family:Verdana, Geneva, Tahoma, sans-serif;
-    }
+    width: 600px;
+    padding-left: 30px;
+    line-height: 30px;
+    padding-top: 30px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: 600;
+    color: rgba(71, 101, 64, 0.7);    }
   }
 
   .banner_right{
-    width: 700px;
+    width: 600px;
     height: 400px;
     padding-top: 40px;
     .banner_right_img{
@@ -123,7 +127,7 @@ export default {
     height: 60px;
     background-color: rgba(90, 184, 46, 0.699);
     position: absolute;
-    bottom: 30px;
+    bottom: -30px;
     left: 50%;
     margin-left: -115px;
     border-radius: 30px;
@@ -219,7 +223,7 @@ export default {
   font-size: 80px;
   // text-align: center;
   color: rgb(88, 122, 81);
-  padding-left:100px ;
+  padding-left:30px ;
   line-height: 90px;
   transition: all 1s;
   font-family: fantasy;
@@ -229,7 +233,7 @@ export default {
   width: 800px;
   height: 100px;
   position: absolute;
-  left: 100px;
+  left: 30px;
   // top: 0;
   content: attr(data-text);
   filter: blur(5px);

@@ -18,8 +18,20 @@
         </el-card>
       </el-timeline-item>
     </el-timeline> -->
+      <div class="news-outline">消息中心</div>
       <ul id="news-ul" v-if="isFinishLoad" v-show="isHide">
-        <li id="news-li" v-for="(item, index) of studentNews" :key="index">
+        <li
+          id="news-li"
+          v-for="(item, index) of studentNews"
+          :key="index"
+          :style="{ backgroundColor: colorOptions[index] }"
+        >
+          <div
+            class="li-line"
+            :style="{ backgroundColor: colorOptions[index] }"
+          ></div>
+          <i :style="{ backgroundColor: colorOptions[colorOptions.length%index] }">{{index + 1}}</i>
+          <span class="news-time">{{ item.time }}</span>
           <div class="news-word">{{ item.content }}</div>
         </li>
       </ul>
@@ -47,6 +59,16 @@ let newsTip = ref("请先登录！");
 // console.dir(WebSocket);
 
 let isHide = ref(false);
+
+let colorOptions = reactive([
+  "#0fb1a0",
+  "#d08aba",
+  "#f5a44c",
+  "#e0529a",
+  "#787cba",
+  "#45afe5",
+  "#bad874",
+]);
 //实时更新数据
 // let openSocket = function () {
 //   var socket;
@@ -120,46 +142,95 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
+$distance: -50px;
+
 #news-content {
   position: relative;
   top: 120px;
   margin: 0 auto;
   width: 70%;
-  background-color: #fff;
+  // background-color: #fff;
 
-  .el-timeline {
-    background-color: #fff;
-
-    .el-timeline-item {
-      // float: right;
-      // margin: 10px 10px;
-      // padding: 20px;
-      width: 400px;
-      background-color: red;
-    }
-  }
-
-#news-ul {
-  position: relative;
-
-#news-li {
-
-  position: absolute;
-  margin: 10px;
-  width: 200px;
-  height: 200px;
-&:nth-child(2n) {
-  right: 10px;
-  }
-   .news-word {
+  .news-outline {
+    position: relative;
+    top: 20px;
+    left: 42.5%;
+    width: 110px;
+    height: 32px;
+    color: #fff;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-align: center;
+    line-height: 32px;
+    border-radius: 20px;
     background-color: red;
   }
-}
-  
 
-}
+  #news-ul {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
 
- 
+    #news-li {
+      position: relative;
+      margin: 10px;
+      padding: 10px 20px;
+      width: 300px;
+      height: 100px;
+      border-radius: 12px;
+      opacity: 0.7;
+    color: #fff;
+
+      .li-line {
+        position: absolute;
+
+        width: 20px;
+        height: 130px;
+        border-radius: 20px;
+      }
+
+      i {
+        position: absolute;
+        width: 25px;
+        height: 25px;
+        top: 40px;
+        color: 12px;
+        text-align: center;
+        line-height: 25px;
+        border-radius: 59%;
+        background-color: red;
+      }
+
+      .news-time {
+        font-size: 14px;
+      }
+
+      &:nth-child(2n + 1) {
+        .li-line {
+          right: -135px;
+        }
+
+        i {
+          right: $distance;
+        }
+      }
+
+      &:nth-child(2n) {
+        left: 550px;
+
+        .li-line {
+          left: -135px;
+        }
+        i {
+          left: $distance;
+        }
+      }
+      .news-word {
+        // background-color: red;
+        width: 200px;
+      }
+    }
+  }
 }
 
 .active {
