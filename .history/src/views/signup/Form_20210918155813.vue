@@ -257,7 +257,7 @@ let warningMessage = ref("");
 let stuId = window.sessionStorage.getItem("userId");
 let loading = ref(true);
 let avatarimg = ref("");
-let hide = ref(true);
+let hide = ref(false);
 //定义warning函数
 const warning = () => {
   ElMessage.warning({
