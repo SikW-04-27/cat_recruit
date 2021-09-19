@@ -1,5 +1,10 @@
 <template>
-  <div class="progress_block">
+  <transition
+    name="animate__animated animate__bounce"
+    enter-active-class="animate__headShake"
+  >
+
+  <div class="progress_block" v-show="hide">
     <div 
       id="progress"
       >
@@ -24,6 +29,8 @@
       </div>
     </div>
   </div>
+
+  </transition>
 </template>
 
 <script setup>
@@ -48,8 +55,10 @@ let closeMessage = ref("查询进度失败，请先报名");
 let stuId = window.sessionStorage.getItem("userId");
 let activities = reactive([]);
 let loading = ref(true);
+let hide = ref(false)
 //定义提示函数：
 onMounted(() => {
+  hide.value = true;
   let loading = ElLoading.service({target:'#progress',background:"rgb(255 255 255 / 41%)"})
   //未登录的话直接退出
   if (!getCookie("studentToken")) {

@@ -1,5 +1,10 @@
 <template>
-  <div class="signIn"  >
+  <transition
+    name="animate__animated animate__bounce"
+    enter-active-class="animate__headShake"
+  >
+
+  <div class="signIn" v-show="hide" >
     <div class="s-main" v-loading="loading" element-loading-background="rgb(255 255 255 / 41%)">
       <!-- 页眉 -->
       <el-page-header @back="goBack" content="面试签到"> </el-page-header>
@@ -36,6 +41,8 @@
       </div>
     </div>
   </div>
+
+  </transition>
 </template>
 
 <script setup>
@@ -76,8 +83,9 @@ let closeMessage = ref("未开放签到");
 //学生id
 let stuId = window.sessionStorage.getItem("userId");
 let currentStatus = ref("");
-let CurrentStatusId = JSON.parse(window.sessionStorage.getItem("CurrentStatus"))
-  .id;
+let CurrentStatusId = JSON.parse(window.sessionStorage.getItem("CurrentStatus")).id;
+//hide
+let hide = ref(false)
 
 //1、是否报名
 let hasSignUp = JSON.parse(window.sessionStorage.getItem("hasSignUp"));
@@ -135,6 +143,7 @@ let getUserQueue = function () {
 onMounted(() => {
   loading.value = true;
 
+  hide.value = true;
   //未登录的话直接退出
   if (!getCookie("studentToken")) {
     console.log(11111111111);

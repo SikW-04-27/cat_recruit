@@ -1,5 +1,10 @@
 <template>
-  <div class="appointment_block">
+  <transition
+    name="animate__animated animate__bounce"
+    enter-active-class="animate__headShake"
+  >
+
+  <div class="appointment_block" v-show="hide">
     <div
       id="appointment"
       v-loading="loading"
@@ -55,6 +60,8 @@
       <div class="close" v-if="close">{{ closeMessage }}</div>
     </div>
   </div>
+
+  </transition>
 </template>
 
 <script setup>
@@ -98,6 +105,8 @@ let totalTime = ref("");
 let currentStatus = ref("");
 // getObjValue(currentStatus) = CurrentStatus();
 const router = useRouter();
+//hide
+let hide = ref(false);
 
 //点击返回按钮
 let goBack = () => {
@@ -219,6 +228,7 @@ let isAppointeds = () => {
 let isEnroll = ref(false);
 
 onMounted(() => {
+    hide.value = true;
 
   //未登录的话直接退出
   if (!getCookie("studentToken")) {
