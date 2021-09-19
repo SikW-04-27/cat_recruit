@@ -1,6 +1,6 @@
 
-<template>
-  <div class="block" id="news-content" key="1" v-loading="loading">
+<template >
+  <div class="block" id="news-content" key="1" v-loading="loading" element-loading-background="#fffdf9">
     <transition-group
       name="animate__animated animate__bounce"
       enter-active-class="animate__backInDown"
@@ -40,6 +40,7 @@
 <script setup>
 import { onMounted, onBeforeMount, reactive, ref } from "vue";
 
+
 import { getStudentNews } from "../../request/api";
 import { getCookie } from "../../utils/myCookie";
 //引入修改时间戳
@@ -70,6 +71,7 @@ let colorOptions = reactive([
 ]);
 
 onBeforeMount(() => {
+
   const studentToken = getCookie("studentToken");
   // console.log(studentToken);
   if (studentToken) {
@@ -103,6 +105,10 @@ onBeforeMount(() => {
 });
 
 onMounted(() => {
+
+  // let loadingInstance = ElLoading.service({
+  //   target: '#app'
+  // });
   //未登录的话直接退出
   if (!getCookie("studentToken")) {
     console.log(11111111111);
@@ -130,6 +136,7 @@ $liLineDistance: -135px;
   top: 120px;
   margin: 120px auto 0;
   width: 70%;
+  // min-height: 500px;
   // background-color: #fff;
 
   .news-outline {
@@ -146,7 +153,8 @@ $liLineDistance: -135px;
     text-align: center;
     line-height: 32px;
     border-radius: 20px;
-    background-color: #ec7272;;
+    background-color: #ec7272;
+    transition: all .5s !important;
   }
 
   #news-ul {
