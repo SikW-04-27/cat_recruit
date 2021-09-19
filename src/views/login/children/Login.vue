@@ -100,8 +100,8 @@ function studentLogin() {
           clearTimeout(timer);
 
           if (result.code === 2000) {
-            store.state.loginStatus = true;
             setCookie("studentToken", result.data.token, 7);
+            console.log(result.data.token, 'token');
             sessionStorage.setItem("userName", result.data.user.userName);
             sessionStorage.setItem("userId", result.data.user.id);
             router.push({
