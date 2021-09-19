@@ -57,7 +57,7 @@ export default {
     onMounted(() => {
       loginStatus.value = getCookie("studentToken") ? 1 : 0;
       if (loginStatus.value) {
-        userName.value = sessionStorage.getItem("userName");
+        // userName.value = sessionStorage.getItem("userName");
         isLoad.value = true;
       } else {
         isLoad.value = false;

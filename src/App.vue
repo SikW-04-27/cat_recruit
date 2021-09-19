@@ -1,5 +1,5 @@
 <template>
-  <Background></Background>
+  <!-- <Background></Background> -->
   <NewNav> </NewNav>
   <router-view class="userNav"></router-view>
 
@@ -25,7 +25,6 @@ export default {
   name: "App",
   components: {
     NewNav,
-    Background,
   },
 
   setup() {
@@ -35,6 +34,7 @@ export default {
       // document.cookie = "nameqq=wwww"
       // 页面在挂载之前，就判断是否有登录
       if (getCookie("studentToken")) {
+        console.log('000000000000000000000');
         getStudentInfo({})
           .then((result) => {
             console.log(result);

@@ -16,10 +16,6 @@
         },
         setup(props) {
             
-
-
-
-
             onUnmounted(() => {
             location.reload();
             });
