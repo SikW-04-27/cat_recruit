@@ -1,7 +1,7 @@
 <template>
   <!-- <Background></Background> -->
   <NewNav> </NewNav>
-  <router-view class="userNav"></router-view>
+  <router-view></router-view>
 
   <!-- <MyButton padding="10px 20px" color="blue">点击</MyButton> -->
 </template>

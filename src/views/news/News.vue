@@ -48,6 +48,7 @@ import { getCookie } from "../../utils/myCookie";
 //引入修改时间戳
 import {openSocket} from '../../utils/websocket'
 import { useRouter } from "vue-router";
+import dayjs from 'dayjs'
 
 
 let studentNews = reactive([]);
@@ -60,6 +61,8 @@ let newsTip = ref("请先登录！");
 // console.dir(WebSocket);
 
 let isHide = ref(false);
+
+const router = useRouter();
 
 let colorOptions = reactive([
   "#0fb1a0",
@@ -179,8 +182,9 @@ $distance: -50px;
 
   #news-ul {
     position: relative;
-    left: 50%;
-    transform: translateX(-50%);
+    // left: 50%;
+    // transform: translateX(-50%);
+    margin: 0 auto;
 
     #news-li {
       position: relative;
