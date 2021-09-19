@@ -48,7 +48,7 @@ export default {
 
     let isLoad = ref(true);
 
-    const store = useStore();
+    // const store = useStore();
 
     const router = useRouter();
 
@@ -111,19 +111,19 @@ export default {
     // );
 
     function unLoad() {
-      // removeCookie("studentToken");
+      removeCookie("studentToken");
       // store.state.loginStatus = false;
       isLoad.value = false;
       sessionStorage.clear();
-      console.log(12345678);
+      location.reload()
       
-      setTimeout(() => {  
-        console.log(4554654456465);
-        router.push({
-          path: "/introduction/banner",
-        });
-          location.reload();
-      },2000);
+      // setTimeout(() => {  
+      //   console.log(4554654456465);
+      //   router.push({
+      //     path: "/introduction/banner",
+      //   });
+      //     location.reload();
+      // },1);
     
     }
 

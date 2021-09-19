@@ -4,7 +4,7 @@
  export function setCookie(name,value,time){ 
     var date= new Date(); 
     date.setDate(date.getDate()+time); 
-    document.cookie = name+"="+value+";expires="+date; 
+    document.cookie = name+"="+value+";expires="+date+";path=/"; 
 } 
 
 //获得cookie

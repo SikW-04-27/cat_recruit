@@ -46,8 +46,9 @@ import { onMounted, onBeforeMount, reactive, ref } from "vue";
 import { getStudentNews } from "../../request/api";
 import { getCookie } from "../../utils/myCookie";
 //引入修改时间戳
-import "../../../node_modules/dayjs/dayjs.min.js";
-import { openSocket } from "../../utils/websocket";
+import {openSocket} from '../../utils/websocket'
+import { useRouter } from "vue-router";
+
 
 let studentNews = reactive([]);
 
@@ -131,6 +132,16 @@ onBeforeMount(() => {
 });
 
 onMounted(() => {
+    //未登录的话直接退出
+  if (!getCookie("studentToken")) {
+    console.log(11111111111);
+    router.push({
+      path: "/introduction/banner",
+    });
+  }
+
+
+
   openSocket().onmessage = function (msg) {
     console.log(msg);
     let msgDay = JSON.parse(msg.data);

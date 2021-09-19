@@ -1,6 +1,11 @@
 <template>
-  <div class="signIn"  v-loading="loading"   element-loading-background="rgba(0, 0, 0, .5)">
-    <div class="s-main">
+  <transition
+    name="animate__animated animate__bounce"
+    enter-active-class="animate__headShake"
+  >
+
+  <div class="signIn" v-show="hide" >
+    <div class="s-main" v-loading="loading" element-loading-background="rgb(255 255 255 / 41%)">
       <!-- 页眉 -->
       <el-page-header @back="goBack" content="面试签到"> </el-page-header>
       <el-divider>当前阶段：{{ currentStatus }}</el-divider>
@@ -36,6 +41,8 @@
       </div>
     </div>
   </div>
+
+  </transition>
 </template>
 
 <script setup>
@@ -76,8 +83,9 @@ let closeMessage = ref("未开放签到");
 //学生id
 let stuId = window.sessionStorage.getItem("userId");
 let currentStatus = ref("");
-let CurrentStatusId = JSON.parse(window.sessionStorage.getItem("CurrentStatus"))
-  .id;
+let CurrentStatusId = JSON.parse(window.sessionStorage.getItem("CurrentStatus")).id;
+//hide
+let hide = ref(false)
 
 //1、是否报名
 let hasSignUp = JSON.parse(window.sessionStorage.getItem("hasSignUp"));
@@ -133,7 +141,9 @@ let getUserQueue = function () {
 };
 
 onMounted(() => {
+  loading.value = true;
 
+  hide.value = true;
   //未登录的话直接退出
   if (!getCookie("studentToken")) {
     console.log(11111111111);
@@ -170,6 +180,7 @@ onMounted(() => {
           close.value = true;
           closeMessage.value =
             "很抱歉你未能通过，感谢你对cat工作室招新工作的支持。";
+          loading.value = false;
           return;
         }
         //未被淘汰
@@ -181,6 +192,7 @@ onMounted(() => {
         //未报名
         warning("您还未报名，请先报名");
         closeMessage.value = "您未报名，请先报名";
+        loading.value = false;
       });
   }
 
@@ -198,11 +210,13 @@ onMounted(() => {
           opening.value = false;
           closeMessage.value = "您还未报名，请先进行报名";
           warning("您还未报名，请先进行报名");
+          loading.value = false;
           return;
         }
       })
       .catch((err) => {
         warning(err.message);
+        loading.value = false;
       });
   }
 
@@ -215,6 +229,7 @@ onMounted(() => {
       if (res.data.id === 1 || res.data.id === 2) {
         opening.value = false;
         closeMessage.value = "目前仍处于报名阶段，您已成功报名，请耐心等候";
+        loading.value = false;
         return;
       } else {
         //处于笔试等阶段，检查用户是否预约
@@ -238,6 +253,7 @@ onMounted(() => {
           opening.value = false;
           closeMessage.value =
             "您未预约，无法进行签到。当前系统已开放预约，请前往预约";
+          loading.value = false;
           return;
         }
         //用户未预约且当前系统未开放预约
@@ -245,6 +261,7 @@ onMounted(() => {
           opening.value = false;
           closeMessage.value =
             "您未预约，无法进行签到。当前系统未开放预约，请耐心等候";
+          loading.value = false;
           return;
         }
         //已在预约的时间内参加本轮招新
@@ -252,17 +269,20 @@ onMounted(() => {
           opening.value = false;
           closeMessage.value =
             "您已在预约时间内参与本轮面试，请耐心等候面试结果";
+          loading.value = false;
           return;
         }
         if (res.code === 1521) {
           opening.value = false;
           closeMessage.value =
             "您未在预约时间内参与本轮面试，请耐心等候面试结果";
+          loading.value = false;
           return;
         }
       })
       .catch((err) => {
         warning(err.message);
+        loading.value = false;
       });
   }
 
@@ -275,11 +295,15 @@ onMounted(() => {
         opening.value = false;
         closeMessage.value = "您已预约，请耐心等候签到开放";
         warning("您已预约，请耐心等候签到开放");
+        loading.value = false;
         return;
       }
       //签到已开放，去检测用户是否签到
       opening.value = true;
       iterator.next();
+    }).catch(err=>{
+      warning(err.message)
+      loading.value = false;
     });
   }
 
@@ -292,12 +316,14 @@ onMounted(() => {
         if (res.code === 1103) {
           UserCheck.value = false;
           signupStatus.value = false;
+          loading.value = false;
           return;
         }
         //用户已签到，未被叫号
         if (res.code === 1303) {
           UserCheck.value = true;
           getUserQueue(); //获取用户排名
+          loading.value = false;
           return;
         }
         //用户已签到且已被叫号,需要前往面试
@@ -307,10 +333,14 @@ onMounted(() => {
           UserCheck.value = false;
           closeMessage.value = "您已签到且被叫号，请尽快前往面试";
           warning("您已签到且被叫号，请尽快前往面试");
+          loading.value = false;
           return;
         }
       })
-      .catch((err) => {});
+      .catch((err) => {
+        warning(err.message)
+        loading.value = false;
+      });
   }
 
   function* gen() {
@@ -333,7 +363,6 @@ onMounted(() => {
   //   .catch((err) => {
   //     console.log(err);
   //   });
-  loading.value = false;
 });
 </script>
 

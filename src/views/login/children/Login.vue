@@ -187,9 +187,11 @@ function newLogin() {
           password: newPassword.value,
           verificationCode: newCheckNum.value
         }).then((result) => {
+          ElMessage.warning(result.message)
           console.log(result);
         }).catch((error) => {
           console.log(error);
+          ElMessage.warning(error.data.message)
         })
     }
 }

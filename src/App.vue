@@ -44,7 +44,6 @@ export default {
             );
             window.sessionStorage.setItem("userId", result.data.user.id);
             store.state.loginStatus = true;
-            console.log("loginstatus修改了");
           })
           .catch((error) => {
             console.log(error);
