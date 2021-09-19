@@ -95,6 +95,7 @@ function studentLogin() {
       password: studentPassword.value,
     })
       .then((result) => {
+        console.log(result);
         if (!isTimeOut.value) {
           loadingInstance.close()
           clearTimeout(timer);

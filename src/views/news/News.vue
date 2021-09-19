@@ -3,39 +3,36 @@
   <div class="block" id="news-content" key="1" v-loading="loading">
     <transition-group
       name="animate__animated animate__bounce"
-      enter-active-class="animate__rubberBand"
+      enter-active-class="animate__backInDown"
     >
-      <!-- <el-timeline v-if="isFinishLoad" v-show="isHide">
-      <el-timeline-item
-        :timestamp="item.time"
-        placement="top"
-        color="#4eb5ff"
-        v-for="(item, index) of studentNews"
-        :key="index"
-      >
-        <el-card class="active">
-          <h4>{{ item.content }}</h4>
-        </el-card>
-      </el-timeline-item>
-    </el-timeline> -->
-      <div class="news-outline">消息中心</div>
-      <ul id="news-ul" v-if="isFinishLoad" v-show="isHide">
+      <div class="news-outline" key="1">消息中心</div>
+
+      <ul id="news-ul" v-if="isFinishLoad" v-show="isHide" key="2">
         <li
           id="news-li"
           v-for="(item, index) of studentNews"
           :key="index"
-          :style="{ backgroundColor: colorOptions[index%colorOptions.length] }"
+          :style="{
+            backgroundColor: colorOptions[index % colorOptions.length],
+          }"
         >
           <div
             class="li-line"
-            :style="{ backgroundColor: colorOptions[index%colorOptions.length] }"
+            :style="{
+              backgroundColor: colorOptions[index % colorOptions.length],
+            }"
           ></div>
-          <i :style="{ backgroundColor: colorOptions[index%colorOptions.length] }">{{index + 1}}</i>
+          <i
+            :style="{
+              backgroundColor: colorOptions[index % colorOptions.length],
+            }"
+            >{{ index + 1 }}</i
+          >
           <span class="news-time">{{ item.time }}</span>
           <div class="news-word">{{ item.content }}</div>
         </li>
       </ul>
-      <div v-else class="noLoad">{{ newsTip }}</div>
+      <div v-else class="noLoad" key="3">{{ newsTip }}</div>
     </transition-group>
   </div>
 </template>
@@ -46,9 +43,8 @@ import { onMounted, onBeforeMount, reactive, ref } from "vue";
 import { getStudentNews } from "../../request/api";
 import { getCookie } from "../../utils/myCookie";
 //引入修改时间戳
-import {openSocket} from '../../utils/websocket'
+import { openSocket } from "../../utils/websocket";
 import { useRouter } from "vue-router";
-
 
 let studentNews = reactive([]);
 
@@ -61,6 +57,8 @@ let newsTip = ref("请先登录！");
 
 let isHide = ref(false);
 
+const router = useRouter();
+
 let colorOptions = reactive([
   "#0fb1a0",
   "#d08aba",
@@ -70,38 +68,10 @@ let colorOptions = reactive([
   "#45afe5",
   "#bad874",
 ]);
-//实时更新数据
-// let openSocket = function () {
-//   var socket;
-//   let token = getCookie("studentToken");
-//   var socketUrl = `http://112.74.33.254:2358/ws/message/${token}`;
-//   socketUrl = socketUrl.replace("https", "ws").replace("http", "ws");
-//   if (socket != null) {
-//     socket.close();
-//     socket = null;
-//   }
-//   socket = new WebSocket(socketUrl);
-//   socket.onopen = function () {
-//     console.log("websocket已打开");
-//   };
-//   socket.onmessage = function (msg) {
-//     console.log(msg);
-//     let msgDay = JSON.parse(msg.data);
-//     msgDay.time = dayjs(msgDay.time).format("YYYY-MM-DD HH:mm:ss");
-//     msgDay.id = 1;
-//     studentNews.unshift(msgDay);
-//   };
-//   socket.onclose = function (e) {
-//     console.log(
-//       "websocket 断开: " + e.code + " " + e.reason + " " + e.wasClean
-//     );
-//     openSocket();
-//   };
-// };
 
 onBeforeMount(() => {
   const studentToken = getCookie("studentToken");
-  console.log(studentToken);
+  // console.log(studentToken);
   if (studentToken) {
     getStudentNews()
       .then((result) => {
@@ -116,7 +86,8 @@ onBeforeMount(() => {
           console.log(studentNews);
           setTimeout(() => {
             isHide.value = true;
-          }, 1000);
+          }, 100);
+          //  isHide.value = true;
         } else {
           newsTip.value = result.message;
           isFinishLoad.value = false;
@@ -132,15 +103,13 @@ onBeforeMount(() => {
 });
 
 onMounted(() => {
-    //未登录的话直接退出
+  //未登录的话直接退出
   if (!getCookie("studentToken")) {
     console.log(11111111111);
     router.push({
       path: "/introduction/banner",
     });
   }
-
-
 
   openSocket().onmessage = function (msg) {
     console.log(msg);
@@ -154,18 +123,21 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 $distance: -50px;
+$liLineDistance: -135px;
 
 #news-content {
-  position: relative;
+  // position: relative;
   top: 120px;
-  margin: 0 auto;
+  margin: 120px auto 0;
   width: 70%;
   // background-color: #fff;
 
   .news-outline {
     position: relative;
-    top: 20px;
-    left: 42.5%;
+    // top: -15px;
+    // left: 50%;
+    // transform: translateX(-50%);
+    margin: 0 auto;
     width: 110px;
     height: 32px;
     color: #fff;
@@ -174,13 +146,15 @@ $distance: -50px;
     text-align: center;
     line-height: 32px;
     border-radius: 20px;
-    background-color: red;
+    background-color: #ec7272;;
   }
 
   #news-ul {
     position: relative;
-    left: 50%;
-    transform: translateX(-50%);
+    // left: 50%;
+    width: 874px;
+    margin: 0 auto;
+    // transform: translateX(-50%);
 
     #news-li {
       position: relative;
@@ -190,7 +164,7 @@ $distance: -50px;
       height: 100px;
       border-radius: 12px;
       opacity: 0.7;
-    color: #fff;
+      color: #fff;
 
       .li-line {
         position: absolute;
@@ -218,7 +192,7 @@ $distance: -50px;
 
       &:nth-child(2n + 1) {
         .li-line {
-          right: -135px;
+          right: $liLineDistance;
         }
 
         i {
@@ -230,7 +204,7 @@ $distance: -50px;
         left: 550px;
 
         .li-line {
-          left: -135px;
+          left: $liLineDistance;
         }
         i {
           left: $distance;
