@@ -1,25 +1,17 @@
 <template>
   <div class="progress_block">
-    <div id="progress" :v-loading="loading">
+    <div 
+      id="progress"
+      >
       <el-page-header @back="goBack" content="面试进度"> </el-page-header>
       <div class="block" v-if="allowing && stuId">
         <el-timeline>
-          <!-- <el-timeline-item
-            v-for="(activity, index) in activities"
-            :key="index"
-            :icon="activity.icon"
-            :type="activity.type"
-            :color="activity.color"
-            :size="activity.size"
-            :timestamp="activity.timestamp"
-          > -->
           <el-timeline-item
             v-for="(activity, index) in activities"
             :key="index"
           >
             <el-alert :title="activity" type="info" :closable="false">
             </el-alert>
-            <!-- {{ activity.content }} -->
           </el-timeline-item>
         </el-timeline>
       </div>
@@ -36,7 +28,7 @@
 
 <script setup>
 import { ref, reactive, defineComponent, onMounted } from "vue";
-import { ElMessage } from "element-plus";
+import { ElMessage, ElLoading } from "element-plus";
 import { getBriefInfo } from "../../request/api";
 import _ from "lodash";
 import { useRouter } from "vue-router";
@@ -58,7 +50,7 @@ let activities = reactive([]);
 let loading = ref(true);
 //定义提示函数：
 onMounted(() => {
-
+  let loading = ElLoading.service({target:'#progress',background:"rgb(255 255 255 / 41%)"})
   //未登录的话直接退出
   if (!getCookie("studentToken")) {
     console.log(11111111111);
@@ -72,15 +64,17 @@ onMounted(() => {
       if(res.code === 1405){
         warning(res.message)
         allowing.value = false;
+        loading.close()
         return
       }
       activities.push(...res.data.recruitmentHistoryInfo);
+      loading.close()
     })
     .catch((err) => {
       allowing.value = false;
       warning(err.message);
+      loading.close()
     });
-  loading.value = false;
 });
 </script>
 
@@ -130,5 +124,19 @@ $fontColor:rgba(20, 20, 20, 0.68);
   text-align: center;
   padding: 100px 0;
   color: $fontColor;
+}
+
+.el-timeline-item{
+  :deep(.el-timeline-item__node){
+    background-color: rgb(226 179 93);
+    top: 8px;
+  }
+  .el-alert{
+    background-color: rgba(160, 209, 107, 0.95);
+    border-radius: 7px;
+    :deep(.el-alert__content){
+      color: #f9f9f9;
+    }
+  }
 }
 </style>

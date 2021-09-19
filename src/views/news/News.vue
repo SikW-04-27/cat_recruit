@@ -29,6 +29,8 @@ import { getStudentNews } from "../../request/api";
 import { getCookie } from "../../utils/myCookie";
 //引入修改时间戳
 import {openSocket} from '../../utils/websocket'
+import { useRouter } from "vue-router";
+
 
 let studentNews = reactive([]);
 
@@ -40,6 +42,7 @@ let newsTip = ref("请先登录！");
 // console.dir(WebSocket);
 
 let isHide = ref(false);
+const router = useRouter();
 //实时更新数据
 // let openSocket = function () {
 //   var socket;
@@ -103,6 +106,16 @@ onBeforeMount(() => {
 });
 
 onMounted(() => {
+    //未登录的话直接退出
+  if (!getCookie("studentToken")) {
+    console.log(11111111111);
+    router.push({
+      path: "/introduction/banner",
+    });
+  }
+
+
+
   openSocket().onmessage = function (msg) {
     console.log(msg);
     let msgDay = JSON.parse(msg.data);

@@ -167,7 +167,7 @@
             <div class="s_input">
               <el-input
                 type="textarea"
-                :autosize="{ minRows: 4}"
+                :autosize="{ minRows: 4 ,maxRows: 8}"
                 placeholder="请做一段简单的自我介绍"
                 v-model="textarea2"
                 resize="none"
@@ -323,13 +323,13 @@ let btnClick = () => {
   //判断是否全部值都已经填好
   if (
     name.value &&
-    numCheck.value &&
-    phoneCheck.value &&
+    stuNumber.value &&
+    phone.value &&
     institute.value &&
     major.value &&
     clazz.value &&
-    direction &&
-    sex &&
+    radio1.value &&
+    radio2.value &&
     textarea2.value
   ) {
     // 提交报名表;
@@ -352,8 +352,9 @@ let btnClick = () => {
           //报名表禁用
           disabled.value = true;
           window.sessionStorage.setItem("hasSignUp", true);
+          location.reload()
         } else {
-          warning(res.message);
+          ElMessage.warning(res.message);
           if (res.code === 4006) {
             //已经提交过报名表
             //报名表禁用
@@ -412,14 +413,12 @@ let changeImg = function (e) {
           avatarimg.value = res.data.data;
         } else {
           loadingInstance.close();
-          warningMessage.value = res.data.message;
-          warning();
+          ElMessage.warning( res.data.message);
         }
       })
       .catch((err) => {
         loadingInstance.close();
-        warningMessage.value = "请5秒之后再试";
-        warning();
+        ElMessage.warning("请5秒之后再试");
       });
   });
 };
@@ -442,6 +441,7 @@ const bluring = function($event){
 
 onMounted(() => {
   // console.log(isSendForm());
+  hide.value = true
 
   //未登录的话直接退出
   if (!getCookie("studentToken")) {
@@ -459,19 +459,23 @@ onMounted(() => {
         //已经报名
         if (res.code === 800) {
           window.sessionStorage.setItem("hasSignUp", true);
+          loading.value = false;
           return;
         }
         //未报名
         if (res.code === 700) {
-          hide.value = true
           window.sessionStorage.setItem("hasSignUp", false);
           listAllCollege({}).then((res) => {
             institutes.push(...res.data);
+            loading.value = false;
+          }).catch(err=>{
+            ElMessage.warning(err.message)
+            loading.value = false;
           });
         }
       })
       .catch((err) => {
-        warning(err.message);
+        ElMessage.warning(err.message);
       });
 
     //获取用户阶段信息
@@ -511,10 +515,14 @@ onMounted(() => {
   }
   //未处于报名时间段
   if (currentStatusId === 1) {
-    warning("招新未开始，请耐心等候");
+    ElMessage.warning("招新未开始，请耐心等候");
+    loading.value = false;
     return;
   }
-  loading.value = false;
+  // --------------------------------处于其他轮呢
+  if (currentStatusId > 2){
+    loading.value = false;
+  }
 });
 </script>
 
@@ -558,6 +566,9 @@ $zhutise: rgb(41, 45, 63);
     border-radius: 0;
     padding: 0;
     transition: .3s;
+    &:focus{
+      border-color: rgb(174, 184, 183);
+    }
   }
   span {
     display: inline-block;

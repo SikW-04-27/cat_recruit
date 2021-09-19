@@ -100,7 +100,7 @@ function studentLogin() {
           clearTimeout(timer);
 
           if (result.code === 2000) {
-            store.state.loginStatus = true;
+            // store.state.loginStatus = true;
             setCookie("studentToken", result.data.token, 7);
             sessionStorage.setItem("userName", result.data.user.userName);
             sessionStorage.setItem("userId", result.data.user.id);
@@ -187,9 +187,11 @@ function newLogin() {
           password: newPassword.value,
           verificationCode: newCheckNum.value
         }).then((result) => {
+          ElMessage.warning(result.message)
           console.log(result);
         }).catch((error) => {
           console.log(error);
+          ElMessage.warning(error.data.message)
         })
     }
 }
