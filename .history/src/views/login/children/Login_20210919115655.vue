@@ -110,10 +110,12 @@ function studentLogin() {
           clearTimeout(timer);
 
           if (result.code === 2000) {
+            alert(1111111111111111);
             store.state.loginStatus = true;
             setCookie("studentToken", result.data.token, 7);
             sessionStorage.setItem("userName", result.data.user.userName);
             sessionStorage.setItem("userId", result.data.user.id);
+            alert(999999999999999999999);
             router.push({
               path: "/introduction",
             });
