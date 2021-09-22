@@ -72,16 +72,13 @@ onMounted(() => {
       if (res.code === 1405) {
         warning(res.message);
         allowing.value = false;
-        loading.value = false;
         return;
       }
       activities.push(...res.data.recruitmentHistoryInfo);
-      loading.value = false;
     })
     .catch((err) => {
       allowing.value = false;
       warning("请先报名");
-      loading.value = false;
     });
 });
 </script>

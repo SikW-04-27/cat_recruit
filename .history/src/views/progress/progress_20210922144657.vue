@@ -58,37 +58,34 @@ let activities = reactive([]);
 let loading = ref(true);
 //定义提示函数：
 onMounted(() => {
+
   //未登录的话直接退出
   if (!getCookie("studentToken")) {
     console.log(11111111111);
     router.push({
       path: "/introduction/banner",
     });
-    loading.value = false;
   }
 
   getBriefInfo({})
     .then((res) => {
-      if (res.code === 1405) {
-        warning(res.message);
+      if(res.code === 1405){
+        warning(res.message)
         allowing.value = false;
-        loading.value = false;
-        return;
+        return
       }
       activities.push(...res.data.recruitmentHistoryInfo);
-      loading.value = false;
     })
     .catch((err) => {
       allowing.value = false;
       warning("请先报名");
-      loading.value = false;
     });
 });
 </script>
 
 <style scoped lang="scss">
 //-----------------------------------------------------------------------------------------
-$fontColor: rgba(20, 20, 20, 0.68);
+$fontColor:rgba(20, 20, 20, 0.68);
 .progress_block {
   padding-top: 40px;
 }

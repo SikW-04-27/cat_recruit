@@ -1,10 +1,7 @@
 <template>
-  <div class="signIn">
-    <div
-      class="s-main"
-      v-loading="loading"
-      element-loading-background="rgb(255 255 255 / 41%)"
-    >
+  <div
+    class="signIn">
+    <div class="s-main">
       <!-- 页眉 -->
       <el-page-header @back="goBack" content="面试签到"> </el-page-header>
       <el-divider>当前阶段：{{ currentStatus }}</el-divider>

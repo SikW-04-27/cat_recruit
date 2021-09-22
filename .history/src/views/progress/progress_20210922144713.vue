@@ -81,7 +81,6 @@ onMounted(() => {
     .catch((err) => {
       allowing.value = false;
       warning("请先报名");
-      loading.value = false;
     });
 });
 </script>
