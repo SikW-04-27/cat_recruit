@@ -48,7 +48,7 @@ export default {
 
     let isLoad = ref(true);
 
-    const store = useStore();
+    // const store = useStore();
 
     const router = useRouter();
 
@@ -57,12 +57,12 @@ export default {
     onMounted(() => {
       loginStatus.value = getCookie("studentToken") ? 1 : 0;
       if (loginStatus.value) {
-        userName.value = sessionStorage.getItem("userName");
+        // userName.value = sessionStorage.getItem("userName");
         isLoad.value = true;
       } else {
         isLoad.value = false;
       }
-      console.dir(store.state.loginStatus);
+      // console.dir(store.state.loginStatus);
 
       //获取当前招新状态
       getCurrentStatus({})
@@ -95,35 +95,35 @@ export default {
       };
     });
 
-    watch(
-      () => store.state.loginStatus,
-      () => {
-        console.log(store.state.loginStatus, "改变了111111111");
-        loginStatus.value =
-          store.state.loginStatus || getCookie("studentToken") ? 1 : 0;
-        if (loginStatus.value) {
-          userName.value = sessionStorage.getItem("userName");
-          isLoad.value = true;
-        } else {
-          isLoad.value = false;
-        }
-      }
-    );
+    // watch(
+    //   () => store.state.loginStatus,
+    //   () => {
+    //     console.log(store.state.loginStatus, "改变了111111111");
+    //     loginStatus.value =
+    //       store.state.loginStatus || getCookie("studentToken") ? 1 : 0;
+    //     if (loginStatus.value) {
+    //       userName.value = sessionStorage.getItem("userName");
+    //       isLoad.value = true;
+    //     } else {
+    //       isLoad.value = false;
+    //     }
+    //   }
+    // );
 
     function unLoad() {
       removeCookie("studentToken");
-      store.state.loginStatus = false;
+      // store.state.loginStatus = false;
       isLoad.value = false;
       sessionStorage.clear();
-      console.log(12345678);
+      location.reload()
       
-      setTimeout(() => {  
-        console.log(4554654456465);
-        router.push({
-          path: "/introduction/banner",
-        });
-          location.reload();
-      },2000);
+      // setTimeout(() => {  
+      //   console.log(4554654456465);
+      //   router.push({
+      //     path: "/introduction/banner",
+      //   });
+      //     location.reload();
+      // },1);
     
     }
 

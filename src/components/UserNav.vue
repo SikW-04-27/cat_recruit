@@ -137,30 +137,30 @@ export default {
       };
     });
 
-    watch(
-      () => store.state.loginStatus,
-      () => {
-        console.log(store.state.loginStatus, "改变了111111111");
-        loginStatus.value =
-          store.state.loginStatus || getCookie("studentToken") ? 1 : 0;
-        if (loginStatus.value) {
-          userName.value = sessionStorage.getItem("userName");
-          isLoad.value = true;
-        } else {
-          isLoad.value = false;
-        }
-      }
-    );
+    // watch(
+    //   () => store.state.loginStatus,
+    //   () => {
+    //     console.log(store.state.loginStatus, "改变了111111111");
+    //     loginStatus.value =
+    //       store.state.loginStatus || getCookie("studentToken") ? 1 : 0;
+    //     if (loginStatus.value) {
+    //       userName.value = sessionStorage.getItem("userName");
+    //       isLoad.value = true;
+    //     } else {
+    //       isLoad.value = false;
+    //     }
+    //   }
+    // );
 
-    function unLoad() {
-      removeCookie("studentToken");
-      store.state.loginStatus = false;
-      isLoad.value = false;
-      sessionStorage.clear();
-      router.push({
-        path: "/introduction",
-      });
-    }
+    // function unLoad() {
+    //   removeCookie("studentToken");
+    //   store.state.loginStatus = false;
+    //   isLoad.value = false;
+    //   sessionStorage.clear();
+    //   router.push({
+    //     path: "/introduction",
+    //   });
+    // }
 
     //点击消息中心，取消小红点
     const unDot = () => {
@@ -168,9 +168,9 @@ export default {
       console.log("取消小红点");
     };
 
-    onUnmounted(() => {
-      location.reload();
-    });
+    // onUnmounted(() => {
+    //   location.reload();
+    // });
 
     // watch(() => route.path,() => {
     // console.log('监听到变化');

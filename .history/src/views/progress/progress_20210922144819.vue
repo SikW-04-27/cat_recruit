@@ -58,8 +58,6 @@ let loading = ref(true);
 let hide = ref(false)
 //定义提示函数：
 onMounted(() => {
-  hide.value = true;
-  let loading = ElLoading.service({target:'#progress',background:"rgb(255 255 255 / 41%)"})
   //未登录的话直接退出
   if (!getCookie("studentToken")) {
     console.log(11111111111);
@@ -74,6 +72,18 @@ onMounted(() => {
       if (res.code === 1405) {
         warning(res.message);
         allowing.value = false;
+<<<<<<< HEAD
+        loading.value = false;
+        return;
+      }
+      activities.push(...res.data.recruitmentHistoryInfo);
+      loading.value = false;
+    })
+    .catch((err) => {
+      allowing.value = false;
+      warning("请先报名");
+      loading.value = false;
+=======
         loading.close()
         return
       }
@@ -84,6 +94,7 @@ onMounted(() => {
       allowing.value = false;
       warning(err.message);
       loading.close()
+>>>>>>> 9266541b2ff39079d5e4e0e33baba24bc5bf0a2b
     });
 });
 </script>

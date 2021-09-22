@@ -3,47 +3,45 @@
     name="animate__animated animate__bounce"
     enter-active-class="animate__headShake"
   >
-    <div class="signIn" v-show="hide">
-      <div
-        class="s-main"
-        v-loading="loading"
-        element-loading-background="rgb(255 255 255 / 41%)"
-      >
-        <!-- 页眉 -->
-        <el-page-header @back="goBack" content="面试签到"> </el-page-header>
-        <el-divider>当前阶段：{{ currentStatus }}</el-divider>
 
-        <!-- 当签到开放 && 用户未签到 -->
-        <div class="s_btn" v-if="opening && !UserCheck">
-          <!-- 点击签到的按钮 -->
-          <el-button
-            type="primary"
-            round
-            v-if="!signupStatus"
-            @click="comfirm"
-            class="c_btn"
-            >点击签到</el-button
-          >
-          <!-- 显示签到成功的信息 -->
-          <div class="tips text-center" v-if="signupStatus">
-            <el-result icon="success" class="float-left"></el-result>
-            <span class="float-left">签到成功，你的排位是{{ ranking }}</span>
-          </div>
-        </div>
+  <div class="signIn" v-show="hide" >
+    <div class="s-main" v-loading="loading" element-loading-background="rgb(255 255 255 / 41%)">
+      <!-- 页眉 -->
+      <el-page-header @back="goBack" content="面试签到"> </el-page-header>
+      <el-divider>当前阶段：{{ currentStatus }}</el-divider>
 
-        <!-- 当签到开放 && 用户已签到 -->
-        <div class="hasCheck" v-if="opening && UserCheck">
-          <el-result icon="success"></el-result>
-          <span>您已签到，你的排位是{{ ranking }}，请等待叫号</span>
-        </div>
-
-        <!-- 签到未开放、 用户未报名、 用户未预约 -->
-        <div class="close" v-if="!opening">
-          <el-result icon="danger"></el-result>
-          <span>{{ closeMessage }}</span>
+      <!-- 当签到开放 && 用户未签到 -->
+      <div class="s_btn" v-if="opening && !UserCheck">
+        <!-- 点击签到的按钮 -->
+        <el-button
+          type="primary"
+          round
+          v-if="!signupStatus"
+          @click="comfirm"
+          class="c_btn"
+          >点击签到</el-button
+        >
+        <!-- 显示签到成功的信息 -->
+        <div class="tips text-center" v-if="signupStatus">
+          <el-result icon="success" class="float-left"></el-result>
+          <span class="float-left">签到成功，你的排位是{{ ranking }}</span>
         </div>
       </div>
+
+      <!-- 当签到开放 && 用户已签到 -->
+      <div class="hasCheck" v-if="opening && UserCheck">
+        <el-result icon="success"></el-result>
+        <span>您已签到，你的排位是{{ ranking }}，请等待叫号</span>
+      </div>
+
+      <!-- 签到未开放、 用户未报名、 用户未预约 -->
+      <div class="close" v-if="!opening">
+        <el-result icon="danger"></el-result>
+        <span>{{ closeMessage }}</span>
+      </div>
     </div>
+  </div>
+
   </transition>
 </template>
 
@@ -84,10 +82,9 @@ let closeMessage = ref("未开放签到");
 //学生id
 let stuId = window.sessionStorage.getItem("userId");
 let currentStatus = ref("");
-let CurrentStatusId = JSON.parse(window.sessionStorage.getItem("CurrentStatus"))
-  .id;
+let CurrentStatusId = JSON.parse(window.sessionStorage.getItem("CurrentStatus")).id;
 //hide
-let hide = ref(false);
+let hide = ref(false)
 
 //1、是否报名
 let hasSignUp = JSON.parse(window.sessionStorage.getItem("hasSignUp"));
@@ -290,24 +287,22 @@ onMounted(() => {
   //检测签到是否开放
   function isSignUpOpen() {
     console.log(444444444);
-    queueStatus({})
-      .then((res) => {
-        //签到未开放
-        if (res.code === 1301) {
-          opening.value = false;
-          closeMessage.value = "您已预约，请耐心等候签到开放";
-          warning("您已预约，请耐心等候签到开放");
-          loading.value = false;
-          return;
-        }
-        //签到已开放，去检测用户是否签到
-        opening.value = true;
-        iterator.next();
-      })
-      .catch((err) => {
-        warning(err.message);
+    queueStatus({}).then((res) => {
+      //签到未开放
+      if (res.code === 1301) {
+        opening.value = false;
+        closeMessage.value = "您已预约，请耐心等候签到开放";
+        warning("您已预约，请耐心等候签到开放");
         loading.value = false;
-      });
+        return;
+      }
+      //签到已开放，去检测用户是否签到
+      opening.value = true;
+      iterator.next();
+    }).catch(err=>{
+      warning(err.message)
+      loading.value = false;
+    });
   }
 
   //检测用户是否签到
@@ -341,7 +336,7 @@ onMounted(() => {
         }
       })
       .catch((err) => {
-        warning(err.message);
+        warning(err.message)
         loading.value = false;
       });
   }

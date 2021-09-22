@@ -112,7 +112,7 @@ function studentLogin() {
 
           if (result.code === 2000) {
             setCookie("studentToken", result.data.token, 7);
-            console.log(result.data.token, "token");
+            console.log(result.data.token, 'token');
             sessionStorage.setItem("userName", result.data.user.userName);
             sessionStorage.setItem("userId", result.data.user.id);
             router.push({
@@ -188,6 +188,7 @@ function isCorrectAndSendCheckNumber() {
 
 // ---------打印的错误----------------------------
 function newLogin() {
+<<<<<<< HEAD
   if (!isAllDone.value || !newCheckNum.value.trim()) {
     ElMessage.warning("请先完善所有信息");
   } else {
@@ -197,14 +198,48 @@ function newLogin() {
       verificationCode: newCheckNum.value,
     })
       .then((result) => {
-        ElMessage.warning(result.message);
         console.log(result);
       })
       .catch((error) => {
         console.log(error);
-        ElMessage.warning(error.data.message);
       });
   }
+=======
+    if(!isAllDone.value || !newCheckNum .value.trim()) {
+    ElMessage.warning("请先完善所有信息")
+    } else {
+        resetPassword({
+          email: loginMail.value,
+          password: newPassword.value,
+          verificationCode: newCheckNum.value
+        }).then((result) => {
+          ElMessage.warning(result.message)
+          console.log(result);
+        }).catch((error) => {
+          console.log(error);
+          ElMessage.warning(error.data.message)
+        })
+    }
+}
+
+const forget = function(){
+  hide_login.value = false
+  hide_forget.value = true
+}
+const backlogin = function(){
+  hide_login.value = true
+  hide_forget.value = false
+}
+
+const viewpassword = function(){
+    password.value = 'text'
+    hidepassword.value = false
+}
+
+const noviewpassword = function(){
+    password.value = 'password'
+    hidepassword.value = true
+>>>>>>> 9266541b2ff39079d5e4e0e33baba24bc5bf0a2b
 }
 
 const forget = function () {

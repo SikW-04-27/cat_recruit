@@ -1,5 +1,10 @@
 <template>
-  <div class="appointment_block">
+  <transition
+    name="animate__animated animate__bounce"
+    enter-active-class="animate__headShake"
+  >
+
+  <div class="appointment_block" v-show="hide">
     <div
       id="appointment"
       v-loading="loading"
@@ -17,7 +22,6 @@
           v-model="totalTime"
           filterable
           placeholder="请选择预约日期"
-          class="el-select"
           :disabled="disabled"
           @change="optionsChange($event)"
         >
@@ -56,6 +60,8 @@
       <div class="close" v-if="close">{{ closeMessage }}</div>
     </div>
   </div>
+
+  </transition>
 </template>
 
 <script setup>
@@ -99,6 +105,8 @@ let totalTime = ref("");
 let currentStatus = ref("");
 // getObjValue(currentStatus) = CurrentStatus();
 const router = useRouter();
+//hide
+let hide = ref(false);
 
 //点击返回按钮
 let goBack = () => {
@@ -167,12 +175,22 @@ let cancel = () => {
 let listAppointments = () => {
   listAppointment({})
     .then((res) => {
+      if(res.code === 1502){
+        //暂无可预约时间
+        warning(res.message)
+        loading.value = false;
+        return
+      }
+      // console.log(res);--------------------------------暂无预约时间可选
       day.push(...res.data);
       day.forEach((item) => {
         item.totalTime = item.beginTime + "~" + item.endTime;
       });
     })
     .catch((err) => {
+      console.log(err);
+      loading.value = false;
+      warning(err.data.message);
       // warning("暂无可选时间，请耐心等候");
     });
 };
@@ -193,6 +211,7 @@ let checkAllappointment = () => {
     })
     .catch((err) => {
       warning(err.message);
+      loading.value = false;
     });
 };
 
@@ -209,10 +228,10 @@ let isAppointeds = () => {
 let isEnroll = ref(false);
 
 onMounted(() => {
+    hide.value = true;
 
   //未登录的话直接退出
   if (!getCookie("studentToken")) {
-    console.log(11111111111);
     router.push({
       path: "/introduction/banner",
     });
@@ -226,6 +245,7 @@ onMounted(() => {
     })
     .catch((err) => {
       warning(err.message);
+      loading.value = false;
     });
   //判断用户是否被淘汰
   function checkUserStatusFun() {
@@ -237,6 +257,7 @@ onMounted(() => {
           close.value = true;
           closeMessage.value =
             "很抱歉你未能通过，感谢你对cat工作室招新工作的支持。";
+          loading.value = false;
           return;
         }
         //未被淘汰
@@ -248,6 +269,7 @@ onMounted(() => {
         //未报名
         warning("您还未报名，请先报名");
         closeMessage.value = "您未报名，请先报名"
+        loading.value = false;  
       });
   }
 
@@ -266,11 +288,13 @@ onMounted(() => {
           close.value = true;
           closeMessage.value = "您还未报名，请先进行报名";
           warning("您还未报名，请先进行报名");
+          loading.value = false;
           return;
         }
       })
       .catch((err) => {
         warning(err.message);
+        loading.value = false;
       });
   }
   //检查阶段
@@ -282,7 +306,9 @@ onMounted(() => {
       //当是1，2前两个阶段的时候，关闭预约功能
       if (res.data.id === 1 || res.data.id === 2) {
         close.value = true;
-        closeMessage.value = "目前仍处于报名阶段，您已成功报名，请耐心等候";
+        closeMessage.value = "目前仍处于报名阶段，您已成功报名，请耐心等候";  
+        loading.value = false;
+
         return;
       } else {
         //处于笔试等阶段，检查预约是否开放
@@ -300,6 +326,7 @@ onMounted(() => {
         if (res.code === 1514) {
           close.value = true;
           closeMessage.value = `当前处于 ${currentStatus.value} 阶段，预约暂未开放，请耐心等候`;
+          loading.value = false;
           return;
         }
         //预约已开放
@@ -309,6 +336,7 @@ onMounted(() => {
       })
       .catch((err) => {
         warning(err.message);
+        loading.value = false;
       });
   }
   listAppointments();
@@ -331,7 +359,9 @@ onMounted(() => {
             })
             .catch((err) => {
               warning(err.message + "appointment:293");
+             loading.value = false;
             });
+          loading.value = false;
         } else {
           //未预约
           iterator.next();
@@ -346,6 +376,7 @@ onMounted(() => {
     console.log(55555555);
     close.value = false;
     signupStatus.value = false;
+    loading.value = false;
   }
 
   function* gen() {
@@ -358,7 +389,8 @@ onMounted(() => {
   }
   let iterator = gen();
   iterator.next();
-  loading.value = false;
+  console.log(375983172985293);
+  // loading.value = false;
 });
 </script>
 
@@ -378,7 +410,7 @@ onMounted(() => {
   position: relative;
 }
 .el-result {
-  :deep .icon-success {
+  :deep(.icon-success) {
     width: 30px;
     height: auto;
   }
@@ -414,10 +446,14 @@ span {
   margin: 0 20px;
   width: 350px;
 }
-.el-input__inner {
-  text-align: center;
+:deep(.el-input__inner) {
+  border: none;
+  background-color: transparent;
+  border-color: transparent ;
+  border-bottom: 1px solid rgb(174, 184, 183);
+  border-radius: 0;
   &:focus{
-    border-color: #66b171;
+    border-color: rgb(174, 184, 183) !important;
   }
 }
 .el-result {
@@ -428,12 +464,6 @@ span {
 .el-result svg {
   width: 30px;
   height: 30px;
-}
-.el-page-header__left {
-  color: rgb(216, 216, 216);
-}
-:deep.el-page-header__content {
-  color: rgb(216, 216, 216);
 }
 .a_btn {
   margin-top: 50px;

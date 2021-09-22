@@ -185,7 +185,6 @@
               <!-- <el-result icon="success" v-show="major"> </el-result> -->
             </div>
           </div>
-
           <!-- 提交按钮 -->
           <div class="commit_btn">
             <el-button
@@ -257,7 +256,7 @@ let warningMessage = ref("");
 let stuId = window.sessionStorage.getItem("userId");
 let loading = ref(true);
 let avatarimg = ref("");
-let hide = ref(true);
+let hide = ref(false);
 //定义warning函数
 const warning = () => {
   ElMessage.warning({
@@ -326,13 +325,13 @@ let btnClick = () => {
   //判断是否全部值都已经填好
   if (
     name.value &&
-    numCheck.value &&
-    phoneCheck.value &&
+    stuNumber.value &&
+    phone.value &&
     institute.value &&
     major.value &&
     clazz.value &&
-    direction &&
-    sex &&
+    radio1.value &&
+    radio2.value &&
     textarea2.value
   ) {
     // 提交报名表;
@@ -355,9 +354,9 @@ let btnClick = () => {
           //报名表禁用
           disabled.value = true;
           window.sessionStorage.setItem("hasSignUp", true);
+          location.reload()
         } else {
-          warningMessage.value = res.message;
-          warning();
+          ElMessage.warning(res.message);
           if (res.code === 4006) {
             //已经提交过报名表
             //报名表禁用
@@ -378,6 +377,9 @@ let btnClick = () => {
 
 let imgUrl = "";
 let changeImg = function (e) {
+  console.log(e.target.files);
+  if(e.target.files.length) {
+    console.log(111);
   console.log(e);
   ElMessageBox.confirm("确定添加头像?", "提示", {
     confirmButtonText: "确定",
@@ -411,21 +413,25 @@ let changeImg = function (e) {
         console.log(res);
         if (res.data.code == 200) {
           //  console.log(res);
-          imgUrl = res.data.data;
-          loadingInstance.close();
-          avatarimg.value = res.data.data;
+        imgUrl = res.data.data;
+        loadingInstance.close();
+        avatarimg.value = res.data.data;
+        changeImgTips.value = "更换头像"
         } else {
           loadingInstance.close();
-          warningMessage.value = res.data.message;
-          warning();
+          ElMessage.warning( res.data.message);
         }
       })
       .catch((err) => {
         loadingInstance.close();
-        warningMessage.value = "请5秒之后再试";
-        warning();
+        ElMessage.warning("请5秒之后再试");
       });
-  });
+  })
+  .catch(() => {
+    console.log(55555);
+  })
+  }
+  
 };
 
 const focusing = function ($event) {
@@ -450,6 +456,7 @@ const bluring = function ($event) {
 
 onMounted(() => {
   // console.log(isSendForm());
+  hide.value = true
 
   //未登录的话直接退出
   if (!getCookie("studentToken")) {
@@ -467,6 +474,7 @@ onMounted(() => {
         //已经报名
         if (res.code === 800) {
           window.sessionStorage.setItem("hasSignUp", true);
+          loading.value = false;
           return;
         }
         //未报名
@@ -474,11 +482,15 @@ onMounted(() => {
           window.sessionStorage.setItem("hasSignUp", false);
           listAllCollege({}).then((res) => {
             institutes.push(...res.data);
+            loading.value = false;
+          }).catch(err=>{
+            ElMessage.warning(err.message)
+            loading.value = false;
           });
         }
       })
       .catch((err) => {
-        warning(err.message);
+        ElMessage.warning(err.message);
       });
 
     //获取用户阶段信息
@@ -518,10 +530,14 @@ onMounted(() => {
   }
   //未处于报名时间段
   if (currentStatusId === 1) {
-    warning("招新未开始，请耐心等候");
+    ElMessage.warning("招新未开始，请耐心等候");
+    loading.value = false;
     return;
   }
-  loading.value = false;
+  // --------------------------------处于其他轮呢
+  if (currentStatusId > 2){
+    loading.value = false;
+  }
 });
 </script>
 
@@ -564,7 +580,10 @@ $zhutise: rgb(41, 45, 63);
     border-bottom: rgb(174, 184, 183) 1px solid;
     border-radius: 0;
     padding: 0;
-    transition: 0.3s;
+    transition: .3s;
+    &:focus{
+      border-color: rgb(174, 184, 183);
+    }
   }
   span {
     display: inline-block;
@@ -700,4 +719,20 @@ $zhutise: rgb(41, 45, 63);
   text-align: center;
   padding: 100px 0;
 }
+
+.avatar {
+
+position: relative;
+
+  .addOrChangeImg {
+    position: absolute;
+    bottom: 10px;
+    left: 100px;
+  width: 100px;
+  height: 30px;
+  background-color: red;
+}
+}
+
+
 </style>>

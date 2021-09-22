@@ -23,7 +23,7 @@ export const isAppointed = () => post(`${url1}status/checkAppointment`);
 
 //报名
 //用户报名接口
-export const submit = p => post(`${url2}enroll/submit`, p)
+export const submit = p => post(`${url1}enroll/submit`, p)
 //通过用户id获取用户报名表
 export const getSubmit = p => post(`${url2}enroll/get`, p)
 // 通过ID删除预约时间
@@ -99,7 +99,7 @@ export const closeQueue = p => post(`${url1}queue/closeQueue`, p);
 export const checkStatus = p => post(`${url1}queue/checkStatus`, p);
 
 // 用户登录
-export const userLogin = p => post(`${url2}user/Login`, p);
+export const userLogin = p => post(`${url1}user/Login`, p);
 
 
 // export const login111 = p => post11('/user/Login', p);
@@ -115,4 +115,4 @@ export const getStudentFormStatus = ()=> post(`${url1}status/checkEnroll`);
 
 export const resetSendEmail = p => post(`${url1}user/resetSendEmail`, p);
 
-export const resetPassword = p => post(`${url1}user/resetSendEmail`, p)
+export const resetPassword = p => post(`${url1}user/resetPassword`, p)
